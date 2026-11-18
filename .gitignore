@@ -1,0 +1,39 @@
+# Python / tooling
+__pycache__/
+*.py[cod]
+.ruff_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+
+# Local editor / agent settings
+.claude/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Streamlit secrets (config.toml is committed)
+.streamlit/secrets.toml
+
+# Local backups (git history replaces them)
+before_review_2026-11-17/
+app_v1_*.py
+
+# Raw downloads: re-created by `python download_data.py`.
+# Kept in git: data/clean/, the Auckland SA2 boundary the app needs,
+# the hand-made mosque lists, and the small extracts derived from the OSM file.
+data/amenities/osm/
+data/amenities/at_gtfs.zip
+data/amenities/schools_directory.csv
+data/boundaries/nz_sa2_*.geojson
+data/census/
+data/crime/
+data/property_prices/
+data/rental/
+
+# Private working notes (kept locally, not published)
+HANDOFF.md
+SESSION_LOG.md
+CLAUDE.md

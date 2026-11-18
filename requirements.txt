@@ -1,0 +1,13 @@
+# Dashboard (app.py)
+streamlit==1.37.1
+pandas==2.3.2
+numpy==1.26.4
+plotly==5.24.1
+markdown==3.4.1
+# Notebooks and data scripts
+geopandas==1.1.1
+pyogrio==0.11.1
+matplotlib==3.10.6
+scikit-learn==1.7.2
+statsmodels==0.14.6
+requests==2.32.5

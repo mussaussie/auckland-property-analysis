@@ -1,0 +1,329 @@
+osm_id,name,amenity,shop,healthcare,healthcare:speciality,diet:halal,cuisine,lat,lon
+664332173,Epsom Anaesthetic Group,doctors,,doctor,,,,-36.873541,174.782805
+745322491,Kaipara Medical Centre,doctors,,doctor,,,,-36.675639,174.451241
+832543474,Westmere Medical Centre,doctors,,doctor,,,,-36.854832,174.718887
+845770351,White Cross Accident and and Medical Clinic,doctors,,doctor,,,,-36.864505,174.630215
+886173720,Westgate Medical Centre,doctors,,doctor,,,,-36.820553,174.614394
+900405504,Wai Health,doctors,,doctor,,,,-36.878018,174.632727
+926022691,Osteopathic Clinic,doctors,,,,,,-36.95347,174.473314
+946127310,Henderson Medical Centre,doctors,,doctor,,,,-36.881188,174.637739
+948959799,Epsom Medical Centre,doctors,,doctor,,,,-36.879648,174.782961
+948963679,Avondale Medical Centre,doctors,,doctor,,,,-36.898332,174.698877
+955769421,North Harbour Medical Centre,doctors,,doctor,general;midwife;osteopathy;psychologist,,,-36.746454,174.738945
+959750062,Cairnhill Health Centre,doctors,,doctor,,,,-36.872931,174.768522
+961406641,,doctors,,doctor,,,,-36.637759,174.747241
+976336667,Ratanui Medical Centre,doctors,,doctor,,,,-36.868839,174.628961
+986304054,Warkworth Medical Centre,doctors,,doctor,,,,-36.39974,174.666186
+1034075513,the Doctors,doctors,,doctor,,,,-36.896615,174.831032
+1061074817,Local Doctors Browns Road,doctors,,doctor,,,,-37.017805,174.863244
+1068492054,Clendon Family Health Centre,doctors,,doctor,,,,-37.031247,174.867668
+1071662651,Papakura Medical Clinic,doctors,,doctor,,,,-37.057004,174.939402
+1071662784,Surgery,doctors,,doctor,,,,-37.061653,174.939532
+1071688599,Rosehill Christian Medical Centre,doctors,,doctor,,,,-37.079774,174.937065
+1084158712,Denture Clinic,doctors,,doctor,,,,-37.100962,174.95095
+1084173653,Drury  Surgery,doctors,,doctor,,,,-37.098224,174.948695
+1097160915,Grey Lynn Medical Centre,doctors,,doctor,,,,-36.864863,174.73766
+1105901018,Worldwise Health Vaccination Centre,doctors,,doctor,,,,-36.871796,174.780211
+1105901044,Auckland Family Medical Centre,doctors,,doctor,,,,-36.872909,174.781619
+1105901064,One Health Medical Centre,doctors,,doctor,,,,-36.874012,174.783712
+1217216952,Balmoral Medical Centre,doctors,,doctor,,,,-36.890127,174.746158
+1278851290,Botany Terrace Medical Centre,doctors,,doctor,,,,-36.924997,174.912588
+1278851303,Eastcare Accident and Medical,doctors,,doctor,,,,-36.922487,174.913536
+1308888216,City Med,doctors,,doctor,,,,-36.845048,174.765186
+1314957302,Titirangi Medical Centre,doctors,,doctor,,,,-36.938218,174.65827
+1448680924,Etu Pasifika Health Centre,doctors,,doctor,,,,-36.929868,174.841966
+1718639363,The Doctors,doctors,,doctor,,,,-36.912482,174.728029
+1734793268,Manly Medical Centre,doctors,,doctor,,,,-36.631283,174.762962
+1789715201,Manurewa Medical,doctors,,doctor,,,,-37.020632,174.89505
+1942202545,The Doctors Waimauku,doctors,,doctor,general,,,-36.768186,174.49284
+1996838217,Upper Harbour Medical Centre,doctors,,doctor,,,,-36.799167,174.646364
+2158628066,Northcote Point Doctors,doctors,,doctor,,,,-36.810469,174.741739
+2597873994,Pukekohe Family Healthcare,doctors,,doctor,,,,-37.187085,174.922123
+2692339072,Cornwall Medical Centre,doctors,,doctor,,,,-36.911514,174.776179
+2993072473,Avondale Medical Centre,doctors,,doctor,,,,-36.885754,174.683621
+3038660857,Meadowbank Medical Centre,doctors,,doctor,,,,-36.873323,174.828826
+3049839237,Peninsula Medical Centre,doctors,,doctor,,,,-36.854653,174.650908
+3064870861,Valley Medical Centre,doctors,,doctor,,,,-36.892452,174.620725
+3099827194,Ranui Medical Centre,doctors,,doctor,,,,-36.863596,174.60266
+3099827200,Swanson Medical,doctors,,doctor,,,,-36.866031,174.579314
+3139667406,Lincoln Road Medical Centre,doctors,,doctor,,,,-36.864729,174.630162
+3151754375,West Harbour Medical Centre,doctors,,doctor,,,,-36.82301,174.624005
+3169797921,Kawau Bay Health - doctors rooms,doctors,,doctor,,,,-36.424268,174.727489
+3200752170,The Airport Doctors,doctors,,doctor,,,,-36.996202,174.78811
+3212135798,Elstree Avenue Family Doctors,doctors,,doctor,,,,-36.871482,174.865328
+3250457720,Doctors on Jervois,doctors,,doctor,,,,-36.845903,174.741349
+3256322938,Clevedon Road Medical Centre,doctors,,doctor,,,,-37.062155,174.948567
+3259548256,Birkdale Family Doctors,doctors,,doctor,,,,-36.799624,174.702454
+3309252441,Penrose Clinic,doctors,,doctor,,,,-36.91039,174.816882
+3326608481,Medical Centre,doctors,,doctor,,,,-36.864961,174.699532
+3335801630,Waiheke Medical Centre,doctors,,doctor,,,,-36.783652,175.010982
+3335801633,Ostend Medical Centre,doctors,,doctor,,,,-36.795916,175.044948
+3365345501,Archers Road Medical Centre,doctors,,doctor,,,,-36.784533,174.734062
+3365345502,Glenfield Doctors,doctors,,doctor,,,,-36.782663,174.730158
+3379403607,White Cross Accident and Medical,doctors,,doctor,,,,-36.942524,174.840754
+3412146098,DW Family Doctors,doctors,,doctor,,,,-36.912143,174.870859
+3412146100,Eastside Family Doctor,doctors,,doctor,,,,-36.918151,174.87472
+3412146101,Family Healthcare Medical Centre,doctors,,doctor,,,,-36.900006,174.908826
+3412146104,Highland Park Medical Centre,doctors,,doctor,,,,-36.899922,174.907841
+3412146111,Te Rawhiti Community Mental Health Centre,doctors,,doctor,,,,-36.899726,174.90884
+3436746940,Baderdrive Doctors,doctors,,doctor,,,,-36.969104,174.799635
+3436746944,Local Doctors,doctors,,doctor,,,,-36.943012,174.787698
+3438936698,Wood Street Doctors and Pharmacy,doctors,,doctor,,,,-37.064837,174.941488
+3439031973,Seddon Medical,doctors,,doctor,,,,-37.198604,174.901555
+3450000415,Surrey Medical Centre,doctors,,doctor,,,,-36.863677,174.73681
+3453817904,Hibiscus Coast Medical Centre,doctors,,doctor,,,,-36.58681,174.693314
+3464952300,Local Doctors Hillpark,doctors,,doctor,,,,-37.013787,174.900572
+3464952304,Papakura East Medical Centre,doctors,,doctor,,,,-37.05858,174.953054
+3494707503,the doctors,doctors,,doctor,,,,-36.606462,174.698706
+3508008257,Balmoral Doctors and Health Centre,doctors,,doctor,,,,-36.884415,174.748536
+3577963843,IBOD,doctors,,doctor,,,,-36.992753,175.03677
+3593740868,Mairangi Bay Medical Centre,doctors,,doctor,,,,-36.737962,174.752204
+3593740874,Sunset Road Family Doctors,doctors,,doctor,,,,-36.747436,174.739997
+3610345632,Milford Family Medical Centre,doctors,,doctor,,,,-36.768854,174.75899
+3610345634,Surgery on Shakespeare,doctors,,doctor,,,,-36.777006,174.758311
+3610458268,Mercy Ascot Endoscopy North Shore,doctors,,doctor,,,,-36.78733,174.757871
+3623030924,Local Doctors,clinic,,clinic,,,,-36.969979,174.78539
+3647179828,Kolmar Road Medical Centre,doctors,,doctor,,,,-36.970527,174.859331
+3647179831,Papatoetoe Medical Centre,doctors,,doctor,,,,-36.979634,174.855679
+3658338979,East Tamaki Health Centre,doctors,,doctor,,,,-37.021494,174.897704
+3658338991,Manurewa Healthcare,doctors,,doctor,,,,-37.02216,174.897412
+3658338992,the fono HealthCare Centre,doctors,,doctor,,,,-37.02199,174.898488
+3659973178,Manukau City Accident and Medical,doctors,,doctor,,,,-36.988893,174.884899
+3659973179,Manukau Family Doctors,doctors,,doctor,,,,-36.984421,174.878655
+3663904502,Howick Medical Practice,doctors,,doctor,,,,-36.895176,174.933448
+3663904511,Selwyn House Medical Centre,doctors,,doctor,,,,-36.894585,174.929788
+3666557177,Millhouse Integrative Medical Centre,doctors,,doctor,,,,-36.919282,174.91776
+3666557178,Millhouse Medical Centre,doctors,,doctor,,,,-36.919132,174.917918
+3666557191,the doctors,doctors,,doctor,,,,-36.926576,174.897862
+3674684231,Dannemora Medical Centre,doctors,,doctor,,,,-36.945188,174.9071
+3674831982,Otara Integrated Health Centre,doctors,,doctor,,,,-36.962027,174.873372
+3678186661,Botany Junction Medical,doctors,,doctor,,,,-36.964943,174.903478
+3678186670,East Tamaki Family Doctors,doctors,,doctor,,,,-36.966682,174.905833
+3678186672,East Tamaki Medical Centre,doctors,,doctor,,,,-36.976883,174.89615
+3678419756,Mount Eden Village Doctors,doctors,,doctor,,,,-36.881825,174.761653
+3683343761,Langstone Clinic,doctors,,doctor,,,,-36.873978,174.783416
+3683343768,Remuera Chiropractic Centre,doctors,,doctor,,,,-36.873334,174.782321
+3683343771,Spinewave,doctors,,doctor,,,,-36.873224,174.782185
+3683343774,Wong Doo Health Clinic,doctors,,doctor,,,,-36.872208,174.780012
+3719197191,Dr. Weng Key Chan - Otahuhu Family Doctors,clinic,,clinic,,,,-36.944136,174.84062
+3725858517,Mauranui Clinic,doctors,,doctor,,,,-36.878726,174.781842
+3730506580,Hobsonville Point Medical Centre,doctors,,doctor,,,,-36.792812,174.660831
+3730506589,Silverdale Medical,doctors,,doctor,,,,-36.60436,174.678494
+3740816553,West Auckland Health Care Doctors,doctors,,doctor,,,,-36.882477,174.632775
+3744924970,Ranfurly Medical Center,clinic,,clinic,,,,-36.884777,174.775334
+3745165053,Three Kings Accident and Medical,clinic,,clinic,emergency;general,,,-36.908596,174.755236
+3801691869,Herne Bay Medical Centre,doctors,,doctor,,,,-36.845848,174.735004
+3879177603,Avondale Family Doctors,doctors,,doctor,,,,-36.894434,174.696982
+3879177618,Green Bay Medical Centre,doctors,,doctor,,,,-36.931014,174.678678
+3977655512,168 Medical Centre,doctors,,doctor,,,,-36.877984,174.74097
+4005100233,Health and Happiness (un) Ltd,doctors,,doctor,,,,-36.977741,174.871606
+4224672529,Westview Medical Centre,doctors,,doctor,,,,-36.910408,174.649768
+4342102305,575 Doctors,doctors,,doctor,,,,-36.88728,174.760239
+4374979490,Shorecare Urgent Clinic,clinic,,hospital,,,,-36.784616,174.753194
+4624427478,Baderdrive Doctors,doctors,,doctor,,,,-37.020884,174.896794
+4662910739,Langimalie Medical Centre,doctors,,doctor,,,,-36.900837,174.856264
+4662910743,Panmure Medical Centre,doctors,,doctor,,,,-36.900982,174.857471
+4662910767,Turuki Healthcare,doctors,,doctor,,,,-36.899323,174.853746
+4666730695,Bishop Medical Centre,doctors,,doctor,,,,-36.961991,174.899504
+4666730701,Universal Energy Chinese Medical Centre,doctors,,doctor,,,,-36.961994,174.900935
+4719895400,The Doctors,doctors,,doctor,,,,-36.791036,174.763658
+4741042742,Karaka Family Health,doctors,,doctor,,,,-37.074075,174.922745
+4753906339,Great Wall Health Centre,clinic,,clinic,,,,-36.857893,174.759367
+4855260686,The Doctors Massey,doctors,,doctor,,,,-36.834983,174.602527
+4855262467,Palomino Medical Centre,doctors,,doctor,,,,-36.883277,174.615018
+4925896199,Royal Heights Medical Centre,doctors,,doctor,,,,-36.832734,174.623327
+4925897692,Kelston Medical Centre and Pharmacy,doctors,,doctor,,,,-36.905602,174.66361
+4943367482,Sandringham Health Centre,doctors,,doctor,,,,-36.891782,174.736492
+4943409500,Stoddard Road Medical Centre,doctors,,doctor,,,,-36.899981,174.721167
+4956159233,Local Doctors,doctors,,doctor,,,,-36.908213,174.733429
+4956181018,New Windsor Medical Centre,doctors,,doctor,,,,-36.911183,174.716777
+4974630940,Eden-Epsom Medical Centre,doctors,,doctor,,,,-36.894402,174.773959
+4974630961,Epsom Pro Health,doctors,,doctor,,,,-36.882169,174.775544
+4974631014,,doctors,,doctor,,,,-36.92611,174.749408
+4989734840,Remuera Village Medical Centre,doctors,,doctor,,,,-36.880324,174.812751
+4989734904,the doctors,doctors,,doctor,,,,-36.85056,174.858642
+4994486197,My Doctor,doctors,,doctor,,,,-36.853326,174.786364
+4999284831,Belmont Medical Centre,doctors,,doctor,,,,-36.808319,174.790416
+5013799353,Roselands Doctors,doctors,,doctor,,,,-37.059656,174.941739
+5021399238,Viaduct Medical Centre,doctors,,doctor,,,,-36.843869,174.760218
+5029943857,Otahuhu Health Centre,doctors,,doctor,,,,-36.946893,174.845232
+5029943858,Otahuhu Family Medical Centre,doctors,,doctor,,,,-36.946926,174.845243
+5030003409,One Care Family Medical Centre,doctors,,doctor,,,,-36.970551,174.861822
+5031773052,One Tree Hill Medical Centre,doctors,,doctor,,,,-36.89868,174.803179
+5031773091,Mount Smart Medical Centre,doctors,,doctor,,,,-36.914942,174.801366
+5031826960,toi - whānau Health,doctors,,doctor,,,,-36.924092,174.785682
+5031826961,Onehunga Family Medical Centre,doctors,,doctor,,,,-36.923616,174.78562
+5031826997,Royal Oak Medical Centre,doctors,,doctor,,,,-36.910797,174.775209
+5047602362,Forrest Hill Family Medical Centre,doctors,,doctor,,,,-36.7605,174.74672
+5053006574,Kidz First Community Health,doctors,,doctor,,,,-37.033591,174.868368
+5053006624,Fellbrook Medical Centre,doctors,,doctor,,,,-37.020478,174.864584
+5057215362,Torbay Medical,doctors,,doctor,,,,-36.695522,174.75131
+5077967165,Local Doctors Glen Innes,doctors,,doctor,,,,-36.87872,174.856357
+5079816240,Avondale Family Health Centre,clinic,,clinic,,,,-36.891577,174.696397
+5116574431,T L Care Medical,doctors,,doctor,,,,-36.862229,174.648572
+5151218063,The Doctors,doctors,,doctor,,,,-36.956843,174.83397
+5151218116,Mangere Family Doctors,doctors,,doctor,,,,-36.956759,174.833824
+5151218401,Mangere East Family Doctors,doctors,,doctor,,,,-36.966093,174.824024
+5151218417,Mangere Medical Centre,doctors,,doctor,,,,-36.966285,174.824843
+5166974050,The Doctors,doctors,,doctor,,,,-36.92334,174.783643
+5237396080,Local Doctors Glendene,doctors,,doctor,,,,-36.886914,174.644754
+5291156303,Conifer Gardens Medical Centre,doctors,,doctor,,,,-37.041237,174.917052
+5291156683,Local Doctors Takanini,doctors,,doctor,,,,-37.048485,174.932966
+5314339218,Vincent Street Family Doctors,doctors,,doctor,,,,-36.90256,174.925712
+5318305416,Blockhouse Bay Medical Centre,doctors,,doctor,,,,-36.922336,174.700872
+5324657321,Beachlands Medical Centre,doctors,,doctor,,,,-36.889499,175.010614
+5340052841,South Seas Medical Centre,doctors,,doctor,,,,-36.961417,174.872807
+5415641733,Four Kauri Family Medical Centre,doctors,,doctor,general,,,-36.883536,174.716674
+5415642976,Assist Healthcare,doctors,,doctor,,,,-36.884374,174.716366
+5421971728,Richmond Road Medical Centre,doctors,,doctor,,,,-36.858867,174.731626
+5812054517,Kingsland Family Health Centre,doctors,,doctor,,,,-36.872142,174.743963
+5872457094,The Doctors Quaymed Wynyard,doctors,,doctor,general,,,-36.844561,174.755072
+5942223442,Kelston Mall Medical Centre,doctors,,doctor,,,,-36.909373,174.664313
+5942223476,Totara Health Services - Medical Centre,doctors,,doctor,,,,-36.908767,174.683868
+5942223588,Newmarket Medical Centre,doctors,,doctor,,,,-36.868984,174.777642
+6021137058,Wiri Family Doctors,doctors,,doctor,,,,-37.000419,174.889335
+6082243818,,doctors,,doctor,,,,-36.872645,174.751892
+6447492690,Greenwood Medical Centre,doctors,,doctor,,,,-36.906056,174.774386
+6550726552,Te Atatu South Medical Centre,doctors,,doctor,,,,-36.862134,174.649582
+6986316323,Three Kings Family medical Centre,doctors,,doctor,,,,-36.909464,174.757974
+8272731358,Airport Aesthetic,doctors,,doctor,,,,-36.996294,174.788158
+8369698105,MoleMap,doctors,,doctor,,,,-36.874005,174.783664
+9136523609,Turuki Healthcare,doctors,,doctor,,,,-36.97225,174.803137
+9551069401,Tend Kingsland Medical Centre,clinic,,clinic,,,,-36.868507,174.75175
+9634953891,Highbrook Medical,doctors,,doctor,,,,-36.936562,174.880311
+9840063301,The Doctors Greenlane,doctors,,doctor,,,,-36.890412,174.79356
+9888658347,VECA Medical Health Centre Onewa,clinic,,clinic,general,,,-36.809815,174.72707
+10091428406,Doctors At Kingsland,doctors,,doctor,,,,-36.872059,174.744262
+10202710065,Local Doctors,clinic,,clinic,,,,-36.971201,174.798339
+10236346575,Ormiston Medical Centre,clinic,,clinic,,,,-36.966156,174.913303
+10236401005,Botany Medical & Urgent Care,clinic,,clinic,,,,-36.93365,174.911197
+10711512477,Donovan Street Medical Centre,doctors,,doctor,,,,-36.922469,174.70176
+10872400012,Blue Waters,doctors,,doctor,,,,-36.795318,175.04435
+10892579305,Ease Nervous System Wellness,doctors,,doctor,,,,-36.78188,175.007807
+11237278093,The Doctors New Lynn,doctors,,doctor,,,,-36.904767,174.684587
+11242524384,K'Road Medical Centre,clinic,,clinic,,,,-36.857739,174.757116
+11242577739,Doctors,clinic,,clinic,,,,-36.857827,174.756848
+11253813863,Devonport Health Centre,doctors,,doctor,general,,,-36.830044,174.798021
+11258172029,Pukekohe Family Health Care,clinic,,clinic,,,,-37.20099,174.900497
+11395366002,Tend Symonds Street Medical Centre,clinic,,clinic,,,,-36.856577,174.765103
+11761454164,Dr Daniel Quistorff,doctors,,doctor,general,,,-36.919156,174.917912
+11808250237,Stonefields Medical Centre,clinic,,clinic,general,,,-36.887088,174.844509
+11984924968,My Doctor,doctors,,doctor,,,,-36.353385,174.716733
+12151050549,Greenhithe Medical Centre,doctors,,doctor,,,,-36.774084,174.671347
+12215389856,Clevedon Village Medical Centre,clinic,,clinic,,,,-36.994097,175.036287
+12251462302,Axis Sports Medicine,doctors,,doctor,,,,-36.884941,174.731003
+12293340071,North West Medical Centre,clinic,,clinic,,,,-36.774826,174.555571
+12585430510,Local Doctors - Glen Innes,doctors,,doctor,general;urgent,,,-36.878834,174.856109
+12585430511,Meadowbank General Practice,doctors,,doctor,,,,-36.875782,174.82804
+12590431708,Eastcare Urgent Care,clinic,,clinic,,,,-36.922382,174.913524
+12590431811,NZ Society of Genealogists,doctors,,doctor,,,,-36.900797,174.856219
+12594031433,Caring Clinic,doctors,,doctor,general,,,-36.848023,174.765227
+12594285005,Family Doctor,doctors,,doctor,,,,-36.899956,174.854734
+12594285009,Pasefika Family Health Group,clinic,,clinic,,,,-36.900359,174.856168
+12759173433,Pakuranga Medical Centre,doctors,,doctor,general,,,-36.916078,174.872877
+13312077959,Remuera Doctors,doctors,,doctor,,,,-36.881036,174.796635
+13597182094,Counties Medical Takanini,doctors,,doctor,,,,-37.03537,174.906685
+13704668505,Life Doctors,doctors,,doctor,,,,-36.89066,174.74611
+13712745801,Gavin Lobo Health,doctors,,doctor,,,,-36.879,174.749806
+13736816285,Mount Wellington Family Health Centre,clinic,,,,,,-36.9004,174.843205
+13757773802,Rosebank Road Medical Services,doctors,,doctor,,,,-36.894428,174.696845
+13762163003,GP Central Medical Centre,doctors,,,,,,-36.903219,174.741996
+13784138304,Langimalie Medical Centre,doctors,,doctor,,,,-36.943133,174.842868
+13785504905,Lifeline Medical Centre,doctors,,,,,,-36.941965,174.841751
+13785504910,MaxCare Medical Centre,doctors,,,,,,-36.941365,174.840221
+13785505002,Speedy Manograms,doctors,,doctor,,,,-36.94239,174.840895
+13785745501,Life Doctors Epsom,doctors,,doctor,,,,-36.878316,174.776685
+13785858206,Papatotoe Medical Centre,doctors,,,,,,-36.979831,174.853696
+13799817446,Bellevue Health Centre,clinic,,,,,,-36.874751,174.754709
+13822974101,Auckland Iron Clinic,doctors,,,,,,-36.849102,174.743267
+13826182506,Ponsonby Medical Centre,doctors,,,,,,-36.852904,174.744951
+13826183202,Doctor,doctors,,,,,,-36.851767,174.745199
+13829268904,Local Doctors Ōtara,doctors,,,,,,-36.96202,174.872815
+13830073005,Langimalie Medical Centre,doctors,,,,,,-36.92406,174.781245
+13833187502,Sunnynook Medical Centre,doctors,,,,,,-36.760483,174.740671
+13915604106,Optimus Health Care,doctors,,,,,,-36.908936,174.812524
+13946649204,Auckland Day Surgery Centre,doctors,,,,,,-36.865329,174.776381
+13953009403,Morrow Street Clinic,doctors,,doctor,,,,-36.870465,174.776511
+13953010002,Intouch Medical,clinic,,,,,,-36.869704,174.775935
+13956696502,Green Doctors,doctors,,doctor,,,,-36.862201,174.75898
+13973412302,Mangere Bridge Surgery,doctors,,doctor,,,,-36.941816,174.787331
+13976530210,Southpoint Family Doctors,doctors,,doctor,,,,-36.98912,174.87859
+13982050704,Winsor Medical Centre,doctors,,,,,,-36.732486,174.7148
+13986925304,Mark Gittos Plastic Surgery,doctors,,,,,,-36.846146,174.733143
+13986925713,Dr Julie Smith,doctors,,,,,,-36.846,174.733213
+13986925716,College Hill Doctors,clinic,,,,,,-36.848597,174.7478
+13986925819,Medical Clinic,clinic,,,,,,-36.847677,174.745383
+14007637306,Devonport Family Medicine,doctors,,doctor,,,,-36.829248,174.797334
+14016521201,Waitemata Endoscopy,doctors,,,,,,-36.770328,174.73342
+14024044764,White Cross,doctors,,doctor,general;emergency,,,-36.902315,174.692773
+14040558107,Whanau Ora Super Clinic,doctors,,,,,,-37.209689,174.909633
+14040558214,Franklin Cardiology,doctors,,,,,,-37.207736,174.909129
+14040558218,Pukekohe Family Doctors,doctors,,,,,,-37.208162,174.908525
+14040558616,Pukekohe South Doctors,doctors,,,,,,-37.214266,174.90966
+14040561409,Remeura Medical Centre,doctors,,,,,,-36.880969,174.797966
+14040562526,Dr Mirjana Janjic - aesthetic medicine,doctors,,,,,,-36.881201,174.800604
+14040562601,Seddon Medical,doctors,,,,,,-37.19956,174.905916
+14050025901,Counties Medical Integrated,doctors,,,,,,-37.060199,174.941602
+14055230308,Local Doctors Wai Health,doctors,,,,,,-36.882246,174.632604
+14062641701,Meadowbank Family Doctors,clinic,,clinic,,,,-36.87574,174.828497
+14069220004,Doctors,doctors,,,,,,-36.856936,174.761649
+14069220403,Grafton Medical,clinic,,clinic,,,,-36.865776,174.764099
+14075726304,Tamaki Family Health Centre,doctors,,,,,,-36.898814,174.853779
+14081126501,Family Doctors,doctors,,doctor,,,,-37.039877,174.915399
+14106622303,Pacifica Family Health Group,doctors,,doctor,,,,-37.033467,174.86805
+14123855202,Local Doctors,doctors,,doctor,,,,-36.960919,174.887862
+14161407501,Botany Town Centre Medical Practice,doctors,,doctor,,,,-36.933719,174.913952
+14184146202,Mahurangi Health Collective,doctors,,doctor,,,,-36.399113,174.664644
+14184146209,Coast to Coast Healthcare,doctors,,,,,,-36.411495,174.721705
+14184146606,Health Hub Warkworth,doctors,,,,,,-36.411609,174.654963
+14205347206,Orewa Medical Centre,doctors,,doctor,,,,-36.587832,174.695211
+14213211573,the doctors,doctors,,doctor,,,,-36.735841,174.727584
+14256591618,Family Medicine,doctors,,,,,,-36.811647,174.726365
+14288432706,Browns Bay Family Doctors,doctors,,doctor,,,,-36.714976,174.748541
+14288433110,Newa Family Medical Centre,doctors,,,,,,-36.730977,174.721207
+14288441505,Kitchener Road Medical Centre,doctors,,doctor,,,,-36.772867,174.76516
+14288444009,Village Medical,doctors,,,,,,-36.773703,174.766406
+14295084137,Browns Bay Medical Centre,doctors,,doctor,,,,-36.714099,174.74631
+14307825503,cardia,doctors,,,,,,-36.781832,174.752882
+11520595,Manukau City Health Centre,clinic,,clinic,,,,-36.993851,174.88221
+92350302,Counties Medical,doctors,,doctor,,,,-37.060443,174.941368
+117895747,Onehunga Accident & Medical,doctors,,doctor,,,,-36.923364,174.78356
+262457904,Optimum Health Chiropractic,doctors,,doctor,,,,-36.914834,174.768977
+264983947,Dominion Medical Centre,doctors,,doctor,,,,-36.903747,174.739915
+274719223,Mangere Health Centre,doctors,,doctor,,,,-36.971625,174.79874
+274719233,Mangere Community Health Centre,doctors,,doctor,,,,-36.9714,174.798353
+292660670,Victoria Park Medical Suites,doctors,,doctor,general,,,-36.848859,174.755834
+303691753,Ellerslie Medical Centre,doctors,,doctor,,,,-36.893694,174.809582
+315120391,eastMED Integrated Medical Centre,clinic,,clinic,,,,-36.862083,174.858834
+316890885,The Fono,doctors,,doctor,,,,-36.877856,174.630838
+330481785,Highland Park Medical Centre,clinic,,clinic,,,,-36.899873,174.907846
+330486527,Crawford Medical,doctors,,doctor,general,,,-36.891944,174.929296
+333392555,Local Doctors,clinic,,clinic,,,,-36.949023,174.90561
+334140892,Franklin Day Surgery,doctors,,doctor,,,,-37.204454,174.909515
+337782008,Clendon Medical Centre,doctors,,doctor,,,,-37.033972,174.868028
+338618749,Wellsford Medical Centre,doctors,,doctor,,,,-36.292589,174.524789
+338618751,Te Ha Oranga Health Services,doctors,,doctor,,,,-36.294847,174.523836
+339310385,,doctors,,doctor,,,,-37.01132,174.91618
+339526945,Hibiscus Coast Community Health Centre,doctors,,doctor,,,,-36.611454,174.69703
+339842947,Medplus Devonport,doctors,,doctor,general,,,-36.830348,174.79549
+353564222,East Coast Bays Doctors,doctors,,doctor,,,,-36.74035,174.741649
+361992969,Howick Health Medical Centre,doctors,,doctor,,,,-36.895631,174.922991
+363687535,Mount Eden Medical Centre,doctors,,doctor,,,,-36.883483,174.761156
+395044556,the doctors birkenhead,doctors,,doctor,,,,-36.807388,174.725831
+395044570,Birkenhead Medical Centre,doctors,,doctor,,,,-36.81352,174.726341
+425045931,Medplus,doctors,,doctor,,,,-36.797624,174.779044
+501959320,,doctors,,doctor,,,,-36.905598,174.663622
+508084379,Hillsborough Medical Centre,doctors,,doctor,general,,,-36.919738,174.757402
+510967492,The Doctors Hauraki Corner,doctors,,doctor,,,,-36.797245,174.779304
+517922637,Mahia Road Doctors,doctors,,doctor,,,,-37.037496,174.888723
+521432470,Saint Lukes Medical Centre,doctors,,doctor,,,,-36.885039,174.735695
+538432806,Albany Family Medical Centre,doctors,,doctor,,,,-36.743367,174.692554
+578192289,The Doctors Drury,doctors,,doctor,general,,,-37.098224,174.94839
+624380712,Flat Bush Medical Centre,clinic,,clinic,,,,-36.974882,174.922993
+625021346,Glenfield Medical Centre,doctors,,doctor,,,,-36.780199,174.721442
+782591741,Luckens Road Medical Centre,doctors,,doctor,,,,-36.817674,174.629237
+832151033,Mayfield Medical Centre,doctors,,doctor,,,,-36.78008,174.721574
+868248402,Otahuhu Family Practice,clinic,,clinic,,,,-36.944738,174.84678
+979451635,Healthcare Roskill South,doctors,,doctor,general,,,-36.921129,174.735464
+999318512,Crawford Medical,doctors,,doctor,general,,,-36.891693,174.929232
+1011946863,MPS Medical Centre,doctors,,doctor,,,,-36.94484,174.839694

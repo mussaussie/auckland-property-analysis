@@ -1,0 +1,152 @@
+kind,osm_id,name,amenity,shop,healthcare,healthcare:speciality,diet:halal,cuisine,lat,lon
+eatery,468079665,Beach Pizza,fast_food,,,,yes,pizza;kebab,-37.021914,174.894816
+eatery,993412136,Mexicali Fresh,fast_food,,,,yes,mexican,-36.85807,174.760605
+eatery,1015095964,Little Turkish Cafe,restaurant,,,,yes,,-36.857623,174.759472
+shop,1603164800,Woolworths,,supermarket,,,yes,,-36.848659,174.764709
+eatery,1735321674,Sal's Pizza,fast_food,,,,yes,pizza,-36.857746,174.760287
+eatery,1789448106,Mr. Turkish Kebab,fast_food,,,,only,kebab,-36.854292,174.76326
+eatery,1789448146,Starbucks,cafe,,,,yes,coffee_shop,-36.849265,174.765418
+eatery,3119789065,Shaolin Kung Fu Noodle,restaurant,,,,yes,chinese,-36.888284,174.747193
+eatery,3139667407,Byte Burger,fast_food,,,,yes,burger,-36.863813,174.629377
+eatery,3211976589,Subway,fast_food,,,,yes,sandwich,-36.856965,174.759112
+eatery,3293524476,Island Gelato Company,ice_cream,,,,yes,,-36.842991,174.767028
+eatery,3293568761,Teaser,cafe,,,,yes,bubble_tea,-36.848621,174.766216
+eatery,3431095891,Shahrzad Kebab,fast_food,,,,yes,kebab,-36.786155,174.772925
+eatery,3508008512,Makassar Corner,fast_food,,,,yes,,-36.874951,174.751185
+eatery,3658338993,Milano's Pizza & Grilled Chicken,fast_food,,,,yes,chicken;pizza,-36.993166,174.886028
+eatery,3678186673,Flame Pizza,fast_food,,,,yes,pizza,-36.964514,174.902801
+shop,3688835407,Food 4 less,,supermarket,,,yes,,-36.943562,174.844978
+eatery,3719184140,Jadetown Uyghur Cuisine,restaurant,,,,yes,uyghur,-36.887642,174.747386
+butcher,3726691262,Supercity Halal Meats,,butcher,,,yes,,-36.948313,174.845695
+eatery,3733790954,Madni Chicken,restaurant,,,,yes,kebab,-37.023168,174.898116
+eatery,3736730813,Pizza and Curry Corner,restaurant,,,,yes,burger,-36.970416,174.798857
+eatery,3739749821,Tasty Kebab,fast_food,,,,yes,kebab,-36.905742,174.730546
+eatery,3739756345,Bawarchi,restaurant,,,,yes,asian;indian,-36.891628,174.736168
+eatery,3739761316,Milanos Pizza & Portuguese Chicken - halal,restaurant,,,,yes,chicken;pizza,-36.968945,174.860271
+butcher,3740699320,Food4Less Supermarket,fast_food,supermarket;butcher,,,yes,asian;indian,-36.907186,174.68808
+eatery,3743497006,Royal Kebab,restaurant,,,,yes,kebab,-36.910284,174.775872
+shop,3837892616,Starz Convenience Store,,convenience,,,yes,,-36.851062,174.761217
+eatery,3879177643,K Chicken,fast_food,,,,yes,chicken;korean,-36.898898,174.695675
+eatery,4049147937,Tikka 'n' Talk,restaurant,,,,only,indian,-36.857763,174.76196
+eatery,4057751085,Epsom Turkish Kebabs,fast_food,,,,yes,turkish,-36.893987,174.774164
+eatery,4753906117,Kebab Kart,fast_food,,,,only,kebab,-36.857767,174.757062
+shop,4753906118,Artisan Bakers,,bakery,,,yes,,-36.857671,174.757377
+eatery,4753906327,Uncle Man's,restaurant,,,,only,malaysian,-36.857432,174.758192
+eatery,4753906348,Kebab King,fast_food,,,,yes,kebab,-36.85817,174.763549
+eatery,4753906391,Bal Ganga,fast_food,,,,yes,indian,-36.847284,174.761231
+eatery,4753906393,New Sensational Kebab & Fried Chicken,fast_food,,,,yes,chicken,-36.847322,174.761382
+eatery,4753906396,Raviz,restaurant,,,,yes,indian,-36.847735,174.761588
+eatery,4753906397,Denny's,restaurant,,,,yes,american,-36.847664,174.761618
+shop,4769024244,Cocomo,,beverages,,,yes,,-36.85008,174.765812
+eatery,4769024273,Sal's Pizza,fast_food,,,,yes,pizza,-36.846372,174.768146
+eatery,4797304732,Long Fang,restaurant,,,,yes,chinese,-36.849618,174.76393
+eatery,4797304733,Tandoor,restaurant,,,,only,indian,-36.849236,174.764361
+eatery,4814853860,No. 1 Handmade Lanzhou Beef Ramen,restaurant,,,,only,chinese,-36.849714,174.766541
+shop,4880757724,Localito,,convenience,,,yes,,-36.843082,174.767049
+shop,4910509298,Japan Mart City Central,,supermarket,,,yes,,-36.847182,174.76458
+eatery,4943367468,Mithai Indian Vegetarian Restaurant,restaurant,,,,yes,indian,-36.897042,174.733251
+eatery,4943409489,Rocket Kebabs,fast_food,,,,yes,kebab,-36.880264,174.72574
+eatery,4943409514,Halal Fried Chicken,fast_food,,,,yes,chicken,-36.900409,174.720843
+eatery,4956159230,PizzaExpress,restaurant,,,,yes,pizza,-36.907673,174.733113
+eatery,5015955232,Turkish Kebab and Burger,fast_food,,,,yes,burger;kebab;turkish,-36.870709,174.710425
+eatery,5047602373,Ronnies Cafe,cafe,,,,yes,sandwich;breakfast;burger,-36.844367,174.764647
+eatery,5057312532,Cafe Anatolia,cafe,,,,yes,turkish,-36.717068,174.746599
+eatery,5153233821,Tanuki's Cave,restaurant,,,,yes,yakitori,-36.853611,174.763129
+eatery,5156242247,Sushi Me,fast_food,,,,yes,sushi,-36.859862,174.752308
+eatery,5274600330,Beach Pizza & Chicken N' Chips (Halal),fast_food,,,,yes,,-37.199407,174.905364
+butcher,5328615485,Westcity Halal Meats,,butcher,,,yes,,-36.876674,174.629297
+butcher,5328743006,Barakah Halal Meat and Spices,,butcher,,,yes,,-36.896703,174.626628
+shop,5400472679,Safka,,supermarket,,,yes,,-36.856914,174.759102
+eatery,5400478996,Izmir Kebab and Grill,fast_food,,,,yes,,-36.84808,174.762776
+eatery,5406798027,Arbung Thai Street Food      - halal,fast_food,,,,yes,thai,-36.843644,174.762542
+eatery,5415987137,Beach Pizza,fast_food,,,,yes,,-36.886297,174.644088
+butcher,5417509854,Shefco Halal Meats,,butcher,,,yes,,-36.901667,174.723086
+butcher,5417526283,Choice Chicken,,butcher,,,yes,,-36.901751,174.723229
+eatery,5417530762,Shefco Pastries,cafe,,,,yes,ope,-36.906254,174.731643
+shop,5417703167,Bake and Beans,,bakery,,,yes,,-36.891277,174.736253
+butcher,5417704388,Auckland Halal Meats,,butcher,,,yes,,-36.891455,174.736745
+eatery,5421571847,Hambagu,fast_food,,,,yes,,-36.894761,174.773928
+eatery,5461203819,Pita House,fast_food,,,,yes,,-36.925869,174.804878
+eatery,5475776227,Yoshizawa,restaurant,,,,yes,japanese,-36.849338,174.765862
+eatery,5485876844,Khanz Cafe and Bakery,cafe,,,,yes,,-36.967458,174.86051
+eatery,5485879719,Beach Pizza,fast_food,,,,yes,,-36.972951,174.840308
+eatery,5490427579,Sham Grill NZ,restaurant,,,,yes,middle_eastern;arab;kebab;shawarma,-36.967261,174.905672
+shop,5504681009,Lunas Bakehouse,,bakery,,,yes,,-36.786568,174.772738
+butcher,5504727206,North Shore Meat Centre,,butcher,,,yes,,-36.783225,174.736447
+shop,5596123186,Lubis,,bakery,,,yes,,-37.039585,174.914803
+eatery,6952885285,Good life,restaurant,,,,yes,,-36.846376,174.768121
+shop,7092241148,Woolworths,,supermarket,,,yes,,-36.843904,174.765232
+eatery,8122051600,Little Algiers,cafe,,,,yes,african;mediterranean,-36.859056,174.753336
+eatery,8127060235,Downtown Kebabs,fast_food,,,,yes,kebab,-36.843641,174.767364
+eatery,8223577458,No. 7,cafe,,,,yes,,-36.856918,174.758668
+eatery,8223577463,Lebanese Grocer,restaurant,,,,yes,lebanese,-36.857397,174.758828
+shop,8641915244,Mill Bakery,,bakery,,,yes,,-36.879952,174.632962
+eatery,9300991090,Thai Kitchen Takeaway,restaurant,,,,yes,thai,-36.900255,174.719976
+eatery,9910617509,Pita Pit,fast_food,,,,yes,pita,-37.005192,174.782789
+eatery,10012449473,The Sushi Store,restaurant,,,,yes,sushi,-36.854192,174.758678
+butcher,10139054533,Madinah Halal Meats,,butcher,,,yes,,-36.986261,174.872017
+eatery,10892579815,Harbourside Ocean Bar & Grill,restaurant,,,,yes,,-36.843046,174.766903
+eatery,10988287988,Tanuki,restaurant,,,,yes,japanese,-36.853637,174.763118
+eatery,11092661805,Raos Indonesian Street Food,restaurant,,,,yes,indonesian,-36.883121,174.748543
+eatery,11204019167,Wucha,cafe,,,,yes,bubble_tea,-36.850275,174.765718
+shop,11216624378,Circle K,,convenience,,,yes,,-36.851628,174.760335
+eatery,11219127390,Cosmo Coffee,cafe,,,,yes,coffee_shop,-36.849772,174.766523
+eatery,11221762021,Sushi & Donburi,restaurant,,,,yes,japanese,-36.850873,174.764909
+eatery,11221827519,Dumpling House,restaurant,,,,yes,chinese,-36.849325,174.765804
+eatery,11226275414,East,cafe,,,,yes,,-36.849084,174.759216
+eatery,11237558073,Kebab Time,fast_food,,,,only,kebab,-36.848306,174.763278
+eatery,11242896437,Sushipac,restaurant,,,,yes,sushi,-36.851306,174.765032
+eatery,11254392518,Sensational Chicken,fast_food,,,,only,kebab,-36.850406,174.760349
+shop,11258933792,Lunas Bakehouse,,bakery,,,yes,,-36.850175,174.763695
+eatery,11369934283,Tang Tea,cafe,,,,yes,bubble_tea,-36.851156,174.764592
+shop,11380877270,Convenience Store,,convenience,,,yes,,-36.845026,174.766676
+eatery,11458515288,Pasand Pizza,fast_food,,,,yes,,-36.91576,174.730583
+eatery,11590999799,Fuga Japanese Brasserie,restaurant,,,,yes,japanese,-36.848516,174.762983
+eatery,12082785402,Chicking,fast_food,,,,yes,,-36.892081,174.73558
+eatery,12195824883,Japanese Dining You,restaurant,,,,yes,japanese,-36.850112,174.763656
+eatery,12445435113,Boishakhi,restaurant,,,,yes,bangalideshi,-36.85548,174.62964
+eatery,12461831353,Albasha Restaurant,restaurant,,,,yes,middle_eastern,-36.90428,174.741992
+butcher,12476983888,A1 Halal Chicken,,butcher,,,yes,,-36.903279,174.726769
+butcher,12477026454,Etihad Halal Meat Butchery,,butcher,,,yes,,-36.900398,174.719957
+butcher,12477072859,Amanah Butchery,,butcher,,,yes,,-36.834178,174.603054
+butcher,12477119473,Wolverton Meat Market,,butcher,,,yes,,-36.907516,174.697737
+butcher,12477134362,Zam Zam Supermarket,,butcher,,,yes,,-36.855606,174.630477
+butcher,12477134426,Continental Meat n Spices halaal,,butcher,,,yes,,-36.987747,174.874816
+eatery,12477178857,Flame Pizza,fast_food,,,,yes,,-36.852635,174.630569
+eatery,12477184679,The Rustic Pizzeria,restaurant,,,,yes,,-36.964478,174.914451
+eatery,12477202683,Flame Pizza,fast_food,,,,yes,,-36.964605,174.905217
+eatery,12477230596,Pizzas and Mocktails,fast_food,,,,yes,,-36.898007,174.697209
+eatery,12487391032,Akbar Durbar Indian Takeaway,fast_food,,,,yes,,-36.847642,174.761646
+eatery,12487391734,Glen Eden Kebab - Glenfield,fast_food,,,,yes,,-36.781628,174.721531
+eatery,12487391736,Celine Mediterranean Cuisine,fast_food,,,,yes,,-36.849554,174.764289
+eatery,12487391737,Chamate Restaurant,fast_food,,,,yes,,-36.846022,174.765054
+eatery,12487391738,Mazi,fast_food,,,,yes,,-36.843661,174.766495
+eatery,12487391739,My Dear Eatery,fast_food,,,,yes,,-36.944602,174.849856
+eatery,12487392006,Chicking,fast_food,,,,yes,,-36.781263,174.721545
+eatery,12487392007,Wicked Chicken,fast_food,,,,yes,,-36.787847,174.769321
+eatery,12487392008,Sensational Chicken,fast_food,,,,yes,chicken,-36.854548,174.766705
+eatery,12487392511,Sensational Chicken | NZ Kebabs,fast_food,,,,yes,,-36.716644,174.746771
+eatery,12487392512,Smash Burger,fast_food,,,,yes,,-36.854748,174.766702
+eatery,12487495807,Khan's Kebab Club,fast_food,,,,yes,kebab,-36.908054,174.69656
+eatery,12487498703,No.1 Lanzhou Beef Noodle,fast_food,,,,yes,asian;beef_bowl;chicken;chinese;fish;noodles;oriental,-36.88748,174.747438
+eatery,12501069609,Halal Tasty Food,fast_food,,,,yes,,-36.942056,174.841417
+eatery,12526103101,Ayesha Halal Certification Ltd,,,,,,,-37.013833,174.88925
+eatery,12526103102,Halal Conformity Services Ltd,,,,,,,-36.908685,174.680393
+butcher,12527833987,Madinah Halal Meats,,butcher,,,yes,,-36.922755,174.720142
+eatery,12679820041,Zeta Greek Kitchen,fast_food,,,,yes,greek,-36.845386,174.767639
+eatery,13722062985,flip,restaurant,,,,yes,burger;soft_serve,-36.852044,174.764232
+eatery,13722384659,House of Authentic Kolkata Dum Biryani,restaurant,,,,yes,indian,-36.900161,174.719976
+eatery,13726730904,Paradise,cafe,,,,yes,indian,-36.892092,174.735671
+eatery,162152485,St Pierre's Sushi,restaurant,,,,yes,sushi,-36.857676,174.760452
+shop,260057114,Asian Groceries,,supermarket,,,yes,,-36.851374,174.759803
+eatery,293023331,Shaolin Kung Fu Noodle,restaurant,,,,only,chinese,-36.856241,174.762399
+butcher,309979336,Istanbul Halal Meats & Grocery,,butcher,,,yes,,-36.904062,174.742162
+shop,329096760,Bake and Beans,,bakery,,,yes,,-36.967865,174.861878
+shop,853219245,Getfresh Halal Takeaway,,supermarket,,,yes,,-36.981863,174.788274
+eatery,894759667,Joong Wha Ru,restaurant,,,,yes,,-36.855652,174.762705
+eatery,894759675,Shoya,restaurant,,,,yes,japanese,-36.85604,174.762487
+eatery,947693739,Kebabzilla,fast_food,,,,only,,-36.848984,174.764215
+eatery,947693741,Toastie,fast_food,,,,yes,,-36.848904,174.764254
+eatery,1041821948,Peppers,cafe,,,,yes,,-36.849031,174.763023
+eatery,1187063865,CoCo Fresh Tea & Juice,cafe,,,,yes,bubble_tea,-36.728704,174.708034
+eatery,1360852786,Feri Cuisine,restaurant,,,,yes,persian,-36.853132,174.764117

@@ -1,0 +1,634 @@
+sa2_code,sa2_name,area_type,rent_source_sa2,bond_rent_census_time,rent_quarters_census_time,lodged_census_time,census_median_rent_weekly,rent_premium_pct,rent_premium_dollars,social_pct,kainga_ora_pct,private_landlord_pct,flag_borrowed_rent,analysis_ready,in_premium_analysis
+110600,Oceanic Auckland Region East,,110600,,,,,,,,,,False,False,False
+111000,Oceanic Auckland Region West,,111000,,,,,,,,,,False,False,False
+110300,Inlet Kaipara Harbour South,,110300,,,,,,,,,,False,False,False
+141400,Inlet Manukau Harbour,,141400,,,,,,,,,,False,False,False
+110400,Cape Rodney,Older & coastal,110400,560.0,2.0,18.0,430.0,30.23,130.0,1.2,0.0,95.18,False,True,False
+110700,South Head,Older & coastal,110700,650.0,1.0,6.0,400.0,62.5,250.0,3.28,0.0,95.08,False,True,False
+111801,Barrier Islands,Older & coastal,111800,,,,208.0,,,2.94,0.0,79.41,False,True,False
+110800,Kaipara Hills,Outer suburbs & lifestyle blocks,110800,,,,400.0,,,5.56,5.56,94.44,False,True,False
+111200,Puhoi Valley,Outer suburbs & lifestyle blocks,111200,537.5,2.0,27.0,500.0,7.5,37.5,3.61,1.2,91.57,False,True,False
+149901,Āwhitu,Older & coastal,149900,480.0,1.0,6.0,430.0,11.63,50.0,0.0,0.0,96.43,False,True,False
+110201,Okahukura Peninsula,Older & coastal,110200,620.0,1.0,6.0,400.0,55.0,220.0,2.44,0.0,97.56,False,True,False
+162701,Kawakawa Bay-Orere,Older & coastal,162700,630.0,2.0,15.0,450.0,40.0,180.0,1.72,0.0,98.28,False,True,False
+112001,Inlets other Auckland,,112000,,,,,,,,,,False,False,False
+128000,Waitākere Ranges South,Older & coastal,128000,390.0,1.0,6.0,400.0,-2.5,-10.0,6.25,0.0,90.62,False,True,False
+166400,Ararimu,Outer suburbs & lifestyle blocks,166400,550.0,1.0,6.0,456.0,20.61,94.0,0.0,0.0,100.0,False,True,False
+111602,Kaukapakapa Rural,Outer suburbs & lifestyle blocks,111600,,,,450.0,,,0.0,0.0,100.0,True,True,False
+151700,Waiheke East,Older & coastal,151700,620.0,1.0,6.0,500.0,24.0,120.0,0.0,0.0,96.77,False,True,False
+117100,Waitākere Ranges North,Outer suburbs & lifestyle blocks,117100,,,,405.0,,,0.0,0.0,100.0,False,True,False
+161400,Kingseat-Karaka,Outer suburbs & lifestyle blocks,161400,630.0,1.0,9.0,500.0,26.0,130.0,0.0,0.0,97.65,False,True,False
+110900,Dome Valley-Matakana,Outer suburbs & lifestyle blocks,110900,646.5,2.0,12.0,550.0,17.55,96.5,0.0,0.0,97.06,False,True,False
+157101,Turanga,Outer suburbs & lifestyle blocks,157100,580.0,1.0,6.0,550.0,5.45,30.0,2.78,0.0,98.61,False,True,False
+119301,Inlet Waitemata Harbour,,119300,,,,,,,,,,False,False,False
+165200,Hunua,Outer suburbs & lifestyle blocks,165200,,,,450.0,,,0.0,0.0,100.0,False,True,False
+114300,Gulf Islands,Older & coastal,114300,,,,450.0,,,,,100.0,False,True,False
+112101,Wainui-Waiwera,Older & coastal,112100,439.0,2.0,21.0,460.0,-4.57,-21.0,0.0,0.0,100.0,True,True,False
+112301,Helensville Rural,Outer suburbs & lifestyle blocks,112300,,,,473.0,,,0.0,0.0,100.0,False,True,False
+113201,Waipatukahu,Outer suburbs & lifestyle blocks,113200,,,,468.0,,,2.56,2.56,97.44,False,True,False
+162400,Glenbrook,Outer suburbs & lifestyle blocks,162400,685.0,2.0,21.0,500.0,37.0,185.0,3.12,0.0,98.44,False,True,False
+112600,Waikoukou Valley,Outer suburbs & lifestyle blocks,112600,,,,450.0,,,0.0,0.0,100.0,False,True,False
+162901,Clevedon,Outer suburbs & lifestyle blocks,162900,695.0,1.0,6.0,500.0,39.0,195.0,2.78,0.0,102.78,False,True,False
+113700,Riverhead Forest,,113700,,,,,,,,,,False,False,False
+111500,Tawharanui Peninsula,Older & coastal,111500,788.0,1.0,9.0,500.0,57.6,288.0,2.86,0.0,100.0,False,True,False
+162300,Ardmore,Outer suburbs & lifestyle blocks,162300,550.0,1.0,6.0,530.0,3.77,20.0,0.0,0.0,100.0,False,True,False
+112500,Waitoki,Outer suburbs & lifestyle blocks,112500,690.0,1.0,6.0,510.0,35.29,180.0,0.0,0.0,97.5,False,True,False
+165101,Ramarama,Outer suburbs & lifestyle blocks,165100,717.5,2.0,18.0,552.0,29.98,165.5,0.0,0.0,100.0,False,True,False
+165001,Puni,Outer suburbs & lifestyle blocks,165000,680.0,2.0,15.0,470.0,44.68,210.0,0.0,0.0,100.0,False,True,False
+147300,Bays Waiheke Island,,147300,,,,,,,,,,False,False,False
+115300,Muriwai Valley-Bethells Beach,Outer suburbs & lifestyle blocks,115300,,,,450.0,,,0.0,0.0,100.0,False,True,False
+159801,Karaka Creek,Outer suburbs & lifestyle blocks,159800,625.0,1.0,6.0,450.0,38.89,175.0,0.0,0.0,96.77,False,True,False
+163803,Patumāhoe Rural,Outer suburbs & lifestyle blocks,163800,560.0,1.0,6.0,500.0,12.0,60.0,0.0,0.0,100.0,True,True,False
+113500,Dairy Flat West,Outer suburbs & lifestyle blocks,113500,685.0,1.0,12.0,560.0,22.32,125.0,1.82,0.0,100.0,False,True,False
+166301,Bombay Hills,Outer suburbs & lifestyle blocks,166300,615.0,1.0,6.0,520.0,18.27,95.0,0.0,0.0,100.0,False,True,False
+114801,Ōkura Bush,Outer suburbs & lifestyle blocks,114800,742.5,2.0,18.0,650.0,14.23,92.5,0.0,0.0,100.0,False,True,False
+116401,Taupaki,Outer suburbs & lifestyle blocks,116400,,,,500.0,,,0.0,0.0,98.11,False,True,False
+114701,Kumeū Rural West,Outer suburbs & lifestyle blocks,114700,,,,550.0,,,0.0,0.0,100.0,False,True,False
+147900,Auckland Airport,,147900,,,,500.0,,,8.7,0.0,86.96,False,False,False
+164603,Waihoehoe,Outer suburbs & lifestyle blocks,164600,642.5,2.0,33.0,650.0,-1.15,-7.5,0.0,0.0,98.11,True,True,False
+111400,Sandspit,Older & coastal,111400,585.0,1.0,6.0,500.0,17.0,85.0,0.0,0.0,100.0,False,True,False
+115501,Coatesville,Outer suburbs & lifestyle blocks,115500,716.5,2.0,21.0,586.0,22.27,130.5,0.0,0.0,100.0,True,True,False
+113402,Dairy Flat North,Outer suburbs & lifestyle blocks,113400,750.0,2.0,21.0,720.0,4.17,30.0,0.0,0.0,100.0,True,True,False
+130000,Oratia,Outer suburbs & lifestyle blocks,130000,,,,500.0,,,6.25,0.0,96.88,False,True,False
+116101,Kumeū Rural East,Outer suburbs & lifestyle blocks,116100,650.0,2.0,21.0,510.0,27.45,140.0,0.0,0.0,100.0,False,True,False
+111901,Mahurangi Peninsula,Older & coastal,111900,,,,454.0,,,3.45,0.0,96.55,False,True,False
+121100,Swanson Rural,Outer suburbs & lifestyle blocks,121100,740.0,1.0,6.0,500.0,48.0,240.0,0.0,0.0,100.0,False,True,False
+124700,Henderson Valley,Outer suburbs & lifestyle blocks,124700,678.0,1.0,6.0,466.0,45.49,212.0,0.0,0.0,94.74,False,True,False
+118001,Waitākere,Outer suburbs & lifestyle blocks,118000,,,,494.0,,,0.0,0.0,100.0,False,True,False
+115601,Dairy Flat South,Outer suburbs & lifestyle blocks,115600,704.0,2.0,15.0,732.0,-3.83,-28.0,0.0,0.0,100.0,False,True,False
+116601,Pāremoremo East,Outer suburbs & lifestyle blocks,115500,716.5,2.0,21.0,550.0,30.27,166.5,2.44,0.0,74.39,True,True,False
+117001,Whenuapai,Outer suburbs & lifestyle blocks,117000,708.0,2.0,57.0,510.0,38.82,198.0,5.92,5.33,76.33,True,True,False
+164601,Runciman,Outer suburbs & lifestyle blocks,164600,642.5,2.0,33.0,616.0,4.3,26.5,0.0,0.0,100.0,True,True,False
+155500,Manukau Central,Apartments & inner city,155500,435.0,2.0,81.0,450.0,-3.33,-15.0,5.61,4.67,94.39,False,True,True
+127601,Waiatarua,Outer suburbs & lifestyle blocks,127600,669.0,2.0,15.0,534.0,25.28,135.0,2.44,2.44,97.56,False,True,False
+111100,Warkworth West,Older & coastal,111100,600.0,2.0,27.0,560.0,7.14,40.0,2.53,2.53,96.2,False,True,False
+114101,Silverdale South (Auckland),Outer suburbs & lifestyle blocks,114100,587.5,2.0,15.0,520.0,12.98,67.5,0.0,0.0,100.0,True,True,False
+116300,Pāremoremo West,Outer suburbs & lifestyle blocks,116300,1320.0,1.0,6.0,538.0,145.35,782.0,0.0,0.0,100.0,False,True,False
+166200,Buckland,Outer suburbs & lifestyle blocks,166200,,,,480.0,,,0.0,0.0,100.0,False,True,False
+144600,Oneroa West,Older & coastal,144600,,,,500.0,,,0.0,0.0,100.0,False,True,False
+164602,Drury South Crossing,Outer suburbs & lifestyle blocks,164600,642.5,2.0,33.0,625.0,2.8,17.5,4.35,0.0,95.65,True,True,False
+157600,Wiri West,,157600,440.0,2.0,63.0,300.0,46.67,140.0,17.39,0.0,78.26,False,False,False
+152300,East Tamaki,,152300,,,,550.0,,,0.0,0.0,95.45,False,False,False
+165400,Anselmi Ridge,Older & coastal,165400,790.0,2.0,24.0,672.0,17.56,118.0,0.0,0.0,100.0,False,True,False
+156400,Te Puru,Outer suburbs & lifestyle blocks,156400,815.0,2.0,45.0,760.0,7.24,55.0,0.0,0.0,100.0,False,True,True
+157400,Maraetai,Outer suburbs & lifestyle blocks,157400,620.0,2.0,30.0,570.0,8.77,50.0,0.0,0.0,100.0,False,True,True
+158900,Tuscany Heights,Outer suburbs & lifestyle blocks,158900,,,,800.0,,,0.0,0.0,93.33,False,True,False
+145900,Penrose,,145900,532.5,2.0,15.0,520.0,2.4,12.5,5.26,5.26,89.47,False,False,False
+120101,Birdwood West,Outer suburbs & lifestyle blocks,120100,,,,530.0,,,4.0,0.0,96.0,False,True,False
+116000,Army Bay,Older & coastal,116000,650.0,1.0,9.0,520.0,25.0,130.0,2.7,0.0,94.59,False,True,False
+151100,Onetangi,Older & coastal,151100,723.0,1.0,6.0,550.0,31.45,173.0,0.0,0.0,100.0,False,True,False
+118600,North Harbour,,118600,524.0,2.0,33.0,500.0,4.8,24.0,1.82,0.0,96.36,False,False,False
+161600,Takanini North,Crowded family suburbs,161600,614.0,2.0,45.0,535.0,14.77,79.0,24.82,22.7,75.89,False,True,True
+111601,Kaukapakapa,Outer suburbs & lifestyle blocks,111600,,,,550.0,,,6.67,0.0,93.33,True,True,False
+124100,Piha,Older & coastal,124100,,,,546.0,,,0.0,0.0,100.0,False,True,False
+113401,Milldale,Outer suburbs & lifestyle blocks,113400,750.0,2.0,21.0,760.0,-1.32,-10.0,0.0,0.0,100.0,True,True,False
+136700,Titirangi South,Outer suburbs & lifestyle blocks,136700,652.5,2.0,15.0,600.0,8.75,52.5,0.0,0.0,101.92,False,True,False
+110501,Wellsford,Older & coastal,110500,535.0,2.0,30.0,462.0,15.8,73.0,1.25,0.0,95.0,False,True,True
+152800,Māngere South East,Crowded family suburbs,152800,655.0,2.0,12.0,465.0,40.86,190.0,40.0,38.33,57.5,False,True,False
+117002,Whenuapai West,Outer suburbs & lifestyle blocks,117000,708.0,2.0,57.0,650.0,8.92,58.0,4.17,2.08,97.92,True,True,False
+115001,Kumeū-Huapai North,Outer suburbs & lifestyle blocks,115000,746.5,2.0,72.0,674.0,10.76,72.5,2.06,1.03,98.97,True,True,False
+111300,Warkworth East,Older & coastal,111300,627.5,2.0,57.0,560.0,12.05,67.5,2.63,1.97,97.37,False,True,True
+159301,The Gardens (Auckland),Outer suburbs & lifestyle blocks,159300,757.5,2.0,33.0,710.0,6.69,47.5,4.23,1.41,94.37,False,True,True
+137500,Laingholm,Outer suburbs & lifestyle blocks,137500,615.0,2.0,18.0,500.0,23.0,115.0,2.94,0.0,100.0,False,True,False
+112401,Helensville,Older & coastal,112400,586.5,2.0,24.0,480.0,22.19,106.5,12.22,10.0,84.44,False,True,False
+116701,Albany Heights,Middle suburbs,116700,640.0,2.0,114.0,680.0,-5.88,-40.0,0.0,0.0,99.38,False,True,True
+148700,Ostend,Older & coastal,148700,660.0,1.0,6.0,500.0,32.0,160.0,6.25,6.25,93.75,False,True,False
+165301,Pukekohe North,Middle suburbs,165300,595.0,2.0,66.0,525.0,13.33,70.0,5.33,4.0,93.33,True,True,False
+111700,Snells Beach,Older & coastal,111700,559.0,2.0,33.0,500.0,11.8,59.0,0.85,0.0,99.15,False,True,True
+146900,Oneroa East-Palm Beach,Older & coastal,146900,940.0,1.0,6.0,550.0,70.91,390.0,0.0,0.0,100.0,False,True,False
+119400,Greenhithe South,Outer suburbs & lifestyle blocks,119400,875.0,2.0,24.0,634.0,38.01,241.0,0.0,0.0,100.0,False,True,False
+162500,Hingaia,Older & coastal,162500,810.0,2.0,18.0,792.0,2.27,18.0,0.0,0.0,97.87,False,True,False
+134600,Waima-Woodlands Park,Outer suburbs & lifestyle blocks,134600,650.0,1.0,6.0,640.0,1.56,10.0,0.0,0.0,96.88,False,True,False
+117003,Massey Red Hills,Outer suburbs & lifestyle blocks,117000,708.0,2.0,57.0,570.0,24.21,138.0,0.0,0.0,100.0,True,True,False
+113800,Silverdale Central (Auckland),,113800,835.0,2.0,18.0,572.0,45.98,263.0,13.51,13.51,86.49,False,False,False
+147700,Mount Wellington Industrial,,147700,,,,,,,,,,False,False,False
+163400,Karaka Lakes,Outer suburbs & lifestyle blocks,163400,775.0,2.0,42.0,750.0,3.33,25.0,9.38,4.69,90.62,False,True,True
+117300,Albany Central,Apartments & inner city,117300,575.0,2.0,162.0,550.0,4.55,25.0,4.08,2.72,95.92,False,True,True
+146100,Māngere Bridge Ambury,Middle suburbs,146100,630.0,2.0,27.0,550.0,14.55,80.0,13.39,12.5,85.71,False,True,False
+166000,Pukekohe Central,,166000,490.0,2.0,15.0,400.0,22.5,90.0,15.62,12.5,87.5,False,False,False
+126300,Chatswood,Outer suburbs & lifestyle blocks,126300,825.0,2.0,21.0,720.0,14.58,105.0,2.86,0.0,97.14,False,True,False
+164302,Drury East,Middle suburbs,164300,620.0,2.0,39.0,550.0,12.73,70.0,17.07,17.07,82.93,True,True,False
+145500,Onehunga-Te Papapa Industrial,,145500,607.5,2.0,33.0,520.0,16.83,87.5,30.43,25.0,70.65,False,False,False
+114500,Muriwai,Outer suburbs & lifestyle blocks,114500,640.0,1.0,6.0,584.0,9.59,56.0,17.65,0.0,88.24,False,True,False
+115400,Tindalls-Matakatia,Older & coastal,115400,600.0,1.0,6.0,566.0,6.01,34.0,0.0,0.0,100.0,False,True,False
+119201,Hobsonville,Outer suburbs & lifestyle blocks,119200,785.0,2.0,24.0,690.0,13.77,95.0,0.0,0.0,98.15,False,True,False
+116500,Long Bay,Outer suburbs & lifestyle blocks,116500,980.0,2.0,51.0,925.0,5.95,55.0,0.0,0.0,100.0,False,True,True
+164301,Drury West,Middle suburbs,164300,620.0,2.0,39.0,628.0,-1.27,-8.0,3.33,3.33,93.33,True,True,False
+118900,Greenhithe West,Outer suburbs & lifestyle blocks,118900,731.5,2.0,33.0,600.0,21.92,131.5,0.0,0.0,98.31,False,True,True
+116200,Gulf Harbour South,Older & coastal,116200,669.0,2.0,42.0,600.0,11.5,69.0,0.0,0.0,100.0,False,True,True
+147600,Surfdale,Older & coastal,147600,600.0,1.0,6.0,550.0,9.09,50.0,0.0,0.0,98.57,False,True,False
+123500,Wairau Valley,,123500,,,,460.0,,,0.0,0.0,100.0,False,False,False
+115002,Kumeū-Huapai South,Outer suburbs & lifestyle blocks,115000,746.5,2.0,72.0,710.0,5.14,36.5,0.0,0.0,100.0,True,True,False
+163902,Harbour View Heights,Outer suburbs & lifestyle blocks,163900,677.5,2.0,33.0,630.0,7.54,47.5,6.67,0.0,93.33,True,True,False
+156000,Botany Junction,,156000,,,,465.0,,,16.67,0.0,91.67,False,False,False
+113300,Millwater South,Outer suburbs & lifestyle blocks,113300,741.5,2.0,69.0,800.0,-7.31,-58.5,0.0,0.0,100.0,False,True,True
+159401,Clarks Beach,Older & coastal,159400,580.0,2.0,21.0,550.0,5.45,30.0,0.0,0.0,100.0,False,True,False
+128700,Rosebank Peninsula,,128700,,,,,,,,,,False,False,False
+164500,Hamilton Estate,Older & coastal,164500,540.0,2.0,33.0,480.0,12.5,60.0,3.53,3.53,94.12,False,True,True
+142802,One Tree Hill Amaru,Affluent established suburbs,142800,622.5,2.0,99.0,540.0,15.28,82.5,9.7,8.21,91.04,True,True,False
+118400,Schnapper Rock,Outer suburbs & lifestyle blocks,118400,657.5,2.0,75.0,750.0,-12.33,-92.5,0.94,0.0,98.11,False,True,True
+126801,Takapuna Central,Affluent established suburbs,126800,606.5,2.0,93.0,610.0,-0.57,-3.5,1.18,0.59,97.65,False,True,True
+115901,Riverhead,Outer suburbs & lifestyle blocks,115900,716.5,2.0,42.0,600.0,19.42,116.5,0.0,0.0,100.0,False,True,True
+164900,Kendallvale,Outer suburbs & lifestyle blocks,164900,,,,516.0,,,0.0,0.0,100.0,False,True,False
+122001,Swanson,Outer suburbs & lifestyle blocks,122000,702.5,2.0,21.0,560.0,25.45,142.5,15.73,10.11,84.27,False,True,False
+117400,Albany West,Older & coastal,117400,771.5,2.0,42.0,670.0,15.15,101.5,1.15,0.0,98.85,False,True,True
+114901,Whangaparāoa Central,Middle suburbs,114900,587.5,2.0,42.0,580.0,1.29,7.5,1.14,0.0,100.0,True,True,False
+130300,Westmere South-Western Springs,Affluent established suburbs,130300,796.5,2.0,30.0,650.0,22.54,146.5,28.32,28.32,71.68,False,True,True
+127500,Henderson Central,Apartments & inner city,127500,510.0,2.0,27.0,402.0,26.87,108.0,24.49,12.24,73.47,False,True,False
+145400,Panmure Glen Innes Industrial,,145400,525.0,1.0,6.0,550.0,-4.55,-25.0,6.67,0.0,86.67,False,False,False
+126601,Takapuna West,Affluent established suburbs,126600,645.0,2.0,147.0,590.0,9.32,55.0,11.11,3.54,88.89,False,True,True
+125100,Henderson Lincoln East,,125100,,,,480.0,,,0.0,0.0,100.0,False,False,False
+119800,West Harbour West,Middle suburbs,119800,617.5,2.0,78.0,550.0,12.27,67.5,24.35,22.17,75.65,False,True,True
+130801,Glen Eden North,Middle suburbs,129100,562.5,2.0,81.0,440.0,27.84,122.5,23.78,13.41,75.0,True,True,False
+118800,Westgate Central,,118800,,,,,,,,,,False,False,False
+160401,Alfriston,Middle suburbs,160400,427.5,2.0,60.0,630.0,-32.14,-202.5,17.65,14.71,81.37,False,True,True
+113900,Red Beach West,Older & coastal,113900,716.5,2.0,27.0,600.0,19.42,116.5,1.52,0.0,98.48,False,True,False
+149600,Ōtāhuhu Industrial,,149600,,,,,,,,,,False,False,False
+130700,Narrow Neck,Affluent established suburbs,130700,695.0,2.0,63.0,524.0,32.63,171.0,13.64,9.09,83.12,False,True,True
+163801,Patumāhoe,Outer suburbs & lifestyle blocks,163800,560.0,1.0,6.0,580.0,-3.45,-20.0,0.0,0.0,100.0,True,True,False
+125300,Te Atatū Peninsula East,Outer suburbs & lifestyle blocks,125300,706.5,2.0,18.0,600.0,17.75,106.5,11.11,9.88,87.65,False,True,False
+150700,Pakuranga Heights East,Middle suburbs,150700,627.5,2.0,54.0,580.0,8.19,47.5,7.09,7.09,92.91,False,True,True
+115700,Gulf Harbour North,Outer suburbs & lifestyle blocks,115700,697.5,2.0,33.0,650.0,7.31,47.5,0.0,0.0,100.0,False,True,True
+113101,Millwater Central,Outer suburbs & lifestyle blocks,113100,832.5,2.0,39.0,800.0,4.06,32.5,0.0,0.0,100.0,False,True,True
+122200,Campbells Bay,Affluent established suburbs,122200,885.0,2.0,24.0,700.0,26.43,185.0,0.0,0.0,100.0,False,True,False
+153400,Cockle Bay,Outer suburbs & lifestyle blocks,153400,614.0,2.0,51.0,550.0,11.64,64.0,2.17,0.0,97.83,False,True,True
+144001,Glendowie North,Affluent established suburbs,144000,925.0,2.0,36.0,750.0,23.33,175.0,1.82,1.82,100.0,False,True,True
+119600,Westgate South,Middle suburbs,119600,675.0,2.0,78.0,580.0,16.38,95.0,22.48,16.28,74.42,False,True,True
+140100,Orakei East,Affluent established suburbs,140100,805.5,2.0,27.0,300.0,168.5,505.5,38.78,38.78,44.22,False,True,False
+147500,Māngere Mountain View,Middle suburbs,147500,672.5,2.0,48.0,450.0,49.44,222.5,36.08,34.81,63.29,False,True,True
+140000,Remuera Waitaramoa,Affluent established suburbs,140000,835.0,2.0,60.0,700.0,19.29,135.0,7.0,6.0,94.0,False,True,True
+150600,Mellons Bay,Outer suburbs & lifestyle blocks,150600,650.0,2.0,42.0,600.0,8.33,50.0,0.0,0.0,100.0,False,True,True
+157301,Ormiston North,Outer suburbs & lifestyle blocks,157300,870.0,2.0,24.0,750.0,16.0,120.0,7.27,5.45,92.73,False,True,False
+114902,Wade Heads-Arkles Bay,Outer suburbs & lifestyle blocks,114900,587.5,2.0,42.0,554.0,6.05,33.5,0.0,0.0,100.0,True,True,False
+136400,Parnell West,Apartments & inner city,136400,704.0,2.0,168.0,650.0,8.31,54.0,6.69,6.69,92.96,False,True,True
+162102,Takanini East,Outer suburbs & lifestyle blocks,162100,690.0,2.0,102.0,680.0,1.47,10.0,2.04,1.02,96.94,True,True,False
+146800,Māngere Bridge,Middle suburbs,146800,620.0,2.0,48.0,500.0,24.0,120.0,29.58,18.31,66.2,False,True,True
+116900,Fairview Heights,Outer suburbs & lifestyle blocks,116900,805.0,2.0,57.0,766.0,5.09,39.0,0.96,0.0,98.08,False,True,True
+161800,Conifer Grove West,Outer suburbs & lifestyle blocks,161800,739.0,2.0,24.0,680.0,8.68,59.0,1.67,0.0,98.33,False,True,False
+115800,Manly East,Older & coastal,115800,620.0,2.0,30.0,550.0,12.73,70.0,0.92,0.0,99.08,False,True,True
+143900,Remuera Waiatarua,Affluent established suburbs,143900,722.5,2.0,48.0,710.0,1.76,12.5,1.06,1.06,97.87,False,True,True
+163200,Papakura Central,Middle suburbs,163200,551.5,2.0,99.0,450.0,22.56,101.5,20.22,15.07,79.04,False,True,True
+158603,Ormiston South East,Outer suburbs & lifestyle blocks,158600,630.0,2.0,54.0,650.0,-3.08,-20.0,5.0,0.0,95.0,True,True,False
+114000,Red Beach East,Older & coastal,114000,639.0,2.0,27.0,560.0,14.11,79.0,1.01,1.01,97.98,False,True,False
+153800,Somerville,Outer suburbs & lifestyle blocks,153800,769.0,2.0,45.0,700.0,9.86,69.0,0.0,0.0,100.0,False,True,True
+153500,Ōtara West,Crowded family suburbs,153500,593.0,1.0,9.0,178.0,233.15,415.0,74.1,73.49,24.7,False,True,False
+143301,Ellerslie Central,Affluent established suburbs,143300,680.5,2.0,66.0,590.0,15.34,90.5,20.37,19.14,80.25,False,True,True
+163700,Rosehill,Crowded family suburbs,163700,657.5,2.0,54.0,510.0,28.92,147.5,26.42,24.53,73.58,False,True,True
+164100,Papakura Industrial,,164100,,,,385.0,,,33.33,33.33,58.33,False,False,False
+112701,Orewa North,Older & coastal,112700,777.5,2.0,48.0,674.0,15.36,103.5,0.0,0.0,100.0,True,True,False
+155000,Sunkist Bay,Outer suburbs & lifestyle blocks,155000,680.0,2.0,39.0,570.0,19.3,110.0,0.0,0.0,100.0,False,True,True
+154400,Ōtara Central,Crowded family suburbs,154400,,,,182.0,,,61.49,55.41,34.46,False,True,False
+132200,Mount Albert North,Middle suburbs,132200,597.5,2.0,90.0,490.0,21.94,107.5,32.73,31.82,67.27,False,True,True
+130200,Saint Marys Bay,Affluent established suburbs,130200,641.5,2.0,60.0,600.0,6.92,41.5,0.0,0.0,98.13,False,True,True
+125701,Henderson Lincoln South,Middle suburbs,125700,537.5,2.0,36.0,550.0,-2.27,-12.5,8.78,8.11,91.22,False,True,True
+112702,Orewa West,Outer suburbs & lifestyle blocks,112700,777.5,2.0,48.0,795.0,-2.2,-17.5,0.0,0.0,100.0,True,True,False
+164401,Tamakae,Older & coastal,164400,557.5,2.0,21.0,480.0,16.15,77.5,6.98,2.33,91.86,False,True,False
+121600,Royal Heights North,Middle suburbs,121600,617.5,2.0,48.0,520.0,18.75,97.5,26.83,15.24,70.73,False,True,True
+118100,Albany South,Middle suburbs,118100,750.0,2.0,63.0,700.0,7.14,50.0,0.72,0.0,99.28,False,True,True
+161100,Wattle Downs West,Outer suburbs & lifestyle blocks,161100,707.5,2.0,33.0,650.0,8.85,57.5,12.05,10.84,87.95,False,True,True
+134700,Kaurilands,Outer suburbs & lifestyle blocks,134700,594.0,2.0,18.0,550.0,8.0,44.0,12.66,5.06,87.34,False,True,False
+158602,Bremner Ridge,Outer suburbs & lifestyle blocks,158600,630.0,2.0,54.0,690.0,-8.7,-60.0,2.33,0.0,97.67,True,True,False
+156901,Baverstock,Outer suburbs & lifestyle blocks,156900,804.0,2.0,48.0,750.0,7.2,54.0,14.41,9.01,83.78,False,True,True
+112200,Parakai,Older & coastal,112200,505.0,1.0,6.0,460.0,9.78,45.0,3.23,0.0,96.77,False,True,False
+139201,Orakei West,Affluent established suburbs,139200,952.5,2.0,42.0,620.0,53.63,332.5,30.89,30.89,69.11,False,True,True
+113000,Orewa Central,Older & coastal,113000,614.0,2.0,60.0,550.0,11.64,64.0,2.34,2.34,96.49,False,True,True
+150200,Māngere Central,Crowded family suburbs,150200,725.0,2.0,18.0,300.0,141.67,425.0,55.49,52.44,43.29,False,True,False
+114201,Waimauku,Outer suburbs & lifestyle blocks,114200,620.0,1.0,9.0,594.0,4.38,26.0,5.26,0.0,100.0,False,True,False
+119100,Greenhithe East,Outer suburbs & lifestyle blocks,119100,786.5,2.0,39.0,790.0,-0.44,-3.5,0.0,0.0,100.0,False,True,True
+153000,Grange,Crowded family suburbs,153000,497.5,2.0,39.0,384.0,29.56,113.5,51.79,50.89,47.32,False,True,True
+124800,Te Atatū Peninsula West,Middle suburbs,124800,602.5,2.0,84.0,570.0,5.7,32.5,7.41,6.35,92.59,False,True,True
+141000,Remuera South,Affluent established suburbs,141000,796.5,2.0,84.0,700.0,13.79,96.5,2.05,1.37,97.26,False,True,True
+120301,West Harbour Clearwater Cove,Outer suburbs & lifestyle blocks,120300,762.5,2.0,33.0,687.0,10.99,75.5,1.45,0.0,100.0,False,True,True
+140500,Remuera North,Affluent established suburbs,140500,955.0,2.0,69.0,760.0,25.66,195.0,4.4,4.4,94.51,False,True,True
+153100,Golflands,Older & coastal,153100,695.0,2.0,27.0,675.0,2.96,20.0,3.8,0.0,94.94,False,True,False
+121701,Massey West,Middle suburbs,122900,604.0,2.0,57.0,550.0,9.82,54.0,20.2,19.19,80.81,True,True,False
+145800,Glen Innes East-Wai O Taiki Bay,Middle suburbs,145800,635.0,2.0,66.0,280.0,126.79,355.0,51.34,37.95,41.96,False,True,True
+158601,Ormiston East,Outer suburbs & lifestyle blocks,158600,630.0,2.0,54.0,530.0,18.87,100.0,21.74,20.29,78.26,True,True,False
+131900,Mount Albert West,Middle suburbs,131900,540.0,2.0,66.0,506.0,6.72,34.0,19.55,17.29,81.2,False,True,True
+146400,Bucklands Beach North,Outer suburbs & lifestyle blocks,146400,792.5,2.0,42.0,695.0,14.03,97.5,0.0,0.0,98.85,False,True,True
+114400,Vipond,Older & coastal,114400,685.0,2.0,21.0,585.0,17.09,100.0,1.35,1.35,98.65,False,True,False
+120203,Hobsonville Scott Point,Outer suburbs & lifestyle blocks,120200,741.5,2.0,96.0,830.0,-10.66,-88.5,4.76,0.0,93.65,True,True,False
+112901,Orewa South,Older & coastal,112900,660.0,2.0,42.0,550.0,20.0,110.0,6.0,6.0,93.0,True,True,False
+121001,Bayview East (Auckland),Middle suburbs,121000,621.5,2.0,45.0,590.0,5.34,31.5,8.16,7.48,90.48,False,True,True
+145102,Glendowie South East,Affluent established suburbs,145100,800.0,2.0,69.0,608.0,31.58,192.0,23.33,21.67,78.33,True,True,False
+144700,Glen Innes West,Middle suburbs,144700,672.5,2.0,66.0,450.0,49.44,222.5,36.51,26.56,59.34,False,True,True
+127400,Birkenhead South,Affluent established suburbs,127400,607.5,2.0,66.0,550.0,10.45,57.5,1.05,0.0,100.0,False,True,True
+142501,Waikowhai Bay,Affluent established suburbs,142500,755.0,2.0,33.0,645.0,17.05,110.0,3.28,1.64,98.36,False,True,True
+148102,Pakuranga North,Middle suburbs,148100,610.0,2.0,42.0,530.0,15.09,80.0,7.97,2.17,90.58,True,True,False
+165800,Rooseville Park,Middle suburbs,165800,590.0,2.0,36.0,530.0,11.32,60.0,6.67,5.56,93.33,False,True,True
+123900,Beach Haven South,Outer suburbs & lifestyle blocks,123900,672.5,2.0,24.0,560.0,20.09,112.5,0.0,0.0,98.48,False,True,False
+143000,Saint Heliers North,Affluent established suburbs,143000,820.0,2.0,48.0,750.0,9.33,70.0,0.85,0.85,99.15,False,True,True
+115100,Stanmore Bay East,Middle suburbs,115100,587.5,2.0,48.0,550.0,6.82,37.5,0.0,0.0,100.0,False,True,True
+158101,Ormiston Central,Outer suburbs & lifestyle blocks,158100,770.0,2.0,45.0,750.0,2.67,20.0,0.9,0.0,98.2,True,True,False
+126000,Summerland South,Outer suburbs & lifestyle blocks,126000,742.5,2.0,21.0,700.0,6.07,42.5,10.61,9.09,89.39,False,True,False
+134200,Mount Albert Central,Affluent established suburbs,134200,674.0,2.0,57.0,530.0,27.17,144.0,11.26,9.27,88.08,False,True,True
+165901,Cloverlea (Auckland),Older & coastal,165900,625.0,2.0,21.0,550.0,13.64,75.0,6.58,3.95,93.42,False,True,False
+116801,Awaruku,Outer suburbs & lifestyle blocks,116800,689.0,2.0,39.0,650.0,6.0,39.0,0.0,0.0,98.91,True,True,False
+147800,Half Moon Bay West,Affluent established suburbs,147800,692.5,2.0,30.0,620.0,11.69,72.5,1.33,0.0,98.67,False,True,True
+132501,Konini Road,Outer suburbs & lifestyle blocks,132500,655.0,2.0,33.0,560.0,16.96,95.0,0.0,0.0,100.0,False,True,True
+141500,Epsom East,Affluent established suburbs,141500,722.5,2.0,78.0,620.0,16.53,102.5,1.53,0.76,98.47,False,True,True
+138901,Blockhouse Bay South,Affluent established suburbs,138900,637.5,2.0,69.0,630.0,1.19,7.5,0.0,0.0,100.0,True,True,False
+138000,Green Bay South,Older & coastal,138000,629.0,2.0,21.0,560.0,12.32,69.0,0.0,0.0,98.51,False,True,False
+150101,Ōtāhuhu Central,,150100,409.0,2.0,57.0,436.0,-6.19,-27.0,16.67,10.26,83.33,False,False,False
+117900,Waiake,Affluent established suburbs,117900,665.0,2.0,33.0,636.0,4.56,29.0,6.48,5.56,94.44,False,True,True
+131500,Glen Eden Central,Middle suburbs,131500,557.5,2.0,54.0,484.0,15.19,73.5,18.38,10.27,78.92,False,True,True
+165501,Pukekohe West,Crowded family suburbs,165500,620.0,2.0,78.0,500.0,24.0,120.0,19.82,18.5,79.74,True,True,False
+130100,Glen Eden Rosier,Middle suburbs,130100,587.5,2.0,33.0,500.0,17.5,87.5,16.95,14.41,83.05,False,True,True
+140300,Mount St John,Affluent established suburbs,140300,685.0,2.0,93.0,590.0,16.1,95.0,0.62,0.0,99.38,False,True,True
+151400,Ōtāhuhu South West,Crowded family suburbs,151400,464.0,2.0,69.0,400.0,16.0,64.0,24.65,22.79,74.88,False,True,True
+120701,West Harbour Luckens Point,Outer suburbs & lifestyle blocks,120700,765.0,2.0,27.0,700.0,9.29,65.0,0.0,0.0,100.0,False,True,False
+123400,Forrest Hill West,Middle suburbs,123400,675.0,2.0,66.0,650.0,3.85,25.0,0.68,0.68,98.63,False,True,True
+156301,Point View,Outer suburbs & lifestyle blocks,156300,797.5,2.0,27.0,720.0,10.76,77.5,0.0,0.0,98.28,False,True,False
+154300,Shelly Park,Outer suburbs & lifestyle blocks,154300,657.5,2.0,24.0,624.0,5.37,33.5,1.72,0.0,96.55,False,True,False
+137400,Parnell East,Affluent established suburbs,137400,747.5,2.0,93.0,650.0,15.0,97.5,5.48,5.48,94.52,False,True,True
+127001,Te Atatū South-North,Middle suburbs,127000,590.0,2.0,66.0,550.0,7.27,40.0,5.71,4.29,94.29,False,True,True
+135401,Titirangi East,Outer suburbs & lifestyle blocks,135400,610.0,2.0,33.0,575.0,6.09,35.0,1.33,0.0,98.67,False,True,True
+143500,Saint Heliers South,Affluent established suburbs,143500,800.0,2.0,69.0,650.0,23.08,150.0,0.0,0.0,99.25,False,True,True
+133301,Quay Street-Customs Street,Apartments & inner city,133300,491.5,2.0,339.0,550.0,-10.64,-58.5,0.78,0.0,98.05,False,True,True
+160601,Leabank,Crowded family suburbs,160600,621.5,2.0,84.0,480.0,29.48,141.5,32.53,24.1,62.65,True,True,False
+163100,Pahurehure,Outer suburbs & lifestyle blocks,163100,630.0,2.0,30.0,560.0,12.5,70.0,10.0,7.78,88.89,False,True,True
+121800,Beach Haven West,Middle suburbs,121800,650.0,2.0,42.0,550.0,18.18,100.0,10.83,6.67,89.17,False,True,True
+129400,Bayswater,Affluent established suburbs,129400,655.0,2.0,30.0,300.0,118.33,355.0,35.94,23.44,47.66,False,True,True
+140700,Mount Roskill Central South,Crowded family suburbs,140700,687.5,2.0,15.0,216.0,218.29,471.5,65.56,65.56,33.77,False,True,False
+150400,Howick West,Middle suburbs,150400,624.0,2.0,51.0,600.0,4.0,24.0,1.38,1.38,97.93,False,True,True
+123300,Glenfield South West,Middle suburbs,123300,630.0,2.0,66.0,594.0,6.06,36.0,3.91,3.12,96.09,False,True,True
+142700,Saint Heliers West,Affluent established suburbs,142700,975.0,2.0,48.0,750.0,30.0,225.0,4.55,3.41,96.59,False,True,True
+128200,Northcote Point (Auckland),Affluent established suburbs,128200,676.5,2.0,45.0,600.0,12.75,76.5,4.35,3.26,95.65,False,True,True
+128401,Henderson East,Middle suburbs,128400,622.5,2.0,57.0,540.0,15.28,82.5,13.9,12.56,86.1,False,True,True
+118300,Browns Bay Central,Older & coastal,118300,625.0,2.0,84.0,600.0,4.17,25.0,0.0,0.0,99.33,False,True,True
+133900,New Lynn Central,,133900,525.0,2.0,18.0,500.0,5.0,25.0,2.08,0.0,97.92,False,False,False
+148000,Eastern Beach,Affluent established suburbs,148000,722.5,2.0,21.0,670.0,7.84,52.5,0.0,0.0,100.0,False,True,False
+135000,Avondale South (Auckland),Middle suburbs,135000,630.0,2.0,78.0,540.0,16.67,90.0,27.02,25.0,72.98,False,True,True
+122901,Massey South,Middle suburbs,122900,604.0,2.0,57.0,530.0,13.96,74.0,19.74,19.08,80.26,True,True,False
+127200,Akoranga,Older & coastal,127200,695.0,2.0,21.0,450.0,54.44,245.0,26.32,24.56,71.93,False,True,False
+151301,Highland Park (Auckland),Middle suburbs,151300,645.0,2.0,72.0,590.0,9.32,55.0,1.1,1.1,98.35,False,True,True
+143600,Hillsborough South (Auckland),Outer suburbs & lifestyle blocks,143600,757.5,2.0,30.0,650.0,16.54,107.5,1.32,1.32,97.37,False,True,True
+124401,Birkdale South,Middle suburbs,124400,610.0,2.0,57.0,560.0,8.93,50.0,14.47,11.84,84.87,False,True,True
+129600,Glen Eden West,Middle suburbs,129600,632.5,2.0,33.0,500.0,26.5,132.5,27.41,26.67,73.33,False,True,True
+129300,Belmont (Auckland),Affluent established suburbs,129300,692.5,2.0,69.0,550.0,25.91,142.5,17.32,16.54,76.38,False,True,True
+118200,Browns Bay South West,Middle suburbs,118200,692.5,2.0,72.0,660.0,4.92,32.5,2.74,2.05,96.58,False,True,True
+164001,Ōpaheke,Middle suburbs,164000,635.0,2.0,39.0,580.0,9.48,55.0,8.62,7.76,90.52,False,True,True
+122501,Massey Keegan,Middle suburbs,122500,615.0,2.0,51.0,510.0,20.59,105.0,32.24,31.58,67.76,False,True,True
+158300,Hilltop (Auckland),Middle suburbs,158300,720.0,2.0,30.0,650.0,10.77,70.0,10.53,9.02,90.98,False,True,True
+127300,Northcote South (Auckland),Affluent established suburbs,127300,617.5,2.0,30.0,595.0,3.78,22.5,1.83,1.83,97.25,False,True,True
+164700,Waiuku Central,Middle suburbs,164700,480.0,2.0,15.0,475.0,1.05,5.0,7.02,1.75,91.23,False,True,False
+122300,Royal Heights South,Middle suburbs,122300,627.5,2.0,39.0,488.0,28.59,139.5,38.36,37.11,61.64,False,True,True
+141300,Mount Roskill South,Affluent established suburbs,141300,715.0,2.0,36.0,610.0,17.21,105.0,1.19,0.0,97.62,False,True,True
+124000,Glenfield Central,Middle suburbs,124000,571.5,2.0,69.0,550.0,3.91,21.5,6.77,3.65,92.71,False,True,True
+149800,Pakuranga Central,Middle suburbs,149800,640.0,2.0,81.0,600.0,6.67,40.0,8.07,4.35,91.3,False,True,True
+129101,Sunnyvale East,Middle suburbs,129100,562.5,2.0,81.0,545.0,3.21,17.5,10.49,6.99,89.51,True,True,False
+131100,Waterview,Middle suburbs,131100,615.5,2.0,54.0,298.0,106.54,317.5,50.72,50.36,49.28,False,True,True
+122400,Beach Haven East,Middle suburbs,122400,632.5,2.0,36.0,316.0,100.16,316.5,52.88,47.12,46.15,False,True,True
+133100,Avondale Central (Auckland),Middle suburbs,133100,522.5,2.0,114.0,500.0,4.5,22.5,23.21,20.24,76.79,False,True,True
+128101,Northcote Tuff Crater,Affluent established suburbs,128100,671.5,2.0,45.0,600.0,11.92,71.5,1.11,0.0,98.89,False,True,True
+124500,Te Atatū Peninsula Central,Middle suburbs,124500,630.0,2.0,60.0,550.0,14.55,80.0,16.67,11.11,81.11,False,True,True
+123200,Te Atatū Peninsula North West,Middle suburbs,123200,602.5,2.0,93.0,560.0,7.59,42.5,15.85,15.24,83.54,False,True,True
+152400,Howick East,Middle suburbs,152400,647.5,2.0,78.0,580.0,11.64,67.5,6.7,3.35,92.18,False,True,True
+148200,Favona North,Crowded family suburbs,148200,650.0,1.0,9.0,300.0,116.67,350.0,54.92,50.82,45.08,False,True,False
+120400,Unsworth Heights East,Middle suburbs,120400,431.5,2.0,135.0,606.0,-28.8,-174.5,7.38,6.71,91.95,False,True,True
+129501,Glendene South,Middle suburbs,129500,635.0,2.0,27.0,500.0,27.0,135.0,20.33,18.7,78.86,False,True,False
+125202,Birkenhead North West,Outer suburbs & lifestyle blocks,125200,596.5,2.0,66.0,594.0,0.42,2.5,0.0,0.0,100.0,True,True,False
+140200,Epsom Central-North,Affluent established suburbs,140200,757.5,2.0,87.0,640.0,18.36,117.5,0.73,0.73,100.0,False,True,True
+120201,Hobsonville Point Catalina Bay,Affluent established suburbs,120200,741.5,2.0,96.0,670.0,10.67,71.5,0.0,0.0,100.0,True,True,False
+128800,Hauraki,Affluent established suburbs,128800,725.0,2.0,114.0,625.0,16.0,100.0,5.36,4.76,88.69,False,True,True
+133600,Morningside (Auckland),Affluent established suburbs,133600,550.0,2.0,111.0,515.0,6.8,35.0,4.33,2.88,95.67,False,True,True
+162200,Takanini Central,Older & coastal,162200,,,,520.0,,,20.0,5.0,75.0,False,True,False
+130902,Glen Eden Konini,Middle suburbs,130900,560.0,2.0,69.0,550.0,1.82,10.0,7.79,6.49,94.81,True,True,False
+126702,Henderson West,Middle suburbs,126700,587.5,2.0,51.0,530.0,10.85,57.5,13.28,6.25,85.16,True,True,False
+160300,Hillpark South,Middle suburbs,160300,550.0,2.0,36.0,530.0,3.77,20.0,12.1,6.45,87.9,False,True,True
+160100,Manurewa Central,Crowded family suburbs,160100,545.0,2.0,72.0,494.0,10.32,51.0,17.88,13.97,81.56,False,True,True
+133000,Devonport,Affluent established suburbs,133000,676.5,2.0,42.0,576.0,17.45,100.5,3.45,2.59,96.55,False,True,True
+138700,Epsom North,Affluent established suburbs,138700,580.0,2.0,138.0,610.0,-4.92,-30.0,0.7,0.0,98.6,False,True,True
+126901,Western Heights (Auckland),Outer suburbs & lifestyle blocks,126900,670.0,2.0,30.0,650.0,3.08,20.0,5.41,5.41,94.59,False,True,True
+157800,Mission Heights North,Outer suburbs & lifestyle blocks,157800,702.5,2.0,51.0,720.0,-2.43,-17.5,9.76,9.76,90.24,False,True,True
+117700,Northcross,Middle suburbs,117700,697.5,2.0,42.0,632.0,10.36,65.5,2.65,2.65,97.35,False,True,True
+126200,Hillcrest East (Auckland),Middle suburbs,126200,645.0,2.0,69.0,580.0,11.21,65.0,3.33,2.0,96.0,False,True,True
+160700,Weymouth South,Crowded family suburbs,160700,655.0,2.0,42.0,550.0,19.09,105.0,21.43,17.53,78.57,False,True,True
+129201,Point Chevalier West,Older & coastal,129200,711.5,2.0,48.0,510.0,39.51,201.5,33.67,33.67,65.31,False,True,True
+125201,Birkenhead West,Affluent established suburbs,125200,596.5,2.0,66.0,570.0,4.65,26.5,3.09,0.0,97.94,True,True,False
+143700,Saint Johns West,Affluent established suburbs,143700,825.0,2.0,33.0,795.0,3.77,30.0,0.0,0.0,100.0,False,True,True
+137300,Green Bay North,Older & coastal,137300,655.0,2.0,21.0,540.0,21.3,115.0,10.77,1.54,87.69,False,True,False
+120202,Hobsonville Point Park,Affluent established suburbs,120200,741.5,2.0,96.0,650.0,14.08,91.5,0.64,0.0,99.36,True,True,False
+115200,Manly West,Older & coastal,115200,650.0,2.0,18.0,555.0,17.12,95.0,0.0,0.0,100.0,False,True,False
+123000,Rānui North,Crowded family suburbs,123000,595.0,2.0,48.0,484.0,22.93,111.0,32.54,30.77,67.46,False,True,True
+152201,Botany Downs West,Middle suburbs,152200,695.0,2.0,33.0,620.0,12.1,75.0,13.73,12.75,87.25,False,True,True
+141900,Meadowbank West,Affluent established suburbs,141900,700.0,2.0,36.0,550.0,27.27,150.0,33.33,33.33,66.67,False,True,True
+128501,Te Atatū South-McLeod South,Middle suburbs,128500,641.5,2.0,45.0,550.0,16.64,91.5,14.71,11.03,84.56,False,True,True
+143100,Remuera Abbotts Park,Affluent established suburbs,143100,780.0,2.0,96.0,690.0,13.04,90.0,1.95,1.95,98.7,False,True,True
+161500,Wattle Downs East,Outer suburbs & lifestyle blocks,161500,695.0,1.0,6.0,620.0,12.1,75.0,5.0,2.5,95.0,False,True,False
+147100,Panmure East,Middle suburbs,147100,565.0,2.0,81.0,500.0,13.0,65.0,19.07,13.02,78.14,False,True,True
+163001,Papakura North,Crowded family suburbs,163000,557.5,2.0,66.0,500.0,11.5,57.5,22.83,21.2,76.63,False,True,True
+126500,Birkenhead North,Affluent established suburbs,126500,559.0,2.0,42.0,550.0,1.64,9.0,8.46,8.46,91.54,False,True,True
+165502,Pukekohe South West,Middle suburbs,165500,620.0,2.0,78.0,610.0,1.64,10.0,9.68,8.6,89.25,True,True,False
+158102,Ormiston South,Outer suburbs & lifestyle blocks,158100,770.0,2.0,45.0,830.0,-7.23,-60.0,1.64,0.0,96.72,True,True,False
+164201,Red Hill,Crowded family suburbs,164200,637.5,2.0,36.0,450.0,41.67,187.5,43.33,41.67,56.67,False,True,True
+122802,Birkdale Central,Middle suburbs,122800,615.0,2.0,63.0,560.0,9.82,55.0,6.35,4.76,93.65,True,True,False
+131400,Stanley Point,Affluent established suburbs,131400,785.0,2.0,30.0,693.0,13.28,92.0,0.0,0.0,90.91,False,True,True
+114600,Stanmore Bay West,Middle suburbs,114600,595.0,2.0,45.0,570.0,4.39,25.0,1.15,0.0,100.0,False,True,True
+140800,Epsom Central-South,Affluent established suburbs,140800,742.5,2.0,84.0,690.0,7.61,52.5,6.25,5.56,93.06,False,True,True
+125600,Hillcrest North (Auckland),Middle suburbs,125600,592.5,2.0,75.0,550.0,7.73,42.5,6.47,2.94,94.12,False,True,True
+129902,Point Chevalier East,Affluent established suburbs,129900,725.0,2.0,66.0,530.0,36.79,195.0,30.77,30.77,69.23,True,True,False
+144101,Onehunga West,Affluent established suburbs,144100,614.0,2.0,75.0,560.0,9.64,54.0,9.38,9.38,88.12,False,True,True
+151500,Pakuranga Heights South West,Middle suburbs,151500,615.0,2.0,39.0,550.0,11.82,65.0,11.89,9.79,88.11,False,True,True
+123100,Glenfield West,Middle suburbs,123100,637.5,2.0,45.0,570.0,11.84,67.5,4.55,3.79,93.94,False,True,True
+145101,Glendowie South West,Affluent established suburbs,145100,800.0,2.0,69.0,676.0,18.34,124.0,13.98,13.98,86.02,True,True,False
+127801,Henderson Valley Park,Crowded family suburbs,127800,605.0,1.0,9.0,440.0,37.5,165.0,43.33,39.17,58.33,False,True,False
+130500,Kelston North,Middle suburbs,130500,565.0,2.0,27.0,528.0,7.01,37.0,9.91,9.91,89.19,False,True,False
+137202,Blockhouse Bay Central,Middle suburbs,138900,637.5,2.0,69.0,574.0,11.06,63.5,15.22,13.77,85.51,True,True,False
+117500,Glamorgan,Middle suburbs,117500,659.0,2.0,60.0,620.0,6.29,39.0,5.17,5.17,93.97,False,True,True
+139700,Mount Roskill North,Middle suburbs,139700,590.0,2.0,75.0,526.0,12.17,64.0,26.36,25.91,73.64,False,True,True
+119500,Murrays Bay West,Outer suburbs & lifestyle blocks,119500,725.0,2.0,33.0,700.0,3.57,25.0,1.49,1.49,100.0,False,True,True
+125000,Rānui South East,Middle suburbs,125000,625.0,2.0,39.0,538.0,16.17,87.0,30.91,29.09,69.09,False,True,True
+150000,Harania North,Crowded family suburbs,150000,655.0,1.0,6.0,213.0,207.51,442.0,76.79,75.0,23.81,False,True,False
+141600,Remuera Waiata,Affluent established suburbs,141600,969.0,2.0,54.0,796.0,21.73,173.0,1.39,1.39,98.61,False,True,True
+130601,Avondale Rosebank (Auckland),Middle suburbs,130600,645.0,2.0,36.0,514.0,25.49,131.0,30.06,29.48,70.52,False,True,True
+139601,Mount Roskill West,Middle suburbs,139600,640.0,2.0,63.0,600.0,6.67,40.0,0.84,0.84,99.16,False,True,True
+149001,Pakuranga West,Middle suburbs,149000,600.0,2.0,72.0,520.0,15.38,80.0,13.91,10.43,86.09,False,True,True
+146301,Point England North,Crowded family suburbs,146300,375.0,2.0,66.0,148.0,153.38,227.0,62.5,44.44,30.09,True,True,False
+122101,Bayview South (Auckland),Middle suburbs,122100,632.5,2.0,39.0,594.0,6.48,38.5,1.94,1.94,98.06,False,True,True
+163302,Twin Parks Rise,Outer suburbs & lifestyle blocks,163300,629.0,2.0,54.0,650.0,-3.23,-21.0,8.0,6.0,90.0,True,True,False
+118502,Pinehill South,Outer suburbs & lifestyle blocks,118500,682.5,2.0,63.0,700.0,-2.5,-17.5,1.37,1.37,100.0,True,True,False
+112902,Millwater North,Outer suburbs & lifestyle blocks,112900,660.0,2.0,42.0,800.0,-17.5,-140.0,0.0,0.0,100.0,True,True,False
+127002,Te Atatū South-Central,Middle suburbs,127700,606.5,2.0,60.0,570.0,6.4,36.5,2.05,1.37,97.26,True,True,False
+148501,Māngere North,Crowded family suburbs,148500,505.0,2.0,48.0,486.0,3.91,19.0,45.96,44.72,54.04,False,True,True
+154701,Dannemora North-Shamrock Park,Older & coastal,154700,820.0,1.0,9.0,780.0,5.13,40.0,0.0,0.0,100.0,False,True,False
+145300,Mount Wellington North West,Older & coastal,145300,543.0,2.0,66.0,520.0,4.42,23.0,2.65,2.65,96.69,False,True,True
+120500,Mairangi Bay North,Affluent established suburbs,120500,687.5,2.0,51.0,688.0,-0.07,-0.5,0.0,0.0,100.0,False,True,True
+123600,Forrest Hill East,Affluent established suburbs,123600,655.0,2.0,63.0,623.0,5.14,32.0,3.97,0.66,95.36,False,True,True
+112800,Hatfields Beach,Outer suburbs & lifestyle blocks,112800,518.0,1.0,6.0,550.0,-5.82,-32.0,0.0,0.0,100.0,False,True,False
+141101,Mission Bay,Affluent established suburbs,141100,680.0,2.0,129.0,670.0,1.49,10.0,0.89,0.0,100.0,True,True,False
+126401,Te Atatū South-Edmonton,Middle suburbs,126400,565.0,2.0,72.0,544.0,3.86,21.0,9.09,8.48,89.7,False,True,True
+135500,Ōwairaka West,Middle suburbs,135500,577.5,2.0,75.0,514.0,12.35,63.5,18.59,17.09,80.4,False,True,True
+130901,Glen Eden Woodglen,Middle suburbs,130900,560.0,2.0,69.0,500.0,12.0,60.0,17.97,15.62,82.03,True,True,False
+131801,Freemans Bay,Affluent established suburbs,131800,757.5,2.0,144.0,550.0,37.73,207.5,29.28,26.24,70.34,True,True,False
+113600,Kingsway,Outer suburbs & lifestyle blocks,113600,740.0,2.0,18.0,680.0,8.82,60.0,0.0,0.0,100.0,False,True,False
+140400,Mount Roskill Central North,Middle suburbs,140400,642.5,2.0,54.0,520.0,23.56,122.5,32.93,31.14,67.07,False,True,True
+124900,Henderson Lincoln West,Middle suburbs,124900,590.0,2.0,54.0,530.0,11.32,60.0,19.02,16.3,79.89,False,True,True
+120900,Massey Royal Road West,Middle suburbs,120900,617.5,2.0,42.0,550.0,12.27,67.5,18.84,17.39,80.43,False,True,True
+163600,Papakura Massey Park,Crowded family suburbs,163600,594.0,2.0,36.0,496.0,19.76,98.0,29.76,27.38,70.24,False,True,True
+154902,Papatoetoe Central East,Middle suburbs,154900,545.0,2.0,117.0,490.0,11.22,55.0,15.08,6.7,83.8,True,True,False
+123701,Castor Bay North,Affluent established suburbs,123700,852.5,2.0,78.0,765.0,11.44,87.5,0.0,0.0,100.0,True,True,False
+142400,Remuera East,Affluent established suburbs,142400,824.0,2.0,39.0,750.0,9.87,74.0,1.79,1.79,100.0,False,True,True
+125800,Hillcrest West (Auckland),Middle suburbs,125800,687.5,2.0,63.0,610.0,12.7,77.5,1.82,1.82,98.18,False,True,True
+160902,Manurewa South,Crowded family suburbs,160900,582.5,2.0,66.0,500.0,16.5,82.5,23.26,20.35,76.16,False,True,True
+120600,Massey Central,Crowded family suburbs,120600,587.5,2.0,51.0,540.0,8.8,47.5,21.23,19.86,78.08,False,True,True
+161700,Takanini Industrial,,161700,,,,,,,,,,False,False,False
+139400,Remuera West,Affluent established suburbs,139400,835.0,2.0,39.0,710.0,17.61,125.0,4.55,3.41,96.59,False,True,True
+165302,Pukekohe North West,Crowded family suburbs,165300,595.0,2.0,66.0,470.0,26.6,125.0,29.57,23.66,69.89,True,True,False
+129700,Herne Bay,Affluent established suburbs,129700,705.0,2.0,66.0,600.0,17.5,105.0,0.0,0.0,100.0,False,True,True
+137800,Mount Eden North,Apartments & inner city,137800,501.5,2.0,147.0,465.0,7.85,36.5,1.63,0.81,98.37,False,True,True
+149200,Sunnyhills East,Older & coastal,149200,640.0,2.0,48.0,580.0,10.34,60.0,1.67,0.0,100.0,False,True,True
+139900,Mount Eden South,Affluent established suburbs,139900,666.5,2.0,78.0,600.0,11.08,66.5,4.41,3.68,95.59,False,True,True
+117202,Torbay East,Affluent established suburbs,117200,735.0,2.0,48.0,640.0,14.84,95.0,1.47,1.47,98.53,False,True,True
+123800,Rānui Domain,Crowded family suburbs,123800,590.0,2.0,66.0,488.0,20.9,102.0,33.53,31.21,66.47,False,True,True
+136601,New Windsor North,Middle suburbs,136600,617.5,2.0,45.0,584.0,5.74,33.5,9.23,8.46,91.54,False,True,True
+158200,Mission Heights South,Outer suburbs & lifestyle blocks,158200,637.5,2.0,30.0,690.0,-7.61,-52.5,10.23,9.09,89.77,False,True,True
+148101,Sunnyhills West,Outer suburbs & lifestyle blocks,148100,610.0,2.0,42.0,650.0,-6.15,-40.0,2.08,0.0,97.92,True,True,False
+155100,Ōtara East,Crowded family suburbs,155100,612.5,2.0,21.0,238.0,157.35,374.5,62.43,61.88,37.57,False,True,False
+121500,Totara Vale North,Middle suburbs,121500,640.0,2.0,42.0,584.0,9.59,56.0,7.63,6.87,93.13,False,True,True
+119000,Rothesay Bay,Affluent established suburbs,119000,790.0,2.0,27.0,698.0,13.18,92.0,0.0,0.0,100.0,False,True,False
+145000,Onehunga Central,Middle suburbs,145000,560.0,2.0,90.0,480.0,16.67,80.0,20.09,19.63,78.54,False,True,True
+153700,Northpark North,Outer suburbs & lifestyle blocks,153700,725.0,2.0,36.0,694.0,4.47,31.0,1.25,0.0,100.0,False,True,True
+148600,Favona West,Crowded family suburbs,148600,596.5,2.0,48.0,310.0,92.42,286.5,61.73,58.64,38.89,False,True,True
+136300,Sandringham North,Affluent established suburbs,136300,572.5,2.0,96.0,540.0,6.02,32.5,8.16,6.63,91.84,False,True,True
+152000,Howick Central,Middle suburbs,152000,605.0,2.0,108.0,590.0,2.54,15.0,7.69,2.8,91.61,False,True,True
+118700,Browns Bay South East,Outer suburbs & lifestyle blocks,118700,684.0,2.0,51.0,660.0,3.64,24.0,0.0,0.0,100.0,False,True,True
+159000,Totara Heights,Middle suburbs,159000,665.0,2.0,30.0,630.0,5.56,35.0,0.0,0.0,98.61,False,True,True
+143800,Greenlane South,Affluent established suburbs,143800,675.0,2.0,69.0,580.0,16.38,95.0,24.72,24.16,75.84,False,True,True
+132900,Fruitvale,Middle suburbs,132900,580.0,2.0,57.0,500.0,16.0,80.0,17.09,10.13,82.91,False,True,True
+140902,Lynfield Harbour View,Affluent established suburbs,140900,649.0,2.0,75.0,630.0,3.02,19.0,0.0,0.0,97.87,True,True,False
+138501,Newmarket,Apartments & inner city,138500,637.5,2.0,195.0,560.0,13.84,77.5,0.42,0.0,99.15,True,True,False
+126100,Summerland North,Outer suburbs & lifestyle blocks,126100,692.5,2.0,21.0,627.0,10.45,65.5,8.45,7.04,91.55,False,True,False
+157701,Clover Park North,Crowded family suburbs,157900,640.0,2.0,33.0,420.0,52.38,220.0,44.55,42.73,55.45,True,True,False
+129000,Sunnyvale West-Parrs Park,Crowded family suburbs,129000,567.5,2.0,39.0,475.0,19.47,92.5,36.04,31.53,63.06,False,True,True
+142101,Mount Roskill Central East,Middle suburbs,142100,660.0,2.0,57.0,600.0,10.0,60.0,5.66,4.4,94.97,False,True,True
+152101,Massey Road North,Crowded family suburbs,152100,395.0,2.0,78.0,454.0,-13.0,-59.0,22.78,20.89,76.58,False,True,True
+148401,Farm Cove,Affluent established suburbs,148400,665.0,2.0,24.0,620.0,7.26,45.0,0.0,0.0,98.18,False,True,False
+149300,Half Moon Bay South East,Middle suburbs,149300,622.5,2.0,51.0,580.0,7.33,42.5,10.87,10.14,89.86,False,True,True
+131000,Kelston South,Crowded family suburbs,131000,607.5,2.0,69.0,500.0,21.5,107.5,23.13,21.09,76.19,False,True,True
+119700,Windsor Park,Older & coastal,119700,722.5,2.0,30.0,660.0,9.47,62.5,8.62,0.0,91.38,False,True,True
+125400,Milford West,Affluent established suburbs,125400,705.0,2.0,60.0,585.0,20.51,120.0,11.46,1.91,86.62,False,True,True
+151000,Māngere South,Crowded family suburbs,151000,650.0,2.0,21.0,400.0,62.5,250.0,50.69,49.31,49.31,False,True,False
+164800,Waiuku East,Outer suburbs & lifestyle blocks,164800,552.5,2.0,18.0,510.0,8.33,42.5,8.33,8.33,91.67,False,True,False
+135200,Mount Albert South,Affluent established suburbs,135200,635.0,2.0,36.0,580.0,9.48,55.0,16.67,15.38,84.62,False,True,True
+160000,Rowandale East,Crowded family suburbs,160000,667.5,2.0,51.0,530.0,25.94,137.5,29.51,27.87,70.49,False,True,True
+144800,Ellerslie South,Affluent established suburbs,144800,599.0,2.0,78.0,600.0,-0.17,-1.0,0.77,0.77,98.46,False,True,True
+154901,Papatoetoe Central West,Middle suburbs,154900,545.0,2.0,117.0,500.0,9.0,45.0,8.6,2.15,89.78,True,True,False
+162601,Takanini South East,Middle suburbs,162600,662.5,2.0,90.0,670.0,-1.12,-7.5,1.56,0.0,96.88,True,True,False
+160800,Manurewa East,Crowded family suburbs,160800,582.5,2.0,45.0,470.0,23.94,112.5,31.87,20.88,65.93,False,True,True
+121901,Totara Vale South,Middle suburbs,121900,601.5,2.0,90.0,552.0,8.97,49.5,8.84,8.84,91.16,False,True,True
+132001,Avondale North West (Auckland),Middle suburbs,132000,625.0,2.0,105.0,548.0,14.05,77.0,21.74,20.29,76.81,True,True,False
+119901,Unsworth Heights West,Affluent established suburbs,119900,760.0,2.0,27.0,665.0,14.29,95.0,1.19,1.19,98.81,False,True,False
+124301,Henderson Larnoch,Crowded family suburbs,124300,595.0,2.0,81.0,535.0,11.21,60.0,23.86,21.59,76.14,False,True,True
+151900,Ōtāhuhu South,Crowded family suburbs,151900,429.0,2.0,90.0,365.0,17.53,64.0,36.55,35.34,63.05,False,True,True
+134000,Cheltenham,Affluent established suburbs,134000,734.0,2.0,27.0,616.0,19.16,118.0,6.67,1.67,93.33,False,True,False
+142600,Royal Oak West (Auckland),Affluent established suburbs,142600,642.5,2.0,63.0,650.0,-1.15,-7.5,10.26,5.13,88.03,False,True,True
+122700,Glenfield North,Middle suburbs,122700,640.0,2.0,63.0,600.0,6.67,40.0,2.72,2.04,97.28,False,True,True
+121200,Sunnynook South,Middle suburbs,121200,667.5,2.0,63.0,600.0,11.25,67.5,7.09,2.84,92.91,False,True,True
+127900,Henderson North East,Middle suburbs,127900,605.0,2.0,42.0,510.0,18.63,95.0,13.08,12.31,86.92,False,True,True
+120800,Mairangi Bay South,Affluent established suburbs,120800,742.5,2.0,45.0,740.0,0.34,2.5,1.47,1.47,100.0,False,True,True
+132100,Grey Lynn West,Affluent established suburbs,132100,591.5,2.0,132.0,522.0,13.31,69.5,34.44,34.44,65.56,False,True,True
+117201,Torbay West,Middle suburbs,116800,689.0,2.0,39.0,600.0,14.83,89.0,6.74,2.25,93.26,True,True,False
+128301,McLaren Memorial Park,Crowded family suburbs,128300,561.5,2.0,42.0,500.0,12.3,61.5,28.47,27.08,70.14,False,True,True
+136502,New Lynn South East,Middle suburbs,136500,620.0,2.0,93.0,502.0,23.51,118.0,14.29,12.38,85.71,True,True,False
+165700,Rosa Birch Park,Older & coastal,165700,569.0,2.0,33.0,516.0,10.27,53.0,10.11,5.62,92.13,False,True,True
+138400,Mount Eden West,Affluent established suburbs,138400,536.5,2.0,90.0,540.0,-0.65,-3.5,2.0,0.67,98.0,False,True,True
+161201,Wattle Downs North,Crowded family suburbs,161200,605.0,2.0,33.0,495.0,22.22,110.0,34.1,32.37,63.58,False,True,True
+150900,Ōtāhuhu East,Crowded family suburbs,150900,575.0,2.0,42.0,470.0,22.34,105.0,22.88,22.03,75.42,False,True,True
+138100,Balmoral,Affluent established suburbs,138100,660.0,2.0,75.0,524.0,25.95,136.0,10.07,8.72,89.93,False,True,True
+151600,Māngere Mascot,Crowded family suburbs,151600,662.5,2.0,24.0,326.0,103.22,336.5,51.35,50.68,47.97,False,True,False
+155301,Dannemora South,Outer suburbs & lifestyle blocks,155300,744.0,2.0,27.0,720.0,3.33,24.0,0.0,0.0,100.0,False,True,False
+155602,Papatoetoe East,Crowded family suburbs,155600,635.0,2.0,60.0,535.0,18.69,100.0,23.66,23.12,75.81,True,True,False
+146600,Mount Wellington West,Middle suburbs,146600,615.0,2.0,42.0,560.0,9.82,55.0,19.88,19.3,80.12,False,True,True
+151200,Harania South,Crowded family suburbs,151200,655.0,2.0,15.0,201.0,225.87,454.0,61.18,57.65,36.47,False,True,False
+141802,Kohimarama Stadium,Affluent established suburbs,141800,812.5,2.0,63.0,750.0,8.33,62.5,0.0,0.0,98.15,True,True,False
+144300,Onehunga North,Middle suburbs,144300,582.5,2.0,75.0,490.0,18.88,92.5,28.76,28.33,71.24,False,True,True
+134400,Kingsland,Affluent established suburbs,134400,650.0,2.0,120.0,627.0,3.67,23.0,6.63,6.63,93.37,False,True,True
+154801,Papatoetoe North West,Crowded family suburbs,154800,532.5,2.0,84.0,510.0,4.41,22.5,24.68,20.13,74.68,True,True,False
+139000,Mount Eden East,Affluent established suburbs,139000,555.0,2.0,84.0,540.0,2.78,15.0,0.0,0.0,99.28,False,True,True
+154802,Papatoetoe West,Crowded family suburbs,154800,532.5,2.0,84.0,500.0,6.5,32.5,20.3,17.77,78.68,True,True,False
+163502,Papakura Eastburn,Crowded family suburbs,163500,645.0,2.0,63.0,500.0,29.0,145.0,31.95,28.99,68.64,True,True,False
+117600,Oteha East,Middle suburbs,117600,685.0,2.0,57.0,670.0,2.24,15.0,0.0,0.0,100.0,False,True,True
+150500,Pakuranga Heights North West,Middle suburbs,150500,650.0,2.0,51.0,570.0,14.04,80.0,7.14,6.35,92.86,False,True,True
+157500,Chapel Downs,Crowded family suburbs,157500,680.0,2.0,45.0,550.0,23.64,130.0,36.09,35.5,63.91,False,True,True
+147201,Mount Wellington Central,Middle suburbs,147200,614.0,2.0,105.0,528.0,16.29,86.0,20.12,17.07,78.66,True,True,False
+122801,Birkdale North,Middle suburbs,122800,615.0,2.0,63.0,520.0,18.27,95.0,23.21,23.21,75.89,True,True,False
+144400,Ellerslie East,Affluent established suburbs,144400,561.5,2.0,63.0,550.0,2.09,11.5,6.94,6.25,93.06,False,True,True
+128902,Glendene North East,Middle suburbs,128900,600.0,2.0,60.0,500.0,20.0,100.0,24.24,24.24,75.76,True,True,False
+158700,Clendon Park North,Crowded family suburbs,158700,616.5,2.0,30.0,498.0,23.8,118.5,42.68,41.4,57.32,False,True,True
+158502,Goodwood Heights East,Outer suburbs & lifestyle blocks,158500,679.0,2.0,48.0,610.0,11.31,69.0,1.37,0.0,95.89,True,True,False
+161000,Randwick Park East,Crowded family suburbs,161000,665.0,2.0,24.0,550.0,20.91,115.0,29.47,27.37,70.53,False,True,False
+121300,Sunnynook North,Middle suburbs,121300,670.0,2.0,51.0,630.0,6.35,40.0,3.79,3.03,97.73,False,True,True
+125900,Milford Central,Affluent established suburbs,125900,925.0,2.0,27.0,612.0,51.14,313.0,0.0,0.0,98.53,False,True,False
+157901,Clover Park South,Crowded family suburbs,157900,640.0,2.0,33.0,530.0,20.75,110.0,22.31,17.36,79.34,True,True,False
+141801,Kohimarama Bay,Affluent established suburbs,141800,812.5,2.0,63.0,650.0,25.0,162.5,1.08,0.0,97.85,True,True,False
+132300,New Lynn North,Middle suburbs,132300,515.0,2.0,78.0,490.0,5.1,25.0,13.95,13.95,85.47,False,True,True
+135600,New Lynn Central South,Middle suburbs,135600,562.5,2.0,90.0,450.0,25.0,112.5,28.96,26.24,70.59,False,True,True
+131700,Avondale West (Auckland),Middle suburbs,131700,590.0,2.0,66.0,445.0,32.58,145.0,41.01,40.55,58.06,False,True,True
+156101,Middlefield,Outer suburbs & lifestyle blocks,155400,637.5,2.0,45.0,750.0,-15.0,-112.5,0.0,0.0,100.0,False,True,True
+124200,Rānui South West,Middle suburbs,124200,619.0,2.0,27.0,490.0,26.33,129.0,31.58,29.47,68.42,False,True,False
+122600,Forrest Hill North,Middle suburbs,122600,695.0,2.0,51.0,650.0,6.92,45.0,0.0,0.0,100.0,False,True,True
+166100,Pukekohe Hospital,Older & coastal,166100,577.5,2.0,12.0,528.0,9.38,49.5,3.64,1.82,94.55,False,True,False
+139300,Maungawhau,Affluent established suburbs,139300,647.5,2.0,63.0,540.0,19.91,107.5,0.0,0.0,99.04,False,True,True
+154001,Papatoetoe North,Crowded family suburbs,154000,585.5,2.0,84.0,500.0,17.1,85.5,29.13,27.67,69.9,False,True,True
+121401,Bayview West (Auckland),Middle suburbs,121400,641.5,2.0,27.0,550.0,16.64,91.5,11.84,11.84,88.16,False,True,False
+150800,Sutton Park,Crowded family suburbs,150800,535.0,2.0,27.0,319.0,67.71,216.0,52.21,49.26,47.06,False,True,False
+148901,Māngere West,Crowded family suburbs,148900,622.5,2.0,42.0,200.0,211.25,422.5,72.78,71.52,27.22,False,True,True
+146000,Mount Wellington North East,Middle suburbs,146000,535.0,2.0,60.0,530.0,0.94,5.0,3.17,2.38,96.83,False,True,True
+131600,Grey Lynn North,Affluent established suburbs,131600,767.5,2.0,51.0,720.0,6.6,47.5,4.96,4.96,95.04,False,True,True
+140901,Lynfield Central,Middle suburbs,140900,649.0,2.0,75.0,590.0,10.0,59.0,7.96,7.08,91.15,True,True,False
+142002,Hillsborough North (Auckland),Older & coastal,142000,695.0,2.0,60.0,600.0,15.83,95.0,2.04,2.04,97.96,True,True,False
+129901,Point Chevalier North,Affluent established suburbs,129900,725.0,2.0,66.0,630.0,15.08,95.0,10.71,10.71,89.29,True,True,False
+134900,New Lynn Seabrook,Middle suburbs,134900,570.0,2.0,57.0,484.0,17.77,86.0,16.99,15.69,83.66,False,True,True
+152700,Middlemore,,152700,,,,,,,,,,False,False,False
+155801,Ferguson,Crowded family suburbs,155800,607.5,2.0,24.0,218.0,178.67,389.5,69.39,68.03,30.61,False,True,False
+131300,Wynyard-Viaduct,,131300,756.5,2.0,111.0,678.0,11.58,78.5,0.0,0.0,100.0,False,False,False
+128601,Takapuna South,Affluent established suburbs,128600,1400.0,2.0,15.0,660.0,112.12,740.0,1.18,0.0,98.82,False,True,False
+165600,Cape Hill,Outer suburbs & lifestyle blocks,165600,670.0,2.0,15.0,620.0,8.06,50.0,2.13,2.13,97.87,False,True,False
+138200,Sandringham East,Middle suburbs,138200,557.5,2.0,87.0,480.0,16.15,77.5,22.53,21.43,76.92,False,True,True
+142001,Three Kings South,Middle suburbs,142000,695.0,2.0,60.0,560.0,24.11,135.0,18.42,17.54,81.58,True,True,False
+132800,Grey Lynn Central,Affluent established suburbs,132800,615.0,2.0,114.0,691.0,-11.0,-76.0,1.19,0.0,98.21,False,True,True
+145600,Te Papapa,Middle suburbs,145600,615.0,2.0,66.0,520.0,18.27,95.0,26.16,26.16,73.26,False,True,True
+158402,Wiri East,Crowded family suburbs,158400,607.5,2.0,60.0,270.0,125.0,337.5,54.89,52.63,44.36,True,True,False
+153900,Northpark South,Outer suburbs & lifestyle blocks,153900,747.5,2.0,15.0,720.0,3.82,27.5,0.0,0.0,100.0,False,True,False
+155901,Papatoetoe South West,Crowded family suburbs,155900,587.5,2.0,48.0,480.0,22.4,107.5,30.71,27.86,67.14,False,True,True
+161300,Randwick Park West,Crowded family suburbs,161300,606.5,2.0,45.0,500.0,21.3,106.5,35.68,34.17,63.82,False,True,True
+156500,Puhinui North,Middle suburbs,156500,590.0,2.0,63.0,510.0,15.69,80.0,8.89,6.67,91.11,False,True,True
+131200,Ponsonby East,Affluent established suburbs,131200,826.5,2.0,93.0,680.0,21.54,146.5,7.23,6.63,91.57,False,True,True
+142301,Mount Roskill South East,Crowded family suburbs,142300,609.0,2.0,42.0,345.0,76.52,264.0,51.93,50.83,48.62,False,True,True
+120000,Murrays Bay East,Affluent established suburbs,120000,710.0,2.0,36.0,675.0,5.19,35.0,0.0,0.0,100.0,False,True,True
+149100,Mount Wellington South West,Middle suburbs,149100,660.0,2.0,63.0,555.0,18.92,105.0,16.25,15.0,83.12,False,True,True
+118501,Pinehill North,Outer suburbs & lifestyle blocks,118500,682.5,2.0,63.0,700.0,-2.5,-17.5,0.0,0.0,98.48,True,True,False
+162101,Takanini South,Middle suburbs,162100,690.0,2.0,102.0,660.0,4.55,30.0,6.8,1.36,93.2,True,True,False
+146501,Mount Wellington East,Middle suburbs,146500,585.0,2.0,63.0,530.0,10.38,55.0,15.1,15.1,84.38,False,True,True
+151800,Massey Road West,Crowded family suburbs,151800,530.0,2.0,42.0,452.0,17.26,78.0,35.32,30.28,62.39,False,True,True
+132600,New Lynn North West,Middle suburbs,132600,592.5,2.0,93.0,490.0,20.92,102.5,23.12,19.1,75.38,False,True,True
+154201,Aorere South West,Crowded family suburbs,154200,630.0,2.0,51.0,495.0,27.27,135.0,21.19,17.8,77.97,True,True,False
+159900,Rowandale West,Crowded family suburbs,159900,650.0,2.0,39.0,500.0,30.0,150.0,36.21,33.91,63.22,False,True,True
+125500,Westlake,Middle suburbs,125500,554.0,2.0,108.0,594.0,-6.73,-40.0,2.86,2.86,97.14,False,True,True
+127100,Northcote Central (Auckland),Middle suburbs,127100,579.0,2.0,78.0,530.0,9.25,49.0,28.67,22.38,67.83,False,True,True
+162000,Takanini West,Crowded family suburbs,162000,622.0,2.0,60.0,500.0,24.4,122.0,29.22,25.97,70.78,False,True,True
+137901,Wesley West,Crowded family suburbs,137900,626.5,2.0,36.0,230.0,172.39,396.5,65.24,65.24,33.69,False,True,True
+138800,Wesley South,,138800,,,,500.0,,,,,100.0,False,False,False
+152900,Botany Downs East,Middle suburbs,152900,715.0,2.0,39.0,650.0,10.0,65.0,1.22,1.22,98.78,False,True,True
+160501,Weymouth East,Crowded family suburbs,160500,637.5,2.0,36.0,450.0,41.67,187.5,48.31,47.46,50.85,False,True,True
+141201,Three Kings North,Affluent established suburbs,141200,695.0,2.0,42.0,650.0,6.92,45.0,11.25,11.25,88.75,False,True,True
+149500,Mount Wellington South East,Crowded family suburbs,149500,557.5,2.0,45.0,352.0,58.38,205.5,50.79,49.21,49.21,False,True,True
+145200,Oranga,Crowded family suburbs,145200,626.5,2.0,27.0,204.0,207.11,422.5,65.88,65.29,34.71,False,True,False
+147002,Tamaki East,Middle suburbs,147000,589.0,2.0,66.0,275.0,114.18,314.0,41.05,28.42,52.63,True,True,False
+159600,Hillpark North,Middle suburbs,159600,670.0,2.0,21.0,560.0,19.64,110.0,6.67,2.67,93.33,False,True,False
+128901,Glendene North West,Middle suburbs,128900,600.0,2.0,60.0,540.0,11.11,60.0,11.46,10.42,88.54,True,True,False
+158401,Wiri North,Crowded family suburbs,158400,607.5,2.0,60.0,186.0,226.61,421.5,70.97,61.94,27.74,True,True,False
+161900,Conifer Grove East,Crowded family suburbs,161900,587.5,2.0,33.0,400.0,46.88,187.5,30.5,18.44,69.5,False,True,True
+143200,Meadowbank East,Affluent established suburbs,143200,660.5,2.0,57.0,530.0,24.62,130.5,0.0,0.0,100.0,False,True,True
+154101,Dingwall,Middle suburbs,154100,654.5,2.0,45.0,600.0,9.08,54.5,10.89,5.94,88.12,False,True,True
+156201,Papatoetoe South,Middle suburbs,156200,575.0,2.0,123.0,530.0,8.49,45.0,15.09,13.21,85.53,False,True,True
+158800,Burbank,Crowded family suburbs,158800,642.5,2.0,33.0,500.0,28.5,142.5,40.8,40.23,59.2,False,True,True
+130400,Ponsonby West,Affluent established suburbs,130400,1091.5,2.0,36.0,545.0,100.28,546.5,29.03,27.96,70.97,False,True,True
+146201,Mount Wellington Ferndale,Middle suburbs,146200,574.0,2.0,99.0,500.0,14.8,74.0,17.5,17.0,82.0,False,True,True
+140601,Mount Roskill North East,Middle suburbs,140600,680.0,2.0,27.0,190.0,257.89,490.0,65.07,65.07,34.93,False,True,False
+148800,Half Moon Bay North East,Outer suburbs & lifestyle blocks,148800,729.0,2.0,39.0,660.0,10.45,69.0,4.88,4.88,92.68,False,True,True
+129800,Westmere North,Affluent established suburbs,129800,819.0,2.0,24.0,650.0,26.0,169.0,21.67,21.67,76.67,False,True,False
+136501,New Lynn South,Middle suburbs,136500,620.0,2.0,93.0,550.0,12.73,70.0,4.03,4.03,95.97,True,True,False
+146700,Panmure West,,146700,,,,198.0,,,59.46,40.54,37.84,False,False,False
+153301,Māngere East,Crowded family suburbs,153300,650.0,2.0,48.0,550.0,18.18,100.0,15.69,14.71,84.31,False,True,True
+149701,Bucklands Beach Murvale,Middle suburbs,149700,660.0,2.0,99.0,640.0,3.12,20.0,0.0,0.0,100.0,True,True,False
+143400,Royal Oak East (Auckland),Middle suburbs,143400,599.0,2.0,81.0,530.0,13.02,69.0,15.18,14.66,85.34,False,True,True
+137100,Glenavon,Crowded family suburbs,137100,592.5,2.0,39.0,350.0,69.29,242.5,49.69,48.45,50.31,False,True,True
+162602,Takanini McLennan,Crowded family suburbs,162600,662.5,2.0,90.0,500.0,32.5,162.5,35.34,26.72,62.93,True,True,False
+156601,Savonna,Outer suburbs & lifestyle blocks,156600,820.0,2.0,30.0,770.0,6.49,50.0,0.0,0.0,100.0,False,True,True
+149400,Favona East,Crowded family suburbs,149400,678.5,2.0,18.0,371.0,82.88,307.5,55.56,54.7,44.44,False,True,False
+147001,Tamaki West,Crowded family suburbs,147000,589.0,2.0,66.0,318.0,85.22,271.0,38.73,26.01,56.07,True,True,False
+142901,Hillsborough Central (Auckland),Middle suburbs,142900,660.0,2.0,48.0,600.0,10.0,60.0,0.0,0.0,98.86,False,True,True
+163901,Papakura East,Crowded family suburbs,163900,677.5,2.0,33.0,520.0,30.29,157.5,42.52,39.37,57.48,True,True,False
+136100,Grafton,Apartments & inner city,136100,280.0,2.0,363.0,520.0,-46.15,-240.0,1.79,0.0,98.21,False,True,True
+141102,Mission Bay Eastridge,Affluent established suburbs,141100,680.0,2.0,129.0,589.0,15.45,91.0,2.67,2.67,97.33,True,True,False
+153600,Aorere Central,Crowded family suburbs,153600,664.0,2.0,12.0,550.0,20.73,114.0,23.53,20.59,77.94,False,True,False
+124600,Glenfield East,Middle suburbs,124600,592.5,2.0,45.0,580.0,2.16,12.5,3.51,3.51,97.37,False,True,True
+142202,Greenlane Central,Affluent established suburbs,142200,712.5,2.0,117.0,660.0,7.95,52.5,1.02,1.02,97.96,True,True,False
+155601,Papatoetoe North East,Crowded family suburbs,155600,635.0,2.0,60.0,500.0,27.0,135.0,20.57,18.29,78.86,True,True,False
+154202,Aorere South East,Crowded family suburbs,154200,630.0,2.0,51.0,500.0,26.0,130.0,29.41,28.43,70.59,True,True,False
+139100,Wesley East,Crowded family suburbs,139100,590.0,2.0,24.0,180.0,227.78,410.0,70.07,69.39,29.93,False,True,False
+160202,Weymouth Central,Crowded family suburbs,160200,640.0,2.0,45.0,480.0,33.33,160.0,42.74,27.35,54.7,True,True,False
+144500,Saint Johns East,Middle suburbs,144500,540.0,2.0,78.0,510.0,5.88,30.0,4.57,2.03,95.43,False,True,True
+155702,Ōtara South,Crowded family suburbs,155700,645.0,1.0,12.0,220.0,193.18,425.0,66.43,66.43,32.86,True,True,False
+160901,Manurewa West,Crowded family suburbs,160600,621.5,2.0,84.0,550.0,13.0,71.5,14.81,12.59,84.44,True,True,False
+157000,Puhinui East,Crowded family suburbs,157000,620.0,2.0,45.0,516.0,20.16,104.0,3.85,3.85,95.38,False,True,True
+159101,Homai East,Crowded family suburbs,159100,600.0,2.0,57.0,500.0,20.0,100.0,18.75,15.97,80.56,False,True,True
+141700,Epsom South,Affluent established suburbs,141700,722.5,2.0,39.0,678.0,6.56,44.5,7.06,7.06,92.94,False,True,True
+159500,Clendon Park West,Crowded family suburbs,159500,617.5,2.0,27.0,500.0,23.5,117.5,43.07,40.88,55.47,False,True,False
+137201,Blockhouse Bay North,Middle suburbs,137200,656.5,2.0,39.0,506.0,29.74,150.5,30.56,22.22,69.44,False,True,True
+126701,Henderson North,Middle suburbs,126700,587.5,2.0,51.0,478.0,22.91,109.5,30.15,28.68,70.59,True,True,False
+136001,Eden Terrace,Apartments & inner city,136000,557.5,2.0,408.0,540.0,3.24,17.5,2.04,1.46,97.96,True,True,False
+136900,Eden Valley,Affluent established suburbs,136900,497.5,2.0,78.0,490.0,1.53,7.5,1.47,0.74,99.26,False,True,True
+127701,Te Atatū South-McLeod North,Middle suburbs,127700,606.5,2.0,60.0,550.0,10.27,56.5,10.81,6.31,90.09,True,True,False
+157200,Rongomai East,Crowded family suburbs,157200,635.0,2.0,18.0,442.0,43.67,193.0,49.54,48.62,49.54,False,True,False
+133500,Grey Lynn East,Apartments & inner city,133500,705.0,2.0,108.0,660.0,6.82,45.0,0.72,0.72,99.28,False,True,True
+148300,Bucklands Beach Central,Affluent established suburbs,148300,735.0,2.0,45.0,650.0,13.08,85.0,0.0,0.0,100.0,False,True,True
+138302,New Windsor East,Middle suburbs,138300,654.0,2.0,54.0,552.0,18.48,102.0,28.32,28.32,71.68,True,True,False
+147202,Mount Wellington Hamlin,Middle suburbs,147200,614.0,2.0,105.0,530.0,15.85,84.0,16.45,13.16,83.55,True,True,False
+139501,Blockhouse Bay East,Older & coastal,139500,675.0,2.0,30.0,582.0,15.98,93.0,27.27,27.27,72.73,False,True,True
+162800,Papakura West,Middle suburbs,162800,555.0,2.0,21.0,460.0,20.65,95.0,21.98,10.99,73.63,False,True,False
+155401,Armoy,Middle suburbs,156100,772.5,2.0,27.0,650.0,18.85,122.5,2.63,1.75,98.25,False,True,False
+139801,Mount Roskill White Swan,Middle suburbs,139800,617.5,2.0,75.0,590.0,4.66,27.5,10.0,9.0,91.0,True,True,False
+147400,Sylvia Park,Middle suburbs,147400,,,,472.0,,,0.0,0.0,100.0,False,True,False
+123702,Castor Bay South,Affluent established suburbs,123700,852.5,2.0,78.0,750.0,13.67,102.5,0.0,0.0,100.0,True,True,False
+163301,Papakura North East,Crowded family suburbs,163300,629.0,2.0,54.0,540.0,16.48,89.0,23.53,21.57,76.47,True,True,False
+155200,Redcastle,Middle suburbs,155200,695.0,2.0,45.0,650.0,6.92,45.0,5.04,5.04,94.96,False,True,True
+146302,Point England South,Crowded family suburbs,146300,375.0,2.0,66.0,278.0,34.89,97.0,52.24,36.57,42.54,True,True,False
+159202,Homai Central,Crowded family suburbs,159200,610.0,2.0,93.0,530.0,15.09,80.0,27.71,22.89,71.69,True,True,False
+144900,Stonefields West,Affluent established suburbs,144900,830.0,2.0,27.0,820.0,1.22,10.0,0.0,0.0,100.0,False,True,False
+138301,New Windsor South,Middle suburbs,138300,654.0,2.0,54.0,595.0,9.92,59.0,5.71,5.71,94.29,True,True,False
+158501,Goodwood Heights West,Crowded family suburbs,158500,679.0,2.0,48.0,590.0,15.08,89.0,20.59,19.12,77.94,True,True,False
+117800,Oteha West,Middle suburbs,117800,544.0,2.0,42.0,545.0,-0.18,-1.0,1.16,0.0,98.84,False,True,True
+138600,Blockhouse Bay North East,Middle suburbs,138600,657.5,2.0,30.0,600.0,9.58,57.5,4.6,4.6,96.55,False,True,True
+142801,One Tree Hill Oranga,Middle suburbs,142800,622.5,2.0,99.0,550.0,13.18,72.5,28.35,28.35,70.87,True,True,False
+142201,Greenlane North,Affluent established suburbs,142200,712.5,2.0,117.0,660.0,7.95,52.5,0.0,0.0,100.0,True,True,False
+156700,Puhinui South,Crowded family suburbs,156700,592.5,2.0,36.0,550.0,7.73,42.5,13.0,11.0,88.0,False,True,True
+152500,Burswood,Middle suburbs,152500,635.0,2.0,18.0,630.0,0.79,5.0,6.25,0.0,92.19,False,True,False
+157702,Clover Park East,Crowded family suburbs,157700,615.0,2.0,27.0,500.0,23.0,115.0,38.46,38.46,60.58,False,True,False
+136200,Eden Park,Affluent established suburbs,136200,700.0,2.0,45.0,590.0,18.64,110.0,2.2,2.2,96.7,False,True,True
+132002,Avondale North East (Auckland),Middle suburbs,132000,625.0,2.0,105.0,570.0,9.65,55.0,16.36,15.45,84.55,True,True,False
+160201,Weymouth West,Crowded family suburbs,160200,640.0,2.0,45.0,530.0,20.75,110.0,26.32,23.16,73.68,True,True,False
+163501,Papakura Kelvin,Crowded family suburbs,163500,645.0,2.0,63.0,490.0,31.63,155.0,27.5,24.17,71.67,True,True,False
+156800,Rongomai West,Crowded family suburbs,156800,600.0,2.0,12.0,300.0,100.0,300.0,65.09,64.15,34.91,False,True,False
+139802,Mount Roskill Nirvana,Middle suburbs,139800,617.5,2.0,75.0,600.0,2.92,17.5,5.56,4.44,95.56,True,True,False
+159201,Homai West,Crowded family suburbs,159200,610.0,2.0,93.0,450.0,35.56,160.0,45.86,43.61,53.38,True,True,False
+149702,Bucklands Beach South,Middle suburbs,149700,660.0,2.0,99.0,600.0,10.0,60.0,1.3,1.3,100.0,True,True,False
+137600,Sandringham West,Affluent established suburbs,137600,620.0,2.0,57.0,560.0,10.71,60.0,6.09,4.35,93.04,False,True,True
+136801,Ōwairaka East,Middle suburbs,136800,547.5,2.0,48.0,504.0,8.63,43.5,26.19,26.19,73.81,False,True,True
+137000,Sandringham Central,Middle suburbs,137000,547.5,2.0,75.0,505.0,8.42,42.5,13.74,12.98,85.5,False,True,True
+158001,Donegal Park West,Middle suburbs,158000,614.0,2.0,42.0,590.0,4.07,24.0,9.09,8.18,90.0,True,True,False
+154600,Botany Central,,154600,,,,,,,,,,False,False,False
+155701,Ōtara South West,Crowded family suburbs,155700,645.0,1.0,12.0,198.0,225.76,447.0,54.64,41.24,39.18,True,True,False
+159700,Clendon Park East,Crowded family suburbs,159700,640.0,2.0,24.0,350.0,82.86,290.0,52.34,50.78,46.88,False,True,False
+135800,St Lukes,Middle suburbs,135800,607.5,2.0,114.0,550.0,10.45,57.5,15.58,14.94,84.42,False,True,True
+132400,Victoria Park,Apartments & inner city,132400,500.0,2.0,360.0,500.0,0.0,0.0,0.26,0.0,99.74,False,True,True
+145700,Stonefields East,Affluent established suburbs,145700,745.0,2.0,45.0,795.0,-6.29,-50.0,1.35,1.35,100.0,False,True,True
+114102,Stillwater,Outer suburbs & lifestyle blocks,114100,587.5,2.0,15.0,550.0,6.82,37.5,0.0,0.0,100.0,True,True,False
+158002,Donegal Park East,Outer suburbs & lifestyle blocks,158000,614.0,2.0,42.0,600.0,2.33,14.0,0.0,0.0,97.06,True,True,False
+154500,Huntington Park,Older & coastal,154500,640.0,2.0,45.0,600.0,6.67,40.0,0.0,0.0,100.0,False,True,True
+137701,Mount Eden North East,Apartments & inner city,137700,698.5,2.0,102.0,650.0,7.46,48.5,1.72,0.0,98.28,False,True,True
+150301,Ōtāhuhu North West,Crowded family suburbs,150300,429.0,2.0,96.0,378.0,13.49,51.0,33.52,28.98,65.34,True,True,False
+134800,Auckland-University,Apartments & inner city,134800,450.0,2.0,24.0,370.0,21.62,80.0,0.0,0.0,100.0,False,True,False
+112102,Ara Hill,Outer suburbs & lifestyle blocks,112100,439.0,2.0,21.0,,,,,,,True,True,False
+150302,Ōtāhuhu North East,Crowded family suburbs,150300,429.0,2.0,96.0,400.0,7.25,29.0,34.38,28.12,65.62,True,True,False
+144201,Ellerslie West,Middle suburbs,144200,,,,600.0,,,12.5,0.0,87.5,False,True,False
+153200,Aorere North,Crowded family suburbs,153200,673.0,1.0,6.0,530.0,26.98,143.0,26.79,23.21,73.21,False,True,False
+152600,Massey Road South,Crowded family suburbs,152600,665.0,2.0,15.0,400.0,66.25,265.0,43.84,41.1,56.16,False,True,False
+138502,Newmarket Park,Affluent established suburbs,138500,637.5,2.0,195.0,760.0,-16.12,-122.5,0.0,0.0,100.0,True,True,False
+136002,Grafton West,,136000,557.5,2.0,408.0,600.0,-7.08,-42.5,0.0,0.0,100.0,True,False,False
+134100,Queen Street South West,Apartments & inner city,134100,440.0,2.0,354.0,430.0,2.33,10.0,7.61,7.27,91.7,False,True,True
+135700,The Strand,Apartments & inner city,135700,374.0,2.0,276.0,570.0,-34.39,-196.0,0.0,0.0,100.0,False,True,True
+134301,Karangahape West,Apartments & inner city,134300,505.0,2.0,183.0,586.0,-13.82,-81.0,0.99,0.99,100.0,True,True,False
+133200,Queen Street,Apartments & inner city,133200,452.5,2.0,192.0,420.0,7.74,32.5,0.88,0.0,99.12,False,True,True
+133800,Hobson Ridge South,Apartments & inner city,133800,410.0,2.0,138.0,400.0,2.5,10.0,4.21,2.63,96.32,False,True,True
+132700,Hobson Ridge North,Apartments & inner city,132700,460.0,2.0,369.0,450.0,2.22,10.0,1.18,0.0,98.22,False,True,True
+135300,Symonds Street West,Apartments & inner city,135300,437.5,2.0,333.0,400.0,9.38,37.5,8.16,5.59,90.91,False,True,True
+133700,Shortland Street,Apartments & inner city,133700,482.5,2.0,246.0,435.0,10.92,47.5,0.71,0.35,98.59,False,True,True
+134302,Karangahape East,Apartments & inner city,134300,505.0,2.0,183.0,450.0,12.22,55.0,5.11,2.19,94.89,True,True,False
+135900,Symonds Street East,Apartments & inner city,135900,404.5,2.0,303.0,425.0,-4.82,-20.5,1.7,0.0,97.73,False,True,True
+134500,Anzac Avenue,Apartments & inner city,134500,442.5,2.0,300.0,450.0,-1.67,-7.5,2.88,1.57,97.38,False,True,True
+131802,College Hill,Apartments & inner city,131800,757.5,2.0,144.0,700.0,8.21,57.5,0.0,0.0,100.0,True,True,False
+135100,Symonds Street North West,Apartments & inner city,135100,375.0,2.0,462.0,380.0,-1.32,-5.0,1.48,0.0,98.28,False,True,True
+133400,Hobson Ridge Central,Apartments & inner city,133400,400.0,2.0,357.0,400.0,0.0,0.0,8.6,4.3,91.4,False,True,True

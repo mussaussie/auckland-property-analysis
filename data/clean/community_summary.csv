@@ -1,0 +1,15 @@
+group,group_type,count_2013,count_2018,count_2023,pct_2013,pct_2018,pct_2023,growth_2013_2023_pct,share_change_pp,dissimilarity_2013,dissimilarity_2023,hubs,pct_in_hubs,area_weighted_median_rent_weekly,area_weighted_rent_3bed_house,area_weighted_rent_to_income_pct,area_weighted_rent_cagr_10y_pct,area_weighted_cooling_pa,area_weighted_crime_per_1000_residents,area_weighted_median_household_income,cheapest_hubs
+European,ethnicity,789261.0,841380.0,825114.0,59.28,53.533,49.814,4.543,-9.466,0.429,0.413,0,0,682.5,712.5,28.68,3.03,-0.57,25.72,123200.0,
+Māori,ethnicity,142788.0,181209.0,203559.0,10.725,11.529,12.289,42.56,1.565,0.306,0.273,40,19,651.25,679.5,30.32,3.17,-1.19,32.33,110000.0,"Point England North ($535), Wellsford ($549), Papakura Central ($551)"
+Pacific,ethnicity,194946.0,243945.0,275040.0,14.642,15.521,16.605,41.085,1.963,0.548,0.501,82,49,649.5,673.75,30.89,3.19,-1.38,32.62,105600.0,"Ōtāhuhu North West ($481), Ōtāhuhu North East ($481), Ōtāhuhu South West ($525)"
+Asian,ethnicity,307257.0,442689.0,518124.0,23.078,28.166,31.28,68.629,8.203,0.385,0.341,30,12,677.0,700.0,29.28,3.0,-0.76,30.33,118700.0,"Twin Parks Rise ($627), Newmarket ($628), Ormiston South East ($643)"
+MELAA,ethnicity,24945.0,35856.0,44736.0,1.874,2.281,2.701,79.339,0.827,0.274,0.218,2,1,675.0,707.67,29.22,2.96,-0.69,30.13,118700.0,"Waterview ($631), Unsworth Heights West ($735)"
+Christian,religion,615864.0,603348.0,578559.0,47.553,38.388,34.929,-6.057,-12.624,0.136,0.151,0,0,668.75,693.33,29.71,3.08,-1.0,29.6,114400.0,
+No religion,religion,489888.0,669093.0,742443.0,37.826,42.571,44.823,51.554,6.997,0.195,0.233,0,0,680.0,708.0,28.93,3.02,-0.67,27.0,121700.0,
+Muslim,religion,31131.0,40296.0,48108.0,2.404,2.564,2.904,54.534,0.501,0.394,0.33,13,11,663.5,690.0,29.92,3.05,-0.96,32.5,113300.0,"Wesley West ($627), Māngere South East ($648), Mount Roskill South East ($654)"
+Hindu,religion,61404.0,81678.0,90273.0,4.741,5.197,5.45,47.015,0.709,0.411,0.369,71,39,663.5,690.0,29.41,3.05,-1.06,33.3,114000.0,"Hobson Ridge Central ($452), Papatoetoe Central East ($566), Papatoetoe Central West ($566)"
+Buddhist,religion,32805.0,29631.0,31071.0,2.533,1.885,1.876,-5.286,-0.657,0.266,0.251,0,0,676.25,705.0,29.22,2.98,-0.72,30.23,119000.0,
+Born in Asia,birthplace,203292.0,295596.0,339987.0,15.372,19.081,20.723,67.241,5.35,0.389,0.332,46,18,680.0,706.25,29.27,2.98,-0.64,30.24,119200.0,"Symonds Street North West ($415), Hobson Ridge South ($428), Hobson Ridge Central ($452)"
+Born in Pacific Is.,birthplace,109626.0,120399.0,129633.0,8.29,7.772,7.901,18.25,-0.388,0.516,0.48,89,53,650.75,675.0,30.52,3.21,-1.35,33.3,106600.0,"Ōtāhuhu North East ($481), Ōtāhuhu North West ($481), Ōtāhuhu South West ($525)"
+Born in Middle East/Africa,birthplace,50328.0,60333.0,69060.0,3.806,3.894,4.209,37.22,0.404,0.3,0.274,33,19,698.25,714.0,29.22,2.97,-0.47,20.51,123300.0,"Unsworth Heights East ($598), Howick Central ($654), Howick East ($660)"
+Samoan speakers,language,58203.0,69450.0,75042.0,4.422,4.419,4.53,28.931,0.109,0.566,0.522,72,54,649.0,671.5,31.38,3.22,-1.47,32.3,103700.0,"Ōtāhuhu North West ($481), Ōtāhuhu South West ($525), Ōtāhuhu East ($529)"
