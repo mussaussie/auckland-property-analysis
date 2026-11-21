@@ -736,7 +736,8 @@ def count_fact(r, what, n_col, near_col, km_col, mapped=False):
 
 def view_simple():
     st.markdown("## What is this suburb like?")
-    name = st.selectbox("Pick a suburb", NAMES, index=NAMES.index(DEFAULT_SUBURB), key="suburb")
+    # With advanced views on, the sidebar already shows this picker (same key), so a second one would clash
+    name = suburb if advanced else st.selectbox("Pick a suburb", NAMES, index=NAMES.index(DEFAULT_SUBURB), key="suburb")
     r = BY_NAME.loc[name]
     st.caption("Green = good for most families, amber = so-so, red = worse than most of Auckland, grey = for information.")
     if not on(r, "analysis_ready"):
