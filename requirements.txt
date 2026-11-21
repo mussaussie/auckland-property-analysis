@@ -1,13 +1,7 @@
-# Dashboard (app.py)
-streamlit==1.37.1
-pandas==2.3.2
-numpy==1.26.4
-plotly==5.24.1
-markdown==3.4.1
-# Notebooks and data scripts
-geopandas==1.1.1
-pyogrio==0.11.1
-matplotlib==3.10.6
-scikit-learn==1.7.2
-statsmodels==0.14.6
-requests==2.32.5
+# Dashboard only (app.py). Streamlit Cloud installs this file, so keep it small.
+# Notebooks and data scripts: pip install -r requirements-analysis.txt
+streamlit>=1.37,<2
+pandas>=2.2,<3
+numpy>=1.26,<3
+plotly>=5.24,<6
+markdown>=3.4,<4

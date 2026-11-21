@@ -1,0 +1,8 @@
+# Notebooks and data scripts (download_data.py, build_master.py, 0*_*.ipynb), on top of the dashboard packages
+-r requirements.txt
+geopandas==1.1.1
+pyogrio==0.11.1
+matplotlib==3.10.6
+scikit-learn==1.7.2
+statsmodels==0.14.6
+requests==2.32.5

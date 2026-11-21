@@ -6,7 +6,6 @@ Run: streamlit run app.py      Previous design: app_v1_2026-11-18.py
 import html
 import json
 
-import geopandas as gpd
 import markdown
 import numpy as np
 import pandas as pd
@@ -54,6 +53,8 @@ section[data-testid="stSidebar"] { background: #ffffff; border-right: 1px solid 
 .brand .t { font-weight: 800; font-size: 1.08rem; color: #0f172a; } .brand .s { font-size: .8rem; color: #64748b; margin-bottom: 10px; }
 [data-testid="stPlotlyChart"], [data-testid="stDataFrame"] { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 6px; }
 .stTabs [data-baseweb="tab-list"] { gap: 6px; }
+.fact { background: #fff; border-radius: 10px; border-left: 7px solid var(--c); box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 14px 18px; margin-bottom: 10px; }
+.fact .ft { font-weight: 700; font-size: 1.1rem; color: #0f172a; } .fact .fx { font-size: 1rem; color: #334155; margin-top: 3px; line-height: 1.5; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -134,10 +135,11 @@ def load():
 
 @st.cache_data
 def geo():
-    g = gpd.read_file("data/boundaries/auckland_sa2_2023.geojson")[["SA22023_V1_00", "geometry"]]
-    g["sa2_code"] = g["SA22023_V1_00"].astype(int)
-    g["geometry"] = g.geometry.simplify(0.0004, preserve_topology=True)  # ~40 m; keeps the page light
-    return json.loads(g[["sa2_code", "geometry"]].to_json())
+    # Plain json, no geopandas, so Streamlit Cloud installs only light packages
+    g = json.load(open("data/boundaries/auckland_sa2_2023.geojson", encoding="utf-8"))
+    for f in g["features"]:
+        f["properties"] = {"sa2_code": int(f["properties"]["SA22023_V1_00"])}
+    return g
 
 
 @st.cache_data
@@ -183,6 +185,7 @@ def pct_rank(col, v):
 
 
 # ---------- sidebar ----------
+SIMPLE_VIEWS = ["A suburb in plain English", "Find a rental under my budget"]
 VIEWS = ["Overview", "Explore suburb", "Compare suburbs", "Opportunity finder", "Family screen", "Map lab", "Methodology", "Glossary"]
 NAMES = sorted(S["sa2_name"])
 # The spec's defaults are suburb names; SA2s split them, so the nearest SA2 is used (CBD: Queen Street)
@@ -191,13 +194,16 @@ DEFAULT_COMPARE = ["Queen Street", "Albany Central", "Mount Eden North", "Manure
 with st.sidebar:
     st.markdown('<div class="brand"><div class="t">Auckland Property Insights</div><div class="s">Suburb Property Dashboard</div></div>',
                 unsafe_allow_html=True)
-    view = st.radio("View", VIEWS, label_visibility="collapsed")
-    st.divider()
-    suburb = st.selectbox("Suburb", NAMES, index=NAMES.index(DEFAULT_SUBURB))
-    compare = st.multiselect("Compare suburbs", NAMES, default=DEFAULT_COMPARE, max_selections=8)
+    advanced = st.toggle("Show advanced views", value=False)
+    view = st.radio("View", SIMPLE_VIEWS + (VIEWS if advanced else []), label_visibility="collapsed")
+    if advanced:
+        st.divider()
+        # Same key as the simple page's picker, so the chosen suburb carries over
+        suburb = st.selectbox("Suburb", NAMES, index=NAMES.index(DEFAULT_SUBURB), key="suburb")
+        compare = st.multiselect("Compare suburbs", NAMES, default=DEFAULT_COMPARE, max_selections=8)
+        R = BY_NAME.loc[suburb]
     st.caption("Suburbs are Stats NZ SA2 areas: names are close to suburb names, boundaries differ. "
                "Sources: Stats NZ 2023 Census, MBIE bonds, Auckland Council valuations, NZ Police, HUD, MoE, Auckland Transport, OpenStreetMap.")
-R = BY_NAME.loc[suburb]
 
 
 # ---------- shared charts ----------
@@ -711,5 +717,106 @@ def view_glossary():
         two_columns(table_cards(rs.get(title) if title in rs else section(rs, prefix)))
 
 
-{"Overview": view_overview, "Explore suburb": view_explore, "Compare suburbs": view_compare, "Opportunity finder": view_opportunity,
+LIGHTS = {"green": GREEN, "amber": AMBER, "red": RED, "grey": "#94a3b8"}
+
+
+def fact(light, title, text):
+    st.markdown(f'<div class="fact" style="--c:{LIGHTS[light]}"><div class="ft">{esc(title)}</div><div class="fx">{esc(text)}</div></div>',
+                unsafe_allow_html=True)
+
+
+def count_fact(r, what, n_col, near_col, km_col, mapped=False):
+    """Green if there is one inside the area, else amber with the nearest (CLAUDE.md rule: count first, nearest as fallback)."""
+    n = r[n_col]
+    if pd.notna(n) and n > 0:
+        return "green", f"{what}: {int(n)} {'mapped ' if mapped else ''}inside this area"
+    return "amber", (f"{what}: none {'mapped ' if mapped else ''}inside this area. Nearest is "
+                     f"{r[near_col] if pd.notna(r[near_col]) else '—'}, {num(r[km_col], suffix=' km')} away")
+
+
+def view_simple():
+    st.markdown("## What is this suburb like?")
+    name = st.selectbox("Pick a suburb", NAMES, index=NAMES.index(DEFAULT_SUBURB), key="suburb")
+    r = BY_NAME.loc[name]
+    st.caption("Green = good for most families, amber = so-so, red = worse than most of Auckland, grey = for information.")
+    if not on(r, "analysis_ready"):
+        st.warning("Few people live here (or it is mostly shops and offices), so these figures are not reliable.")
+
+    rent = r["median_rent_weekly"]
+    if pd.isna(rent):
+        fact("grey", "Rent: no figure", "Too few homes are rented here to give a typical rent.")
+    else:
+        p = pct_rank("median_rent_weekly", rent)
+        light, word = ("green", "cheaper than most") if p < 33 else ("amber", "about average") if p < 67 else ("red", "dearer than most")
+        fact(light, f"Rent: {money(rent)} a week ({word})",
+             f"A typical new rental here costs {money(rent)} a week, {word} for Auckland. All home types, last 12 months."
+             + (" This figure is shared with a neighbouring area." if on(r, "flag_borrowed_rent") else ""))
+    if pd.notna(r["cooling_pa"]):
+        c = r["cooling_pa"]
+        word = "going up" if c > 1 else "going down" if c < -1 else "about flat"
+        fact("grey", f"Rent trend: {word}", f"Over the last 2 years rent has moved {c:+.1f}% a year.")
+
+    rating = r["crime_rating"]
+    if rating in ("Low", "Moderate", "High"):
+        word = {"Low": "lower than most", "Moderate": "about average", "High": "higher than most"}[rating]
+        fact({"Low": "green", "Moderate": "amber", "High": "red"}[rating], f"Crime: {rating.lower()}",
+             f"{r['crime_per_1000_residents']:.0f} crimes recorded per 1,000 residents in the last 12 months, {word} for Auckland.")
+    elif rating == "Hotspot":
+        fact("red", "Crime: busy centre", "Many visitors come here, so crime per resident looks very high and can't be compared with other areas.")
+    else:
+        fact("grey", "Crime: no rating", "Too few residents to rate crime fairly.")
+
+    light, title = count_fact(r, "Primary schools (Year 1)", "year1_schools_in_area", "nearest_year1_school", "km_to_nearest_year1_school")
+    fact(light, title, "Being near a school does not mean you are in its zone; check the school's enrolment scheme.")
+    light, title = count_fact(r, "Secondary schools", "secondary_schools_in_area", "nearest_secondary_school", "km_to_nearest_secondary_school")
+    fact(light, title, "Distances are straight-line, not travel time.")
+    light, title = count_fact(r, "GP clinics", "gp_clinics_in_area", "nearest_gp_clinic", "km_to_nearest_gp_clinic", mapped=True)
+    fact(light, title, "From OpenStreetMap, which misses some clinics.")
+    light, title = count_fact(r, "Playgrounds", "playgrounds_in_area", "nearest_playground", "km_to_nearest_playground", mapped=True)
+    fact(light, title, f"{num(r['parks_in_area'], '{:.0f}')} parks mapped inside this area. From OpenStreetMap, which misses some.")
+
+    km = r["km_to_nearest_mosque"]
+    if pd.notna(km):
+        fact("green" if km <= 3 else "amber" if km <= 8 else "red", f"Mosque: {km:.1f} km",
+             f"Nearest mosque on our verified list: {r['nearest_mosque']}, {km:.1f} km in a straight line. "
+             "The list has only 6 mosques, so there may be a closer one.")
+    if pd.notna(r["gross_yield_pct"]):
+        fact("grey", f"For investors: rent is about {r['gross_yield_pct']:.1f}% of value a year",
+             "Yearly rent divided by the 2024 council valuation, before costs. A rough guide, not advice."
+             + (" Small apartments make this look higher than it really is here." if r.get("area_type") == "Apartments & inner city" else ""))
+    fact("grey", f"People: {r['population_2023']:,.0f} residents",
+         f"{num(r['pct_under_15'], '{:.0f}', '%')} are children under 15; {num(r['pct_owner_occupied'], '{:.0f}', '%')} of homes are lived in by their owner (2023 Census).")
+    caveat("Rent: MBIE new-tenancy bonds. Crime: NZ Police, counted where it happened. Schools: Ministry of Education. "
+           "For every number and caveat, switch on 'Show advanced views' in the sidebar.")
+
+
+def view_find():
+    st.markdown("## Find a rental under my budget")
+    c = st.columns(3)
+    max_rent = c[0].number_input("My budget ($ a week)", 200, 2000, 600, 10)
+    dwelling = c[1].selectbox("Home type", ["House", "Apartment", "ALL"], format_func=lambda x: "Any type" if x == "ALL" else x)
+    beds = c[2].selectbox("Bedrooms", ["1", "2", "3", "4", "5+", "ALL"], index=2, format_func=lambda x: "Any" if x == "ALL" else x)
+    s = family_screen(max_rent, dwelling, beds, include_apt=dwelling == "Apartment")
+    m = s[s["under"]].sort_values("rent")
+    home = f"{'' if beds == 'ALL' else beds + '-bedroom '}{'home' if dwelling == 'ALL' else dwelling.lower()}"
+    if m.empty:
+        st.info(f"No area has a typical rent of {money(max_rent)} a week or less for a {home}. Try a higher budget or fewer bedrooms.")
+    else:
+        st.markdown(f"#### {len(m)} areas where a typical {home} rents for {money(max_rent)} a week or less")
+        t = pd.DataFrame({
+            "Area": m["sa2_name"], "Typical rent": m["rent"],
+            "Reliable figure?": m["check"].map({"ok": "Yes", "verify": "Check listings"}),
+            "Crime": m["crime_rating"],
+            "Primary school inside": np.where(m["year1_schools_in_area"] > 0, "Yes", "No"),
+            "Mosque (km)": m["km_to_nearest_mosque"]})
+        st.dataframe(t, hide_index=True, use_container_width=True, column_config={
+            "Typical rent": st.column_config.NumberColumn(format="$%.0f"), "Mosque (km)": st.column_config.NumberColumn(format="%.1f")})
+    caveat("Typical rent = new-tenancy bonds, average of the last 4 quarters. 'Check listings' means few rentals or prices jump around. "
+           f"{(s['check'] == 'no estimate').sum()} areas have no published rent for this home, so they are not shown. Busy centres with very high "
+           "crime are left out" + ("" if dwelling == "Apartment" else ", and so are apartment and inner-city areas") + ". "
+           "Mosque distance: straight-line, from a verified list of only 6 mosques.")
+
+
+{"A suburb in plain English": view_simple, "Find a rental under my budget": view_find,
+ "Overview": view_overview, "Explore suburb": view_explore, "Compare suburbs": view_compare, "Opportunity finder": view_opportunity,
  "Family screen": view_family, "Map lab": view_map, "Methodology": view_methodology, "Glossary": view_glossary}[view]()

@@ -42,6 +42,7 @@ streamlit run app.py
 Raw downloads (about 640 MB) are not in git. To re-create them and re-run the analysis:
 
 ```bash
+pip install -r requirements-analysis.txt
 python download_data.py
 python build_master.py
 ```
