@@ -33,6 +33,8 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 html, body, [class*="css"], p, label, li, span, div, h1, h2, h3, h4, button, input { font-family: 'Inter', system-ui, sans-serif !important; }
+/* Icons are ligatures in Streamlit's icon font; the Inter rule above would print them as words ("keyboard_double_arrow_left") */
+[data-testid="stIconMaterial"] { font-family: 'Material Symbols Rounded' !important; }
 .stApp { background: #f5f6f1; }
 .block-container { padding-top: 1.4rem; max-width: 1480px; }
 h1, h2, h3 { color: #18222f; letter-spacing: 0; }
@@ -544,7 +546,8 @@ def view_explore():
     with t1:
         kpis([
             ("Rent growth 10y", num(r["rent_cagr_10y_pct"], suffix="%/yr"), "Compound, % a year", GREEN),
-            ("Rent trend 2y", num(r["cooling_pa"], "{:+.1f}", "%/yr"), "Last 2 years, annualised; noisy", BLUE),
+            ("Rent trend 2y", num(r["cooling_pa"], "{:+.1f}", "%/yr"),
+             "Unreliable: few rentals or prices jump around" if r["sa2_code"] in JUMPY else "Last 2 years, annualised; noisy", BLUE),
             ("Rent change 5y", num(r["rent_change_5y_pct"], "{:+.1f}", "%"), "Total change", BLUE),
             ("Outlook, year 1", money(r.get("forecast_rent_y1")), f"{r.get('year1_period') or ''}; 80% band {money(r.get('y1_low'))}–{money(r.get('y1_high'))}", AMBER),
             ("Outlook, year 2", money(r.get("forecast_rent_y2")), f"{r.get('year2_period') or ''}; 80% band {money(r.get('y2_low'))}–{money(r.get('y2_high'))}", AMBER),
@@ -993,7 +996,10 @@ def view_simple():
     if pd.notna(r["cooling_pa"]):
         c = r["cooling_pa"]
         word = "going up" if c > 1 else "going down" if c < -1 else "about flat"
-        fact("grey", f"Rent trend: {word}", f"Over the last 2 years rent has moved {c:+.1f}% a year.")
+        if r["sa2_code"] in JUMPY:
+            fact("grey", "Rent trend: unclear", f"The figure ({c:+.1f}% a year) is unreliable here: few rentals, or prices jump around between quarters.")
+        else:
+            fact("grey", f"Rent trend: {word}", f"Over the last 2 years rent has moved {c:+.1f}% a year.")
 
     rating = r["crime_rating"]
     if rating in ("Low", "Moderate", "High"):
@@ -1071,3 +1077,8 @@ def view_find():
 {"Suburb in plain English": view_simple, "Rent in Auckland": view_rent, "Find a rental under my budget": view_find,
  "Overview": view_overview, "Explore suburb": view_explore, "Compare suburbs": view_compare, "Opportunity finder": view_opportunity,
  "Family screen": view_family, "Map lab": view_map, "Methodology": view_methodology, "Glossary": view_glossary}[view]()
+
+st.divider()
+st.markdown('<div style="padding:.35rem 0 1.25rem;font-size:.95rem;color:#5b6470">Created by <strong>Abdul Mussavir</strong> | '
+            '<a href="https://github.com/mussaussie/auckland-property-analysis" target="_blank" '
+            'style="color:#176b5b;text-decoration:none;font-weight:600">Project repo on GitHub</a></div>', unsafe_allow_html=True)
