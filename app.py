@@ -4,7 +4,9 @@ Reads only data/clean/, the SA2 geojson and METRIC_RULES.md (Methodology and Glo
 Run: streamlit run app.py      Previous design: app_v1_2026-11-18.py
 """
 import html
+import io
 import json
+import unicodedata
 
 import markdown
 import numpy as np
@@ -12,14 +14,17 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+from docx import Document
+from fpdf import FPDF, XPos, YPos
 from plotly.subplots import make_subplots
 
 CLEAN = "data/clean"
 st.set_page_config(page_title="Auckland Property Insights", page_icon="🏠", layout="wide")
 
 # ---------- design tokens ----------
-INK, MUTED, LINE = "#0f172a", "#64748b", "#e2e8f0"
-GREEN, AMBER, BLUE, RED = "#16a34a", "#d97706", "#2563eb", "#dc2626"   # KPI borders: count, rent/price, volume, risk
+# Palette and card style follow SA Property Insights (the Adelaide dashboard), at the user's request (21 Nov 2026)
+INK, MUTED, LINE = "#18222f", "#647181", "#d9dfdc"
+GREEN, AMBER, BLUE, RED = "#176b5b", "#a87922", "#285f96", "#c94e3f"   # KPI borders: count, rent/price, volume, risk
 SERIES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948"]  # dataviz categorical order
 SEQ = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]
 DIV = ["#184f95", "#5598e7", "#f0efec", "#ec8a89", "#b8302f"]
@@ -28,21 +33,33 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 html, body, [class*="css"], p, label, li, span, div, h1, h2, h3, h4, button, input { font-family: 'Inter', system-ui, sans-serif !important; }
-.stApp { background: #f8fafc; }
-.block-container { padding-top: 1.6rem; max-width: 1360px; }
-h1, h2, h3 { color: #0f172a; letter-spacing: -0.015em; }
-section[data-testid="stSidebar"] { background: #ffffff; border-right: 1px solid #e2e8f0; }
-.card { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #eef2f7; padding: 18px 20px; margin-bottom: 14px; }
-.card h4 { margin: 0 0 6px; font-size: 1rem; color: #0f172a; }
-.card p, .card li { font-size: .86rem; color: #334155; line-height: 1.5; }
-.kicker { font-size: .72rem; letter-spacing: .14em; font-weight: 700; color: #2563eb; text-transform: uppercase; }
-.hero h1 { font-size: 1.9rem; font-weight: 800; margin: 6px 0 4px; }
-.hero p { color: #64748b; margin: 0; }
+.stApp { background: #f5f6f1; }
+.block-container { padding-top: 1.4rem; max-width: 1480px; }
+h1, h2, h3 { color: #18222f; letter-spacing: 0; }
+section[data-testid="stSidebar"] { background: #ffffff; border-right: 1px solid #d9dfdc; }
+section[data-testid="stSidebar"] [role="radiogroup"] label p { font-weight: 650; }
+.card { background: #fff; border-radius: 8px; box-shadow: 0 12px 30px rgba(24,34,47,0.06); border: 1px solid #d9dfdc; padding: 18px 20px; margin-bottom: 14px; }
+.card h4 { margin: 0 0 6px; font-size: 1rem; color: #18222f; }
+.card p, .card li { font-size: .88rem; color: #3b4654; line-height: 1.5; }
+.kicker { font-size: .78rem; font-weight: 800; color: #176b5b; text-transform: uppercase; }
+.hero h1 { font-size: 2.15rem; font-weight: 850; margin: 4px 0 4px; line-height: 1.05; }
+.hero p { color: #647181; margin: 0; }
+.note-box { color: #55471f; background: #fbf5e7; border: 1px solid #ead9ad; border-radius: 8px; padding: .9rem 1rem; font-size: .9rem; line-height: 1.45; margin-bottom: 14px; }
 .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); gap: 14px; margin: 4px 0 18px; }
-.kpi { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-top: 4px solid var(--c); padding: 14px 16px; }
-.kpi .l { font-size: .72rem; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
-.kpi .v { font-size: 1.55rem; font-weight: 700; color: #0f172a; margin-top: 4px; }
-.kpi .c { font-size: .74rem; color: #64748b; margin-top: 4px; line-height: 1.35; }
+.kpi { background: #fff; border-radius: 8px; border: 1px solid #d9dfdc; box-shadow: 0 10px 24px rgba(24,34,47,0.06); border-top: 4px solid var(--c); padding: 1rem; }
+.kpi .l { font-size: .74rem; color: #647181; font-weight: 800; text-transform: uppercase; }
+.kpi .v { font-size: 1.62rem; font-weight: 850; color: #18222f; margin-top: 4px; }
+.kpi .c { font-size: .8rem; color: #647181; margin-top: 4px; line-height: 1.3; }
+.stButton > button { background: linear-gradient(135deg, #176b5b, #285f96) !important; color: #fff !important; border: 0 !important;
+  border-radius: 8px !important; font-weight: 800 !important; min-height: 2.8rem; box-shadow: 0 10px 22px rgba(24,34,47,0.18) !important; }
+.stButton > button * , .stDownloadButton > button * { color: #fff !important; }
+.stButton > button:hover { filter: brightness(1.08); }
+.stDownloadButton > button { background: linear-gradient(135deg, #a87922, #c94e3f) !important; color: #fff !important; border: 0 !important;
+  border-radius: 8px !important; font-weight: 800 !important; }
+.score { color: #fff; background: #176b5b; border-radius: 999px; padding: 2px 9px; font-size: .78rem; font-weight: 800; float: right; }
+.stTabs [data-baseweb="tab"] { border-radius: 8px 8px 0 0; padding: .5rem .8rem; font-weight: 750; }
+.stTabs [aria-selected="true"] { background: #fff !important; border: 1px solid #d9dfdc; border-bottom-color: #fff; }
+.stTabs [aria-selected="true"] * { color: #176b5b !important; }
 .badge { display: inline-block; font-size: .72rem; font-weight: 600; padding: 2px 10px; border-radius: 999px; margin: 0 6px 6px 0; }
 .badge.ok { background: #dcfce7; color: #166534; } .badge.warn { background: #fef3c7; color: #92400e; }
 .badge.bad { background: #fee2e2; color: #991b1b; } .badge.info { background: #dbeafe; color: #1e40af; }
@@ -130,6 +147,8 @@ def load():
         sales=pd.read_csv(f"{CLEAN}/auckland_sales_quarterly.csv", parse_dates=["quarter_end"]),
         rent_ts=pd.read_csv(f"{CLEAN}/rent_timeseries_by_sa2.csv", parse_dates=["quarter"]),
         by_type=pd.read_csv(f"{CLEAN}/rent_by_type_sa2.csv", dtype={"beds": str}),
+        community=pd.read_csv(f"{CLEAN}/community_by_sa2.csv"),
+        community_akl=pd.read_csv(f"{CLEAN}/community_summary.csv").set_index("group")["pct_2023"],
     )
 
 
@@ -160,6 +179,10 @@ S = D["sa2"]
 READY = S[S["analysis_ready"]]
 RANKED = S[S["ranked"] == True]  # noqa: E712 (object column after merge)
 BY_NAME = S.set_index("sa2_name")
+# Areas whose all-dwelling rent is thin or swings between quarters (e.g. Otara Central $350-$750): their growth figures are noise
+_all = D["by_type"][(D["by_type"]["dwelling"] == "ALL") & (D["by_type"]["beds"] == "ALL")]
+JUMPY = set(_all.loc[(_all["flag_unstable_rent"] == True) | (_all["flag_thin_sample"] == True), "sa2_code"])  # noqa: E712
+JUMPY_NOTE = "unreliable: few rentals or prices jump around between quarters"
 on = lambda r, k: r.get(k) == True  # noqa: E731,E712 (blank flags are NaN, which is truthy)
 
 
@@ -185,8 +208,8 @@ def pct_rank(col, v):
 
 
 # ---------- sidebar ----------
-SIMPLE_VIEWS = ["A suburb in plain English", "Rent in Auckland", "Find a rental under my budget"]
-VIEWS = ["Overview", "Explore suburb", "Compare suburbs", "Opportunity finder", "Family screen", "Map lab", "Methodology", "Glossary"]
+VIEWS = ["Overview", "Explore suburb", "Compare suburbs", "Opportunity finder", "Map lab", "Suburb in plain English", "Rent in Auckland",
+         "Find a rental under my budget", "Family screen", "Methodology", "Glossary"]
 NAMES = sorted(S["sa2_name"])
 # The spec's defaults are suburb names; SA2s split them, so the nearest SA2 is used (CBD: Queen Street)
 DEFAULT_SUBURB = "Queen Street"
@@ -194,14 +217,11 @@ DEFAULT_COMPARE = ["Queen Street", "Albany Central", "Mount Eden North", "Manure
 with st.sidebar:
     st.markdown('<div class="brand"><div class="t">Auckland Property Insights</div><div class="s">Suburb Property Dashboard</div></div>',
                 unsafe_allow_html=True)
-    advanced = st.toggle("Show advanced views", value=False)
-    view = st.radio("View", SIMPLE_VIEWS + (VIEWS if advanced else []), label_visibility="collapsed")
-    if advanced:
-        st.divider()
-        # Same key as the simple page's picker, so the chosen suburb carries over
-        suburb = st.selectbox("Suburb", NAMES, index=NAMES.index(DEFAULT_SUBURB), key="suburb")
-        compare = st.multiselect("Compare suburbs", NAMES, default=DEFAULT_COMPARE, max_selections=8)
-        R = BY_NAME.loc[suburb]
+    view = st.radio("View", VIEWS, label_visibility="collapsed")
+    st.divider()
+    suburb = st.selectbox("Suburb", NAMES, index=NAMES.index(DEFAULT_SUBURB))
+    compare = st.multiselect("Compare suburbs", NAMES, default=DEFAULT_COMPARE, max_selections=8)
+    R = BY_NAME.loc[suburb]
     st.caption("Suburbs are Stats NZ SA2 areas: names are close to suburb names, boundaries differ. "
                "Sources: Stats NZ 2023 Census, MBIE bonds, Auckland Council valuations, NZ Police, HUD, MoE, Auckland Transport, OpenStreetMap.")
 
@@ -259,13 +279,14 @@ def shortlist_table(df, n=15):
             "Screen rank": st.column_config.NumberColumn(format="%d")})
 
 
-def snapshot_cards(df, n=4):
-    cols = st.columns(n)
-    for col, (_, r) in zip(cols, df.head(n).iterrows()):
+def snapshot_cards(df, n=6, per_row=3):
+    cols = st.columns(per_row)
+    for i, (_, r) in enumerate(df.head(n).iterrows()):
         pills = [("Rent", money(r["median_rent_weekly"]) + "/wk"), ("Yield", num(r["gross_yield_pct"], "{:.2f}", "%")),
                  ("Growth 10y", num(r["rent_cagr_10y_pct"], suffix="%/yr")), ("Crime", num(r["crime_per_1000_residents"], "{:.0f}", "/1k"))]
-        with col:
-            card(f'<div class="snap"><div class="name">{esc(r["sa2_name"])}</div><div class="type">{esc(r.get("area_type") or "")}</div>'
+        score = f'<span class="score">{r["score_Balanced"]:.0f}</span>' if pd.notna(r.get("score_Balanced")) else ""
+        with cols[i % per_row]:
+            card(f'<div class="snap">{score}<div class="name">{esc(r["sa2_name"])}</div><div class="type">{esc(r.get("area_type") or "")}</div>'
                  + badge_html(badges(r)[:3]) + "<div>" + "".join(f'<span class="pill">{k} <b>{esc(v)}</b></span>' for k, v in pills) + "</div></div>")
 
 
@@ -294,6 +315,9 @@ QUICK = {
 def view_overview():
     card('<div class="hero"><div class="kicker">Property intelligence</div><h1>Auckland property, suburb by suburb</h1>'
          f'<p>Rent, valuations, risk and community for {len(S)} Stats NZ SA2 areas. Data to September 2026.</p></div>')
+    st.markdown('<div class="note-box">Auckland Property Insights combines new-tenancy rents, council valuations, crime, schools, '
+                'community and a rent outlook for every Auckland area. New here? Start with <b>Suburb in plain English</b> or '
+                '<b>Find a rental under my budget</b> in the sidebar.</div>', unsafe_allow_html=True)
     rm, sales = D["rent_m"], D["sales"]
     last3 = rm.tail(3)
     sales_ok = sales[~sales["provisional"]]
@@ -310,19 +334,23 @@ def view_overview():
         ("Residents", f"{S['population_2023'].sum():,.0f}", "2023 Census", BLUE),
     ])
 
-    st.markdown("#### Quick search")
+    st.markdown("#### Quick searches")
+    caveat("Click once to surface common suburb lists.")
     if "qs" not in st.session_state:
         st.session_state.qs = "Best opportunities"
-    for col, name in zip(st.columns(len(QUICK)), QUICK):
-        if col.button(name, use_container_width=True, type="primary" if st.session_state.qs == name else "secondary"):
+    grid = st.columns(4)
+    for i, name in enumerate(QUICK):
+        if grid[i % 4].button(name, use_container_width=True):
             st.session_state.qs = name
             st.rerun()
     fn, desc = QUICK[st.session_state.qs]
     df = fn().dropna(subset=["median_rent_weekly"]) if st.session_state.qs not in ("Lowest recorded victimisation rates", "Highest crime") else fn().dropna(subset=["crime_per_1000_residents"])
+    st.markdown(f"#### {st.session_state.qs}")
     shortlist_table(df)
     caveat(f"{st.session_state.qs}: {desc} {len(df)} areas qualify.")
 
     st.markdown("#### Executive snapshot")
+    caveat("Top six of this list. The badge is the Balanced screen score (0–100, higher is better) where the area is ranked.")
     snapshot_cards(df)
     st.plotly_chart(risk_return(set(df.head(15)["sa2_code"]), f"{st.session_state.qs} (top 15)"), use_container_width=True)
     caveat("Each bubble is one of the 481 ranked areas, sized by population. Return = mean of the value (yield) and growth (rent, population) "
@@ -348,6 +376,145 @@ def positioning(r):
     return " ".join(s)
 
 
+def annual_rent(code):
+    """Yearly rent growth: mean of the quarterly medians in each complete year (4 quarters published)."""
+    ts = D["rent_ts"][D["rent_ts"]["sa2_code"] == code].dropna(subset=["median_rent"])
+    y = ts.groupby(ts["quarter"].dt.year)["median_rent"].agg(["mean", "count"])
+    y = y[y["count"] == 4]["mean"].to_frame("rent")
+    y["growth"] = y["rent"].pct_change() * 100
+    return y.dropna()
+
+
+def yoy_rent_tab(r):
+    y = annual_rent(r["sa2_code"])
+    y = y[y.index >= 2011]
+    if y.empty:
+        st.info("No complete yearly rent series for this area.")
+        return
+    best, worst = y["growth"].idxmax(), y["growth"].idxmin()
+    if r["sa2_code"] in JUMPY:
+        st.warning(f"These yearly figures are {JUMPY_NOTE}. Big swings here are noise, not real rent changes.")
+    kpis([("Best year", f"{best}", f"Rent {y.loc[best, 'growth']:+.1f}% on the year before", GREEN),
+          ("Weakest year", f"{worst}", f"Rent {y.loc[worst, 'growth']:+.1f}% on the year before", RED),
+          ("Average year", f"{y['growth'].mean():+.1f}%", f"{y.index.min()}–{y.index.max()}", BLUE)])
+    colours = [GREEN if i == best else RED if i == worst else "#9cb9d5" if g >= 0 else "#d8bf83" for i, g in y["growth"].items()]
+    fig = go.Figure(go.Bar(x=y.index.astype(str), y=y["growth"], marker_color=colours, text=[f"{g:+.1f}%" for g in y["growth"]],
+                           textposition="auto", hovertemplate="%{x}: %{y:+.1f}%<extra></extra>"))
+    fig.add_hline(y=0, line_color="#9aa4ad", line_width=1)
+    fig.update_yaxes(ticksuffix="%")
+    st.plotly_chart(style(fig, 380, "Year-to-year rent growth, new tenancies"), use_container_width=True)
+    caveat("Each year is the mean of its four quarterly medians, compared with the year before; years with a missing quarter are left out. "
+           "Small areas swing a lot from year to year." + (" Series shared with neighbouring areas." if on(r, "flag_borrowed_rent") else ""))
+
+
+def communities_tab(r):
+    c = D["community"][D["community"]["sa2_code"] == r["sa2_code"]].set_index("group")
+    if c.empty:
+        st.info("No census community data for this area.")
+        return
+    c = c.sort_values("pct_2023")
+    fig = go.Figure([go.Bar(y=c.index, x=c["pct_2023"], orientation="h", name=r.name, marker_color=SERIES[0]),
+                     go.Bar(y=c.index, x=D["community_akl"].reindex(c.index), orientation="h", name="Auckland", marker_color="#cbd5e1")])
+    fig.update_layout(barmode="group", bargap=0.25)
+    fig.update_xaxes(ticksuffix="%")
+    st.plotly_chart(style(fig, 520, "Community share of residents, 2023 Census"), use_container_width=True)
+    hubs = c[c["is_hub"] == True].index.tolist()  # noqa: E712
+    if hubs:
+        st.markdown(badge_html([(f"Community hub: {g}", "info") for g in hubs]), unsafe_allow_html=True)
+    t = c.sort_values("pct_2023", ascending=False)
+    st.dataframe(pd.DataFrame({"Group": t.index, "Share 2013 %": t["pct_2013"], "Share 2023 %": t["pct_2023"],
+                               "Change (pts)": t["share_change_pp_2013_2023"], "Times Auckland share": t["lq_2023"]}),
+                 hide_index=True, use_container_width=True, column_config={
+                     c_: st.column_config.NumberColumn(format="%.1f") for c_ in ["Share 2013 %", "Share 2023 %", "Change (pts)", "Times Auckland share"]})
+    caveat("A hub is an area where the group's share is at least twice Auckland's and 300+ people. People can belong to several groups, "
+           "so shares add to more than 100%. 'Born in Middle East/Africa' includes South Africans. Census shares show where people live, "
+           "not where mosques, temples, halal shops or faith schools are.")
+
+
+def plain(text):
+    """PDF core fonts are Latin-1 only: drop macrons (ā → a) and swap dashes."""
+    text = str(text).replace("–", "-").replace("—", "-").replace("≥", ">=")
+    return unicodedata.normalize("NFKD", text).encode("latin-1", "ignore").decode("latin-1")
+
+
+def report_sections(r):
+    """(heading, [(label, value)]) shared by the PDF and Word reports."""
+    y = annual_rent(r["sa2_code"])
+    y = y[y.index >= 2011]
+    c = D["community"][D["community"]["sa2_code"] == r["sa2_code"]].nlargest(5, "pct_2023")
+    rank = f"{int(r['rank_Balanced'])} of {len(RANKED)}" if pd.notna(r.get("rank_Balanced")) else "Not ranked"
+    out = [
+        ("Key facts", [
+            ("Area type", r.get("area_type") or "-"), ("Residents (2023)", f"{r['population_2023']:,.0f}"),
+            ("Weekly rent, new tenancies", money(r["median_rent_weekly"])),
+            ("3-bed house rent", money(r["rent_3bed_house"]) + (" (verify: thin or unstable sample)" if on(r, "flag_verify_3bed_house") else "")),
+            ("Rent growth, 10 years", num(r["rent_cagr_10y_pct"], suffix="% a year")),
+            ("Rent trend, last 2 years", num(r["cooling_pa"], "{:+.1f}", "% a year") + (f" ({JUMPY_NOTE})" if r["sa2_code"] in JUMPY else "")),
+            ("Rent outlook", f"{money(r.get('forecast_rent_y1'))} for {r.get('year1_period') or '-'}, 80% band "
+                             f"{money(r.get('y1_low'))}-{money(r.get('y1_high'))}" if pd.notna(r.get("forecast_rent_y1")) else "-"),
+            ("Gross yield (2024 CV proxy)", num(r["gross_yield_pct"], "{:.2f}", "%")),
+            ("Capital value 2024", money(r["median_cv_2024"]) + " (council valuation, not a sale price)"),
+            ("Crime", f"{num(r['crime_per_1000_residents'], '{:.0f}')} per 1,000 residents, rating {r['crime_rating']}"),
+            ("Investment screen rank", rank)]),
+        ("Schools and facilities", [
+            (a, f"{int(r[n])} inside the area" if pd.notna(r[n]) and r[n] > 0 else f"none inside; nearest {r[b]}, {num(r[k], suffix=' km')}")
+            for a, n, b, k in [("Year 1 schools", "year1_schools_in_area", "nearest_year1_school", "km_to_nearest_year1_school"),
+                               ("Secondary schools", "secondary_schools_in_area", "nearest_secondary_school", "km_to_nearest_secondary_school"),
+                               ("GP clinics (OSM)", "gp_clinics_in_area", "nearest_gp_clinic", "km_to_nearest_gp_clinic"),
+                               ("Playgrounds (OSM)", "playgrounds_in_area", "nearest_playground", "km_to_nearest_playground"),
+                               ("Mosques (verified list of 6)", "mosques_in_area", "nearest_mosque", "km_to_nearest_mosque")]]),
+        ("Largest communities (2023 Census)", [(g, f"{p:.1f}% of residents") for g, p in zip(c["group"], c["pct_2023"])]),
+    ]
+    if not y.empty:
+        note = f" ({JUMPY_NOTE})" if r["sa2_code"] in JUMPY else ""
+        out.insert(1, ("Year-to-year rent", [("Best year", f"{y['growth'].idxmax()}: {y['growth'].max():+.1f}%{note}"),
+                                             ("Weakest year", f"{y['growth'].idxmin()}: {y['growth'].min():+.1f}%{note}")]))
+    return out
+
+
+REPORT_NOTES = ("Rent is MBIE new-tenancy bond rent, mean of the last 4 quarters. The outlook is Auckland's damped trend applied to this "
+                "area's rent (about 5% typical error in a one-year backtest). Crime is NZ Police victimisations, Oct 2025 - Sep 2026, "
+                "counted where it happened. OSM = OpenStreetMap, which may be incomplete; distances are straight-line. "
+                "SA2 areas are close to suburbs but boundaries differ. A research summary, not financial advice.")
+
+
+def report_pdf(name, r):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Helvetica", "B", 18)
+    pdf.cell(0, 10, plain(f"{name} Property Insight Report"), new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="C")
+    pdf.set_font("Helvetica", "", 9)
+    pdf.cell(0, 7, "Generated from Auckland Property Insights", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="C")
+    for head, rows in report_sections(r):
+        pdf.ln(3)
+        pdf.set_font("Helvetica", "B", 12)
+        pdf.cell(0, 8, plain(head), new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        pdf.set_font("Helvetica", "", 9)
+        for label, value in rows:
+            pdf.multi_cell(0, 6, plain(f"**{label}:** {value}"), markdown=True, new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+    pdf.ln(4)
+    pdf.set_font("Helvetica", "I", 8)
+    pdf.multi_cell(0, 5, plain("Notes: " + REPORT_NOTES))
+    return bytes(pdf.output())
+
+
+def report_docx(name, r):
+    doc = Document()
+    doc.add_heading(f"{name} Property Insight Report", 0)
+    doc.add_paragraph("Generated from Auckland Property Insights")
+    for head, rows in report_sections(r):
+        doc.add_heading(head, level=1)
+        for label, value in rows:
+            p = doc.add_paragraph()
+            p.add_run(f"{label}: ").bold = True
+            p.add_run(str(value))
+    doc.add_heading("Notes", level=1)
+    doc.add_paragraph(REPORT_NOTES)
+    buf = io.BytesIO()
+    doc.save(buf)
+    return buf.getvalue()
+
+
 def view_explore():
     r = R
     card(f'<div class="kicker">{esc(r.get("area_type") or "SA2")} · SA2 {int(r["sa2_code"])}</div><h2 style="margin:6px 0">{esc(suburb)}</h2>'
@@ -359,7 +526,20 @@ def view_explore():
         ("Rent growth 10y", num(r["rent_cagr_10y_pct"], suffix="%/yr"), "Past performance", GREEN),
         ("Crime /1,000", num(r["crime_per_1000_residents"], "{:.0f}"), f"Rating: {r['crime_rating']}", RED),
     ])
-    t1, t2, t3, t4, t5 = st.tabs(["Growth & Trends", "Risk & Rental", "Crime insights", "People & Community", "Amenities & Lifestyle"])
+    t1, t6, t2, t3, t4, t7, t5, t8 = st.tabs(["Growth & Trends", "Year-to-year growth", "Risk & Rental", "Crime insights", "People",
+                                              "Communities", "Amenities & Lifestyle", "Download report"])
+    with t6:
+        yoy_rent_tab(r)
+    with t7:
+        communities_tab(r)
+    with t8:
+        st.markdown(f"#### {suburb} property insight report")
+        caveat("Key facts, year-to-year rent, schools and facilities, largest communities, with their caveats.")
+        file = suburb.replace(" ", "_")
+        c1, c2 = st.columns(2)
+        c1.download_button("Download PDF", report_pdf(suburb, r), f"{file}_report.pdf", "application/pdf", use_container_width=True)
+        c2.download_button("Download Word", report_docx(suburb, r), f"{file}_report.docx",
+                           "application/vnd.openxmlformats-officedocument.wordprocessingml.document", use_container_width=True)
 
     with t1:
         kpis([
@@ -552,7 +732,7 @@ def view_opportunity():
         st.info("No area matches. Loosen a filter.")
         return
     st.markdown("#### Best matches")
-    snapshot_cards(m, min(3, len(m)))
+    snapshot_cards(m, 3)
     st.plotly_chart(risk_return(set(m["sa2_code"]), "Matches"), use_container_width=True)
     caveat("Only matches that are in the File 4 screen (house-dominated, all seven inputs) appear on the chart. "
            "'Hide high risk' drops crime hotspots and the screen's 'Higher risk' third, and keeps only ranked areas unless you also show "
@@ -735,8 +915,8 @@ def count_fact(r, what, n_col, near_col, km_col, mapped=False):
 
 
 def pick_suburb():
-    # With advanced views on, the sidebar already shows this picker (same key), so a second one would clash
-    return suburb if advanced else st.selectbox("Pick a suburb", NAMES, index=NAMES.index(DEFAULT_SUBURB), key="suburb")
+    st.caption(f"Showing **{suburb}**. Change the suburb in the sidebar.")
+    return suburb
 
 
 def view_rent():
@@ -781,8 +961,7 @@ def view_rent():
 
     st.markdown("#### Where rent is rising and falling (last 2 years)")
     # One row per rent area (neighbours can share a figure) and enough rentals for the trend to mean something
-    jumpy = bt[(bt["dwelling"] == "ALL") & (bt["beds"] == "ALL") & (bt["flag_unstable_rent"] == True)]["sa2_code"]  # noqa: E712
-    t = READY[(READY["forecast_thin_sample"] == False) & ~READY["sa2_code"].isin(jumpy)]  # noqa: E712
+    t = READY[(READY["forecast_thin_sample"] == False) & ~READY["sa2_code"].isin(JUMPY)]  # noqa: E712
     t = t.dropna(subset=["cooling_pa"]).drop_duplicates("rent_source_sa2")
     cols = st.columns(2)
     for col, label, df in [(cols[0], "Rising most", t.nlargest(10, "cooling_pa")), (cols[1], "Falling most", t.nsmallest(10, "cooling_pa"))]:
@@ -847,7 +1026,7 @@ def view_simple():
     fact("grey", f"People: {r['population_2023']:,.0f} residents",
          f"{num(r['pct_under_15'], '{:.0f}', '%')} are children under 15; {num(r['pct_owner_occupied'], '{:.0f}', '%')} of homes are lived in by their owner (2023 Census).")
     caveat("Rent: MBIE new-tenancy bonds. Crime: NZ Police, counted where it happened. Schools: Ministry of Education. "
-           "For every number and caveat, switch on 'Show advanced views' in the sidebar.")
+           "For every number and caveat, open 'Explore suburb'.")
 
 
 def view_find():
@@ -889,6 +1068,6 @@ def view_find():
            "Mosque distance: straight-line, from a verified list of only 6 mosques.")
 
 
-{"A suburb in plain English": view_simple, "Rent in Auckland": view_rent, "Find a rental under my budget": view_find,
+{"Suburb in plain English": view_simple, "Rent in Auckland": view_rent, "Find a rental under my budget": view_find,
  "Overview": view_overview, "Explore suburb": view_explore, "Compare suburbs": view_compare, "Opportunity finder": view_opportunity,
  "Family screen": view_family, "Map lab": view_map, "Methodology": view_methodology, "Glossary": view_glossary}[view]()
