@@ -185,7 +185,7 @@ def pct_rank(col, v):
 
 
 # ---------- sidebar ----------
-SIMPLE_VIEWS = ["A suburb in plain English", "Find a rental under my budget"]
+SIMPLE_VIEWS = ["A suburb in plain English", "Rent in Auckland", "Find a rental under my budget"]
 VIEWS = ["Overview", "Explore suburb", "Compare suburbs", "Opportunity finder", "Family screen", "Map lab", "Methodology", "Glossary"]
 NAMES = sorted(S["sa2_name"])
 # The spec's defaults are suburb names; SA2s split them, so the nearest SA2 is used (CBD: Queen Street)
@@ -734,10 +734,69 @@ def count_fact(r, what, n_col, near_col, km_col, mapped=False):
                      f"{r[near_col] if pd.notna(r[near_col]) else '—'}, {num(r[km_col], suffix=' km')} away")
 
 
+def pick_suburb():
+    # With advanced views on, the sidebar already shows this picker (same key), so a second one would clash
+    return suburb if advanced else st.selectbox("Pick a suburb", NAMES, index=NAMES.index(DEFAULT_SUBURB), key="suburb")
+
+
+def view_rent():
+    st.markdown("## Rent in Auckland")
+    rm = D["rent_m"]
+    now, year_ago = rm.tail(3), rm.iloc[-15:-12]
+    chg = now["median_rent"].mean() / year_ago["median_rent"].mean() - 1
+    word = "up" if chg > 0.01 else "down" if chg < -0.01 else "about the same as"
+    fact("grey", f"Typical Auckland rent: {money(now['median_rent'].mean())} a week",
+         f"New rentals, {now['month'].iloc[0]:%B}–{now['month'].iloc[-1]:%B %Y}. That is {word}"
+         f"{'' if word.startswith('about') else ' ' + f'{abs(chg):.1%} on'} a year earlier. Half of new rentals cost between "
+         f"{money(now['lq_rent'].mean())} and {money(now['uq_rent'].mean())}.")
+    d = rm[rm["month"] >= "2015-01-01"]
+    fig = go.Figure(go.Scatter(x=d["month"], y=d["median_rent"], line=dict(color=SERIES[0], width=2),
+                               hovertemplate="%{x|%b %Y}: $%{y:,.0f} a week<extra></extra>"))
+    fig.update_yaxes(tickprefix="$")
+    st.plotly_chart(style(fig, 300, "Typical weekly rent for a new rental, Auckland"), use_container_width=True)
+
+    st.markdown("#### Rent in one suburb")
+    name = pick_suburb()
+    r = BY_NAME.loc[name]
+    bt = D["by_type"]
+    rows = []
+    for dw in ["House", "Apartment"]:
+        for b in ["1", "2", "3", "4", "5+"]:
+            x = bt[(bt["sa2_code"] == r["sa2_code"]) & (bt["dwelling"] == dw) & (bt["beds"] == b)]
+            if len(x) and pd.notna(x["rent"].iloc[0]):
+                x = x.iloc[0]
+                rows.append((f"{b}-bedroom {dw.lower()}", x["rent"],
+                             "Check listings" if x["flag_thin_sample"] == True or x["flag_unstable_rent"] == True else "Yes"))  # noqa: E712
+    if rows:
+        st.dataframe(pd.DataFrame(rows, columns=["Home", "Typical rent a week", "Reliable figure?"]), hide_index=True,
+                     use_container_width=True, column_config={"Typical rent a week": st.column_config.NumberColumn(format="$%.0f")})
+    else:
+        st.info("No published rent by home size for this area.")
+    if pd.notna(r.get("forecast_rent_y1")):
+        fact("grey", f"Next year: about {money(r['forecast_rent_y1'])} a week (likely {money(r['y1_low'])}–{money(r['y1_high'])})",
+             f"For {r['year1_period']}, all home types. This is Auckland's overall rent trend applied to this area's current rent, "
+             "so every area moves by the same %; the range covers 8 in 10 outcomes (about 5% typical error in past tests).")
+    caveat("Rents are new-tenancy bonds (MBIE), average of the last 4 quarters. 'Check listings' = few rentals or prices jump around."
+           + (" This area shares its rent figures with a neighbouring area." if on(r, "flag_borrowed_rent") else ""))
+
+    st.markdown("#### Where rent is rising and falling (last 2 years)")
+    # One row per rent area (neighbours can share a figure) and enough rentals for the trend to mean something
+    jumpy = bt[(bt["dwelling"] == "ALL") & (bt["beds"] == "ALL") & (bt["flag_unstable_rent"] == True)]["sa2_code"]  # noqa: E712
+    t = READY[(READY["forecast_thin_sample"] == False) & ~READY["sa2_code"].isin(jumpy)]  # noqa: E712
+    t = t.dropna(subset=["cooling_pa"]).drop_duplicates("rent_source_sa2")
+    cols = st.columns(2)
+    for col, label, df in [(cols[0], "Rising most", t.nlargest(10, "cooling_pa")), (cols[1], "Falling most", t.nsmallest(10, "cooling_pa"))]:
+        col.markdown(f"**{label}**")
+        col.dataframe(pd.DataFrame({"Area": df["sa2_name"], "Change a year": df["cooling_pa"], "Rent now": df["median_rent_weekly"]}),
+                      hide_index=True, use_container_width=True, column_config={
+                          "Change a year": st.column_config.NumberColumn(format="%+.1f%%"),
+                          "Rent now": st.column_config.NumberColumn(format="$%.0f")})
+    caveat("Change a year = rent trend over the last 2 years, all home types. Areas with few rentals are left out because their figures jump around.")
+
+
 def view_simple():
     st.markdown("## What is this suburb like?")
-    # With advanced views on, the sidebar already shows this picker (same key), so a second one would clash
-    name = suburb if advanced else st.selectbox("Pick a suburb", NAMES, index=NAMES.index(DEFAULT_SUBURB), key="suburb")
+    name = pick_suburb()
     r = BY_NAME.loc[name]
     st.caption("Green = good for most families, amber = so-so, red = worse than most of Auckland, grey = for information.")
     if not on(r, "analysis_ready"):
@@ -799,25 +858,37 @@ def view_find():
     beds = c[2].selectbox("Bedrooms", ["1", "2", "3", "4", "5+", "ALL"], index=2, format_func=lambda x: "Any" if x == "ALL" else x)
     s = family_screen(max_rent, dwelling, beds, include_apt=dwelling == "Apartment")
     m = s[s["under"]].sort_values("rent")
+    ok, shaky = m[m["check"] == "ok"], m[m["check"] == "verify"]
     home = f"{'' if beds == 'ALL' else beds + '-bedroom '}{'home' if dwelling == 'ALL' else dwelling.lower()}"
-    if m.empty:
-        st.info(f"No area has a typical rent of {money(max_rent)} a week or less for a {home}. Try a higher budget or fewer bedrooms.")
+    if ok.empty:
+        cheapest = s[s["check"] == "ok"]["rent"].min()
+        # "\$": two plain $ signs in one message would render as a maths formula
+        st.info(f"No area has a reliable typical rent of \\{money(max_rent)} a week or less for a {home}."
+                + (f" The cheapest reliable figure is \\{money(cheapest)} a week." if pd.notna(cheapest) else "")
+                + " Try a higher budget or fewer bedrooms.")
     else:
-        st.markdown(f"#### {len(m)} areas where a typical {home} rents for {money(max_rent)} a week or less")
-        t = pd.DataFrame({
-            "Area": m["sa2_name"], "Typical rent": m["rent"],
-            "Reliable figure?": m["check"].map({"ok": "Yes", "verify": "Check listings"}),
-            "Crime": m["crime_rating"],
-            "Primary school inside": np.where(m["year1_schools_in_area"] > 0, "Yes", "No"),
-            "Mosque (km)": m["km_to_nearest_mosque"]})
-        st.dataframe(t, hide_index=True, use_container_width=True, column_config={
+        st.markdown(f"#### {len(ok)} areas where a typical {home} rents for \\{money(max_rent)} a week or less")
+        st.dataframe(pd.DataFrame({
+            "Area": ok["sa2_name"], "Typical rent": ok["rent"], "Crime": ok["crime_rating"],
+            "Primary school inside": np.where(ok["year1_schools_in_area"] > 0, "Yes", "No"),
+            "Mosque (km)": ok["km_to_nearest_mosque"]}), hide_index=True, use_container_width=True, column_config={
             "Typical rent": st.column_config.NumberColumn(format="$%.0f"), "Mosque (km)": st.column_config.NumberColumn(format="%.1f")})
-    caveat("Typical rent = new-tenancy bonds, average of the last 4 quarters. 'Check listings' means few rentals or prices jump around. "
+    if len(shaky):
+        # Thin or jumpy samples (e.g. 6 bonds in one quarter, or social and market rents mixed) give impossible rents like $93
+        with st.expander(f"{len(shaky)} more areas with unreliable figures (don't trust these)"):
+            st.caption("Too few rentals, or the price jumps around a lot between quarters, often because cheap social housing "
+                       "is mixed in. Real asking rents are usually much higher. Check listings before believing these.")
+            st.dataframe(pd.DataFrame({
+                "Area": shaky["sa2_name"], "Recorded figure": shaky["rent"], "Lowest quarter": shaky["rent_min_quarter"],
+                "Highest quarter": shaky["rent_max_quarter"], "New rentals counted (12 months)": shaky["lodged_bonds_4q"]}),
+                hide_index=True, use_container_width=True, column_config={
+                    c: st.column_config.NumberColumn(format="$%.0f") for c in ["Recorded figure", "Lowest quarter", "Highest quarter"]})
+    caveat("Typical rent = new-tenancy bonds, average of the last 4 quarters; only areas with 30+ new rentals and steady prices are listed. "
            f"{(s['check'] == 'no estimate').sum()} areas have no published rent for this home, so they are not shown. Busy centres with very high "
            "crime are left out" + ("" if dwelling == "Apartment" else ", and so are apartment and inner-city areas") + ". "
            "Mosque distance: straight-line, from a verified list of only 6 mosques.")
 
 
-{"A suburb in plain English": view_simple, "Find a rental under my budget": view_find,
+{"A suburb in plain English": view_simple, "Rent in Auckland": view_rent, "Find a rental under my budget": view_find,
  "Overview": view_overview, "Explore suburb": view_explore, "Compare suburbs": view_compare, "Opportunity finder": view_opportunity,
  "Family screen": view_family, "Map lab": view_map, "Methodology": view_methodology, "Glossary": view_glossary}[view]()
