@@ -237,6 +237,48 @@ def osm_parks():
     print("ok  ", pg_out.name, len(play), f"({play.park_name.notna().sum()} inside a mapped park) |", park_out.name, len(parks))
 
 
+def osm_shops():
+    """Auckland supermarkets of the main chains and shopping centres, same OpenStreetMap extract (ODbL)."""
+    am = DATA / "amenities"
+    sm_out, mall_out = am / "supermarkets_auckland.csv", am / "shopping_centres_auckland.csv"
+    if sm_out.exists() and mall_out.exists():
+        return print("skip", sm_out.name, mall_out.name)
+    import pyogrio
+    pbf, bbox = am / "osm" / "new-zealand-latest.osm.pbf", (174.1, -37.4, 175.6, -36.0)
+    pts = pyogrio.read_dataframe(pbf, layer="points", bbox=bbox, where="other_tags LIKE '%\"shop\"=>\"supermarket\"%' OR other_tags LIKE '%\"shop\"=>\"mall\"%'")
+    pts["shop"] = pts.other_tags.str.extract(r'"shop"=>"([^"]*)"')[0]
+    polys = pyogrio.read_dataframe(pbf, layer="multipolygons", bbox=bbox, where="shop IN ('supermarket','mall')")
+    polys["osm_id"] = polys.filter(regex="^osm_(way_)?id$").bfill(axis=1).iloc[:, 0]
+    g = pd.concat([pts, polys], ignore_index=True)[["osm_id", "name", "shop", "other_tags", "geometry"]].to_crs(2193)
+    g["brand"] = g.other_tags.str.extract(r'"brand"=>"([^"]*)"')[0]
+    g["branch"] = g.other_tags.str.extract(r'"branch"=>"([^"]*)"')[0]
+    g["site_ha"] = (g.area / 1e4).round(2)  # 0 for points
+    g = g.assign(geometry=g.representative_point())  # buildings -> one point
+    sa2 = gpd.read_file(DATA / "boundaries" / "auckland_sa2_2023.geojson")[["geometry"]].to_crs(2193)
+    g = g[g.index.isin(gpd.sjoin(g, sa2, predicate="within").index)].to_crs(4326)
+    g["lat"], g["lon"] = g.geometry.y.round(6), g.geometry.x.round(6)
+    # Main chains by brand tag, else by name. Countdown was renamed Woolworths (2023-24); old tags still say Countdown.
+    chains = {"Woolworths": r"woolworths|countdown", "New World": r"new world", "PAK'nSAVE": r"pak.?n.?save",
+              "FreshChoice": r"fresh ?choice", "SuperValue": r"super ?value"}
+    text = g.brand.fillna("") + " " + g.name.fillna("")
+    g["chain"] = None
+    for chain, pattern in chains.items():
+        g.loc[g.chain.isna() & text.str.contains(pattern, case=False), "chain"] = chain
+    sm = g[(g.shop == "supermarket") & g.chain.notna()].copy()
+    # Name stores by chain and branch ("Woolworths Westgate"); most OSM names are the chain alone
+    has_branch = [isinstance(b, str) and b not in str(n) for n, b in zip(sm.name, sm.branch)]
+    sm["name"] = (sm.chain + " " + sm.branch).where(has_branch, sm.name.fillna(sm.chain))
+    # A store mapped as both a point and a building counts once: same name within about 100 m (3 decimals of a degree)
+    near = lambda d: d.assign(_k=d.lat.round(3).astype(str) + d.lon.round(3).astype(str)).drop_duplicates(["name", "_k"])
+    sm = near(sm.assign(name=sm.chain).sort_values("branch")).assign(name=lambda d: sm.name.loc[d.index])  # by chain: one copy may lack the branch; keep the one with it
+    # Shopping centre = named shop=mall mapped as a site of 0.5 ha or more. Points and small sites are mostly single shops,
+    # clinics or arcades tagged 'mall' (checked 24 Nov 2026). City Works Depot is a food and creative precinct, not a centre.
+    mall = near(g[(g.shop == "mall") & g.name.notna() & (g.site_ha >= 0.5) & (g.name != "City Works Depot")])
+    sm[["osm_id", "name", "chain", "brand", "branch", "lat", "lon"]].to_csv(sm_out, index=False)
+    mall[["osm_id", "name", "site_ha", "lat", "lon"]].to_csv(mall_out, index=False)
+    print("ok  ", sm_out.name, len(sm), dict(sm.chain.value_counts()), "|", mall_out.name, len(mall))
+
+
 if __name__ == "__main__":
     crime()
     download(TENANCY + "detailed-quarterly-tenancy-q1-2020q3-november-2026.csv", DATA / "rental" / "mbie_quarterly_sa2_2020_2026.csv")
@@ -254,6 +296,7 @@ if __name__ == "__main__":
     download("https://download.geofabrik.de/australia-oceania/new-zealand-latest.osm.pbf", DATA / "amenities" / "osm" / "new-zealand-latest.osm.pbf")
     osm_amenities()
     osm_parks()
+    osm_shops()
 
     census = STATSNZ + "/2023_Census_totals_by_topic_for_{}_by_SA2/FeatureServer/{}"
     # layer 3 = individuals part 2; its coast-clipped twin (layer 2) is published empty

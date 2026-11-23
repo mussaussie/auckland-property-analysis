@@ -7,6 +7,7 @@ import html
 import io
 import json
 import unicodedata
+from urllib.parse import quote
 
 import markdown
 import numpy as np
@@ -301,8 +302,16 @@ QUICK = {
                       "Gross yield (2024 CV proxy) among the 481 screened house-dominated areas; apartment areas are left out because small units inflate it."),
     "Most growing": (lambda: RANKED.sort_values("rent_cagr_10y_pct", ascending=False),
                      "10-year rent growth, % a year, among the 481 screened areas. Past performance: read it next to the 2-year trend."),
-    "Lowest recorded victimisation rates": (lambda: READY[~READY["flag_crime_hotspot"]].sort_values("crime_per_1000_residents"),
+    "Lowest recorded crime": (lambda: READY[~READY["flag_crime_hotspot"]].sort_values("crime_per_1000_residents"),
                        "Lowest recorded victimisations per 1,000 residents, analysis-ready areas. Counted where crime happens; crimes inside homes other than burglary are not in the data."),
+    "Cheapest rent": (lambda: READY[~READY["flag_crime_hotspot"] & ~READY["sa2_code"].isin(JUMPY)].sort_values("median_rent_weekly"),
+                      "Lowest new-tenancy rent, all home types, average of the last 4 quarters. Areas with few rentals or jumpy prices are left out. "
+                      "Inner-city areas top the list because most of their rentals are small apartments; use 'Find a rental under my budget' for a home type and size."),
+    # Same rule as the Rent in Auckland page: enough rentals, steady prices, one row per MBIE rent area
+    "Rent falling fastest": (lambda: READY[(READY["forecast_thin_sample"] == False) & ~READY["sa2_code"].isin(JUMPY)]  # noqa: E712
+                             .dropna(subset=["cooling_pa"]).drop_duplicates("rent_source_sa2").sort_values("cooling_pa"),
+                             "Rent change over the last 2 years, % a year, most negative first. Areas with few rentals or jumpy prices are left out; "
+                             "neighbours that share one MBIE rent figure appear once. Past change, not a forecast."),
     "Highest crime": (lambda: READY.sort_values("crime_per_1000_residents", ascending=False),
                       "Highest recorded victimisations per 1,000 residents. Town centres and malls rank high because visitors are not residents."),
     "Lowest risk": (lambda: RANKED.sort_values("risk_score", ascending=False),
@@ -346,7 +355,7 @@ def view_overview():
             st.session_state.qs = name
             st.rerun()
     fn, desc = QUICK[st.session_state.qs]
-    df = fn().dropna(subset=["median_rent_weekly"]) if st.session_state.qs not in ("Lowest recorded victimisation rates", "Highest crime") else fn().dropna(subset=["crime_per_1000_residents"])
+    df = fn().dropna(subset=["median_rent_weekly"]) if st.session_state.qs not in ("Lowest recorded crime", "Highest crime") else fn().dropna(subset=["crime_per_1000_residents"])
     st.markdown(f"#### {st.session_state.qs}")
     shortlist_table(df)
     caveat(f"{st.session_state.qs}: {desc} {len(df)} areas qualify.")
@@ -464,6 +473,8 @@ def report_sections(r):
                                ("Secondary schools", "secondary_schools_in_area", "nearest_secondary_school", "km_to_nearest_secondary_school"),
                                ("GP clinics (OSM)", "gp_clinics_in_area", "nearest_gp_clinic", "km_to_nearest_gp_clinic"),
                                ("Playgrounds (OSM)", "playgrounds_in_area", "nearest_playground", "km_to_nearest_playground"),
+                               ("Supermarkets, main chains (OSM)", "supermarkets_in_area", "nearest_supermarket", "km_to_nearest_supermarket"),
+                               ("Shopping centres (OSM)", "shopping_centres_in_area", "nearest_shopping_centre", "km_to_nearest_shopping_centre"),
                                ("Mosques (verified list of 6)", "mosques_in_area", "nearest_mosque", "km_to_nearest_mosque")]]),
         ("Largest communities (2023 Census)", [(g, f"{p:.1f}% of residents") for g, p in zip(c["group"], c["pct_2023"])]),
     ]
@@ -649,6 +660,8 @@ def view_explore():
             ("Halal butchers (OSM)", "halal_butchers_in_area", "nearest_halal_butcher", "km_to_nearest_halal_butcher"),
             ("Parks (OSM)", "parks_in_area", "nearest_park", "km_to_nearest_park"),
             ("Public playgrounds (OSM)", "playgrounds_in_area", "nearest_playground", "km_to_nearest_playground"),
+            ("Supermarkets, main chains (OSM)", "supermarkets_in_area", "nearest_supermarket", "km_to_nearest_supermarket"),
+            ("Shopping centres (OSM)", "shopping_centres_in_area", "nearest_shopping_centre", "km_to_nearest_shopping_centre"),
         ]
         st.dataframe(pd.DataFrame([(a, "—" if pd.isna(r[n]) else int(r[n]), r[b] if pd.notna(r[b]) else "—", num(r[k], suffix=" km"))
                                    for a, n, b, k in rows], columns=["Facility", "Inside this area", "Nearest", "Distance"]),
@@ -1019,6 +1032,10 @@ def view_simple():
     fact(light, title, "From OpenStreetMap, which misses some clinics.")
     light, title = count_fact(r, "Playgrounds", "playgrounds_in_area", "nearest_playground", "km_to_nearest_playground", mapped=True)
     fact(light, title, f"{num(r['parks_in_area'], '{:.0f}')} parks mapped inside this area. From OpenStreetMap, which misses some.")
+    light, title = count_fact(r, "Supermarkets", "supermarkets_in_area", "nearest_supermarket", "km_to_nearest_supermarket", mapped=True)
+    fact(light, title, "Woolworths, New World, PAK'nSAVE, FreshChoice and SuperValue only, from OpenStreetMap. Straight-line distance.")
+    light, title = count_fact(r, "Shopping centres", "shopping_centres_in_area", "nearest_shopping_centre", "km_to_nearest_shopping_centre", mapped=True)
+    fact(light, title, "Larger shopping centres from OpenStreetMap, which may miss some. Straight-line distance.")
 
     km = r["km_to_nearest_mosque"]
     if pd.notna(km):
@@ -1035,6 +1052,18 @@ def view_simple():
            "For every number and caveat, open 'Explore suburb'.")
 
 
+def suburb_word(sa2_name):
+    """SA2 name to a listings search word: 'Glen Innes East-Wai O Taiki Bay' -> 'Glen Innes' (Trade Me knows suburbs, not SA2s)."""
+    words = sa2_name.split("-")[0].split()
+    while len(words) > 1 and words[-1] in ("North", "South", "East", "West", "Central"):
+        words.pop()
+    return " ".join(words)
+
+
+assert suburb_word("Glen Innes East-Wai O Taiki Bay") == "Glen Innes" and suburb_word("Massey Central") == "Massey"
+assert suburb_word("Te Atatū Peninsula West") == "Te Atatū Peninsula" and suburb_word("Āwhitu") == "Āwhitu"
+
+
 def view_find():
     st.markdown("## Find a rental under my budget")
     c = st.columns(3)
@@ -1043,7 +1072,16 @@ def view_find():
     beds = c[2].selectbox("Bedrooms", ["1", "2", "3", "4", "5+", "ALL"], index=2, format_func=lambda x: "Any" if x == "ALL" else x)
     s = family_screen(max_rent, dwelling, beds, include_apt=dwelling == "Apartment")
     m = s[s["under"]].sort_values("rent")
-    ok, shaky = m[m["check"] == "ok"], m[m["check"] == "verify"]
+    ok = m[m["check"] == "ok"]
+    # Thin or jumpy figures (e.g. $93 from 6 bonds in one quarter) are not shown; the area's steady wider figure stands in:
+    # same home type any size, else any home. That covers all sizes, so it can sit above what this home really costs.
+    bt = D["by_type"]
+    steady = bt[~(bt["flag_thin_sample"].eq(True) | bt["flag_unstable_rent"].eq(True)) & (bt["beds"] == "ALL")]
+    wide = pd.concat([steady[steady["dwelling"] == d].assign(basis="all homes" if d == "ALL" else f"all {d.lower()}s")
+                      for d in dict.fromkeys([dwelling, "ALL"])]).drop_duplicates("sa2_code")
+    shaky = s[s["check"] == "verify"].merge(wide[["sa2_code", "rent", "lodged_bonds_4q", "basis"]], on="sa2_code",
+                                            suffixes=("_thin", ""))
+    shaky = shaky[shaky["rent"] <= max_rent].sort_values("rent")
     home = f"{'' if beds == 'ALL' else beds + '-bedroom '}{'home' if dwelling == 'ALL' else dwelling.lower()}"
     if ok.empty:
         cheapest = s[s["check"] == "ok"]["rent"].min()
@@ -1059,15 +1097,18 @@ def view_find():
             "Mosque (km)": ok["km_to_nearest_mosque"]}), hide_index=True, use_container_width=True, column_config={
             "Typical rent": st.column_config.NumberColumn(format="$%.0f"), "Mosque (km)": st.column_config.NumberColumn(format="%.1f")})
     if len(shaky):
-        # Thin or jumpy samples (e.g. 6 bonds in one quarter, or social and market rents mixed) give impossible rents like $93
-        with st.expander(f"{len(shaky)} more areas with unreliable figures (don't trust these)"):
-            st.caption("Too few rentals, or the price jumps around a lot between quarters, often because cheap social housing "
-                       "is mixed in. Real asking rents are usually much higher. Check listings before believing these.")
+        with st.expander(f"{len(shaky)} more areas to check: too few {home} rentals for a figure of their own"):
+            st.caption(f"Too few {home} rentals were recorded here, or their price jumps around between quarters (often because "
+                       "cheap social housing is mixed in), so we show the area's wider rent instead. It covers all sizes, so a "
+                       f"{home} may cost a bit more or less. Check live listings before deciding.")
             st.dataframe(pd.DataFrame({
-                "Area": shaky["sa2_name"], "Recorded figure": shaky["rent"], "Lowest quarter": shaky["rent_min_quarter"],
-                "Highest quarter": shaky["rent_max_quarter"], "New rentals counted (12 months)": shaky["lodged_bonds_4q"]}),
+                "Area": shaky["sa2_name"], "Wider-area rent": shaky["rent"], "Based on": shaky["basis"],
+                "New rentals counted (12 months)": shaky["lodged_bonds_4q"],
+                "Live listings": "https://www.trademe.co.nz/a/property/residential/rent/auckland/search?search_string="
+                                 + shaky["sa2_name"].map(lambda n: quote(suburb_word(n)))}),
                 hide_index=True, use_container_width=True, column_config={
-                    c: st.column_config.NumberColumn(format="$%.0f") for c in ["Recorded figure", "Lowest quarter", "Highest quarter"]})
+                    "Wider-area rent": st.column_config.NumberColumn(format="$%.0f"),
+                    "Live listings": st.column_config.LinkColumn(display_text="Search Trade Me")})
     caveat("Typical rent = new-tenancy bonds, average of the last 4 quarters; only areas with 30+ new rentals and steady prices are listed. "
            f"{(s['check'] == 'no estimate').sum()} areas have no published rent for this home, so they are not shown. Busy centres with very high "
            "crime are left out" + ("" if dwelling == "Apartment" else ", and so are apartment and inner-city areas") + ". "

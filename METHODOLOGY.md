@@ -345,7 +345,11 @@ The dashboard and the AI agent should use these exact definitions and figures. C
   Both are incomplete (volunteer-mapped). Playgrounds and parks (session 11, `osm_parks()`): `leisure=playground` / `leisure=park`
   points and areas, each placed at one inside point; `access` private / no / customers dropped (220 features: school, childcare,
   fast-food playgrounds, private parks); unnamed playgrounds are labelled by the smallest mapped park containing them. One park
-  point sits on a shared SA2 edge, so `count_in` keeps one SA2 per point. Mosque history 18 Nov: 11 points → 14 (user update) → 6 verified; median SA2 distance 3.9 → 3.5 → 6.0 km.
+  point sits on a shared SA2 edge, so `count_in` keeps one SA2 per point. Supermarkets and shopping centres (23 Nov, `osm_shops()`): `shop=supermarket` kept only for the five main chains
+  (brand tag, else name; Countdown counts as Woolworths), `shop=mall` kept only when named and mapped as a site of 0.5 ha or more (24 Nov
+  cleanup: points and small sites were single shops, clinics and arcades; City Works Depot dropped by name). A store mapped as
+  both point and building counts once (same chain within ~100 m, keeping the copy with a branch tag); stores are named chain +
+  branch. Two Woolworths 360 m apart at Westgate are tagged as different branches (Northwest, Westgate) and both kept. 124 supermarkets, 33 centres. Mosque history 18 Nov: 11 points → 14 (user update) → 6 verified; median SA2 distance 3.9 → 3.5 → 6.0 km.
 - The archived Urban Development `TA.csv` used here (`hud_ta_sales_rents.zip`) is by territorial authority, so it gives
   Auckland-wide sale prices. The ministry's separate Property and Sales Statistics dashboard and HPI do cover Auckland local
   boards; not used here. File 5 Step 9 uses the Auckland rows: median sale price (nominal and real, real in the latest quarter's
