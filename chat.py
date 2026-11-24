@@ -24,6 +24,9 @@ class Ask(BaseModel):
     dwelling: Optional[Literal["House", "Apartment", "Flat", "ALL"]] = Field(None, description="Home type, only if stated in this message")
     beds: Optional[Literal["1", "2", "3", "4", "5+", "ALL"]] = Field(None, description="Bedrooms, only if stated in this message")
     include_apt: Optional[bool] = Field(None, description="True only if the user asks to include apartments or the city centre")
+    low_crime: Optional[bool] = Field(None, description="True if the user wants safe / low-crime areas; false if they drop that wish")
+    school: Optional[bool] = Field(None, description="True if the user wants a (primary) school in the area; false if they drop it")
+    park: Optional[bool] = Field(None, description="True if the user wants parks or green space in the area; false if they drop it")
     areas: list[str] = Field(default_factory=list, description="Suburb or area names as the user wrote them in this message")
     question: Optional[str] = Field(None, description="When intent is clarify: one short question for the user")
 
@@ -31,10 +34,12 @@ class Ask(BaseModel):
 SYSTEM = """You turn messages about renting in Auckland, New Zealand into search filters for a dashboard.
 Never answer the question yourself and never give figures: return only JSON that matches the schema.
 intent:
-- rental_search: find areas that fit a weekly rent budget (optionally a home type and bedrooms).
+- rental_search: any request for a list of suburbs or areas to rent in: by budget, home type, bedrooms, safety (low_crime),
+  schools (school), parks (park) or a place. A budget is optional ("safe suburbs with schools for a 3 bed house").
 - area_info: facts about one named area (rent, crime, schools, parks, whether it fits a budget).
 - compare: two or more named areas side by side.
-- mosque: mosques, prayer places, halal food or religious communities.
+- mosque: mosques, prayer places, halal food or religious communities. Still fill max_rent, dwelling, beds and areas if the
+  message gives them ("3 bed house under $700 near a mosque in Mt Roskill").
 - clarify: too vague to search, e.g. "where should I live?" with no budget or area; put one short question in `question`.
 - other: anything else (house sale prices, forecasts, investment advice, other cities, small talk).
 Filters: max_rent is NZ$ per week (monthly x 12 / 52, fortnightly / 2). dwelling: House, Apartment, Flat (flat or unit) or ALL (any home).
@@ -69,6 +74,12 @@ def find_areas(names, text):
     t = _norm(text)
     exact = [n for n in names if _norm(n) == t]
     return exact or [n for n in names if re.search(rf"\b{re.escape(t)}\b", _norm(n))]
+
+
+# Optional wishes: (wording, filter on the search's rows). Low = lowest third of comparable areas by recorded crime per resident.
+WANTS = {"low_crime": ("low recorded crime", lambda df: df["crime_rating"].eq("Low")),
+         "school": ("a primary school inside", lambda df: df["primary_schools_in_area"].gt(0)),
+         "park": ("a park mapped inside", lambda df: df["parks_in_area"].gt(0))}
 
 
 def home_label(dwelling, beds):
@@ -106,17 +117,33 @@ def reply(text, prefs, tables=(), notes_=(), manual=False):
     return dict(text=text, tables=list(tables), notes=list(notes_), prefs=prefs, manual=manual)
 
 
+MOSQUE_NOTE = ("Ask Auckland leaves mosque information out. To see mapped mosques, switch on Show nearby mosques in the sidebar and "
+               "use Find a rental under my budget or Family screen. The mapped list is partial and distances are straight-line. Census "
+               "shares show where people live, not where mosques or halal shops are.")
+
+
 def respond(data, question, prefs, history, extract):
     """Answer one message. extract(question, prefs, history) -> Ask (Gemini in the app, a stub in tests).
-    prefs carries budget, home, bedrooms, areas and the last intent between messages; the reply holds the updated prefs."""
+    prefs carries budget, home, bedrooms, areas and the last intent between messages; the reply holds the updated prefs.
+    A mosque question that also gives a budget, home or area ("3 bed under $700 near a mosque") is searched as usual,
+    with the mosque note on top; mosque details themselves stay in the manual search."""
     ask = extract(question, prefs, history)
-    p = {**prefs, **ask.model_dump(include={"max_rent", "dwelling", "beds", "include_apt"}, exclude_none=True)}
+    mixed = ask.intent == "mosque" and bool(ask.max_rent or ask.areas or ask.dwelling or ask.beds)
+    if mixed:
+        ask = ask.model_copy(update={"intent": "rental_search" if ask.max_rent or not ask.areas else "area_info"})
+    r = answer(data, ask, prefs)
+    if mixed:
+        r["notes"].insert(0, MOSQUE_NOTE)
+        r["manual"] = True
+    return r
+
+
+def answer(data, ask, prefs):
+    p = {**prefs, **ask.model_dump(include={"max_rent", "dwelling", "beds", "include_apt", *WANTS}, exclude_none=True)}
     if ask.areas:
         p["areas"] = ask.areas
     if ask.intent == "mosque":
-        return reply("Ask Auckland leaves mosque information out. To see mapped mosques, switch on **Show nearby mosques** in the sidebar and "
-                     "use Find a rental under my budget or Family screen. The mapped list is partial and distances are straight-line. Census "
-                     "shares show where people live, not where mosques or halal shops are.", p, manual=True)
+        return reply(MOSQUE_NOTE.replace("Show nearby mosques", "**Show nearby mosques**"), p, manual=True)
     if ask.intent == "other":
         return reply("I can only answer from this project's data: rents by area and home type, recorded crime, schools and parks in each "
                      "Auckland area. Try a budget search (\"3-bed houses under $650 a week\") or ask about an area (\"crime and schools "
@@ -131,10 +158,13 @@ def respond(data, question, prefs, history, extract):
     assumed = [f"No {' or '.join(unset)} given, so any is included. Say e.g. '3-bed house' to narrow it."] if unset else []
 
     if ask.intent == "rental_search":
-        if not p.get("max_rent"):
-            return reply("What is your weekly rent budget? For example: \"$650 a week\".", p)
-        budget = p["max_rent"]
-        res = rental_search(data, budget, dwelling, beds, p.get("include_apt"))
+        budget = p.get("max_rent")
+        # shortcut: no budget = no cap (rent can't reach $100k/wk), so the answer lists every area that passes the checks, cheapest first
+        res = rental_search(data, budget or 100_000, dwelling, beds, p.get("include_apt"))
+
+        def cut(res, keep):  # same search, fewer areas: keep(df) -> bool mask
+            res = {**res, **{k: res[k][keep(res[k])] for k in ("areas", "under", "matches", "fallbacks")}}
+            return {**res, "cheapest_ok": res["areas"].loc[res["areas"]["check"] == "ok", "rent"].min()}
         # Areas named in this message, or kept from a previous budget search in named areas ("and 2 bedrooms?")
         where = ask.areas or (prefs.get("areas", []) if prefs.get("intent") == "rental_search" else [])
         p.pop("areas", None)
@@ -144,11 +174,20 @@ def respond(data, question, prefs, history, extract):
         unknown = [a for a, h in hits.items() if not h]
         in_area = sorted({n for h in hits.values() for n in h})
         place = ""
+        searched = set(res["areas"]["sa2_name"])  # after the search's own rules (hotspots, apartments), before preferences
+        wants = [k for k in WANTS if p.get(k)]
+        for k in wants:
+            res = cut(res, WANTS[k][1])
+        if wants:
+            w = [WANTS[k][0] for k in wants]
+            place += " with " + (", ".join(w[:-1]) + " and " if len(w) > 1 else "") + w[-1]
+        if not budget:
+            assumed.append("No budget given, so every area that passes the sample checks is listed, cheapest first. "
+                           "Add a budget (e.g. '$650 a week') to narrow it.")
         if in_area:  # same search, cut to the named areas
-            left_out = sorted(set(in_area) - set(res["areas"]["sa2_name"]))
-            res = {**res, **{k: res[k][res[k]["sa2_name"].isin(in_area)] for k in ("areas", "under", "matches", "fallbacks")}}
-            res["cheapest_ok"] = res["areas"].loc[res["areas"]["check"] == "ok", "rent"].min()
-            place = " in " + ", ".join(a for a in where if hits[a])
+            left_out = sorted(set(in_area) - searched)
+            res = cut(res, lambda df: df["sa2_name"].isin(in_area))
+            place = " in " + ", ".join(a for a in where if hits[a]) + place
             if left_out:
                 assumed.append("Left out by the search rules (crime hotspot, apartment or inner-city area, or not analysis-ready): "
                                + ", ".join(left_out) + ". Ask about the area directly to see its figures.")
@@ -159,23 +198,27 @@ def respond(data, question, prefs, history, extract):
         fails = (res["under"]["check"] == "verify").sum()
         apt_in = p.get("include_apt", dwelling == "Apartment")  # rental_search's own default
         excluded = ("Crime hotspots are left out" + ("" if apt_in else ", and so are apartment and inner-city areas (ask to include them)")
-                    + f". {(res['areas']['check'] == 'no estimate').sum()} areas have no published rent for a {home}, so they are not shown.")
+                    + ". " + (f"{n_none} areas have no published rent for a {home}, so they are not shown." if (n_none := (res["areas"]["check"] == "no estimate").sum()) else ""))
         tables = []
+        cap = f" of ${budget:,} a week or less" if budget else ""
         if len(m):
-            text = (f"**{len(m)} area{'s' * (len(m) > 1)}**{place} {'have' if len(m) > 1 else 'has'} a typical {home} rent of ${budget:,} a week or less that passes the sample checks "
-                    "(cheapest first).")
-            tables.append((f"Budget matches: {home}{place}, up to ${budget:,}/wk", area_table(m, home)))
+            top = ", ".join(f"{n} (${r:,.0f})" for n, r in zip(m["sa2_name"].head(5), m["rent"].head(5)))
+            text = (f"**{len(m)} area{'s' * (len(m) > 1)}**{place} {'have' if len(m) > 1 else 'has'} a typical {home} rent{cap} that "
+                    f"passes the sample checks. Cheapest: {top}{', …' if len(m) > 5 else '.'} All of them are in the table below.")
+            tables.append((f"{'Budget matches' if budget else 'Areas'}: {home}{place}" + (f", up to ${budget:,}/wk" if budget else ""),
+                           area_table(m, home)))
         else:
             cheapest = res["cheapest_ok"]
-            text = (f"**No area matches.** No area{place} has a {home} rent that passes the sample checks at ${budget:,} a week or less."
+            text = (f"**No area matches.** No area{place} has a {home} rent{cap} that passes the sample checks."
                     + (f" The cheapest figure that passes them is ${cheapest:,.0f} a week; try a higher budget or fewer bedrooms."
-                       if pd.notna(cheapest) else f" No area{place} has a figure for this home that passes them at any budget."))
+                       if pd.notna(cheapest) else " Try fewer conditions, another home type or fewer bedrooms."))
         if fails:
-            text += f" {fails} more areas have a figure under budget that fails the sample checks, so they are not budget matches."
+            text += (f" {fails} more areas have a figure{' under budget' if budget else ''} that fails the sample checks, "
+                     "so they are not listed as matches.")
         if len(fb):
-            tables.append((f"Areas to investigate ({len(fb)}): not budget matches, broader rent data", area_table(fb, home)))
-            text += (f" {len(fb)} areas have a broader steady rent under budget, listed separately: a rent across all sizes cannot "
-                     f"show that a {home} fits your budget, so check live listings.")
+            tables.append((f"Areas to investigate ({len(fb)}): not matches, broader rent data", area_table(fb, home)))
+            text += (f" {len(fb)} areas have a broader steady rent{' under budget' if budget else ''}, listed separately: a rent across "
+                     f"all sizes cannot show what a {home} costs, so check live listings.")
         return reply(text, p, tables, notes(data, [*assumed, excluded]))
 
     # area_info / compare: one row per area, same rent and sample-check rule as the manual search
@@ -185,7 +228,7 @@ def respond(data, question, prefs, history, extract):
         hits = find_areas(names, a)
         if not hits:
             missing.append(a)
-        elif len(hits) > 4:
+        elif len(hits) > 8:  # up to 8 parts of one suburb are shown; more, and we ask
             return reply(f"\"{a}\" matches {len(hits)} areas ({', '.join(hits[:8])}{', …' if len(hits) > 8 else ''}). Which one do you mean?", p)
         else:
             split += [a] if len(hits) > 1 else []
@@ -233,10 +276,14 @@ if __name__ == "__main__":
     assert r2["prefs"] == {"max_rent": 600, "dwelling": "House", "beds": "2", "intent": "rental_search"}
     assert r2["tables"][0][1]["Area"].tolist() == rental_search(d, 600, "House", "2")["matches"]["sa2_name"].tolist()
     # Budget missing -> asks; split and ambiguous areas; no mosque columns anywhere
-    assert "budget" in respond(d, "cheap houses", {}, [], stub(Ask(intent="rental_search", dwelling="House")))["text"]
+    nb = respond(d, "cheap houses", {}, [], stub(Ask(intent="rental_search", dwelling="House")))  # no budget: list, cheapest first
+    assert nb["tables"][0][1]["Area"].tolist() == rental_search(d, 100_000, "House", "ALL")["matches"]["sa2_name"].tolist() and any("No budget given" in n for n in nb["notes"])
+    sc = respond(d, "x", {}, [], stub(Ask(intent="rental_search", max_rent=700, dwelling="House", beds="3", low_crime=True, school=True)))
+    t = sc["tables"][0][1]
+    assert len(t) and t["Crime rating"].eq("Low").all() and t["Primary schools in area"].gt(0).all() and "low recorded crime and a primary school" in sc["text"]
     a = respond(d, "Ponsonby", {}, [], stub(Ask(intent="area_info", areas=["ponsonby"])))
     assert a["tables"][0][1]["Area"].tolist() == ["Ponsonby East", "Ponsonby West"]
-    assert "Which one" in respond(d, "Avondale", {}, [], stub(Ask(intent="area_info", areas=["Avondale"])))["text"]
+    assert "Which one" in respond(d, "Mt Roskill", {}, [], stub(Ask(intent="area_info", areas=["Mt Roskill"])))["text"]
     assert find_areas(sorted(d["sa2"]["sa2_name"]), "avondale central") == ["Avondale Central (Auckland)"]
     assert not any("osque" in c for x in (r, r2, a) for _, df in x["tables"] for c in df.columns)
     # Budget search inside named areas: cut to those SA2s, kept for follow-ups; unknown names said out loud
@@ -246,4 +293,8 @@ if __name__ == "__main__":
     assert respond(d, "x", g["prefs"], [], stub(Ask(intent="rental_search", beds="2")))["prefs"]["areas"] == ["Grey Lynn"]
     u = respond(d, "x", {}, [], stub(Ask(intent="rental_search", max_rent=500, dwelling="Apartment", areas=["city centre"])))
     assert any("searches all of Auckland" in n for n in u["notes"])
+    # Mosque question with a budget: searched as usual, mosque note first, no mosque columns
+    mq = respond(d, "x", {}, [], stub(Ask(intent="mosque", max_rent=700, dwelling="House", beds="3")))
+    assert mq["notes"][0] == MOSQUE_NOTE and mq["tables"][0][1]["Area"].tolist() == rental_search(d, 700, "House", "3")["matches"]["sa2_name"].tolist()
+    assert not respond(d, "x", {}, [], stub(Ask(intent="mosque")))["tables"]
     print("chat.py self-check passed")

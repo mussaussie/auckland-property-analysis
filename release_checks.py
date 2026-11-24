@@ -280,20 +280,28 @@ c2 = table(c, "Rent $/wk (2-bedroom house)")
 check("Follow-up keeps budget and home type: 'what about 2 bedrooms' searches 2-bed houses up to $600",
       c.session_state["ask_prefs"] == {"max_rent": 600, "dwelling": "House", "beds": "2", "intent": "rental_search"} and bool(c2)
       and c2[0]["Area"].tolist() == search.rental_search(data, 600, "House", "2")["matches"]["sa2_name"].tolist())
-c = ask(A(intent="rental_search", dwelling="House"))
-check("Chat asks for the budget when it is missing", "What is your weekly rent budget?" in text(c) and not c.dataframe)
+c = ask(A(intent="rental_search", dwelling="House", beds="3", low_crime=True, school=True))
+cl = table(c, home3)
+base = search.rental_search(data, 100_000, "House", "3")["matches"]
+want = base[base["crime_rating"].eq("Low") & base["primary_schools_in_area"].gt(0)]["sa2_name"].tolist()
+check("Plain-English list: 'safe suburbs with schools, 3-bed house' (no budget) lists low-crime areas with a primary school, cheapest first",
+      bool(cl) and cl[0]["Area"].tolist() == want and "No budget given" in text(c) and "Cheapest: " + want[0] in text(c), f"{len(cl[0]) if cl else 0} vs {len(want)}")
 c = ask(A(intent="compare", areas=["Avondale Central", "Queen Street"]))
 m = run("Compare suburbs", setup=pick2)
 ct, mt = table(c, "Rent $/wk (home)"), [d.value for d in m.dataframe if "Weekly rent (new tenancies)" in d.value.index]
 check("Chat compare = Compare page: all-home rent and crime per 1,000 for Avondale Central and Queen Street",
       bool(ct and mt) and [f"${v:,.0f}" for v in ct[0]["Rent $/wk (home)"]] == mt[0].loc["Weekly rent (new tenancies)"].tolist()
       and [f"{v:.0f}" for v in ct[0]["Crime per 1,000 residents"]] == mt[0].loc["Crime /1,000 residents"].tolist())
-c = ask(A(intent="area_info", areas=["Avondale"]))
-check("Chat asks which area when a name matches many SA2s (Avondale)", "Which one do you mean?" in text(c) and not c.dataframe)
+c = ask(A(intent="area_info", areas=["Mt Roskill"]))
+check("Chat asks which area when a name matches more than 8 SA2s (Mt Roskill, 10)", "Which one do you mean?" in text(c) and not c.dataframe)
 c = ask(A(intent="area_info", areas=["Avondale Central"]), A(intent="rental_search", max_rent=800, dwelling="House", beds="3"), mosques=True)
 c2 = ask(A(intent="mosque"), mosques=True)
+c3 = ask(A(intent="mosque", max_rent=700, dwelling="House", beds="3"), mosques=True)
 check("Chat leaves mosque information out (even with the toggle on) and points to the manual search",
-      not mosque_shown(c) and "Show nearby mosques" in text(c2) and not re.search(r"Islamic|Masjid|Jamie|km to", text(c) + text(c2)))
+      not mosque_shown(c) and "Show nearby mosques" in text(c2) and not re.search(r"Islamic|Masjid|Jamie|km to", text(c) + text(c2) + text(c3)))
+check("Mosque question with a budget ('3 bed house under $700 near a mosque') still lists suburbs, with the mosque note",
+      bool(table(c3, home3)) and table(c3, home3)[0]["Area"].tolist() == search.rental_search(data, 700, "House", "3")["matches"]["sa2_name"].tolist()
+      and "leaves mosque information out" in text(c3) and not any("osque" in str(col) for d in c3.dataframe for col in d.value.columns))
 quota = errors.ClientError(429, {"error": {"code": 429, "message": "Resource exhausted", "status": "RESOURCE_EXHAUSTED"}})
 c = ask(quota)
 btn = [b for b in c.button if b.label == "Open Find a rental under my budget"]
