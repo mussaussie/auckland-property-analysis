@@ -333,7 +333,10 @@ The dashboard and the AI agent should use these exact definitions and figures. C
   Westney Road, Māngere, so the two distances differ by at most 0.3 km. `km_to_nearest_mosque` (with `nearest_mosque`) uses the
   same method on `mosques_verified.csv`: each of the user's 14 entries checked (18 Nov 2026) for a street address from the
   operator or a directory and an OpenStreetMap building at that address. 6 verified (4 with a corrected street, point or name),
-  7 unverified, 1 duplicate (NZMA's "West Auckland Mosque" is its Rānui site); only verified entries are counted. **Schools by year level:** each MoE school type maps to the years it serves (Contributing 1–6, Full Primary 1–8, Intermediate
+  7 unverified, 1 duplicate (NZMA's "West Auckland Mosque" is its Rānui site). **24 Nov 2026:** `download_data.py` `osm_mosques()` adds
+  OpenStreetMap Muslim places of worship (`religion=muslim`, points and buildings): 36 found, 9 dropped (6 within 100 m of a verified
+  mosque, 1 point duplicating a building, 2 institutional prayer rooms: AUT, Massey Albany), 27 kept after the user's review. File 3
+  counts 33 (`source` verified / osm); the one unnamed OSM site (144 Triangle Rd) is labelled by its address. **Schools by year level:** each MoE school type maps to the years it serves (Contributing 1–6, Full Primary 1–8, Intermediate
   7–8, Composite 1–15, Secondary 7–15 / 9–15 / 7–10 / 11–15, Restricted Composite 7–10); primary = any of Years 1–8, secondary =
   any of Years 9–13, Year 1 = starts at Year 1. Before 18 Nov composites counted as secondary only (Pinehurst, Albany South, was
   missed as a primary school). **In the area:** `*_in_area` counts facilities inside the SA2 polygon (spatial join, NZTM); every
@@ -349,7 +352,7 @@ The dashboard and the AI agent should use these exact definitions and figures. C
   (brand tag, else name; Countdown counts as Woolworths), `shop=mall` kept only when named and mapped as a site of 0.5 ha or more (24 Nov
   cleanup: points and small sites were single shops, clinics and arcades; City Works Depot dropped by name). A store mapped as
   both point and building counts once (same chain within ~100 m, keeping the copy with a branch tag); stores are named chain +
-  branch. Two Woolworths 360 m apart at Westgate are tagged as different branches (Northwest, Westgate) and both kept. 124 supermarkets, 33 centres. Mosque history 18 Nov: 11 points → 14 (user update) → 6 verified; median SA2 distance 3.9 → 3.5 → 6.0 km.
+  branch. Two Woolworths 360 m apart at Westgate are tagged as different branches (Northwest, Westgate) and both kept. 124 supermarkets, 33 centres. Mosque history 18 Nov: 11 points → 14 (user update) → 6 verified; median SA2 distance 3.9 → 3.5 → 6.0 km. 24 Nov: + 27 OSM → 33 mosques, median 2.5 km.
 - The archived Urban Development `TA.csv` used here (`hud_ta_sales_rents.zip`) is by territorial authority, so it gives
   Auckland-wide sale prices. The ministry's separate Property and Sales Statistics dashboard and HPI do cover Auckland local
   boards; not used here. File 5 Step 9 uses the Auckland rows: median sale price (nominal and real, real in the latest quarter's

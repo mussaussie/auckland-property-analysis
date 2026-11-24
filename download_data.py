@@ -279,6 +279,69 @@ def osm_shops():
     print("ok  ", sm_out.name, len(sm), dict(sm.chain.value_counts()), "|", mall_out.name, len(mall))
 
 
+def osm_mosques():
+    """Auckland Muslim places of worship from the same OpenStreetMap extract (ODbL), cleaned for review.
+    Writes every candidate with keep/drop and the reason; File 3 should only use it after the user has reviewed the list."""
+    am = DATA / "amenities"
+    out = am / "mosques_osm_candidates.csv"
+    if out.exists():
+        return print("skip", out.name)
+    import re
+    import pyogrio
+    pbf, bbox = am / "osm" / "new-zealand-latest.osm.pbf", (174.1, -37.4, 175.6, -36.0)
+    where = "other_tags LIKE '%\"religion\"=>\"muslim\"%'"
+    parts = []
+    for layer in ("points", "multipolygons"):
+        g = pyogrio.read_dataframe(pbf, layer=layer, bbox=bbox, where=where)
+        g["osm_id"] = g.filter(regex="^osm_(way_)?id$").bfill(axis=1).iloc[:, 0]
+        g["mapped_as"] = "point" if layer == "points" else "building/area"
+        parts.append(g)
+    g = pd.concat(parts, ignore_index=True)
+    tag = lambda k: g.other_tags.str.extract(r'"' + re.escape(k) + r'"=>"([^"]*)"')[0]
+    g["amenity"] = g["amenity"].fillna(tag("amenity")) if "amenity" in g else tag("amenity")
+    g["building"] = g["building"].fillna(tag("building")) if "building" in g else tag("building")
+    for k in ["addr:housenumber", "addr:street", "addr:suburb", "operator", "denomination"]:
+        g[k] = tag(k)
+    g = g[g.amenity.eq("place_of_worship") | g.building.eq("mosque")].to_crs(2193)
+    g = g.assign(geometry=g.representative_point())
+    sa2 = gpd.read_file(DATA / "boundaries" / "auckland_sa2_2023.geojson")[["geometry"]].to_crs(2193)
+    g = g[g.index.isin(gpd.sjoin(g, sa2, predicate="within").index)].copy()
+    g["address"] = (g["addr:housenumber"].fillna("") + " " + g["addr:street"].fillna("") + ", " + g["addr:suburb"].fillna("")).str.strip(" ,")
+    g["status"], g["reason"] = "keep", ""
+
+    # Institutional prayer rooms (not open community mosques), by name or operator
+    inst = (g.name.fillna("") + " " + g.operator.fillna("")).str.contains(
+        r"universit|\baut\b|hospital|airport|school|college|campus|prayer room|chaplain", case=False)
+    g.loc[inst, ["status", "reason"]] = ["drop", "institutional prayer room (name/operator)"]
+
+    # Within ~100 m of a verified mosque: the same site, already counted
+    v = pd.read_csv(am / "mosques_verified.csv").query("status == 'verified'")
+    v = gpd.GeoDataFrame(v, geometry=gpd.points_from_xy(v.lon, v.lat), crs=4326).to_crs(2193)
+    hit = gpd.sjoin_nearest(g[["geometry"]], v[["name", "geometry"]], max_distance=100, distance_col="m")
+    hit = hit[~hit.index.duplicated()]
+    dup_v = g.index.isin(hit.index) & g.status.eq("keep")
+    g.loc[dup_v, "status"] = "drop"
+    g.loc[dup_v, "reason"] = "same site as verified: " + hit.loc[g.index[dup_v], "name"]
+
+    # Point + building of one site: keep one per ~100 m (prefer the building, then a named feature)
+    g = g.sort_values(["mapped_as", "name"], na_position="last")  # 'building/area' sorts before 'point'
+    kept = g[g.status.eq("keep")]
+    for i in kept.index:
+        if g.at[i, "status"] != "keep":
+            continue
+        near = kept.index[(kept.distance(g.at[i, "geometry"]) <= 100) & (kept.index != i)]
+        near = [j for j in near if g.at[j, "status"] == "keep"]
+        g.loc[near, ["status", "reason"]] = ["drop", f"duplicate of osm {g.at[i, 'osm_id']} within 100 m"]
+        if pd.isna(g.at[i, "name"]) and g.loc[near, "name"].notna().any():  # unnamed building takes its point's name
+            g.at[i, "name"] = g.loc[near, "name"].dropna().iloc[0]
+
+    g = g.to_crs(4326)
+    g["lat"], g["lon"] = g.geometry.y.round(6), g.geometry.x.round(6)
+    g = g.sort_values(["status", "name"], ascending=[False, True])
+    g[["status", "reason", "osm_id", "name", "address", "operator", "denomination", "mapped_as", "lat", "lon"]].to_csv(out, index=False)
+    print("ok  ", out.name, len(g), dict(g.status.value_counts()))
+
+
 if __name__ == "__main__":
     crime()
     download(TENANCY + "detailed-quarterly-tenancy-q1-2020q3-november-2026.csv", DATA / "rental" / "mbie_quarterly_sa2_2020_2026.csv")

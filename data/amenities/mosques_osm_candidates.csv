@@ -1,0 +1,37 @@
+status,reason,osm_id,name,address,operator,denomination,mapped_as,lat,lon
+keep,,5417500955,Al Hijaz Masjid,"236 Richardson Road, Wesley",,,point,-36.900771,174.719949
+keep,,12527833992,Al Iqra Islamic Centre - (Takanini Islamic Centre),"12A Tironui Station Road West, Takanini",,sunni,point,-37.051175,174.933697
+keep,,314041410,Al Maktoum Mosque,"91 Westney Road, Māngere",,sunni,building/area,-36.982026,174.787098
+keep,,12501069621,Al Mustafa Charity Centre,3 Drury Street,,,point,-36.903007,174.688612
+keep,,975206723,Al Rahman Masjid,"84 Hendon Avenue, Mount Albert",,,building/area,-36.898294,174.713069
+keep,,329811386,Al Rahman Masjid - Al Manar Islamic Trust,"72 Carr Road, Mount Roskill",,sunni,building/area,-36.912796,174.74961
+keep,,1085592994,Al-Falaah Mosque - Masjid,"1/8 Laidlaw Way, East Tāmaki",,sunni,building/area,-36.961654,174.895614
+keep,,330474740,Baitul Muqeet Mosque,"20 Dalgety Drive, Wiri",,ahmadiyya,building/area,-37.012658,174.874108
+keep,,959907739,Ellerslie Islamic Centre,5 Ballarat Street,,,building/area,-36.897493,174.823277
+keep,,3683197689,Glen Innes Islamic Centre,"127 Elstree Avenue, Point England",,sunni,point,-36.882281,174.864856
+keep,,5362650146,Hibiscus Coast Islamic Centre,"8 Hibiscus Coast Highway, Silverdale",,,point,-36.622442,174.668509
+keep,,330338372,Imam Reza Mosque,7b Astley Avenue,,,building/area,-36.912776,174.687393
+keep,,333783842,Masjid Abu Bakr Al Saddiq,"5B Cortina Place, Pakuranga",,sunni,building/area,-36.915305,174.872235
+keep,,3701968582,Masjid As-Salam,"3 Akatea Road, Glendene",,sunni,point,-36.887991,174.660355
+keep,,3683039850,Masjid At-Taqwa,"58 Grayson Avenue, Papatoetoe",,sunni,point,-36.989135,174.86621
+keep,,439643386,Masjid Ayesha,"96 Maich Road, Manurewa",,sunni,building/area,-37.013819,174.889319
+keep,,3702024763,Masjid e Abu Hurairah (Kelston Islamic Centre NZMA),"45 Cartwright Road, Kelston",,sunni,point,-36.904521,174.660996
+keep,,330200951,Maunatul Islamic Centre,"45 Thomas Road, Māngere",,,building/area,-36.971949,174.794426
+keep,,3700505525,Mount Albert Islamic Centre,"38 Wairere Avenue, Mount Albert",,sunni,point,-36.879401,174.724792
+keep,,3700492108,New Lynn Islamic Centre,"13 Ward Street, New Lynn",,sunni,point,-36.908124,174.688993
+keep,,188563031,Onehunga Islamic Centre,"140 Church Street, Onehunga",,sunni,building/area,-36.922337,174.789586
+keep,,12527833991,Otahuhu Mosque - Masjid,"34 Portage Road, Ōtāhuhu",,,point,-36.935851,174.840326
+keep,,425040599,Papatoetoe Islamic Centre,"63 Park Avenue, Papatoetoe",,sunni,building/area,-36.978547,174.836716
+keep,,3700494179,Pukekohe Islamic Centre,"107 Princes Street, Pukekohe",,sunni,point,-37.197627,174.892232
+keep,,1458827076,Ulul Albab Islamic Institute NZ,27 Stock Street,,,building/area,-36.902116,174.686691
+keep,,421566349,Vajihi Markaz,,,,building/area,-36.882492,174.639675
+keep,,366051031,,144 Triangle Road,,,building/area,-36.837711,174.617925
+drop,institutional prayer room (name/operator),13667982402,AUT Masjid - Muslim Prayer Hall,49 Saint Paul Street,,,point,-36.853834,174.765439
+drop,duplicate of osm 975206723 within 100 m,12501045626,Al Rahman Masjid,"84 Hendon Avenue, Mount Albert",,,point,-36.898351,174.712992
+drop,same site as verified: Al-Masjid Al-Jamie (NZMA Ponsonby),317610415,Al-Masjid Al-Jamie,"17 Vermont Street, Ponsonby",,sunni,building/area,-36.852587,174.743774
+drop,same site as verified: Al-Mustafa Jamia Masjid (South Auckland Mosque),360117094,Al-Mustafa Jamia Masjid,"26 Mangere Road, Ōtāhuhu",,sunni,building/area,-36.952121,174.844446
+drop,same site as verified: Avondale Islamic Centre (NZMA),295577814,Avondale Islamic Centre,122 - 126 Blockhouse Bay Road,,sunni,building/area,-36.895268,174.701486
+drop,same site as verified: Islamic Ahlulbayt Foundation of New Zealand,3702016441,Islamic Ahlulbayt Foundation of New Zealand,"27 Ben Lomond Crescent, Pakuranga Heights",,shia,point,-36.91471,174.899035
+drop,same site as verified: Masjid e Umar,308373663,Masjid e Umar,185 - 187 Stoddard Road,,sunni,building/area,-36.901809,174.7244
+drop,institutional prayer room (name/operator),10742555935,Muslim Prayer Room,,,,point,-36.733546,174.702924
+drop,same site as verified: Masjid Al-Rahman / West Auckland Mosque (NZMA Ranui),340098308,West Auckland Islamic Centre,"31-33 Armada Drive, Rānui",,sunni,building/area,-36.862517,174.601711

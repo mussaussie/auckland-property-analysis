@@ -222,7 +222,8 @@ with st.sidebar:
                 unsafe_allow_html=True)
     view = st.radio("View", VIEWS, label_visibility="collapsed")
     st.divider()
-    suburb = st.selectbox("Suburb", NAMES, index=NAMES.index(DEFAULT_SUBURB))
+    st.session_state.setdefault("suburb", DEFAULT_SUBURB)  # default via state, since a map click also sets it
+    suburb = st.selectbox("Suburb", NAMES, key="suburb")
     compare = st.multiselect("Compare suburbs", NAMES, default=DEFAULT_COMPARE, max_selections=8)
     R = BY_NAME.loc[suburb]
     st.caption("Suburbs are Stats NZ SA2 areas: names are close to suburb names, boundaries differ. "
@@ -251,7 +252,7 @@ def risk_return(highlight_codes, label="Highlighted"):
     return style(fig, 460, "Risk vs return, File 4 screen")
 
 
-def choropleth(df, col, label, scale, fmt, height=600):
+def choropleth(df, col, label, scale, fmt, height=600, highlight=None):
     d = df[["sa2_code", "sa2_name", col]].dropna()
     if scale == "div":
         lim = d[col].abs().quantile(0.95)
@@ -262,7 +263,12 @@ def choropleth(df, col, label, scale, fmt, height=600):
         d, geojson=geo(), locations="sa2_code", featureidkey="properties.sa2_code", color=col,
         hover_name="sa2_name", hover_data={"sa2_code": False, col: fmt}, labels={col: label},
         mapbox_style="open-street-map", center=dict(lat=-36.9, lon=174.78), zoom=9, opacity=0.62, **kw)
-    fig.update_traces(marker_line_width=0.4, marker_line_color="#ffffff")
+    fig.update_traces(marker_line_width=0.4, marker_line_color="#ffffff",
+                      selected_marker_opacity=0.62, unselected_marker_opacity=0.62)  # a click selects; don't fade the map
+    if highlight is not None:  # outline the selected suburb
+        fig.add_trace(go.Choroplethmapbox(geojson=geo(), locations=[highlight], z=[0], featureidkey="properties.sa2_code",
+                                          colorscale=[[0, "rgba(0,0,0,0)"], [1, "rgba(0,0,0,0)"]], showscale=False,
+                                          marker_line_width=3, marker_line_color=INK, hoverinfo="skip"))
     fig.update_layout(height=height, margin=dict(l=0, r=0, t=0, b=0), paper_bgcolor="#ffffff",
                       coloraxis_colorbar=dict(title="", thickness=10, len=0.6), font=dict(family="Inter, system-ui, sans-serif", color=INK))
     return fig
@@ -475,7 +481,7 @@ def report_sections(r):
                                ("Playgrounds (OSM)", "playgrounds_in_area", "nearest_playground", "km_to_nearest_playground"),
                                ("Supermarkets, main chains (OSM)", "supermarkets_in_area", "nearest_supermarket", "km_to_nearest_supermarket"),
                                ("Shopping centres (OSM)", "shopping_centres_in_area", "nearest_shopping_centre", "km_to_nearest_shopping_centre"),
-                               ("Mosques (verified list of 6)", "mosques_in_area", "nearest_mosque", "km_to_nearest_mosque")]]),
+                               ("Mosques (mapped)", "mosques_in_area", "nearest_mosque", "km_to_nearest_mosque")]]),
         ("Largest communities (2023 Census)", [(g, f"{p:.1f}% of residents") for g, p in zip(c["group"], c["pct_2023"])]),
     ]
     if not y.empty:
@@ -656,7 +662,7 @@ def view_explore():
             ("Year 1 schools", "year1_schools_in_area", "nearest_year1_school", "km_to_nearest_year1_school"),
             ("Secondary schools", "secondary_schools_in_area", "nearest_secondary_school", "km_to_nearest_secondary_school"),
             ("GP clinics (OSM)", "gp_clinics_in_area", "nearest_gp_clinic", "km_to_nearest_gp_clinic"),
-            ("Mosques (verified list of 6)", "mosques_in_area", "nearest_mosque", "km_to_nearest_mosque"),
+            ("Mosques (mapped)", "mosques_in_area", "nearest_mosque", "km_to_nearest_mosque"),
             ("Halal butchers (OSM)", "halal_butchers_in_area", "nearest_halal_butcher", "km_to_nearest_halal_butcher"),
             ("Parks (OSM)", "parks_in_area", "nearest_park", "km_to_nearest_park"),
             ("Public playgrounds (OSM)", "playgrounds_in_area", "nearest_playground", "km_to_nearest_playground"),
@@ -804,9 +810,9 @@ def view_family():
             "rent_min_quarter": "Lowest qtr", "rent_max_quarter": "Highest qtr", "lodged_bonds_4q": "New bonds (4q)",
             "crime_per_1000_residents": "Crime /1,000", "year1_schools_in_area": "Year 1 schools in area",
             "gp_clinics_in_area": "GPs mapped in area", "playgrounds_in_area": "Playgrounds in area",
-            "km_to_nearest_mosque": "Km to mosque (verified list)", "km_to_nearest_halal_butcher": "Km to halal butcher (OSM)",
+            "km_to_nearest_mosque": "Km to mosque (mapped)", "km_to_nearest_halal_butcher": "Km to halal butcher (OSM)",
             "pt_stops_800m": "Stops ≤800 m"}
-    cfg = {c: st.column_config.NumberColumn(format="%.1f") for c in [f"{groups[sort]} %", "Km to mosque (verified list)", "Km to halal butcher (OSM)"]}
+    cfg = {c: st.column_config.NumberColumn(format="%.1f") for c in [f"{groups[sort]} %", "Km to mosque (mapped)", "Km to halal butcher (OSM)"]}
     cfg.update({c: st.column_config.NumberColumn(format="$%.0f") for c in ["Rent $/wk", "Lowest qtr", "Highest qtr"]})
     cfg["Crime /1,000"] = st.column_config.NumberColumn(format="%.0f")
 
@@ -824,7 +830,7 @@ def view_family():
         show(s[s["check"] == "ok"].nsmallest(15, "rent"))
     with st.expander(f"No estimate ({len(missing)})"):
         show(missing.sort_values(sort, ascending=False))
-    caveat("Census shares show where people live, not where mosques or halal shops are. Mosque distances come from a verified list of 6; "
+    caveat("Census shares show where people live, not where mosques or halal shops are. Mosque distances come from 33 mapped mosques (6 verified, 27 OpenStreetMap); "
            "GPs, halal food and playgrounds come from OpenStreetMap, which may be incomplete. Distances are straight-line.")
 
 
@@ -836,8 +842,17 @@ MAP_METRICS = {
     "cooling_pa": ("Rent trend, last 2 years (% a year)", "Annualised; noisy.", "div", ":.1f"),
     "crime_per_1000_residents": ("Crime rate per 1,000 residents", "Recorded victimisations; busy centres look worse because visitors are not residents.", "seq", ":.0f"),
     "pct_muslim": ("Muslim share (%)", "2023 Census. Where people live, not where mosques or halal shops are.", "seq", ":.1f"),
-    "km_to_nearest_mosque": ("Mosque distance (km, verified list)", "From a verified list of 6 mosques; many are not in it. Straight-line.", "seq", ":.1f"),
+    "km_to_nearest_mosque": ("Mosque distance (km)", "From 33 mapped mosques (6 verified, 27 OpenStreetMap); the list may miss some. Straight-line.", "seq", ":.1f"),
 }
+
+
+def map_pick():
+    """Map click -> sidebar suburb. Runs before the rerun, so the selectbox can still be set."""
+    pts = st.session_state.map_click.selection.points
+    code = pts[0].get("location") if pts else None
+    hit = S.loc[S["sa2_code"].astype(str) == str(code), "sa2_name"]
+    if not hit.empty:
+        st.session_state.suburb = hit.iloc[0]
 
 
 def view_map():
@@ -846,8 +861,9 @@ def view_map():
     label, cav, scale, fmt = MAP_METRICS[key]
     left, right = st.columns([3, 1.25])
     with left:
-        st.plotly_chart(choropleth(READY, key, label, scale, fmt), use_container_width=True)
-        caveat(f"{cav} Only the {len(READY)} analysis-ready areas are coloured. Map © OpenStreetMap contributors.")
+        st.plotly_chart(choropleth(READY, key, label, scale, fmt, highlight=R["sa2_code"]), use_container_width=True,
+                        key="map_click", on_select=map_pick, selection_mode="points")
+        caveat(f"Click an area to select it. {cav} Only the {len(READY)} analysis-ready areas are coloured. Map © OpenStreetMap contributors.")
     with right:
         v = R[key]
         vals = READY[key].dropna()
@@ -1040,8 +1056,8 @@ def view_simple():
     km = r["km_to_nearest_mosque"]
     if pd.notna(km):
         fact("green" if km <= 3 else "amber" if km <= 8 else "red", f"Mosque: {km:.1f} km",
-             f"Nearest mosque on our verified list: {r['nearest_mosque']}, {km:.1f} km in a straight line. "
-             "The list has only 6 mosques, so there may be a closer one.")
+             f"Nearest mapped mosque: {r['nearest_mosque']}, {km:.1f} km in a straight line. "
+             "The list has 33 mosques and may miss some, such as small musallahs.")
     if pd.notna(r["gross_yield_pct"]):
         fact("grey", f"For investors: rent is about {r['gross_yield_pct']:.1f}% of value a year",
              "Yearly rent divided by the 2024 council valuation, before costs. A rough guide, not advice."
@@ -1112,7 +1128,7 @@ def view_find():
     caveat("Typical rent = new-tenancy bonds, average of the last 4 quarters; only areas with 30+ new rentals and steady prices are listed. "
            f"{(s['check'] == 'no estimate').sum()} areas have no published rent for this home, so they are not shown. Busy centres with very high "
            "crime are left out" + ("" if dwelling == "Apartment" else ", and so are apartment and inner-city areas") + ". "
-           "Mosque distance: straight-line, from a verified list of only 6 mosques.")
+           "Mosque distance: straight-line, from 33 mapped mosques.")
 
 
 {"Suburb in plain English": view_simple, "Rent in Auckland": view_rent, "Find a rental under my budget": view_find,
