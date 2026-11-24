@@ -214,7 +214,7 @@ with st.sidebar:
         compare = st.multiselect("Compare suburbs", NAMES, max_selections=8, placeholder="Pick up to 8 suburbs")
     R = BY_NAME.loc[suburb]
     st.caption("Suburbs are Stats NZ SA2 areas: names are close to suburb names, boundaries differ. "
-               "Sources: Stats NZ 2023 Census, MBIE bonds, Auckland Council valuations, NZ Police, HUD, MoE, Auckland Transport, OpenStreetMap.")
+               "Sources: Stats NZ 2023 Census, MBIE bonds, Auckland Council valuations, NZ Police, HUD, MoE, Auckland Transport, © OpenStreetMap contributors.")
 
 
 # ---------- shared charts ----------
