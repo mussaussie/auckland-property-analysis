@@ -18,8 +18,11 @@ from search import rent_period, rental_search, with_home_rent
 MODEL = "gemini-3.5-flash-lite"  # free tier about 500 requests/day (Nov 2026); Flash is about 20/day. One request per question.
 
 
+EXTRAS = Literal["muslim", "mosque", "halal", "park", "playground", "supermarket"]
+
+
 class Ask(BaseModel):
-    intent: Literal["rental_search", "area_info", "compare", "mosque", "clarify", "other"]
+    intent: Literal["rental_search", "area_info", "compare", "clarify", "other"]
     max_rent: Optional[int] = Field(None, description="Weekly rent budget in NZ dollars, only if stated in this message")
     dwelling: Optional[Literal["House", "Apartment", "Flat", "ALL"]] = Field(None, description="Home type, only if stated in this message")
     beds: Optional[Literal["1", "2", "3", "4", "5+", "ALL"]] = Field(None, description="Bedrooms, only if stated in this message")
@@ -27,6 +30,11 @@ class Ask(BaseModel):
     low_crime: Optional[bool] = Field(None, description="True if the user wants safe / low-crime areas; false if they drop that wish")
     school: Optional[bool] = Field(None, description="True if the user wants a (primary) school in the area; false if they drop it")
     park: Optional[bool] = Field(None, description="True if the user wants parks or green space in the area; false if they drop it")
+    min_muslim_pct: Optional[float] = Field(None, description="Minimum % of residents who are Muslim, only if stated; 0 drops the wish")
+    near_mosque: Optional[bool] = Field(None, description="True if the user wants a mosque nearby; false if they drop it")
+    near_halal: Optional[bool] = Field(None, description="True if the user wants halal shops or food nearby; false if they drop it")
+    near_km: Optional[float] = Field(None, description="Distance in km for 'nearby', only if stated ('within 2 km')")
+    show: list[EXTRAS] = Field(default_factory=list, description="Extra facts the user asks to see without filtering on them")
     areas: list[str] = Field(default_factory=list, description="Suburb or area names as the user wrote them in this message")
     question: Optional[str] = Field(None, description="When intent is clarify: one short question for the user")
 
@@ -35,17 +43,20 @@ SYSTEM = """You turn messages about renting in Auckland, New Zealand into search
 Never answer the question yourself and never give figures: return only JSON that matches the schema.
 intent:
 - rental_search: any request for a list of suburbs or areas to rent in: by budget, home type, bedrooms, safety (low_crime),
-  schools (school), parks (park) or a place. A budget is optional ("safe suburbs with schools for a 3 bed house").
-- area_info: facts about one named area (rent, crime, schools, parks, whether it fits a budget).
+  schools (school), parks (park), Muslim share of residents (min_muslim_pct), a nearby mosque (near_mosque), nearby halal
+  shops or food (near_halal) or a place. A budget is optional ("safe suburbs with schools for a 3 bed house").
+- area_info: facts about one named area (rent, crime, schools, GPs, shops, whether it fits a budget).
 - compare: two or more named areas side by side.
-- mosque: mosques, prayer places, halal food or religious communities. Still fill max_rent, dwelling, beds and areas if the
-  message gives them ("3 bed house under $700 near a mosque in Mt Roskill").
 - clarify: too vague to search, e.g. "where should I live?" with no budget or area; put one short question in `question`.
 - other: anything else (house sale prices, forecasts, investment advice, other cities, small talk).
 Filters: max_rent is NZ$ per week (monthly x 12 / 52, fortnightly / 2). dwelling: House, Apartment, Flat (flat or unit) or ALL (any home).
+When the message names two or more home types ("house/unit", "house or apartment"), dwelling is ALL, never just one of them.
 beds: "1" to "4", "5+" or "ALL"; a studio is "1".
 areas: suburb names in full, with nicknames expanded (Pt Chev -> Point Chevalier, Grey Lynn stays Grey Lynn). Fill areas for any
 intent when the message names a place, including a budget search limited to a place.
+Rent, crime, schools, GPs and shopping centres are always shown. show: extra facts asked about but not required ("show the
+Muslim %", "how many parks?"): muslim, mosque, halal, park, playground, supermarket. A requirement ("more than 5% Muslim",
+"near a mosque") sets the filter field instead.
 
 Follow-ups: the user's current preferences and the recent conversation are given. Set a filter only if this message states or
 changes it; leave it null otherwise, so earlier preferences carry over. A short follow-up ("what about 2 bedrooms?", "and $700?")
@@ -76,10 +87,45 @@ def find_areas(names, text):
     return exact or [n for n in names if re.search(rf"\b{re.escape(t)}\b", _norm(n))]
 
 
-# Optional wishes: (wording, filter on the search's rows). Low = lowest third of comparable areas by recorded crime per resident.
-WANTS = {"low_crime": ("low recorded crime", lambda df: df["crime_rating"].eq("Low")),
-         "school": ("a primary school inside", lambda df: df["primary_schools_in_area"].gt(0)),
-         "park": ("a park mapped inside", lambda df: df["parks_in_area"].gt(0))}
+NEAR_KM = 3  # 'nearby' without a stated distance: within 3 km straight-line
+
+
+def near(p):
+    return p.get("near_km") or NEAR_KM
+
+
+# Optional wishes: (wording, filter on the search's rows, extra columns it shows). Low = lowest third of comparable areas by
+# recorded crime per resident. Halal: food places mapped inside, or the nearest halal butcher within the distance.
+WANTS = {"low_crime": (lambda p: "low recorded crime", lambda df, p: df["crime_rating"].eq("Low"), None),
+         "school": (lambda p: "a primary school inside", lambda df, p: df["primary_schools_in_area"].gt(0), None),
+         "park": (lambda p: "a park mapped inside", lambda df, p: df["parks_in_area"].gt(0), "park"),
+         "min_muslim_pct": (lambda p: f"more than {p['min_muslim_pct']:g}% Muslim residents",
+                            lambda df, p: df["pct_muslim"].gt(p["min_muslim_pct"]), "muslim"),
+         "near_mosque": (lambda p: f"a mapped mosque within {near(p):g} km", lambda df, p: df["km_to_nearest_mosque"].le(near(p)), "mosque"),
+         "near_halal": (lambda p: f"halal food mapped inside or a halal butcher within {near(p):g} km",
+                        lambda df, p: df["halal_places_in_area"].gt(0) | df["halal_butchers_in_area"].gt(0)
+                        | df["km_to_nearest_halal_butcher"].le(near(p)), "halal")}
+
+# Extra columns, shown only when asked about or filtered on
+EXTRA_COLS = {
+    "muslim": {"Muslim residents % (2023 Census)": "pct_muslim"},
+    "mosque": {"Nearest mapped mosque": "nearest_mosque", "Mosque km (straight-line)": "km_to_nearest_mosque",
+               "Mosque inside area": "mosques_in_area"},
+    "halal": {"Halal food places mapped inside": "halal_places_in_area", "Halal butchers mapped inside": "halal_butchers_in_area",
+              "Nearest halal butcher km": "km_to_nearest_halal_butcher"},
+    "park": {"Parks in area": "parks_in_area", "Nearest park km": "km_to_nearest_park"},
+    "playground": {"Playgrounds in area": "playgrounds_in_area", "Nearest playground km": "km_to_nearest_playground"},
+    "supermarket": {"Supermarkets in area": "supermarkets_in_area", "Nearest supermarket km": "km_to_nearest_supermarket"}}
+EXTRA_NOTES = {
+    "muslim": "Muslim % = residents who gave Islam as their religion, 2023 Census. Census shares show where people live, not where "
+              "mosques, halal shops or faith schools are.",
+    "mosque": "Mosques: 33 mapped (6 verified from a supplied list plus 27 reviewed OpenStreetMap entries). The list is partial and "
+              "distances are straight-line from the area's representative point; check other sources for prayer rooms.",
+    "halal": "Halal food and butchers come from OpenStreetMap, which is incomplete: 0 means none mapped, not none. Check other "
+             "sources before relying on it.",
+    "park": "", "playground": "", "supermarket": ""}  # covered by the OpenStreetMap note every answer has
+EXTRA_NAMES = {"muslim": "Muslim %", "mosque": "mapped mosques", "halal": "halal food", "park": "parks", "playground": "playgrounds",
+               "supermarket": "supermarkets"}
 
 
 def home_label(dwelling, beds):
@@ -89,64 +135,66 @@ def home_label(dwelling, beds):
 CHECK = {"ok": "Passes sample checks", "verify": "Fails sample checks (few rentals or jumpy price)", "no estimate": "No published figure"}
 
 
-def area_table(df, home):
-    """The facts every chat answer shows: rent for the home asked about, its sample check, crime, schools and parks (no mosques)."""
+def area_table(df, home, extras=()):
+    """The facts every chat answer shows (rent for the home asked about, its sample check, crime, schools, GPs, shopping centres),
+    plus the extra columns asked about."""
     t = pd.DataFrame({"Area": df["sa2_name"], f"Rent $/wk ({home})": df["rent"]})
     if "basis" in df:  # fallbacks: broader steady rent, not this home
         t = t.rename(columns={f"Rent $/wk ({home})": "Broader rent $/wk"}).assign(**{"Rent covers": df["basis"]})
     else:
         t["Sample check"] = df["check"].map(CHECK)
-    return t.assign(**{"New rentals (12 months)": df["lodged_bonds_4q"],
+    t = t.assign(**{"New rentals (12 months)": df["lodged_bonds_4q"],
                        "Crime per 1,000 residents": df["crime_per_1000_residents"].round(0), "Crime rating": df["crime_rating"],
                        "Primary schools in area": df["primary_schools_in_area"], "Secondary schools in area": df["secondary_schools_in_area"],
-                       "Parks in area": df["parks_in_area"]}).reset_index(drop=True)
+                       "GP clinics in area": df["gp_clinics_in_area"], "Nearest GP km": df["km_to_nearest_gp_clinic"],
+                       "Shopping centres in area": df["shopping_centres_in_area"],
+                       "Nearest shopping centre": df["nearest_shopping_centre"] + " (" + df["km_to_nearest_shopping_centre"].map("{:.1f}".format) + " km)",
+                       **{label: df[col] for x in extras for label, col in EXTRA_COLS[x].items()}}).reset_index(drop=True)
+    if "mosque" in extras:  # METRIC_RULES wording for a zero
+        t["Mosque inside area"] = t["Mosque inside area"].map(lambda n: "No mosque mapped inside this SA2" if n == 0 else f"{n:.0f} mapped")
+    return t
 
 
-def notes(data, extra=()):
+def notes(data, extra=(), extras=()):
     return [*extra,
             f"Rent = median weekly rent on new tenancies (MBIE bonds), average of the last 4 quarters ({rent_period(data)}). It is not what all "
             "renters pay. 'Passes sample checks' = 30+ new rentals in 12 months and a steady price between quarters; it does not make the "
             "figure precise or mean a home is available at that price.",
             "Crime = NZ Police recorded victimisations per 1,000 residents, Oct 2025–Sep 2026; busy centres with many visitors look worse. "
             "Hotspots are not rated.",
-            "Schools are counted inside the area boundary by year levels served. Parks come from OpenStreetMap: 0 means none mapped, "
-            "not none. Areas are Stats NZ SA2 areas, close to but not the same as suburbs."]
+            "Schools are counted inside the area boundary by year levels served. GPs, shopping centres, parks, playgrounds and "
+            "supermarkets come from OpenStreetMap: 0 means none mapped, not none. Distances are straight-line. Areas are Stats NZ "
+            "SA2 areas, close to but not the same as suburbs.",
+            *[EXTRA_NOTES[x] for x in extras if EXTRA_NOTES[x]]]
+
+
+def extras_for(p):
+    """Extra columns for these preferences: asked about (show) plus those of any active filter, in a fixed order."""
+    on = set(p.get("show", [])) | {WANTS[k][2] for k in WANTS if p.get(k) and WANTS[k][2]}
+    return [x for x in EXTRA_COLS if x in on]
 
 
 def reply(text, prefs, tables=(), notes_=(), manual=False):
     return dict(text=text, tables=list(tables), notes=list(notes_), prefs=prefs, manual=manual)
 
 
-MOSQUE_NOTE = ("Ask Auckland leaves mosque information out. To see mapped mosques, switch on Show nearby mosques in the sidebar and "
-               "use Find a rental under my budget or Family screen. The mapped list is partial and distances are straight-line. Census "
-               "shares show where people live, not where mosques or halal shops are.")
-
-
 def respond(data, question, prefs, history, extract):
     """Answer one message. extract(question, prefs, history) -> Ask (Gemini in the app, a stub in tests).
-    prefs carries budget, home, bedrooms, areas and the last intent between messages; the reply holds the updated prefs.
-    A mosque question that also gives a budget, home or area ("3 bed under $700 near a mosque") is searched as usual,
-    with the mosque note on top; mosque details themselves stay in the manual search."""
-    ask = extract(question, prefs, history)
-    mixed = ask.intent == "mosque" and bool(ask.max_rent or ask.areas or ask.dwelling or ask.beds)
-    if mixed:
-        ask = ask.model_copy(update={"intent": "rental_search" if ask.max_rent or not ask.areas else "area_info"})
-    r = answer(data, ask, prefs)
-    if mixed:
-        r["notes"].insert(0, MOSQUE_NOTE)
-        r["manual"] = True
-    return r
+    prefs carries budget, home, bedrooms, wishes, extra columns, areas and the last intent between messages; the reply holds
+    the updated prefs."""
+    return answer(data, extract(question, prefs, history), prefs)
 
 
 def answer(data, ask, prefs):
-    p = {**prefs, **ask.model_dump(include={"max_rent", "dwelling", "beds", "include_apt", *WANTS}, exclude_none=True)}
+    p = {**prefs, **ask.model_dump(include={"max_rent", "dwelling", "beds", "include_apt", "near_km", *WANTS}, exclude_none=True)}
     if ask.areas:
         p["areas"] = ask.areas
-    if ask.intent == "mosque":
-        return reply(MOSQUE_NOTE.replace("Show nearby mosques", "**Show nearby mosques**"), p, manual=True)
+    if ask.show:
+        p["show"] = sorted(set(prefs.get("show", [])) | set(ask.show))
+    extras = extras_for(p)
     if ask.intent == "other":
-        return reply("I can only answer from this project's data: rents by area and home type, recorded crime, schools and parks in each "
-                     "Auckland area. Try a budget search (\"3-bed houses under $650 a week\") or ask about an area (\"crime and schools "
+        return reply("I can only answer from this project's data: rents by area and home type, recorded crime, schools, GPs, shops, "
+                     "parks, census communities and mapped mosques and halal food in each Auckland area. Try a budget search (\"3-bed houses under $650 a week\") or ask about an area (\"crime and schools "
                      "in Avondale Central\"). House sale prices exist only Auckland-wide here, never by suburb.", p)
     if ask.intent == "clarify":
         return reply(ask.question or "What weekly rent budget, home type and number of bedrooms should I search for?", p)
@@ -177,9 +225,9 @@ def answer(data, ask, prefs):
         searched = set(res["areas"]["sa2_name"])  # after the search's own rules (hotspots, apartments), before preferences
         wants = [k for k in WANTS if p.get(k)]
         for k in wants:
-            res = cut(res, WANTS[k][1])
+            res = cut(res, lambda df: WANTS[k][1](df, p))
         if wants:
-            w = [WANTS[k][0] for k in wants]
+            w = [WANTS[k][0](p) for k in wants]
             place += " with " + (", ".join(w[:-1]) + " and " if len(w) > 1 else "") + w[-1]
         if not budget:
             assumed.append("No budget given, so every area that passes the sample checks is listed, cheapest first. "
@@ -206,7 +254,7 @@ def answer(data, ask, prefs):
             text = (f"**{len(m)} area{'s' * (len(m) > 1)}**{place} {'have' if len(m) > 1 else 'has'} a typical {home} rent{cap} that "
                     f"passes the sample checks. Cheapest: {top}{', …' if len(m) > 5 else '.'} All of them are in the table below.")
             tables.append((f"{'Budget matches' if budget else 'Areas'}: {home}{place}" + (f", up to ${budget:,}/wk" if budget else ""),
-                           area_table(m, home)))
+                           area_table(m, home, extras)))
         else:
             cheapest = res["cheapest_ok"]
             text = (f"**No area matches.** No area{place} has a {home} rent{cap} that passes the sample checks."
@@ -216,10 +264,10 @@ def answer(data, ask, prefs):
             text += (f" {fails} more areas have a figure{' under budget' if budget else ''} that fails the sample checks, "
                      "so they are not listed as matches.")
         if len(fb):
-            tables.append((f"Areas to investigate ({len(fb)}): not matches, broader rent data", area_table(fb, home)))
+            tables.append((f"Areas to investigate ({len(fb)}): not matches, broader rent data", area_table(fb, home, extras)))
             text += (f" {len(fb)} areas have a broader steady rent{' under budget' if budget else ''}, listed separately: a rent across "
                      f"all sizes cannot show what a {home} costs, so check live listings.")
-        return reply(text, p, tables, notes(data, [*assumed, excluded]))
+        return reply(text, p, tables, notes(data, [*assumed, excluded], extras))
 
     # area_info / compare: one row per area, same rent and sample-check rule as the manual search
     names = sorted(data["sa2"]["sa2_name"])
@@ -238,7 +286,7 @@ def answer(data, ask, prefs):
                       "nearby suburb name.") if missing else "Which area should I look up?", p)
     sa2 = data["sa2"]
     rows = with_home_rent(sa2[sa2["sa2_name"].isin(found)], data, dwelling, beds).set_index("sa2_name").loc[found].reset_index()
-    t = area_table(rows, home)
+    t = area_table(rows, home, extras)
     extra = list(assumed)
     if p.get("max_rent"):
         b = p["max_rent"]
@@ -253,8 +301,9 @@ def answer(data, ask, prefs):
         extra.append("Not analysis-ready (too few residents or rentals): " + ", ".join(rows.loc[~rows["analysis_ready"], "sa2_name"]) + ".")
     if rows["flag_borrowed_rent"].eq(True).any():
         extra.append("Shares rent figures with a neighbouring area: " + ", ".join(rows.loc[rows["flag_borrowed_rent"].eq(True), "sa2_name"]) + ".")
-    text = (f"Comparing {len(found)} areas" if len(found) > 1 else f"**{found[0]}**") + f": rent for a {home}, crime, schools and parks."
-    return reply(text, p, [(f"{home.capitalize()} rent and area facts", t)], notes(data, extra))
+    text = ((f"Comparing {len(found)} areas" if len(found) > 1 else f"**{found[0]}**") + f": rent for a {home}, crime, schools, GPs and "
+            "shopping centres" + "".join(f", {EXTRA_NAMES[x]}" for x in extras) + ".")
+    return reply(text, p, [(f"{home.capitalize()} rent and area facts", t)], notes(data, extra, extras))
 
 
 def stub(*answers):
@@ -285,7 +334,9 @@ if __name__ == "__main__":
     assert a["tables"][0][1]["Area"].tolist() == ["Ponsonby East", "Ponsonby West"]
     assert "Which one" in respond(d, "Mt Roskill", {}, [], stub(Ask(intent="area_info", areas=["Mt Roskill"])))["text"]
     assert find_areas(sorted(d["sa2"]["sa2_name"]), "avondale central") == ["Avondale Central (Auckland)"]
-    assert not any("osque" in c for x in (r, r2, a) for _, df in x["tables"] for c in df.columns)
+    # Base columns always; extras only when asked about or filtered on
+    assert not any("osque" in c or "Muslim" in c for x in (r, r2, a) for _, df in x["tables"] for c in df.columns)
+    assert {"GP clinics in area", "Nearest shopping centre", "Crime rating"} <= set(a["tables"][0][1].columns)
     # Budget search inside named areas: cut to those SA2s, kept for follow-ups; unknown names said out loud
     g = respond(d, "x", {}, [], stub(Ask(intent="rental_search", max_rent=900, dwelling="House", beds="3", areas=["Grey Lynn"])))
     gl = rental_search(d, 900, "House", "3")["matches"]
@@ -293,8 +344,16 @@ if __name__ == "__main__":
     assert respond(d, "x", g["prefs"], [], stub(Ask(intent="rental_search", beds="2")))["prefs"]["areas"] == ["Grey Lynn"]
     u = respond(d, "x", {}, [], stub(Ask(intent="rental_search", max_rent=500, dwelling="Apartment", areas=["city centre"])))
     assert any("searches all of Auckland" in n for n in u["notes"])
-    # Mosque question with a budget: searched as usual, mosque note first, no mosque columns
-    mq = respond(d, "x", {}, [], stub(Ask(intent="mosque", max_rent=700, dwelling="House", beds="3")))
-    assert mq["notes"][0] == MOSQUE_NOTE and mq["tables"][0][1]["Area"].tolist() == rental_search(d, 700, "House", "3")["matches"]["sa2_name"].tolist()
-    assert not respond(d, "x", {}, [], stub(Ask(intent="mosque")))["tables"]
+    # "2 bedroom house/unit, more than 5% Muslim, near a mosque and halal shops": same areas as filtering the manual search
+    mq = respond(d, "x", {}, [], stub(Ask(intent="rental_search", dwelling="ALL", beds="2", min_muslim_pct=5, near_mosque=True, near_halal=True)))
+    ref = rental_search(d, 100_000, "ALL", "2")["matches"]
+    ref = ref[ref["pct_muslim"].gt(5) & ref["km_to_nearest_mosque"].le(3) & (ref["halal_places_in_area"].gt(0) | ref["halal_butchers_in_area"].gt(0)
+              | ref["km_to_nearest_halal_butcher"].le(3))]
+    t = mq["tables"][0][1]
+    assert len(ref) and t["Area"].tolist() == ref["sa2_name"].tolist() and t["Muslim residents % (2023 Census)"].gt(5).all()
+    assert {"Nearest mapped mosque", "Halal butchers mapped inside"} <= set(t.columns) and "Parks in area" not in t
+    assert any("33 mapped" in n for n in mq["notes"]) and any("Census shares" in n for n in mq["notes"])
+    # Follow-up keeps the wishes; 'show' adds a column without filtering
+    sh = respond(d, "x", mq["prefs"], [], stub(Ask(intent="rental_search", show=["park"])))
+    assert sh["tables"][0][1]["Area"].tolist() == t["Area"].tolist() and "Parks in area" in sh["tables"][0][1]
     print("chat.py self-check passed")

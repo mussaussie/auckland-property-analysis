@@ -269,8 +269,9 @@ cm, mm = table(c, home3), table(m, "Quarters with data (of 4)")
 check("Chat = manual, $700 3-bed house: same budget-match areas, rents and lodgement counts",
       bool(cm and mm) and cm[0]["Area"].tolist() == mm[0]["Area"].tolist() and cm[0][home3].tolist() == mm[0]["Typical rent"].tolist()
       and cm[0]["New rentals (12 months)"].tolist() == mm[0]["New rentals (12 months)"].tolist(), f"chat {len(cm[0]) if cm else 0}, manual {len(mm[0]) if mm else 0}")
-check("Chat answers show sample check, crime, schools and parks with the rent period",
-      bool(cm) and {"Sample check", "Crime per 1,000 residents", "Crime rating", "Primary schools in area", "Parks in area"} <= set(cm[0].columns)
+check("Chat answers always show sample check, crime, schools, GPs and shopping centres with the rent period; nothing else unasked",
+      bool(cm) and {"Sample check", "Crime per 1,000 residents", "Crime rating", "Primary schools in area", "GP clinics in area",
+                    "Nearest shopping centre"} <= set(cm[0].columns) and not {"Parks in area", "Muslim residents % (2023 Census)"} & set(cm[0].columns)
       and "(Oct 2025–Sep 2026)" in text(c) and "30+ new rentals" in text(c))
 c = ask(A(intent="rental_search", max_rent=580, dwelling="House", beds="3"))
 check("Chat = Family screen reference ($580 3-bed house): 0 matches, 4 under budget that fail the checks, 138 with no figure",
@@ -295,13 +296,18 @@ check("Chat compare = Compare page: all-home rent and crime per 1,000 for Avonda
 c = ask(A(intent="area_info", areas=["Mt Roskill"]))
 check("Chat asks which area when a name matches more than 8 SA2s (Mt Roskill, 10)", "Which one do you mean?" in text(c) and not c.dataframe)
 c = ask(A(intent="area_info", areas=["Avondale Central"]), A(intent="rental_search", max_rent=800, dwelling="House", beds="3"), mosques=True)
-c2 = ask(A(intent="mosque"), mosques=True)
-c3 = ask(A(intent="mosque", max_rent=700, dwelling="House", beds="3"), mosques=True)
-check("Chat leaves mosque information out (even with the toggle on) and points to the manual search",
-      not mosque_shown(c) and "Show nearby mosques" in text(c2) and not re.search(r"Islamic|Masjid|Jamie|km to", text(c) + text(c2) + text(c3)))
-check("Mosque question with a budget ('3 bed house under $700 near a mosque') still lists suburbs, with the mosque note",
-      bool(table(c3, home3)) and table(c3, home3)[0]["Area"].tolist() == search.rental_search(data, 700, "House", "3")["matches"]["sa2_name"].tolist()
-      and "leaves mosque information out" in text(c3) and not any("osque" in str(col) for d in c3.dataframe for col in d.value.columns))
+check("Chat leaves mosque information out unless asked (even with the toggle on)", not mosque_shown(c))
+c3 = ask(A(intent="rental_search", dwelling="ALL", beds="2", min_muslim_pct=5, near_mosque=True, near_halal=True))
+c3t = table(c3, "Nearest mapped mosque")
+ref = search.rental_search(data, 100_000, "ALL", "2")["matches"]
+ref = ref[ref["pct_muslim"].gt(5) & ref["km_to_nearest_mosque"].le(3) & (ref["halal_places_in_area"].gt(0) | ref["halal_butchers_in_area"].gt(0)
+          | ref["km_to_nearest_halal_butcher"].le(3))]
+p3 = prof.loc[ref["sa2_name"]]
+check(f"'2-bed house/unit, over 5% Muslim, near a mosque and halal shops': {len(ref)} areas, Muslim %, mosque and halal as in the area profile",
+      bool(c3t) and c3t[0]["Area"].tolist() == ref["sa2_name"].tolist() and (c3t[0]["Nearest mapped mosque"].values == p3["nearest_mosque"].values).all()
+      and (c3t[0]["Mosque km (straight-line)"].values == p3["km_to_nearest_mosque"].values).all()
+      and c3t[0]["Muslim residents % (2023 Census)"].gt(5).all() and "Halal butchers mapped inside" in c3t[0]
+      and "list is partial" in text(c3) and "Census shares show where people live" in text(c3), f"{len(c3t[0]) if c3t else 0} vs {len(ref)}")
 quota = errors.ClientError(429, {"error": {"code": 429, "message": "Resource exhausted", "status": "RESOURCE_EXHAUSTED"}})
 c = ask(quota)
 btn = [b for b in c.button if b.label == "Open Find a rental under my budget"]
