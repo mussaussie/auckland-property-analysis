@@ -232,7 +232,7 @@ from pydantic import ValidationError  # noqa: E402
 A = chat.Ask
 
 
-def ask(*answers, key="test-key", mosques=False):
+def ask(*answers, key="test-key", mosques=False, messages=None):  # messages: when a retry uses two answers for one message
     it = iter(answers)
 
     def fake(client, q, prefs, history):
@@ -246,7 +246,7 @@ def ask(*answers, key="test-key", mosques=False):
     at.session_state["view"] = "Ask Auckland"
     at.secrets["GEMINI_API_KEY"] = key  # "" = no key (overrides a local secrets.toml)
     at.run()
-    for _ in answers:
+    for _ in range(messages or len(answers)):
         at.chat_input[0].set_value("a question").run()
     return at
 
@@ -300,6 +300,11 @@ btn = [b for b in c.button if b.label == "Open Find a rental under my budget"]
 check("API limit (429): clear message and buttons to the manual filters", "free AI usage limit" in text(c) and len(btn) == 1 and not c.exception)
 btn[0].click().run() if btn else None
 check("API limit button opens the manual search", c.session_state["view"] == "Find a rental under my budget")
+busy = errors.ServerError(503, {"error": {"code": 503, "message": "The model is overloaded", "status": "UNAVAILABLE"}})
+c = ask(busy, A(intent="rental_search", max_rent=600, dwelling="House", beds="3"), messages=1)
+c2 = ask(busy, busy, messages=1)
+check("Gemini 503: retried once and answered; if it fails twice, says try again and offers manual filters",
+      "No area matches" in text(c) and "try again in a moment" in text(c2) and any(b.label.startswith("Open Find") for b in c2.button))
 try:
     A.model_validate_json('{"intent": "nonsense"}')
 except ValidationError as e:

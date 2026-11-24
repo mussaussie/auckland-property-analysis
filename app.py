@@ -6,6 +6,7 @@ Run: streamlit run app.py      Previous design: app_v1_2026-11-18.py
 import html
 import io
 import json
+import time
 import unicodedata
 from urllib.parse import quote
 
@@ -1246,14 +1247,21 @@ def view_ask():
         r = dict(text="Ask Auckland isn't set up on this copy of the dashboard (no AI key). The manual filters work without it:", manual=True)
     else:
         try:
+            def extract(*a):
+                try:
+                    return chat.gemini_extract(gemini_client(key), *a)
+                except errors.ServerError:  # 5xx: Google's side, often a brief overload; one retry (a 429 limit is not retried)
+                    time.sleep(2)
+                    return chat.gemini_extract(gemini_client(key), *a)
             history = [(m["role"], m["text"][:300]) for m in msgs]
-            r = chat.respond(D, q, st.session_state.get("ask_prefs", {}), history,
-                             lambda *a: chat.gemini_extract(gemini_client(key), *a))
+            with st.spinner("Reading your question…"):
+                r = chat.respond(D, q, st.session_state.get("ask_prefs", {}), history, extract)
             st.session_state["ask_prefs"] = r["prefs"]
         except errors.APIError as e:
             r = dict(text=("Ask Auckland has reached the free AI usage limit for now. Try again in a minute; the daily limit resets at "
                            "midnight Pacific time. Meanwhile the manual filters give the same results:") if e.code == 429 else
-                     "Ask Auckland couldn't reach the AI service just now. The manual filters give the same results:", manual=True)
+                     "Ask Auckland couldn't reach the AI service just now. Please try again in a moment, or use the manual filters, "
+                     "which give the same results:", manual=True)
         except ValidationError:  # the model's reply didn't fit the filter schema
             r = dict(text="I couldn't turn that into a search. Please rephrase it, or use the manual filters:", manual=True)
     msgs += [dict(role="user", text=q), dict(role="assistant", **r)]
