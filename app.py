@@ -19,6 +19,8 @@ from docx import Document
 from fpdf import FPDF, XPos, YPos
 from plotly.subplots import make_subplots
 
+from search import load_data, rental_search
+
 CLEAN = "data/clean"
 st.set_page_config(page_title="Auckland Property Insights", page_icon="🏠", layout="wide")
 
@@ -126,33 +128,7 @@ def style(fig, height=360, title=None):
 
 
 # ---------- data ----------
-@st.cache_data
-def load():
-    sa2 = pd.read_csv(f"{CLEAN}/master_flagged.csv")
-    for f in ["rent_metrics_by_sa2", "area_profiles_by_sa2", "risk_value_screen", "rent_market_by_sa2", "rent_premium_by_sa2",
-              "rent_forecast_by_sa2"]:
-        d = pd.read_csv(f"{CLEAN}/{f}.csv").rename(columns={"flag_thin_sample": "forecast_thin_sample"})  # only the forecast file has it
-        new = [c for c in d.columns if c not in sa2.columns]
-        sa2 = sa2.merge(d[["sa2_code"] + new], on="sa2_code", how="left")
-    # Police crime groups: person = assault, harm/endanger, sexual, robbery; property = burglary, theft (the six sum to crime_total)
-    sa2["crime_person"] = sa2[["crime_assault", "crime_harm_or_endanger_persons", "crime_sexual_offences", "crime_robbery"]].sum(axis=1, min_count=1)
-    sa2["crime_property"] = sa2[["crime_burglary", "crime_theft"]].sum(axis=1, min_count=1)
-    comparable = sa2["analysis_ready"] & ~sa2["flag_crime_hotspot"]
-    lo, hi = sa2.loc[comparable, "crime_per_1000_residents"].quantile([1 / 3, 2 / 3])
-    sa2["crime_rating"] = np.select([sa2["flag_crime_hotspot"], sa2["crime_per_1000_residents"] <= lo, sa2["crime_per_1000_residents"] <= hi,
-                                     sa2["crime_per_1000_residents"] > hi], ["Hotspot", "Low", "Moderate", "High"], default="—")
-    sa2.loc[~sa2["analysis_ready"], "crime_rating"] = "—"
-    sa2["return_score"] = (sa2["value_score"] + sa2["growth_score"]) / 2
-    sa2["risk_level"] = 100 - sa2["risk_score"]          # risk_score: 100 = lowest risk
-    return dict(
-        sa2=sa2,
-        rent_m=pd.read_csv(f"{CLEAN}/auckland_rent_monthly.csv", parse_dates=["month"]),
-        sales=pd.read_csv(f"{CLEAN}/auckland_sales_quarterly.csv", parse_dates=["quarter_end"]),
-        rent_ts=pd.read_csv(f"{CLEAN}/rent_timeseries_by_sa2.csv", parse_dates=["quarter"]),
-        by_type=pd.read_csv(f"{CLEAN}/rent_by_type_sa2.csv", dtype={"beds": str}),
-        community=pd.read_csv(f"{CLEAN}/community_by_sa2.csv"),
-        community_akl=pd.read_csv(f"{CLEAN}/community_summary.csv").set_index("group")["pct_2023"],
-    )
+load = st.cache_data(load_data)  # search.py: shared with the future AI chat
 
 
 @st.cache_data
@@ -229,6 +205,8 @@ with st.sidebar:
     if view == "Compare suburbs":  # only that page uses it
         compare = st.multiselect("Compare suburbs", NAMES, max_selections=8, placeholder="Pick up to 8 suburbs")
     R = BY_NAME.loc[suburb]
+    # Visitor's choice: mosque names, counts and distances appear only when switched on (every page and the reports)
+    MOSQUES = st.toggle("Show nearby mosques", value=False, key="show_mosques")
     st.caption("Suburbs are Stats NZ SA2 areas: names are close to suburb names, boundaries differ. "
                "Sources: Stats NZ 2023 Census, MBIE bonds, Auckland Council valuations, NZ Police, HUD, MoE, Auckland Transport, © OpenStreetMap contributors.")
 
@@ -486,7 +464,7 @@ def report_sections(r):
                                ("Playgrounds (OSM)", "playgrounds_in_area", "nearest_playground", "km_to_nearest_playground"),
                                ("Supermarkets, main chains (OSM)", "supermarkets_in_area", "nearest_supermarket", "km_to_nearest_supermarket"),
                                ("Shopping centres (OSM)", "shopping_centres_in_area", "nearest_shopping_centre", "km_to_nearest_shopping_centre"),
-                               ("Mosques (mapped)", "mosques_in_area", "nearest_mosque", "km_to_nearest_mosque")]]),
+                               ("Mosques (mapped)", "mosques_in_area", "nearest_mosque", "km_to_nearest_mosque")][:None if MOSQUES else -1]]),
         ("Largest communities (2023 Census)", [(g, f"{p:.1f}% of residents") for g, p in zip(c["group"], c["pct_2023"])]),
     ]
     if not y.empty:
@@ -670,7 +648,7 @@ def view_explore():
             ("Year 1 schools", "year1_schools_in_area", "nearest_year1_school", "km_to_nearest_year1_school"),
             ("Secondary schools", "secondary_schools_in_area", "nearest_secondary_school", "km_to_nearest_secondary_school"),
             ("GP clinics (OSM)", "gp_clinics_in_area", "nearest_gp_clinic", "km_to_nearest_gp_clinic"),
-            ("Mosques (mapped)", "mosques_in_area", "nearest_mosque", "km_to_nearest_mosque"),
+            *[("Mosques (mapped)", "mosques_in_area", "nearest_mosque", "km_to_nearest_mosque")] * MOSQUES,
             ("Halal butchers (OSM)", "halal_butchers_in_area", "nearest_halal_butcher", "km_to_nearest_halal_butcher"),
             ("Parks (OSM)", "parks_in_area", "nearest_park", "km_to_nearest_park"),
             ("Public playgrounds (OSM)", "playgrounds_in_area", "nearest_playground", "km_to_nearest_playground"),
@@ -689,8 +667,9 @@ def view_explore():
             caveat(f"Nearest Year 1 school: {r['nearest_year1_school_authority']}, enrolment scheme: {r['nearest_year1_school_enrolment_scheme']}. "
                    "Nearest is not the zoned school.")
         caveat("Counts are inside the area's boundary; a 0 means none mapped there, not none nearby. GPs, halal butchers, parks and playgrounds "
-               "come from OpenStreetMap, which may be incomplete (school, childcare and private playgrounds left out). Mosques come from 33 mapped "
-               "mosques (6 verified, 27 OpenStreetMap); small musallahs may be missing. Distances are straight-line from the area's centre, not travel time.")
+               "come from OpenStreetMap, which may be incomplete (school, childcare and private playgrounds left out). "
+               + ("Mosques come from 33 mapped mosques (6 verified, 27 OpenStreetMap); small musallahs may be missing. " if MOSQUES else "")
+               + "Distances are straight-line from the area's centre, not travel time.")
 
 
 def view_compare():
@@ -721,6 +700,9 @@ def view_compare():
             ("Screen rank (of 481)", lambda r: num(r.get("rank_Balanced"), "{:.0f}")), ("Residents 2023", lambda r: f"{r['population_2023']:,.0f}"),
             ("Median household income", lambda r: money(r["median_household_income"])), ("Owner-occupied", lambda r: num(r["pct_owner_occupied"], suffix="%")),
             ("Under 15", lambda r: num(r["pct_under_15"], suffix="%")), ("Muslim", lambda r: num(r["pct_muslim"], suffix="%"))]
+    if MOSQUES:
+        spec += [("Mosques mapped inside", lambda r: mosque_inside(r["mosques_in_area"])),
+                 ("Nearest mapped mosque", lambda r: f"{r['nearest_mosque']}, {num(r['km_to_nearest_mosque'], suffix=' km')}")]
     st.dataframe(pd.DataFrame({n: [f(rows.loc[n]) for _, f in spec] for n in compare}, index=[k for k, _ in spec]), use_container_width=True)
 
     # Three measures in three units: small multiples, never one shared axis
@@ -779,19 +761,12 @@ BEDS = ["1", "2", "3", "4", "5+", "ALL"]
 BED_LABEL = {"ALL": "Any", "5+": "5 or more (incl. 6)"}  # MBIE groups 5, 6 and more as "5+"
 
 
-def family_screen(max_rent, dwelling, beds, include_apt=False):
-    """Same rules as File 3 Step 8 shortlist() (include_apt=False): all filtered SA2s with the rent for this home and its check status."""
-    bt = D["by_type"]
-    r = bt[(bt["dwelling"] == dwelling) & (bt["beds"] == beds)][
-        ["sa2_code", "rent", "rent_min_quarter", "rent_max_quarter", "lodged_bonds_4q", "quarters", "flag_thin_sample", "flag_unstable_rent"]]
-    keep = ~READY["flag_crime_hotspot"] & (include_apt | (READY["area_type"] != "Apartments & inner city"))
-    s = READY[keep].merge(r, on="sa2_code", how="left")
-    s["check"] = "ok"
-    s.loc[s["flag_thin_sample"].eq(True) | s["flag_unstable_rent"].eq(True), "check"] = "verify"
-    s.loc[s["rent"].isna(), "check"] = "no estimate"
-    s["under"] = s["rent"] <= max_rent
-    s["mosque_inside"] = s["mosques_in_area"].map(mosque_inside)
-    return s
+def family_screen(max_rent, dwelling, beds, include_apt=None):
+    """search.rental_search (shared with the future AI chat) plus the display-only mosque column."""
+    res = rental_search(D, max_rent, dwelling, beds, include_apt)
+    for k in ("areas", "under", "matches", "fallbacks"):
+        res[k] = res[k].assign(mosque_inside=res[k]["mosques_in_area"].map(mosque_inside))
+    return res
 
 
 MOSQUE_NOTE = "Distance is straight-line from the area's representative point. The mapped mosque list may be incomplete."
@@ -810,15 +785,15 @@ def view_family():
     max_rent = c[0].number_input("Budget ($/wk)", 200, 2000, 580, 10)
     dwelling = c[1].selectbox("Dwelling", ["House", "Apartment", "Flat", "ALL"], format_func=lambda x: "Any type" if x == "ALL" else x)
     beds = c[2].selectbox("Bedrooms", BEDS, index=2, format_func=lambda x: BED_LABEL.get(x, x))
-    groups = {"pct_muslim": "Muslim", "pct_hindu": "Hindu", "pct_christian": "Christian", "pct_buddhist": "Buddhist",
-              "pct_pacific": "Pacific", "pct_asian": "Asian", "pct_maori": "Māori", "pct_under_15": "Children under 15"}
-    sort = c[3].selectbox("Sort by share of", list(groups), format_func=groups.get)
+    groups = {"pct_under_15": "Children under 15", "pct_asian": "Asian", "pct_buddhist": "Buddhist", "pct_christian": "Christian",
+              "pct_hindu": "Hindu", "pct_maori": "Māori", "pct_muslim": "Muslim", "pct_pacific": "Pacific"}
+    sort = c[3].selectbox("Sort by", ["rent"] + list(groups), format_func=lambda k: "Rent (lowest first)" if k == "rent" else f"Share: {groups[k]}")
+    by = lambda df: df.sort_values(sort, ascending=sort == "rent")  # noqa: E731
     # key per dwelling so the default resets when the dwelling changes
     include_apt = st.checkbox("Include apartment & inner-city areas", value=dwelling == "Apartment", key=f"apt_{dwelling}")
 
-    s = family_screen(max_rent, dwelling, beds, include_apt)
-    under = s[s["under"]]
-    ok = under[under["check"] == "ok"]
+    res = family_screen(max_rent, dwelling, beds, include_apt)
+    s, under, ok = res["areas"], res["under"], res["matches"]
     missing = s[s["check"] == "no estimate"]
     kpis([
         ("Areas pass other filters", f"{len(s)}", f"{s['rent'].notna().sum()} have a rent estimate for this home", GREEN),
@@ -829,15 +804,16 @@ def view_family():
     if beds == "1":
         caveat(D["by_type"].loc[D["by_type"]["beds"] == "1", "data_note"].dropna().iloc[0])
 
-    cols = {"sa2_name": "Area", "area_type": "Area type", sort: f"{groups[sort]} %", "rent": "Rent $/wk", "check": "Check",
+    share = groups.get(sort, "") + " %"
+    cols = {"sa2_name": "Area", "area_type": "Area type", **({sort: share} if sort != "rent" else {}), "rent": "Rent $/wk", "check": "Check",
             "rent_min_quarter": "Lowest qtr", "rent_max_quarter": "Highest qtr", "lodged_bonds_4q": "New bonds (4q)",
             "quarters": "Quarters with data (of 4)",
             "crime_per_1000_residents": "Crime /1,000", "year1_schools_in_area": "Year 1 schools in area",
             "gp_clinics_in_area": "GPs mapped in area", "playgrounds_in_area": "Playgrounds in area",
-            "mosque_inside": "Mosque inside area", "nearest_mosque": "Nearest mapped mosque",
-            "km_to_nearest_mosque": "Km to mosque (mapped)", "km_to_nearest_halal_butcher": "Km to halal butcher (OSM)",
-            "pt_stops_800m": "Stops ≤800 m"}
-    cfg = {c: st.column_config.NumberColumn(format="%.1f") for c in [f"{groups[sort]} %", "Km to mosque (mapped)", "Km to halal butcher (OSM)"]}
+            **({"mosque_inside": "Mosque inside area", "nearest_mosque": "Nearest mapped mosque",
+                "km_to_nearest_mosque": "Km to mosque (mapped)"} if MOSQUES else {}),
+            "km_to_nearest_halal_butcher": "Km to halal butcher (OSM)", "pt_stops_800m": "Stops ≤800 m"}
+    cfg = {c: st.column_config.NumberColumn(format="%.1f") for c in [share, "Km to mosque (mapped)", "Km to halal butcher (OSM)"]}
     cfg.update({c: st.column_config.NumberColumn(format="$%.0f") for c in ["Rent $/wk", "Lowest qtr", "Highest qtr"]})
     cfg["Crime /1,000"] = st.column_config.NumberColumn(format="%.0f")
 
@@ -848,7 +824,7 @@ def view_family():
     if under.empty:
         st.info("No area is under budget on the published figures.")
     else:
-        show(under.sort_values(sort, ascending=False))
+        show(by(under))
     caveat("Check column: ok = passes the project's sample checks (at least 30 new rentals of this home in the last 12 months and a steady "
            "price between quarters). Passing them does not make the figure precise or mean a home is available at that price. "
            "verify = fewer rentals or a price that jumps between quarters, so check listings before relying on it. "
@@ -857,9 +833,10 @@ def view_family():
     with st.expander("Cheapest areas that pass the sample checks for this home (any budget)"):
         show(s[s["check"] == "ok"].nsmallest(15, "rent"))
     with st.expander(f"Areas with no rent figure for this home ({len(missing)})"):
-        show(missing.sort_values(sort, ascending=False))
-    caveat(MOSQUE_NOTE)
-    caveat("Census shares show where people live, not where mosques or halal shops are. Mosque distances come from 33 mapped mosques (6 verified, 27 OpenStreetMap); "
+        show(by(missing))
+    if MOSQUES:
+        caveat(MOSQUE_NOTE + " Mosque distances come from 33 mapped mosques (6 verified, 27 OpenStreetMap).")
+    caveat("Census shares show where people live, not where places of worship or halal shops are. "
            "GPs, halal food and playgrounds come from OpenStreetMap, which may be incomplete. Distances are straight-line.")
 
 
@@ -886,7 +863,7 @@ def map_pick():
 
 def view_map():
     st.markdown("## Map lab")
-    key = st.selectbox("Metric", list(MAP_METRICS), format_func=lambda k: MAP_METRICS[k][0])
+    key = st.selectbox("Metric", [k for k in MAP_METRICS if MOSQUES or k != "km_to_nearest_mosque"], format_func=lambda k: MAP_METRICS[k][0])
     label, cav, scale, fmt = MAP_METRICS[key]
     left, right = st.columns([3, 1.25])
     with left:
@@ -1123,7 +1100,7 @@ def view_simple():
     fact(light, title, "Larger shopping centres only. Source: OpenStreetMap, a free map; some may be missing.")
 
     km = r["km_to_nearest_mosque"]
-    if pd.notna(km):
+    if MOSQUES and pd.notna(km):
         fact("green" if km <= 3 else "amber" if km <= 8 else "red", f"Mosque: {km:.1f} km",
              f"{mosque_inside(r['mosques_in_area'])}. Nearest mapped mosque: {r['nearest_mosque']}, {km:.1f} km. "
              + MOSQUE_NOTE + " It has 33 mosques and may miss small musallahs.")
@@ -1171,22 +1148,11 @@ def view_find():
     max_rent = c[0].number_input("My budget ($ a week)", 200, 2000, 600, 10)
     dwelling = c[1].selectbox("Home type", ["House", "Apartment", "ALL"], format_func=lambda x: "Any type" if x == "ALL" else x)
     beds = c[2].selectbox("Bedrooms", BEDS, index=2, format_func=lambda x: BED_LABEL.get(x, x))
-    s = family_screen(max_rent, dwelling, beds, include_apt=dwelling == "Apartment")
-    m = s[s["under"]].sort_values("rent")
-    ok = m[m["check"] == "ok"]
-    # Thin or jumpy figures (e.g. $93 from 6 bonds in one quarter) are not shown; the area's steady wider figure stands in:
-    # same home type any size, else any home. That covers all sizes, so it can sit above what this home really costs.
-    bt = D["by_type"]
-    steady = bt[~(bt["flag_thin_sample"].eq(True) | bt["flag_unstable_rent"].eq(True)) & (bt["beds"] == "ALL")]
-    wide = pd.concat([steady[steady["dwelling"] == d].assign(basis="All home types, all bedroom counts" if d == "ALL"
-                                                             else f"{d}s only, all bedroom counts")
-                      for d in dict.fromkeys([dwelling, "ALL"])]).drop_duplicates("sa2_code")
-    shaky = s[s["check"] == "verify"].merge(wide[["sa2_code", "rent", "lodged_bonds_4q", "basis"]], on="sa2_code",
-                                            suffixes=("_thin", ""))
-    shaky = shaky[shaky["rent"] <= max_rent].sort_values("rent")
+    res = family_screen(max_rent, dwelling, beds)
+    s, ok, shaky = res["areas"], res["matches"], res["fallbacks"]
     home = f"{'' if beds == 'ALL' else beds + '-bedroom '}{'home' if dwelling == 'ALL' else dwelling.lower()}"
     if ok.empty:
-        cheapest = s[s["check"] == "ok"]["rent"].min()
+        cheapest = res["cheapest_ok"]
         # "\$": two plain $ signs in one message would render as a maths formula
         st.info(f"No area has a typical rent that passes the sample checks at \\{money(max_rent)} a week or less for a {home}."
                 + (f" The cheapest figure that passes them is \\{money(cheapest)} a week." if pd.notna(cheapest) else "")
@@ -1197,8 +1163,8 @@ def view_find():
             "Area": ok["sa2_name"], "Typical rent": ok["rent"], "New rentals (12 months)": ok["lodged_bonds_4q"],
             "Quarters with data (of 4)": ok["quarters"], "Crime": ok["crime_rating"],
             "Primary school inside": np.where(ok["year1_schools_in_area"] > 0, "Yes", "No"),
-            "Mosque inside area": ok["mosque_inside"], "Nearest mapped mosque": ok["nearest_mosque"],
-            "Mosque (km)": ok["km_to_nearest_mosque"], "Live listings": ok["sa2_name"].map(lambda n: listings_url(n, dwelling, beds, max_rent))}),
+            **({"Mosque inside area": ok["mosque_inside"], "Nearest mapped mosque": ok["nearest_mosque"],
+                "Mosque (km)": ok["km_to_nearest_mosque"]} if MOSQUES else {}), "Live listings": ok["sa2_name"].map(lambda n: listings_url(n, dwelling, beds, max_rent))}),
             hide_index=True, use_container_width=True, column_config={
             "Typical rent": st.column_config.NumberColumn(format="$%.0f"), "Mosque (km)": st.column_config.NumberColumn(format="%.1f"),
             "Live listings": st.column_config.LinkColumn(display_text="Search Trade Me")})
@@ -1220,9 +1186,9 @@ def view_find():
     methods_link("find")
     caveat("Typical rent = new-tenancy bonds, average of the last 4 quarters. "
            f"{(s['check'] == 'no estimate').sum()} areas have no published rent for this home, so they are not shown. Busy centres with very high "
-           "crime are left out" + ("" if dwelling == "Apartment" else ", and so are apartment and inner-city areas") + ". "
-           "Mosques: from 33 mapped mosques.")
-    caveat(MOSQUE_NOTE)
+           "crime are left out" + ("" if dwelling == "Apartment" else ", and so are apartment and inner-city areas") + ".")
+    if MOSQUES:
+        caveat(MOSQUE_NOTE + " Mosques: from 33 mapped mosques.")
 
 
 {"Suburb in plain English": view_simple, "Rent in Auckland": view_rent, "Find a rental under my budget": view_find,
