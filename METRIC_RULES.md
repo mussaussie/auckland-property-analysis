@@ -128,9 +128,9 @@ MBIE counts are randomly rounded to base 3 and suppressed below 5 bonds. Census 
 
 | Item | Rule | Caveat to state |
 |---|---|---|
-| Forecast rent | `forecast_rent_y1` (year to Sep 2027, `year1_period`), `forecast_rent_y2` (year to Sep 2028); mean new-tenancy rent over that year | **"Forecast: Auckland's damped rent trend applied to this area's current rent."** Every area gets the same % (`change_y1_pct` −0.3%, `change_y2_pct` −0.6%): area-specific growth did not beat it in the backtest. |
-| Band | `y1_low`–`y1_high`, `y2_low`–`y2_high`: 80% band from the model's errors over 13 tests (2012–2024), wider where `flag_thin_sample` (under 30 new bonds in 4 quarters, 36 rent areas) | Always show the band and period with the number. 1 area in 5 lands outside. |
-| Accuracy | Trained to Sep 2024: 5.0% mean error for the year to Sep 2025, 6.2% for the year to Sep 2026 (`rent_forecast_backtest.csv`) | "About 5% typical error in a one-year test." The model expected +0.9% / +2.0% Auckland-wide; actual was −0.1% / −0.9%. |
+| Forecast rent | `forecast_rent_y1` (year to Sep 2027, `year1_period`), `forecast_rent_y2` (year to Sep 2028); mean new-tenancy rent over that year | **"Experimental Auckland-trend scenario: Auckland's damped rent trend applied to this area's current rent."** Every area gets the same % (`change_y1_pct` −0.3%, `change_y2_pct` −0.6%). Show the unchanged-rent benchmark (`rent_now`) beside it. |
+| Range | `y1_low`–`y1_high`, `y2_low`–`y2_high`: 10th–90th percentile of the model's errors over 13 tests (2012–2024), wider where `flag_thin_sample` (under 30 new bonds in 4 quarters, 36 rent areas) | Always show the range and period with the number. Describe it by its historical coverage: ranges built from 2012–2023 tests held 79% of 2024–26 outcomes. Never say it will cover 8 in 10 future outcomes. |
+| Accuracy | `rent_forecast_backtest.csv`. Trained to Sep 2024, scored Oct 2024–Sep 2026: 5.0% / 6.2% mean error (years 1 / 2) against 4.7% / 5.5% for unchanged rent. Average of 13 tests (Sep 2012–2024 starts): 5.1% / 6.9% against 5.8% / 8.5% | Say both: unchanged rent did better in the latest test; the scenario did better over 13 tests, which is why it was chosen. The model expected +0.9% / +2.0% Auckland-wide; actual was −0.1% / −0.9%. |
 | Sharing | Areas with `flag_borrowed_rent` share the forecast of their rent area; `is_new_development` areas forecast from the 2018 parent area | — |
 
 ### Family screen (File 3)

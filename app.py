@@ -173,6 +173,22 @@ BY_NAME = S.set_index("sa2_name")
 _all = D["by_type"][(D["by_type"]["dwelling"] == "ALL") & (D["by_type"]["beds"] == "ALL")]
 JUMPY = set(_all.loc[(_all["flag_unstable_rent"] == True) | (_all["flag_thin_sample"] == True), "sa2_code"])  # noqa: E712
 JUMPY_NOTE = "unreliable: few rentals or prices jump around between quarters"
+_last_q = D["rent_ts"]["quarter"].max()  # quarter start: 2026-07-01 = Jul-Sep 2026
+RENT_PERIOD = f"{_last_q - pd.DateOffset(months=9):%b %Y}–{_last_q + pd.DateOffset(months=2):%b %Y}"
+DATA_REFRESHED = "24 November 2026"  # last rebuild of data/clean (git log -1 -- data/clean); release_checks.py compares
+# File 8 backtest, shown beside every forecast: the selected model ("auckland") against the unchanged-rent benchmark ("naive")
+_bt = pd.read_csv(f"{CLEAN}/rent_forecast_backtest.csv").set_index(["test", "h", "model"])["mape"]
+LATEST, ROLLING = "trained to Sep 2024", "13 origins 2012-2024"
+FC_LABEL = "Experimental Auckland-trend scenario"
+FC_NOTE = (f"{FC_LABEL}: Auckland's damped rent trend applied to this area's current rent, so every area gets the same % change. "
+           f"Chosen because over 13 tests (starting each September, 2012–2024) its average error was {_bt[ROLLING, 1, 'auckland']:.1f}% "
+           f"at one year and {_bt[ROLLING, 2, 'auckland']:.1f}% at two, against {_bt[ROLLING, 1, 'naive']:.1f}% and "
+           f"{_bt[ROLLING, 2, 'naive']:.1f}% for assuming rent stays unchanged. In the latest test (trained to Sep 2024, scored "
+           f"Oct 2024–Sep 2026) unchanged rent did better: {_bt[LATEST, 1, 'naive']:.1f}% against {_bt[LATEST, 1, 'auckland']:.1f}% "
+           f"at one year, {_bt[LATEST, 2, 'naive']:.1f}% against {_bt[LATEST, 2, 'auckland']:.1f}% at two. "
+           # 79%: File 8 Step 5 output (bands from 2012-2023 origins scored on 2024-26)
+           "Range = 10th to 90th percentile of past errors; ranges built from the 2012–2023 tests held 79% of 2024–26 outcomes, "
+           "so treat them as a guide, not a guarantee.")
 on = lambda r, k: r.get(k) == True  # noqa: E731,E712 (blank flags are NaN, which is truthy)
 
 
@@ -199,14 +215,14 @@ def pct_rank(col, v):
 
 # ---------- sidebar ----------
 VIEWS = ["Overview", "Rent in Auckland", "Explore suburb", "Compare suburbs", "Opportunity finder", "Map lab", "Suburb in plain English",
-         "Find a rental under my budget", "Family screen", "Glossary"]
+         "Find a rental under my budget", "Family screen", "Data & Methods", "Glossary"]
 NAMES = sorted(S["sa2_name"])
 # The spec's defaults are suburb names; SA2s split them, so the nearest SA2 is used (CBD: Queen Street)
 DEFAULT_SUBURB = "Queen Street"
 with st.sidebar:
     st.markdown('<div class="brand"><div class="t">Auckland Property Insights</div><div class="s">Suburb Property Dashboard</div></div>',
                 unsafe_allow_html=True)
-    view = st.radio("View", VIEWS, label_visibility="collapsed")
+    view = st.radio("View", VIEWS, label_visibility="collapsed", key="view")  # key: methods_link() switches to Data & Methods
     st.divider()
     st.session_state.setdefault("suburb", DEFAULT_SUBURB)  # default via state, since a map click also sets it
     suburb = st.selectbox("Suburb", NAMES, key="suburb")
@@ -454,8 +470,10 @@ def report_sections(r):
             ("3-bed house rent", money(r["rent_3bed_house"]) + (" (verify: thin or unstable sample)" if on(r, "flag_verify_3bed_house") else "")),
             ("Rent growth, 10 years", num(r["rent_cagr_10y_pct"], suffix="% a year")),
             ("Rent trend, last 2 years", num(r["cooling_pa"], "{:+.1f}", "% a year") + (f" ({JUMPY_NOTE})" if r["sa2_code"] in JUMPY else "")),
-            ("Rent outlook", f"{money(r.get('forecast_rent_y1'))} for {r.get('year1_period') or '-'}, 80% band "
-                             f"{money(r.get('y1_low'))}-{money(r.get('y1_high'))}" if pd.notna(r.get("forecast_rent_y1")) else "-"),
+            (f"Rent scenario ({FC_LABEL.lower()})",
+             f"{money(r.get('forecast_rent_y1'))} for {r.get('year1_period') or '-'}, past-error range "
+             f"{money(r.get('y1_low'))}-{money(r.get('y1_high'))}; unchanged-rent benchmark {money(r.get('rent_now'))}"
+             if pd.notna(r.get("forecast_rent_y1")) else "-"),
             ("Gross yield (2024 CV proxy)", num(r["gross_yield_pct"], "{:.2f}", "%")),
             ("Capital value 2024", money(r["median_cv_2024"]) + " (council valuation, not a sale price)"),
             ("Crime", f"{num(r['crime_per_1000_residents'], '{:.0f}')} per 1,000 residents, rating {r['crime_rating']}"),
@@ -478,8 +496,7 @@ def report_sections(r):
     return out
 
 
-REPORT_NOTES = ("Rent is MBIE new-tenancy bond rent, mean of the last 4 quarters. The outlook is Auckland's damped trend applied to this "
-                "area's rent (about 5% typical error in a one-year backtest). Crime is NZ Police victimisations, Oct 2025 - Sep 2026, "
+REPORT_NOTES = (f"Rent is MBIE new-tenancy bond rent, mean of the last 4 quarters ({RENT_PERIOD}). " + FC_NOTE + " Crime is NZ Police victimisations, Oct 2025 - Sep 2026, "
                 "counted where it happened. OSM = OpenStreetMap, which may be incomplete; distances are straight-line. "
                 "SA2 areas are close to suburbs but boundaries differ. A research summary, not financial advice.")
 
@@ -553,8 +570,10 @@ def view_explore():
             ("Rent trend 2y", num(r["cooling_pa"], "{:+.1f}", "%/yr"),
              "Unreliable: few rentals or prices jump around" if r["sa2_code"] in JUMPY else "Last 2 years, annualised; noisy", BLUE),
             ("Rent change 5y", num(r["rent_change_5y_pct"], "{:+.1f}", "%"), "Total change", BLUE),
-            ("Outlook, year 1", money(r.get("forecast_rent_y1")), f"{r.get('year1_period') or ''}; 80% band {money(r.get('y1_low'))}–{money(r.get('y1_high'))}", AMBER),
-            ("Outlook, year 2", money(r.get("forecast_rent_y2")), f"{r.get('year2_period') or ''}; 80% band {money(r.get('y2_low'))}–{money(r.get('y2_high'))}", AMBER),
+            ("Scenario, year 1", money(r.get("forecast_rent_y1")), f"Experimental. {r.get('year1_period') or ''}; past-error range "
+             f"{money(r.get('y1_low'))}–{money(r.get('y1_high'))}; unchanged {money(r.get('rent_now'))}", AMBER),
+            ("Scenario, year 2", money(r.get("forecast_rent_y2")), f"Experimental. {r.get('year2_period') or ''}; past-error range "
+             f"{money(r.get('y2_low'))}–{money(r.get('y2_high'))}; unchanged {money(r.get('rent_now'))}", AMBER),
         ])
         ts = D["rent_ts"][D["rent_ts"]["sa2_code"] == r["sa2_code"]].sort_values("quarter")
         if ts.empty:
@@ -566,14 +585,16 @@ def view_explore():
                 last = D["rent_ts"]["quarter"].max()
                 xs = [last + pd.DateOffset(months=9), last + pd.DateOffset(months=21)]   # middle of each forecast year
                 ys = [r["forecast_rent_y1"], r["forecast_rent_y2"]]
-                fig.add_trace(go.Scatter(x=xs, y=ys, mode="markers", name="Outlook (80% band)", marker=dict(color=SERIES[1], size=9),
+                fig.add_trace(go.Scatter(x=xs, y=ys, mode="markers", name=f"{FC_LABEL} (past-error range)", marker=dict(color=SERIES[1], size=9),
                                          error_y=dict(type="data", symmetric=False, array=[r["y1_high"] - ys[0], r["y2_high"] - ys[1]],
                                                       arrayminus=[ys[0] - r["y1_low"], ys[1] - r["y2_low"]], color=SERIES[1]),
-                                         hovertemplate="$%{y:,.0f}<extra>outlook</extra>"))
+                                         hovertemplate="$%{y:,.0f}<extra>scenario</extra>"))
+                fig.add_trace(go.Scatter(x=xs, y=[r["rent_now"]] * 2, mode="markers", name="Unchanged-rent benchmark",
+                                         marker=dict(color="#64748b", size=9, symbol="x"), hovertemplate="$%{y:,.0f}<extra>unchanged</extra>"))
             fig.update_yaxes(tickprefix="$")
             st.plotly_chart(style(fig, 360, "Weekly rent, new tenancies"), use_container_width=True)
-        caveat("Outlook: Auckland's damped rent trend applied to this area's current rent (File 8); about 5% typical error in a one-year backtest, "
-               "and 1 area in 5 lands outside its band." + (" Series shared with neighbouring areas." if on(r, "flag_borrowed_rent") else ""))
+        caveat(FC_NOTE + (" Series shared with neighbouring areas." if on(r, "flag_borrowed_rent") else ""))
+        methods_link("explore")
 
     with t2:
         if on(r, "ranked"):
@@ -694,7 +715,8 @@ def view_compare():
             ("3-bed house rent", lambda r: money(r["rent_3bed_house"]) + (" (verify)" if on(r, "flag_verify_3bed_house") else "")),
             ("Gross yield (2024 CV proxy)", lambda r: num(r["gross_yield_pct"], "{:.2f}", "%")),
             ("Rent growth 10y", lambda r: num(r["rent_cagr_10y_pct"], suffix="%/yr")), ("Rent trend 2y", lambda r: num(r["cooling_pa"], "{:+.1f}", "%/yr")),
-            ("Outlook, year to Sep 2027", lambda r: money(r.get("forecast_rent_y1"))),
+            ("Experimental scenario, year to Sep 2027", lambda r: money(r.get("forecast_rent_y1"))),
+            ("Unchanged-rent benchmark", lambda r: money(r.get("rent_now"))),
             ("Crime /1,000 residents", lambda r: num(r["crime_per_1000_residents"], "{:.0f}")), ("Crime rating", lambda r: r["crime_rating"]),
             ("Screen rank (of 481)", lambda r: num(r.get("rank_Balanced"), "{:.0f}")), ("Residents 2023", lambda r: f"{r['population_2023']:,.0f}"),
             ("Median household income", lambda r: money(r["median_household_income"])), ("Owner-occupied", lambda r: num(r["pct_owner_occupied"], suffix="%")),
@@ -750,6 +772,7 @@ def view_opportunity():
     shortlist_table(m, 50)
     caveat("Ranked by the Balanced screen rank, then yield. Capital value is the council's 2024 valuation (median of all rating units), not a "
            "sale price. A research screen, not investment advice.")
+    methods_link("opportunity")
 
 
 BEDS = ["1", "2", "3", "4", "5+", "ALL"]
@@ -760,14 +783,22 @@ def family_screen(max_rent, dwelling, beds, include_apt=False):
     """Same rules as File 3 Step 8 shortlist() (include_apt=False): all filtered SA2s with the rent for this home and its check status."""
     bt = D["by_type"]
     r = bt[(bt["dwelling"] == dwelling) & (bt["beds"] == beds)][
-        ["sa2_code", "rent", "rent_min_quarter", "rent_max_quarter", "lodged_bonds_4q", "flag_thin_sample", "flag_unstable_rent"]]
+        ["sa2_code", "rent", "rent_min_quarter", "rent_max_quarter", "lodged_bonds_4q", "quarters", "flag_thin_sample", "flag_unstable_rent"]]
     keep = ~READY["flag_crime_hotspot"] & (include_apt | (READY["area_type"] != "Apartments & inner city"))
     s = READY[keep].merge(r, on="sa2_code", how="left")
     s["check"] = "ok"
     s.loc[s["flag_thin_sample"].eq(True) | s["flag_unstable_rent"].eq(True), "check"] = "verify"
     s.loc[s["rent"].isna(), "check"] = "no estimate"
     s["under"] = s["rent"] <= max_rent
+    s["mosque_inside"] = s["mosques_in_area"].map(mosque_inside)
     return s
+
+
+MOSQUE_NOTE = "Distance is straight-line from the area's representative point. The mapped mosque list may be incomplete."
+
+
+def mosque_inside(n):
+    return "—" if pd.isna(n) else "No mosque mapped inside this SA2" if n == 0 else f"{int(n)} mapped inside this SA2"
 
 
 def view_family():
@@ -792,7 +823,7 @@ def view_family():
     kpis([
         ("Areas pass other filters", f"{len(s)}", f"{s['rent'].notna().sum()} have a rent estimate for this home", GREEN),
         ("Under budget", f"{len(under)}", f"On published figures; {under['rent_source_sa2'].nunique()} distinct MBIE rent areas", AMBER),
-        ("Reliable rent", f"{len(ok)}", f"Under budget with enough steady rentals; {len(under) - len(ok)} have too few to be sure", BLUE),
+        ("Passes sample checks", f"{len(ok)}", f"Under budget, 30+ new rentals and a steady price; {len(under) - len(ok)} fail the checks", BLUE),
         ("No rent figure", f"{len(missing)}", "No published rent for this home, so we can't say if it fits", RED),
     ])
     if beds == "1":
@@ -800,8 +831,10 @@ def view_family():
 
     cols = {"sa2_name": "Area", "area_type": "Area type", sort: f"{groups[sort]} %", "rent": "Rent $/wk", "check": "Check",
             "rent_min_quarter": "Lowest qtr", "rent_max_quarter": "Highest qtr", "lodged_bonds_4q": "New bonds (4q)",
+            "quarters": "Quarters with data (of 4)",
             "crime_per_1000_residents": "Crime /1,000", "year1_schools_in_area": "Year 1 schools in area",
             "gp_clinics_in_area": "GPs mapped in area", "playgrounds_in_area": "Playgrounds in area",
+            "mosque_inside": "Mosque inside area", "nearest_mosque": "Nearest mapped mosque",
             "km_to_nearest_mosque": "Km to mosque (mapped)", "km_to_nearest_halal_butcher": "Km to halal butcher (OSM)",
             "pt_stops_800m": "Stops ≤800 m"}
     cfg = {c: st.column_config.NumberColumn(format="%.1f") for c in [f"{groups[sort]} %", "Km to mosque (mapped)", "Km to halal butcher (OSM)"]}
@@ -816,13 +849,16 @@ def view_family():
         st.info("No area is under budget on the published figures.")
     else:
         show(under.sort_values(sort, ascending=False))
-    caveat("Check column: ok = at least 30 new rentals of this home in the last 12 months and a steady price, so the figure is reliable; "
+    caveat("Check column: ok = passes the project's sample checks (at least 30 new rentals of this home in the last 12 months and a steady "
+           "price between quarters). Passing them does not make the figure precise or mean a home is available at that price. "
            "verify = fewer rentals or a price that jumps between quarters, so check listings before relying on it. "
-           "Rent = typical rent on new tenancies, average of the last 4 quarters.")
-    with st.expander("Cheapest areas with a reliable rent for this home (any budget)"):
+           f"Rent = median rent on new tenancies, average of the last 4 quarters ({RENT_PERIOD}).")
+    methods_link("family")
+    with st.expander("Cheapest areas that pass the sample checks for this home (any budget)"):
         show(s[s["check"] == "ok"].nsmallest(15, "rent"))
     with st.expander(f"Areas with no rent figure for this home ({len(missing)})"):
         show(missing.sort_values(sort, ascending=False))
+    caveat(MOSQUE_NOTE)
     caveat("Census shares show where people live, not where mosques or halal shops are. Mosque distances come from 33 mapped mosques (6 verified, 27 OpenStreetMap); "
            "GPs, halal food and playgrounds come from OpenStreetMap, which may be incomplete. Distances are straight-line.")
 
@@ -890,10 +926,11 @@ GLOSSARY = [
      "4 quarters. It is what a new tenant pays, not what people already renting pay."),
     ("New rentals counted", "How many new tenancies were lodged in the last 12 months: the number of rents the figure is based on."),
     ("Shared rent figure", "Some areas were split after 2018, but the rent data still uses the 2018 areas, so 142 areas share a figure with a neighbour."),
-    ("Reliable figure (ok / verify / no figure)", "ok = at least 30 new rentals of that home in 12 months and a steady price. verify = fewer "
+    ("Passes sample checks (ok / verify / no figure)", "ok = at least 30 new rentals of that home in 12 months and a steady price. These are "
+     "the project's screening rules: they do not make the figure precise or mean a home is available at that price. verify = fewer "
      "rentals, or a price that jumps between quarters, so check listings. No figure = no rent is published for that home in that area."),
-    ("Wider-area rent", "When a home size has too few rentals, the area's rent for that home type at any size (or for any home) is shown "
-     "instead. It mixes sizes, so one home may cost more or less."),
+    ("Broader rent", "When a home size has too few rentals, the area's rent for that home type at any size (or for any home) is shown in "
+     "a separate list of areas to investigate, never as a budget match. It mixes sizes, so one home may cost more or less."),
     ("Bedrooms: 5 or more", "The government rent data puts 5, 6 and more bedrooms in one group, so there is no separate 6-bedroom rent."),
     ("Capital value (CV)", "Auckland Council's valuation at 1 May 2024, the middle value of all properties in the area. It is not a sale "
      "price, and it includes shops and offices."),
@@ -901,8 +938,9 @@ GLOSSARY = [
      "It looks too high in apartment areas, where small units have low values."),
     ("Rent growth, 10 years", "The average yearly change in rent over the last 10 years. Past performance, not a promise."),
     ("Rent trend, last 2 years", "The yearly rate of rent change over the last 2 years. It moves around a lot in areas with few rentals."),
-    ("Rent forecast and likely range", "Auckland's overall rent trend applied to the area's current rent, so every area moves by the same %. "
-     "The range covers 8 out of 10 outcomes; past tests were about 5% off on average."),
+    ("Rent scenario and past-error range", "An experimental scenario: Auckland's overall rent trend applied to the area's current rent, so every "
+     "area moves by the same %. In the latest test it was slightly less accurate than assuming rent stays unchanged; over 13 tests it was "
+     "more accurate. The range comes from past errors and held about 79% of outcomes in the latest test, so it is a guide, not a guarantee."),
     ("Crime per 1,000 residents", "Crimes recorded by NZ Police in the last 12 months, per 1,000 people who live there. Busy centres look "
      "worse because visitors are counted in the crimes but not in the residents."),
     ("Crime rating", "Low, moderate or high compared with other Auckland areas (each is a third of areas). 'Busy centre' (hotspot) = over "
@@ -920,6 +958,32 @@ GLOSSARY = [
     ("Community share", "The % of residents in a group at the 2023 Census. It shows where people live, not where mosques, temples or "
      "shops are."),
 ]
+
+
+def methods_link(key):
+    st.button("How these figures are made: Data & Methods", key=f"dm_{key}",
+              on_click=lambda: st.session_state.update(view="Data & Methods"))
+
+
+def view_data():
+    st.markdown("## Data & Methods")
+    caveat(f"Where every figure comes from: source, period, calculation, sample rule and limits. Data last refreshed {DATA_REFRESHED}; "
+           f"area rents cover {RENT_PERIOD}.")
+    md_card("Areas are not suburbs", "Every figure is for a Stats NZ SA2 area (633 in Auckland; 599 analysis-ready). Names are close to "
+            "suburb names but boundaries differ, and big suburbs are split (for example Ponsonby East and Ponsonby West).")
+    # The canonical metric reference; its agent-facing sections ("Rules of use", "Never say") are left out
+    text = open("METRIC_RULES.md", encoding="utf-8").read()
+    for part in text.split("\n## ")[1:]:
+        head, _, body = part.partition("\n")
+        if head in ("Data vintages", "Geography and keys", "Metrics", "Auckland headline figures", "Not in the data"):
+            with st.expander(head, expanded=head == "Data vintages"):
+                st.markdown(body.replace("$", "\\$"))
+    st.markdown("#### Rent scenario: tested against unchanged rent")
+    b = _bt.unstack("model")[["auckland", "naive"]].reset_index()
+    b["test"] = b["test"].map({LATEST: "Trained to Sep 2024, scored Oct 2024–Sep 2026", ROLLING: "Average of 13 tests, Sep 2012–Sep 2024 starts"})
+    st.dataframe(b.rename(columns={"test": "Test period", "h": "Years ahead", "auckland": "Auckland-trend scenario, mean error %",
+                                   "naive": "Unchanged rent, mean error %"}), hide_index=True, use_container_width=True)
+    caveat(FC_NOTE)
 
 
 def view_glossary():
@@ -980,18 +1044,20 @@ def view_rent():
             x = bt[(bt["sa2_code"] == r["sa2_code"]) & (bt["dwelling"] == dw) & (bt["beds"] == b)]
             if len(x) and pd.notna(x["rent"].iloc[0]):
                 x = x.iloc[0]
-                rows.append((f"{'5 or more' if b == '5+' else b}-bedroom {dw.lower()}", x["rent"],
-                             "Check listings" if x["flag_thin_sample"] == True or x["flag_unstable_rent"] == True else "Yes"))  # noqa: E712
+                rows.append((f"{'5 or more' if b == '5+' else b}-bedroom {dw.lower()}", x["rent"], x["lodged_bonds_4q"], x["quarters"],
+                             "No: check listings" if x["flag_thin_sample"] == True or x["flag_unstable_rent"] == True else "Yes"))  # noqa: E712
     if rows:
-        st.dataframe(pd.DataFrame(rows, columns=["Home", "Typical rent a week", "Reliable figure?"]), hide_index=True,
+        st.dataframe(pd.DataFrame(rows, columns=["Home", "Typical rent a week", "New rentals (12 months)", "Quarters with data (of 4)",
+                                                 "Passes sample checks?"]), hide_index=True,
                      use_container_width=True, column_config={"Typical rent a week": st.column_config.NumberColumn(format="$%.0f")})
     else:
         st.info("No published rent by home size for this area.")
     if pd.notna(r.get("forecast_rent_y1")):
-        fact("grey", f"Next year: about {money(r['forecast_rent_y1'])} a week (likely {money(r['y1_low'])}–{money(r['y1_high'])})",
-             f"For {r['year1_period']}, all home types. This is Auckland's overall rent trend applied to this area's current rent, "
-             "so every area moves by the same %; the range covers 8 in 10 outcomes (about 5% typical error in past tests).")
-    caveat("Rents are new-tenancy bonds (MBIE), average of the last 4 quarters. 'Check listings' = few rentals or prices jump around."
+        fact("grey", f"Experimental scenario for next year: about {money(r['forecast_rent_y1'])} a week "
+                     f"(past-error range {money(r['y1_low'])}–{money(r['y1_high'])}); unchanged rent would be {money(r['rent_now'])}",
+             f"For {r['year1_period']}, all home types. " + FC_NOTE)
+    caveat(f"Rents are new-tenancy bonds (MBIE), average of the last 4 quarters ({RENT_PERIOD}). Sample checks = 30+ new rentals and a "
+           "steady price; passing them does not make a figure precise. 'Check listings' = few rentals or prices jump around."
            + (" This area shares its rent figures with a neighbouring area." if on(r, "flag_borrowed_rent") else ""))
 
     st.markdown("#### Where rent is rising and falling (last 2 years)")
@@ -1059,8 +1125,8 @@ def view_simple():
     km = r["km_to_nearest_mosque"]
     if pd.notna(km):
         fact("green" if km <= 3 else "amber" if km <= 8 else "red", f"Mosque: {km:.1f} km",
-             f"Nearest mapped mosque: {r['nearest_mosque']}, {km:.1f} km in a straight line. "
-             "The list has 33 mosques and may miss some, such as small musallahs.")
+             f"{mosque_inside(r['mosques_in_area'])}. Nearest mapped mosque: {r['nearest_mosque']}, {km:.1f} km. "
+             + MOSQUE_NOTE + " It has 33 mosques and may miss small musallahs.")
     if pd.notna(r["gross_yield_pct"]):
         fact("grey", f"For investors: rent is about {r['gross_yield_pct']:.1f}% of value a year",
              "Yearly rent divided by the 2024 council valuation, before costs. A rough guide, not advice."
@@ -1084,6 +1150,21 @@ assert suburb_word("Glen Innes East-Wai O Taiki Bay") == "Glen Innes" and suburb
 assert suburb_word("Te Atatū Peninsula West") == "Te Atatū Peninsula" and suburb_word("Āwhitu") == "Āwhitu"
 
 
+def listings_url(sa2_name, dwelling, beds, max_rent):
+    """Trade Me rental search carrying the suburb word, budget, bedrooms and type (parameters checked on trademe.co.nz, Nov 2026)."""
+    p = {"search_string": suburb_word(sa2_name), "price_max": int(max_rent)}
+    if beds != "ALL":
+        p["bedrooms_min"] = beds.rstrip("+")
+        if not beds.endswith("+"):
+            p["bedrooms_max"] = beds
+    if dwelling != "ALL":
+        p["property_type"] = dwelling.lower()
+    return "https://www.trademe.co.nz/a/property/residential/rent/auckland/search?" + "&".join(f"{k}={quote(str(v))}" for k, v in p.items())
+
+
+assert listings_url("Pukekohe West", "House", "3", 600).endswith("search_string=Pukekohe&price_max=600&bedrooms_min=3&bedrooms_max=3&property_type=house")
+
+
 def view_find():
     st.markdown("## Find a rental under my budget")
     c = st.columns(3)
@@ -1097,7 +1178,8 @@ def view_find():
     # same home type any size, else any home. That covers all sizes, so it can sit above what this home really costs.
     bt = D["by_type"]
     steady = bt[~(bt["flag_thin_sample"].eq(True) | bt["flag_unstable_rent"].eq(True)) & (bt["beds"] == "ALL")]
-    wide = pd.concat([steady[steady["dwelling"] == d].assign(basis="all homes" if d == "ALL" else f"all {d.lower()}s")
+    wide = pd.concat([steady[steady["dwelling"] == d].assign(basis="All home types, all bedroom counts" if d == "ALL"
+                                                             else f"{d}s only, all bedroom counts")
                       for d in dict.fromkeys([dwelling, "ALL"])]).drop_duplicates("sa2_code")
     shaky = s[s["check"] == "verify"].merge(wide[["sa2_code", "rent", "lodged_bonds_4q", "basis"]], on="sa2_code",
                                             suffixes=("_thin", ""))
@@ -1106,38 +1188,46 @@ def view_find():
     if ok.empty:
         cheapest = s[s["check"] == "ok"]["rent"].min()
         # "\$": two plain $ signs in one message would render as a maths formula
-        st.info(f"No area has a reliable typical rent of \\{money(max_rent)} a week or less for a {home}."
-                + (f" The cheapest reliable figure is \\{money(cheapest)} a week." if pd.notna(cheapest) else "")
+        st.info(f"No area has a typical rent that passes the sample checks at \\{money(max_rent)} a week or less for a {home}."
+                + (f" The cheapest figure that passes them is \\{money(cheapest)} a week." if pd.notna(cheapest) else "")
                 + " Try a higher budget or fewer bedrooms.")
     else:
         st.markdown(f"#### {len(ok)} areas where a typical {home} rents for \\{money(max_rent)} a week or less")
         st.dataframe(pd.DataFrame({
-            "Area": ok["sa2_name"], "Typical rent": ok["rent"], "Crime": ok["crime_rating"],
+            "Area": ok["sa2_name"], "Typical rent": ok["rent"], "New rentals (12 months)": ok["lodged_bonds_4q"],
+            "Quarters with data (of 4)": ok["quarters"], "Crime": ok["crime_rating"],
             "Primary school inside": np.where(ok["year1_schools_in_area"] > 0, "Yes", "No"),
-            "Mosque (km)": ok["km_to_nearest_mosque"]}), hide_index=True, use_container_width=True, column_config={
-            "Typical rent": st.column_config.NumberColumn(format="$%.0f"), "Mosque (km)": st.column_config.NumberColumn(format="%.1f")})
+            "Mosque inside area": ok["mosque_inside"], "Nearest mapped mosque": ok["nearest_mosque"],
+            "Mosque (km)": ok["km_to_nearest_mosque"], "Live listings": ok["sa2_name"].map(lambda n: listings_url(n, dwelling, beds, max_rent))}),
+            hide_index=True, use_container_width=True, column_config={
+            "Typical rent": st.column_config.NumberColumn(format="$%.0f"), "Mosque (km)": st.column_config.NumberColumn(format="%.1f"),
+            "Live listings": st.column_config.LinkColumn(display_text="Search Trade Me")})
+    caveat(f"Budget matches use the rent for this exact home ({home}), median of new tenancies, average of {RENT_PERIOD}. Listed only if it passes "
+           "the project's sample checks: 30+ new rentals in 12 months and a steady price between quarters. Passing them does not make the "
+           "figure precise or mean a home is available at that price.")
     if len(shaky):
-        with st.expander(f"{len(shaky)} more areas that may fit your budget (not enough {home} rentals here for a reliable figure)"):
-            st.caption(f"Too few {home} rentals were recorded here, or their price jumps around between quarters (often because "
-                       "cheap social housing is mixed in), so we show the area's wider rent instead. It covers all sizes, so a "
-                       f"{home} may cost a bit more or less. Check live listings before deciding.")
-            st.dataframe(pd.DataFrame({
-                "Area": shaky["sa2_name"], "Wider-area rent": shaky["rent"], "Based on": shaky["basis"],
-                "New rentals counted (12 months)": shaky["lodged_bonds_4q"],
-                "Live listings": "https://www.trademe.co.nz/a/property/residential/rent/auckland/search?search_string="
-                                 + shaky["sa2_name"].map(lambda n: quote(suburb_word(n)))}),
-                hide_index=True, use_container_width=True, column_config={
-                    "Wider-area rent": st.column_config.NumberColumn(format="$%.0f"),
-                    "Live listings": st.column_config.LinkColumn(display_text="Search Trade Me")})
-    caveat("Typical rent = new-tenancy bonds, average of the last 4 quarters; only areas with 30+ new rentals and steady prices are listed. "
+        st.markdown(f"#### Areas to investigate using broader rent data ({len(shaky)})")
+        st.caption(f"Not budget matches. These areas have too few {home} rentals, or a price that jumps between quarters, so no {home} "
+                   "rent passes the sample checks. The rent shown is broader: the 'Rent covers' column says which homes it includes. "
+                   f"A rent across all sizes cannot show that a {home} fits your budget; check live listings.")
+        st.dataframe(pd.DataFrame({
+            "Area": shaky["sa2_name"], "Broader rent": shaky["rent"], "Rent covers": shaky["basis"],
+            "New rentals (12 months)": shaky["lodged_bonds_4q"],
+            "Live listings": shaky["sa2_name"].map(lambda n: listings_url(n, dwelling, beds, max_rent))}),
+            hide_index=True, use_container_width=True, column_config={
+                "Broader rent": st.column_config.NumberColumn(format="$%.0f"),
+                "Live listings": st.column_config.LinkColumn(display_text="Search Trade Me")})
+    methods_link("find")
+    caveat("Typical rent = new-tenancy bonds, average of the last 4 quarters. "
            f"{(s['check'] == 'no estimate').sum()} areas have no published rent for this home, so they are not shown. Busy centres with very high "
            "crime are left out" + ("" if dwelling == "Apartment" else ", and so are apartment and inner-city areas") + ". "
-           "Mosque distance: straight-line, from 33 mapped mosques.")
+           "Mosques: from 33 mapped mosques.")
+    caveat(MOSQUE_NOTE)
 
 
 {"Suburb in plain English": view_simple, "Rent in Auckland": view_rent, "Find a rental under my budget": view_find,
  "Overview": view_overview, "Explore suburb": view_explore, "Compare suburbs": view_compare, "Opportunity finder": view_opportunity,
- "Family screen": view_family, "Map lab": view_map, "Glossary": view_glossary}[view]()
+ "Family screen": view_family, "Map lab": view_map, "Data & Methods": view_data, "Glossary": view_glossary}[view]()
 
 st.divider()
 st.markdown('<div style="padding:.35rem 0 1.25rem;font-size:.95rem;color:#5b6470">Created by <strong>Abdul Mussavir</strong> | '

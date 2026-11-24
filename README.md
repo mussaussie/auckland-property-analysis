@@ -9,7 +9,8 @@ Streamlit dashboard. Every figure is keyed to a Stats NZ **SA2** area (633 in Au
 | Part | What it does |
 |---|---|
 | `01`–`08` notebooks | The analysis. Each one writes a documented CSV to `data/clean/` and states its findings and caveats in a summary cell. |
-| `app.py` | Streamlit dashboard: Overview, Rent in Auckland, Explore suburb, Compare suburbs, Opportunity finder, Map lab, Suburb in plain English, Find a rental under my budget, Family screen, Glossary. |
+| `app.py` | Streamlit dashboard: Overview, Rent in Auckland, Explore suburb, Compare suburbs, Opportunity finder, Map lab, Suburb in plain English, Find a rental under my budget, Family screen, Data & Methods, Glossary. |
+| `release_checks.py` | Checks the figures and decisions the dashboard presents (`python release_checks.py`); run before every release. |
 | `download_data.py` | Fetches every raw source into `data/`. |
 | `build_master.py` | Joins the raw sources into one row per SA2 (`data/clean/master_dataset_by_sa2.csv`). |
 | `METRIC_RULES.md` | Canonical definition, source, period and caveat for every metric, plus a "Never say" list. |
@@ -26,7 +27,7 @@ Streamlit dashboard. Every figure is keyed to a Stats NZ **SA2** area (633 in Au
 | 05 | Auckland rent trends 1993–2026 and cooling by area type | `auckland_rent_monthly.csv`, `rent_market_by_sa2.csv` |
 | 06 | Census rent paid vs new-tenancy bond rent | `rent_premium_by_sa2.csv` |
 | 07 | Communities 2013–2023: growth, hubs, segregation | `community_by_sa2.csv`, `community_summary.csv` |
-| 08 | Rent forecast with backtest and 80% bands | `rent_forecast_by_sa2.csv`, `rent_forecast_backtest.csv` |
+| 08 | Experimental rent scenario with backtest against unchanged rent, and past-error ranges | `rent_forecast_by_sa2.csv`, `rent_forecast_backtest.csv` |
 
 ## Run the dashboard
 
