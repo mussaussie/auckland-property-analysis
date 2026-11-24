@@ -19,7 +19,8 @@ from docx import Document
 from fpdf import FPDF, XPos, YPos
 from plotly.subplots import make_subplots
 
-from search import load_data, rental_search
+import chat
+from search import load_data, rent_period, rental_search
 
 CLEAN = "data/clean"
 st.set_page_config(page_title="Auckland Property Insights", page_icon="🏠", layout="wide")
@@ -149,8 +150,7 @@ BY_NAME = S.set_index("sa2_name")
 _all = D["by_type"][(D["by_type"]["dwelling"] == "ALL") & (D["by_type"]["beds"] == "ALL")]
 JUMPY = set(_all.loc[(_all["flag_unstable_rent"] == True) | (_all["flag_thin_sample"] == True), "sa2_code"])  # noqa: E712
 JUMPY_NOTE = "unreliable: few rentals or prices jump around between quarters"
-_last_q = D["rent_ts"]["quarter"].max()  # quarter start: 2026-07-01 = Jul-Sep 2026
-RENT_PERIOD = f"{_last_q - pd.DateOffset(months=9):%b %Y}–{_last_q + pd.DateOffset(months=2):%b %Y}"
+RENT_PERIOD = rent_period(D)
 DATA_REFRESHED = "24 November 2026"  # last rebuild of data/clean (git log -1 -- data/clean); release_checks.py compares
 # File 8 backtest, shown beside every forecast: the selected model ("auckland") against the unchanged-rent benchmark ("naive")
 _bt = pd.read_csv(f"{CLEAN}/rent_forecast_backtest.csv").set_index(["test", "h", "model"])["mape"]
@@ -190,7 +190,7 @@ def pct_rank(col, v):
 
 
 # ---------- sidebar ----------
-VIEWS = ["Overview", "Rent in Auckland", "Explore suburb", "Compare suburbs", "Opportunity finder", "Map lab", "Suburb in plain English",
+VIEWS = ["Overview", "Ask Auckland", "Rent in Auckland", "Explore suburb", "Compare suburbs", "Opportunity finder", "Map lab", "Suburb in plain English",
          "Find a rental under my budget", "Family screen", "Data & Methods", "Glossary"]
 NAMES = sorted(S["sa2_name"])
 # The spec's defaults are suburb names; SA2s split them, so the nearest SA2 is used (CBD: Queen Street)
@@ -1191,7 +1191,77 @@ def view_find():
         caveat(MOSQUE_NOTE + " Mosques: from 33 mapped mosques.")
 
 
-{"Suburb in plain English": view_simple, "Rent in Auckland": view_rent, "Find a rental under my budget": view_find,
+def gemini_key():
+    # .streamlit/secrets.toml locally (gitignored); app Settings > Secrets on Streamlit Cloud.
+    # load_if_toml_exists() first: reading st.secrets with no file shows a red error box on the page.
+    return st.secrets.get("GEMINI_API_KEY") if st.secrets.load_if_toml_exists() else None
+
+
+@st.cache_resource
+def gemini_client(key):
+    from google import genai
+    return genai.Client(api_key=key)
+
+
+def manual_links(key):
+    c = st.columns(2)
+    for col, v in zip(c, ["Find a rental under my budget", "Family screen"]):
+        col.button(f"Open {v}", key=f"go_{key}_{v}", on_click=lambda v=v: st.session_state.update(view=v))
+
+
+def show_reply(m, i):
+    st.markdown(m["text"].replace("$", "\\$"))  # plain $ pairs would render as maths
+    for title, df in m.get("tables", []):
+        st.markdown(f"**{esc(title)}**")
+        st.dataframe(df, hide_index=True, use_container_width=True, column_config={
+            c: st.column_config.NumberColumn(format="$%.0f") for c in df.columns if "$/wk" in c and "?" not in c})
+    for n in m.get("notes", []):
+        caveat(n)
+    if m.get("manual"):
+        manual_links(i)
+
+
+def view_ask():
+    st.markdown("## Ask Auckland")
+    caveat("Ask about rents, recorded crime, schools and parks in Auckland areas. An AI model (Google Gemini, free tier) only reads your "
+           "question and turns it into filters; every figure comes from this project's data through the same searches as the manual "
+           "pages. Mosque information is only in the manual search (switch on Show nearby mosques). Not financial advice.")
+    msgs = st.session_state.setdefault("ask_msgs", [])
+    for i, m in enumerate(msgs):
+        with st.chat_message(m["role"]):
+            if m["role"] == "assistant":
+                show_reply(m, i)
+            else:
+                st.markdown(esc(m["text"]).replace("$", "\\$"))
+    q = st.chat_input("e.g. 3-bed houses under $650 a week, or compare Avondale Central and Māngere East")
+    if not q:
+        return
+    q = q[:500]
+    with st.chat_message("user"):
+        st.markdown(esc(q).replace("$", "\\$"))
+    key = gemini_key()
+    from google.genai import errors
+    from pydantic import ValidationError
+    if not key:
+        r = dict(text="Ask Auckland isn't set up on this copy of the dashboard (no AI key). The manual filters work without it:", manual=True)
+    else:
+        try:
+            history = [(m["role"], m["text"][:300]) for m in msgs]
+            r = chat.respond(D, q, st.session_state.get("ask_prefs", {}), history,
+                             lambda *a: chat.gemini_extract(gemini_client(key), *a))
+            st.session_state["ask_prefs"] = r["prefs"]
+        except errors.APIError as e:
+            r = dict(text=("Ask Auckland has reached the free AI usage limit for now. Try again in a minute; the daily limit resets at "
+                           "midnight Pacific time. Meanwhile the manual filters give the same results:") if e.code == 429 else
+                     "Ask Auckland couldn't reach the AI service just now. The manual filters give the same results:", manual=True)
+        except ValidationError:  # the model's reply didn't fit the filter schema
+            r = dict(text="I couldn't turn that into a search. Please rephrase it, or use the manual filters:", manual=True)
+    msgs += [dict(role="user", text=q), dict(role="assistant", **r)]
+    with st.chat_message("assistant"):
+        show_reply(msgs[-1], len(msgs))
+
+
+{"Ask Auckland": view_ask, "Suburb in plain English": view_simple, "Rent in Auckland": view_rent, "Find a rental under my budget": view_find,
  "Overview": view_overview, "Explore suburb": view_explore, "Compare suburbs": view_compare, "Opportunity finder": view_opportunity,
  "Family screen": view_family, "Map lab": view_map, "Data & Methods": view_data, "Glossary": view_glossary}[view]()
 

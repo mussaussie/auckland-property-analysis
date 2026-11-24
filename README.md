@@ -9,8 +9,9 @@ Streamlit dashboard. Every figure is keyed to a Stats NZ **SA2** area (633 in Au
 | Part | What it does |
 |---|---|
 | `01`–`08` notebooks | The analysis. Each one writes a documented CSV to `data/clean/` and states its findings and caveats in a summary cell. |
-| `app.py` | Streamlit dashboard: Overview, Rent in Auckland, Explore suburb, Compare suburbs, Opportunity finder, Map lab, Suburb in plain English, Find a rental under my budget, Family screen, Data & Methods, Glossary. |
-| `search.py` | Shared data loading and rental search, used by the dashboard's filters and the planned AI chat (`python search.py` self-checks). |
+| `app.py` | Streamlit dashboard: Overview, Ask Auckland (chat), Rent in Auckland, Explore suburb, Compare suburbs, Opportunity finder, Map lab, Suburb in plain English, Find a rental under my budget, Family screen, Data & Methods, Glossary. |
+| `search.py` | Shared data loading and rental search, used by the dashboard's filters and the chat (`python search.py` self-checks). |
+| `chat.py` | Ask Auckland: Google Gemini (free tier) turns a question into filters; the answer is computed by `search.py` from `data/clean`, never written by the model (`python chat.py` self-checks without an API call). |
 | `release_checks.py` | Checks the figures and decisions the dashboard presents (`python release_checks.py`); run before every release. |
 | `download_data.py` | Fetches every raw source into `data/`. |
 | `build_master.py` | Joins the raw sources into one row per SA2 (`data/clean/master_dataset_by_sa2.csv`). |
@@ -38,6 +39,15 @@ The clean data is in the repo, so the dashboard runs straight after cloning:
 pip install -r requirements.txt
 streamlit run app.py
 ```
+
+Ask Auckland needs a free Gemini API key from Google AI Studio. Locally, put it in `.streamlit/secrets.toml` (gitignored):
+
+```toml
+GEMINI_API_KEY = "your-key"
+```
+
+On Streamlit Community Cloud, paste the same line into the app's **Settings → Secrets**. Without a key the chat says it isn't set
+up and every other page works as before.
 
 ## Rebuild from raw data
 

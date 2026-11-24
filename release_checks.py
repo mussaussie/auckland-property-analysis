@@ -74,7 +74,7 @@ check("Data & Methods refresh date matches the last data/clean commit",
 check("No 'reliable rent' wording left in app.py", not re.search(r"reliable (rent|figure|typical)|Reliable (rent|figure)", app_src))
 
 # ---------- app ----------
-VIEWS = ["Overview", "Rent in Auckland", "Explore suburb", "Compare suburbs", "Opportunity finder", "Map lab", "Suburb in plain English",
+VIEWS = ["Overview", "Ask Auckland", "Rent in Auckland", "Explore suburb", "Compare suburbs", "Opportunity finder", "Map lab", "Suburb in plain English",
          "Find a rental under my budget", "Family screen", "Data & Methods", "Glossary"]
 for v in VIEWS:
     at = run(v)
@@ -222,6 +222,91 @@ check("Explore: scenario labelled experimental, unchanged-rent benchmark and tes
 at = run("Data & Methods")
 check("Data & Methods: refresh date, SA2 note, sources and forecast test table",
       f"Data last refreshed" in text(at) and "Areas are not suburbs" in text(at) and len(at.dataframe) == 1 and len(at.expander) == 5)
+
+# ---------- Ask Auckland: chat and manual searches agree ----------
+# Gemini is replaced by stubs that return fixed filters, so these checks use no API quota; the reply itself is computed by chat.py
+import chat  # noqa: E402
+from google.genai import errors  # noqa: E402
+from pydantic import ValidationError  # noqa: E402
+
+A = chat.Ask
+
+
+def ask(*answers, key="test-key", mosques=False):
+    it = iter(answers)
+
+    def fake(client, q, prefs, history):
+        a = next(it)
+        if isinstance(a, Exception):
+            raise a
+        return a
+    chat.gemini_extract = fake  # app.py calls chat.gemini_extract, so the page uses the stub
+    at = AppTest.from_file("app.py", default_timeout=180)
+    at.session_state["show_mosques"] = mosques
+    at.session_state["view"] = "Ask Auckland"
+    at.secrets["GEMINI_API_KEY"] = key  # "" = no key (overrides a local secrets.toml)
+    at.run()
+    for _ in answers:
+        at.chat_input[0].set_value("a question").run()
+    return at
+
+
+def table(at, col):
+    return [d.value for d in at.dataframe if col in d.value.columns]
+
+
+home3 = "Rent $/wk (3-bedroom house)"
+c = ask(A(intent="rental_search", max_rent=600, dwelling="House", beds="3"))
+m = run("Find a rental under my budget")
+cf, mf = table(c, "Rent covers"), table(m, "Rent covers")
+check("Chat = manual, zero-match $600 3-bed house: says no match, same 13 areas and broader rents",
+      not c.exception and "No area matches" in text(c) and home3 not in " ".join(map(str, sum((list(d.value.columns) for d in c.dataframe), [])))
+      and bool(cf and mf) and cf[0]["Area"].tolist() == mf[0]["Area"].tolist() and cf[0]["Broader rent $/wk"].tolist() == mf[0]["Broader rent"].tolist(),
+      f"chat {len(cf[0]) if cf else 0}, manual {len(mf[0]) if mf else 0}")
+c = ask(A(intent="rental_search", max_rent=700, dwelling="House", beds="3"))
+m = run("Find a rental under my budget", setup=lambda a: widget(a.number_input, "My budget ($ a week)").set_value(700))
+cm, mm = table(c, home3), table(m, "Quarters with data (of 4)")
+check("Chat = manual, $700 3-bed house: same budget-match areas, rents and lodgement counts",
+      bool(cm and mm) and cm[0]["Area"].tolist() == mm[0]["Area"].tolist() and cm[0][home3].tolist() == mm[0]["Typical rent"].tolist()
+      and cm[0]["New rentals (12 months)"].tolist() == mm[0]["New rentals (12 months)"].tolist(), f"chat {len(cm[0]) if cm else 0}, manual {len(mm[0]) if mm else 0}")
+check("Chat answers show sample check, crime, schools and parks with the rent period",
+      bool(cm) and {"Sample check", "Crime per 1,000 residents", "Crime rating", "Primary schools in area", "Parks in area"} <= set(cm[0].columns)
+      and "(Oct 2025–Sep 2026)" in text(c) and "30+ new rentals" in text(c))
+c = ask(A(intent="rental_search", max_rent=580, dwelling="House", beds="3"))
+check("Chat = Family screen reference ($580 3-bed house): 0 matches, 4 under budget that fail the checks, 138 with no figure",
+      "No area matches" in text(c) and "4 more areas have a figure under budget that fails" in text(c) and "138 areas have no published rent" in text(c))
+c = ask(A(intent="rental_search", max_rent=600, dwelling="House", beds="3"), A(intent="rental_search", beds="2"))
+c2 = table(c, "Rent $/wk (2-bedroom house)")
+check("Follow-up keeps budget and home type: 'what about 2 bedrooms' searches 2-bed houses up to $600",
+      c.session_state["ask_prefs"] == {"max_rent": 600, "dwelling": "House", "beds": "2", "intent": "rental_search"} and bool(c2)
+      and c2[0]["Area"].tolist() == search.rental_search(data, 600, "House", "2")["matches"]["sa2_name"].tolist())
+c = ask(A(intent="rental_search", dwelling="House"))
+check("Chat asks for the budget when it is missing", "What is your weekly rent budget?" in text(c) and not c.dataframe)
+c = ask(A(intent="compare", areas=["Avondale Central", "Queen Street"]))
+m = run("Compare suburbs", setup=pick2)
+ct, mt = table(c, "Rent $/wk (home)"), [d.value for d in m.dataframe if "Weekly rent (new tenancies)" in d.value.index]
+check("Chat compare = Compare page: all-home rent and crime per 1,000 for Avondale Central and Queen Street",
+      bool(ct and mt) and [f"${v:,.0f}" for v in ct[0]["Rent $/wk (home)"]] == mt[0].loc["Weekly rent (new tenancies)"].tolist()
+      and [f"{v:.0f}" for v in ct[0]["Crime per 1,000 residents"]] == mt[0].loc["Crime /1,000 residents"].tolist())
+c = ask(A(intent="area_info", areas=["Avondale"]))
+check("Chat asks which area when a name matches many SA2s (Avondale)", "Which one do you mean?" in text(c) and not c.dataframe)
+c = ask(A(intent="area_info", areas=["Avondale Central"]), A(intent="rental_search", max_rent=800, dwelling="House", beds="3"), mosques=True)
+c2 = ask(A(intent="mosque"), mosques=True)
+check("Chat leaves mosque information out (even with the toggle on) and points to the manual search",
+      not mosque_shown(c) and "Show nearby mosques" in text(c2) and not re.search(r"Islamic|Masjid|Jamie|km to", text(c) + text(c2)))
+quota = errors.ClientError(429, {"error": {"code": 429, "message": "Resource exhausted", "status": "RESOURCE_EXHAUSTED"}})
+c = ask(quota)
+btn = [b for b in c.button if b.label == "Open Find a rental under my budget"]
+check("API limit (429): clear message and buttons to the manual filters", "free AI usage limit" in text(c) and len(btn) == 1 and not c.exception)
+btn[0].click().run() if btn else None
+check("API limit button opens the manual search", c.session_state["view"] == "Find a rental under my budget")
+try:
+    A.model_validate_json('{"intent": "nonsense"}')
+except ValidationError as e:
+    bad = e
+check("Malformed model output: asks to rephrase, offers manual filters", "couldn't turn that into a search" in text(ask(bad)))
+c = ask(A(intent="other"), key="")
+check("No API key: chat says it isn't set up and the page still works", "isn't set up" in text(c) and not c.exception)
 
 # ---------- report ----------
 width = max(len(n) for n, _, _ in results)

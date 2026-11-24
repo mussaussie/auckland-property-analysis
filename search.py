@@ -40,6 +40,24 @@ def load_data():
     )
 
 
+def rent_period(data):
+    """Months covered by the area rents: the last 4 quarters, e.g. 'Oct 2025–Sep 2026'."""
+    last = data["rent_ts"]["quarter"].max()  # quarter start: 2026-07-01 = Jul-Sep 2026
+    return f"{last - pd.DateOffset(months=9):%b %Y}–{last + pd.DateOffset(months=2):%b %Y}"
+
+
+def with_home_rent(df, data, dwelling, beds):
+    """df (SA2 rows) plus the rent for one home (dwelling x beds) and its sample check: ok / verify / no estimate."""
+    bt = data["by_type"]
+    r = bt[(bt["dwelling"] == dwelling) & (bt["beds"] == beds)][
+        ["sa2_code", "rent", "rent_min_quarter", "rent_max_quarter", "lodged_bonds_4q", "quarters", "flag_thin_sample", "flag_unstable_rent"]]
+    s = df.merge(r, on="sa2_code", how="left")
+    s["check"] = "ok"
+    s.loc[s["flag_thin_sample"].eq(True) | s["flag_unstable_rent"].eq(True), "check"] = "verify"
+    s.loc[s["rent"].isna(), "check"] = "no estimate"
+    return s
+
+
 def rental_search(data, max_rent, dwelling="House", beds="3", include_apt=None):
     """Areas for a budget and a home (dwelling: House / Apartment / Flat / ALL; beds: 1-4, 5+, ALL). Rules as File 3 shortlist().
 
@@ -56,13 +74,8 @@ def rental_search(data, max_rent, dwelling="House", beds="3", include_apt=None):
     include_apt = dwelling == "Apartment" if include_apt is None else include_apt
     ready = data["sa2"][data["sa2"]["analysis_ready"]]
     bt = data["by_type"]
-    r = bt[(bt["dwelling"] == dwelling) & (bt["beds"] == beds)][
-        ["sa2_code", "rent", "rent_min_quarter", "rent_max_quarter", "lodged_bonds_4q", "quarters", "flag_thin_sample", "flag_unstable_rent"]]
     keep = ~ready["flag_crime_hotspot"] & (include_apt | (ready["area_type"] != "Apartments & inner city"))
-    s = ready[keep].merge(r, on="sa2_code", how="left")
-    s["check"] = "ok"
-    s.loc[s["flag_thin_sample"].eq(True) | s["flag_unstable_rent"].eq(True), "check"] = "verify"
-    s.loc[s["rent"].isna(), "check"] = "no estimate"
+    s = with_home_rent(ready[keep], data, dwelling, beds)
     s["under"] = s["rent"] <= max_rent
     under = s[s["under"]]
     # Thin or jumpy figures (e.g. $93 from 6 bonds in one quarter) are not budget matches; the area's steady wider figure is a lead:
