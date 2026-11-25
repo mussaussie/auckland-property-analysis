@@ -61,20 +61,19 @@ def load_rent():
     }).dropna(subset=["median_rent"])
 
 
-def main():
-    CLEAN.mkdir(exist_ok=True)
-    sa2 = gpd.read_file(DATA / "boundaries" / "auckland_sa2_2023.geojson").rename(
-        columns={"SA22023_V1_00": "sa2_code", "SA22023_V1_00_NAME": "sa2_name", "LAND_AREA_SQ_KM": "land_area_sq_km"})
-    sa2["sa2_code"] = sa2["sa2_code"].astype(str)
-    centre = sa2.representative_point()
-    m = sa2[["sa2_code", "sa2_name", "land_area_sq_km"]].assign(lat=centre.y, lon=centre.x).set_index("sa2_code")
-
-    # --- census: negative values are Stats NZ suppression codes, not counts
+def census_counts():
+    """Census columns by SA2 code (str); negative values are Stats NZ suppression codes, not counts."""
+    out = []
     for table, names in CENSUS.items():
         c = pd.read_csv(DATA / "census" / f"census_2013_2018_2023_{table}_sa2.csv",
                         usecols=["SA22023_V1_00", *names], dtype={"SA22023_V1_00": str})
         c = c.dropna(subset=["SA22023_V1_00"]).set_index("SA22023_V1_00").rename(columns=names)
-        m = m.join(c.where(c >= 0))
+        out.append(c.where(c >= 0))
+    return pd.concat(out, axis=1)
+
+
+def census_shares(m):
+    """Turn the _counts into pct_ shares (also used on summed counts for suburbs) and drop the counts."""
     m["pct_overseas_born"] = 100 * m["_overseas"] / m["_birth_stated"]
     for g in ["european", "maori", "pacific", "asian"]:  # people can report several, so these overlap
         m[f"pct_{g}"] = 100 * m[f"_{g}"] / m["_eth_stated"]
@@ -91,7 +90,18 @@ def main():
     m["pct_no_vehicle"] = 100 * m["_no_vehicle"] / m["_vehicle_stated"]
     m["pct_separate_house"] = 100 * m["_separate_house"] / m["_private_dwellings"]
     m["pct_damp"] = 100 * (m["_always_damp"] + m["_sometimes_damp"]) / m["_damp_stated"]
-    m = m.drop(columns=[c for c in m if c.startswith("_")])
+    return m.drop(columns=[c for c in m if c.startswith("_")])
+
+
+def main():
+    CLEAN.mkdir(exist_ok=True)
+    sa2 = gpd.read_file(DATA / "boundaries" / "auckland_sa2_2023.geojson").rename(
+        columns={"SA22023_V1_00": "sa2_code", "SA22023_V1_00_NAME": "sa2_name", "LAND_AREA_SQ_KM": "land_area_sq_km"})
+    sa2["sa2_code"] = sa2["sa2_code"].astype(str)
+    centre = sa2.representative_point()
+    m = sa2[["sa2_code", "sa2_name", "land_area_sq_km"]].assign(lat=centre.y, lon=centre.x).set_index("sa2_code")
+
+    m = census_shares(m.join(census_counts()))
 
     # --- capital values: every rating unit, as the source has no residential/commercial flag
     cv = pd.read_csv(DATA / "property_prices" / "auckland_cv_2021_2024.csv",

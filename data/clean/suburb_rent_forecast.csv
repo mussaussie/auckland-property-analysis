@@ -1,0 +1,278 @@
+suburb_id,suburb_name,rent_now,forecast_rent_y1,y1_low,y1_high,change_y1_pct,forecast_rent_y2,y2_low,y2_high,change_y2_pct,lodged_4q,flag_thin_sample,flag_shared_rent_area,suburb_source_sa2,analysis_ready,model,year1_period,year2_period
+2960.0,Albany,718.8,716.5,672.2,777.2,-0.3,714.6,661.1,806.0,-0.6,372.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8827.0,Albany Heights,663.8,661.7,620.8,717.7,-0.3,659.9,610.5,744.3,-0.6,192.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+18.0,Alfriston,615.0,613.1,575.2,665.0,-0.3,611.4,565.6,689.7,-0.6,114.0,False,False,160401,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2863.0,Algies Bay,572.5,570.7,494.7,662.3,-0.3,569.2,483.6,687.6,-0.6,12.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2754.0,Anawhata,675.0,672.9,583.3,780.9,-0.3,671.1,570.2,810.7,-0.6,6.0,True,False,117100,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2888.0,Arkles Bay,660.8,658.7,618.0,714.5,-0.3,656.9,607.7,741.0,-0.6,117.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2885.0,Army Bay,658.8,656.7,616.1,712.3,-0.3,654.9,605.9,738.7,-0.6,33.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2728.0,Auckland Central,493.2,491.6,461.2,533.2,-0.3,490.3,453.6,553.0,-0.6,8199.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2912.0,Avondale,631.4,629.4,590.5,682.7,-0.3,627.7,580.7,708.0,-0.6,948.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2897.0,Bayswater,882.5,879.7,825.4,954.2,-0.3,877.4,811.7,989.6,-0.6,42.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8820.0,Bayview,670.2,668.1,626.8,724.6,-0.3,666.3,616.4,751.5,-0.6,234.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2898.0,Beach Haven,666.4,664.3,623.3,720.6,-0.3,662.5,612.9,747.3,-0.6,273.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2726.0,Beachlands,742.6,740.3,694.6,803.0,-0.3,738.3,683.0,832.8,-0.6,216.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2895.0,Belmont,823.8,821.2,770.4,890.7,-0.3,819.0,757.6,923.8,-0.6,90.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8751.0,Big Ōmaha,611.2,609.3,571.7,660.9,-0.3,607.7,562.2,685.5,-0.6,45.0,False,False,110400,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2900.0,Birkdale,659.2,657.2,616.6,712.8,-0.3,655.4,606.3,739.3,-0.6,273.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2899.0,Birkenhead,682.9,680.7,638.7,738.4,-0.3,678.9,628.1,765.8,-0.6,330.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+140.0,Blockhouse Bay,673.2,671.0,629.6,727.9,-0.3,669.3,619.1,754.9,-0.6,417.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+144.0,Bombay,735.0,732.7,635.1,850.3,-0.3,730.8,620.9,882.7,-0.6,12.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+145.0,Botany Downs,742.1,739.8,694.1,802.5,-0.3,737.8,682.6,832.2,-0.6,144.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+161.0,Brookby,730.0,727.7,682.8,789.3,-0.3,725.8,671.4,818.6,-0.6,36.0,False,False,157101,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2872.0,Browns Bay,750.2,747.9,701.7,811.2,-0.3,745.9,690.0,841.3,-0.6,315.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+174.0,Buckland,710.0,707.8,613.5,821.4,-0.3,705.9,599.8,852.7,-0.6,24.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+175.0,Bucklands Beach,760.3,757.9,711.1,822.1,-0.3,755.9,699.3,852.6,-0.6,330.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+183.0,Burswood,728.8,726.5,681.6,788.0,-0.3,724.5,670.3,817.2,-0.6,42.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2873.0,Campbells Bay,969.5,966.5,906.8,1048.3,-0.3,963.9,891.7,1087.2,-0.6,60.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2879.0,Castor Bay,938.2,935.3,877.5,1014.5,-0.3,932.8,862.9,1052.2,-0.6,111.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2903.0,Chatswood,822.5,819.9,769.3,889.4,-0.3,817.8,756.5,922.4,-0.6,45.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+230.0,Clarks Beach,638.8,636.7,597.4,690.7,-0.3,635.1,587.5,716.3,-0.6,48.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+235.0,Clendon Park,642.3,640.2,600.7,694.5,-0.3,638.6,590.7,720.2,-0.6,195.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+4033.0,Clevedon,681.2,679.1,637.2,736.6,-0.3,677.3,626.6,764.0,-0.6,36.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+240.0,Clover Park,670.8,668.7,627.4,725.4,-0.3,667.0,617.0,752.3,-0.6,126.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+248.0,Coatesville,748.3,746.0,699.9,809.2,-0.3,744.0,688.3,839.2,-0.6,39.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+6543.0,Cockle Bay,662.5,660.4,619.6,716.4,-0.3,658.7,609.3,742.9,-0.6,57.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+254.0,Conifer Grove,670.2,668.1,626.8,724.7,-0.3,666.3,616.4,751.5,-0.6,159.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2753.0,Cornwallis,436.7,435.3,377.3,505.2,-0.3,434.1,368.9,524.4,-0.6,18.0,True,False,128000,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+276.0,Dairy Flat,831.9,829.3,778.0,899.5,-0.3,827.1,765.1,932.9,-0.6,231.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8696.0,Dannemora,854.2,851.5,798.9,923.7,-0.3,849.3,785.7,957.9,-0.6,78.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2896.0,Devonport,790.1,787.7,739.0,854.4,-0.3,785.6,726.7,886.1,-0.6,126.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+295.0,Dome Forest,673.8,671.6,630.1,728.5,-0.3,669.9,619.7,755.5,-0.6,51.0,False,False,111200,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+296.0,Dome Valley,667.0,664.9,576.4,771.6,-0.3,663.1,563.5,801.1,-0.6,27.0,True,False,110900,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+306.0,Drury,701.7,699.5,656.3,758.8,-0.3,697.7,645.4,786.9,-0.6,237.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+6542.0,East Tāmaki,720.0,717.7,673.4,778.5,-0.3,715.8,662.2,807.4,-0.6,231.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8697.0,East Tāmaki Heights,781.4,778.9,730.8,844.9,-0.3,776.9,718.7,876.2,-0.6,129.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+6544.0,Eastern Beach,766.2,763.8,716.7,828.5,-0.3,761.8,704.8,859.3,-0.6,57.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+329.0,Eden Terrace,578.2,576.4,540.8,625.3,-0.3,574.9,531.8,648.4,-0.6,603.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+341.0,Ellerslie,667.7,665.6,624.5,722.0,-0.3,663.8,614.1,748.7,-0.6,555.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+349.0,Epsom,717.1,714.9,670.7,775.4,-0.3,713.0,659.6,804.2,-0.6,813.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8826.0,Fairview Heights,886.2,883.5,828.9,958.3,-0.3,881.1,815.1,993.8,-0.6,108.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+370.0,Farm Cove,781.2,778.8,730.7,844.8,-0.3,776.7,718.5,876.1,-0.6,69.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+371.0,Favona,628.2,626.2,587.5,679.3,-0.3,624.6,577.8,704.5,-0.6,183.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8694.0,Flat Bush,723.9,721.6,677.0,782.7,-0.3,719.7,665.8,811.7,-0.6,1182.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+393.0,Forrest Hill,766.8,764.4,717.2,829.2,-0.3,762.4,705.3,859.9,-0.6,357.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+399.0,Freemans Bay,651.8,649.8,609.6,704.8,-0.3,648.1,599.5,731.0,-0.6,603.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+421.0,Glen Eden,611.2,609.3,571.6,660.9,-0.3,607.7,562.1,685.4,-0.6,699.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+435.0,Glen Innes,656.9,654.8,614.4,710.3,-0.3,653.1,604.2,736.6,-0.6,378.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+425.0,Glenbrook,658.8,656.7,616.1,712.3,-0.3,654.9,605.9,738.7,-0.6,57.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2906.0,Glendene,621.6,619.6,581.3,672.1,-0.3,618.0,571.7,697.0,-0.6,186.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2926.0,Glendowie,881.8,879.0,824.7,953.5,-0.3,876.7,811.0,988.8,-0.6,159.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2964.0,Glenfield,673.4,671.2,629.8,728.1,-0.3,669.5,619.3,755.1,-0.6,558.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+446.0,Glorit,595.0,593.1,514.1,688.3,-0.3,591.6,502.6,714.6,-0.6,6.0,True,False,110800,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+448.0,Golflands,803.8,801.2,751.7,869.1,-0.3,799.1,739.2,901.3,-0.6,57.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+449.0,Goodwood Heights,707.5,705.3,661.7,765.0,-0.3,703.4,650.7,793.4,-0.6,87.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+459.0,Grafton,435.0,433.7,406.9,470.4,-0.3,432.5,400.1,487.8,-0.6,1617.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+462.0,Green Bay,652.8,650.8,610.6,705.9,-0.3,649.1,600.4,732.1,-0.6,78.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2959.0,Greenhithe,839.2,836.6,784.9,907.4,-0.3,834.4,771.8,941.1,-0.6,171.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+467.0,Greenlane,778.3,775.8,727.9,841.6,-0.3,773.8,715.8,872.8,-0.6,294.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+475.0,Grey Lynn,711.7,709.5,665.7,769.6,-0.3,707.6,654.6,798.1,-0.6,666.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2874.0,Gulf Harbour,710.8,708.6,664.8,768.6,-0.3,706.7,653.8,797.1,-0.6,156.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+488.0,Half Moon Bay,720.6,718.3,674.0,779.2,-0.3,716.4,662.8,808.1,-0.6,237.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2866.0,Hatfields Beach,577.5,575.7,499.0,668.1,-0.3,574.2,487.9,693.6,-0.6,15.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2893.0,Hauraki,803.8,801.2,751.7,869.1,-0.3,799.1,739.2,901.3,-0.6,144.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+525.0,Helensville,635.1,633.1,594.0,686.7,-0.3,631.4,584.1,712.2,-0.6,93.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+526.0,Henderson,621.8,619.9,581.6,672.4,-0.3,618.3,571.9,697.3,-0.6,1212.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+4361.0,Herald Island,712.5,710.3,666.4,770.4,-0.3,708.4,655.3,799.0,-0.6,234.0,False,True,117001,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2913.0,Herne Bay,769.0,766.6,719.2,831.5,-0.3,764.6,707.3,862.4,-0.6,147.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2932.0,Highland Park,676.2,674.1,632.5,731.2,-0.3,672.3,622.0,758.3,-0.6,150.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+541.0,Hillcrest,706.8,704.5,661.0,764.2,-0.3,702.7,650.0,792.6,-0.6,348.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8976.0,Hillpark,620.5,618.6,580.4,671.0,-0.3,616.9,570.7,695.8,-0.6,171.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+545.0,Hillsborough,731.2,728.9,683.9,790.7,-0.3,727.0,672.5,820.0,-0.6,300.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2962.0,Hobsonville,686.9,684.7,642.4,742.7,-0.3,682.9,631.7,770.2,-0.6,666.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+578.0,Howick,669.0,666.9,625.7,723.4,-0.3,665.2,615.3,750.2,-0.6,441.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8876.0,Huapai,757.0,754.6,708.0,818.5,-0.3,752.6,696.2,848.9,-0.6,183.0,False,False,115001,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2954.0,Huia,436.7,435.3,377.3,505.2,-0.3,434.1,368.9,524.4,-0.6,18.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2174.0,Hūnua,600.0,598.1,518.5,694.1,-0.3,596.5,506.9,720.6,-0.6,6.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+635.0,Kaipara Flats,673.8,671.6,630.1,728.5,-0.3,669.9,619.7,755.5,-0.6,51.0,False,False,111200,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+658.0,Karaka,781.5,779.1,730.9,845.0,-0.3,777.0,718.8,876.4,-0.6,411.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2183.0,Karekare,436.7,435.3,377.3,505.2,-0.3,434.1,368.9,524.4,-0.6,18.0,True,False,128000,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2024.0,Karioitahi,510.0,508.4,477.0,551.5,-0.3,507.1,469.1,571.9,-0.6,39.0,False,False,149901,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2758.0,Kaukapakapa,682.5,680.4,589.7,789.6,-0.3,678.6,576.6,819.7,-0.6,27.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2739.0,Kawakawa Bay,634.5,632.5,593.4,686.1,-0.3,630.8,583.6,711.5,-0.6,33.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2907.0,Kelston,586.5,584.7,548.6,634.2,-0.3,583.1,539.5,657.7,-0.6,198.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+693.0,Kingseat,737.5,735.2,689.8,797.5,-0.3,733.2,678.3,827.0,-0.6,81.0,False,False,161400,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+694.0,Kingsland,690.0,687.8,645.3,746.1,-0.3,686.0,634.6,773.8,-0.6,222.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2920.0,Kohimarama,842.0,839.4,787.5,910.5,-0.3,837.1,774.4,944.2,-0.6,114.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2963.0,Kumeū,737.8,735.5,690.0,797.8,-0.3,733.5,678.6,827.4,-0.6,273.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2017.0,Laingholm,702.7,700.5,607.2,812.9,-0.3,698.6,593.6,843.9,-0.6,27.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2194.0,Lake Puketi,510.0,508.4,477.0,551.5,-0.3,507.1,469.1,571.9,-0.6,39.0,False,False,149901,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2861.0,Leigh,611.2,609.3,571.7,660.9,-0.3,607.7,562.2,685.5,-0.6,45.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8824.0,Long Bay,851.2,848.6,796.2,920.5,-0.3,846.3,782.9,954.6,-0.6,120.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8828.0,Lucas Heights,748.3,746.0,699.9,809.2,-0.3,744.0,688.3,839.2,-0.6,39.0,False,True,116601,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+779.0,Lynfield,663.8,661.7,620.8,717.7,-0.3,659.9,610.5,744.3,-0.6,126.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+4085.0,Mahurangi,572.5,570.7,494.7,662.3,-0.3,569.2,483.6,687.6,-0.6,12.0,True,False,111901,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+795.0,Mahurangi West,673.8,671.6,630.1,728.5,-0.3,669.9,619.7,755.5,-0.6,51.0,False,False,111200,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2880.0,Mairangi Bay,842.5,839.8,787.9,911.0,-0.3,837.6,774.8,944.7,-0.6,168.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+805.0,Makarau,595.0,593.1,514.1,688.3,-0.3,591.6,502.6,714.6,-0.6,6.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+822.0,Mangakura,595.0,593.1,514.1,688.3,-0.3,591.6,502.6,714.6,-0.6,6.0,True,False,110800,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2856.0,Mangawhai,611.2,609.3,571.7,660.9,-0.3,607.7,562.2,685.5,-0.6,45.0,False,False,110400,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2878.0,Manly,691.9,689.7,647.1,748.1,-0.3,687.9,636.3,775.9,-0.6,138.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+841.0,Manukau City Centre,522.9,521.3,489.1,565.4,-0.3,519.9,481.0,586.4,-0.6,273.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2953.0,Manukau Heads,510.0,508.4,477.0,551.5,-0.3,507.1,469.1,571.9,-0.6,39.0,False,False,149901,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+844.0,Manurewa,636.0,634.0,594.8,687.7,-0.3,632.3,584.9,713.2,-0.6,1317.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+845.0,Manurewa East,666.2,664.2,623.1,720.4,-0.3,662.4,612.8,747.1,-0.6,111.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2721.0,Maraetai,687.5,685.3,643.0,743.4,-0.3,683.5,632.3,771.0,-0.6,60.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+4119.0,Massey,639.7,637.7,598.3,691.7,-0.3,636.0,588.3,717.3,-0.6,906.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+875.0,Matakana,667.0,664.9,576.4,771.6,-0.3,663.1,563.5,801.1,-0.6,27.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8777.0,Matakatia,766.7,764.3,717.1,829.0,-0.3,762.2,705.1,859.7,-0.6,33.0,False,False,115400,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+892.0,Mauku,666.7,664.6,623.5,720.9,-0.3,662.8,613.2,747.6,-0.6,30.0,False,False,165001,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2921.0,Meadowbank,650.0,648.0,607.9,702.8,-0.3,646.2,597.8,728.9,-0.6,186.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8767.0,Mellons Bay,777.0,774.6,726.7,840.2,-0.3,772.5,714.6,871.3,-0.6,75.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2901.0,Milford,783.8,781.3,733.1,847.5,-0.3,779.3,720.9,878.9,-0.6,345.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2924.0,Mission Bay,770.0,767.6,720.2,832.6,-0.3,765.6,708.2,863.5,-0.6,219.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8939.0,Morningside,598.8,596.9,560.0,647.4,-0.3,595.3,550.7,671.4,-0.6,171.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+994.0,Mount Albert,615.8,613.9,576.0,665.9,-0.3,612.3,566.4,690.6,-0.6,978.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+995.0,Mount Eden,621.9,619.9,581.6,672.4,-0.3,618.3,572.0,697.4,-0.6,1185.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+996.0,Mount Roskill,705.9,703.7,660.2,763.3,-0.3,701.8,649.2,791.6,-0.6,825.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2925.0,Mount Wellington,644.2,642.1,602.5,696.5,-0.3,640.4,592.5,722.4,-0.6,1368.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+6526.0,Muriwai Beach,695.0,692.8,600.5,804.0,-0.3,691.0,587.1,834.7,-0.6,9.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2886.0,Murrays Bay,883.3,880.5,826.1,955.1,-0.3,878.2,812.4,990.5,-0.6,132.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2737.0,Māngere,619.9,618.0,579.8,670.3,-0.3,616.3,570.2,695.2,-0.6,462.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+836.0,Māngere Bridge,661.4,659.4,618.6,715.2,-0.3,657.6,608.4,741.7,-0.6,318.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+837.0,Māngere East,606.3,604.4,567.1,655.6,-0.3,602.8,557.6,679.9,-0.6,717.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2892.0,Narrow Neck,760.8,758.4,711.5,822.6,-0.3,756.4,699.7,853.1,-0.6,84.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+4006.0,Ness Valley,634.5,632.5,593.4,686.1,-0.3,630.8,583.6,711.5,-0.6,33.0,False,False,162701,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2911.0,New Lynn,610.7,608.8,571.2,660.3,-0.3,607.2,561.7,684.8,-0.6,927.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8842.0,New Windsor,651.6,649.5,609.4,704.5,-0.3,647.8,599.3,730.7,-0.6,303.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1018.0,Newmarket,627.5,625.5,586.9,678.5,-0.3,623.9,577.1,703.7,-0.6,285.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2285.0,Nihotupu,610.0,608.1,527.1,705.7,-0.3,606.5,515.3,732.6,-0.6,15.0,True,False,130000,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2902.0,Northcote,668.3,666.2,625.1,722.6,-0.3,664.4,614.7,749.4,-0.6,306.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8819.0,Northcote Point,818.8,816.2,765.8,885.3,-0.3,814.0,753.0,918.1,-0.6,75.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1061.0,Northcross,765.0,762.6,715.5,827.2,-0.3,760.6,703.6,857.9,-0.6,96.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8768.0,Northpark,801.3,798.8,749.4,866.4,-0.3,796.7,737.0,898.6,-0.6,126.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1106.0,One Tree Hill,680.0,677.9,636.0,735.3,-0.3,676.1,625.4,762.6,-0.6,174.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1107.0,Onehunga,628.1,626.1,587.5,679.2,-0.3,624.5,577.7,704.4,-0.6,774.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8651.0,Oneroa,746.7,744.3,698.3,807.4,-0.3,742.4,686.7,837.3,-0.6,81.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8650.0,Onetangi,430.8,429.4,402.9,465.8,-0.3,428.3,396.2,483.0,-0.6,66.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1127.0,Oratia,610.0,608.1,527.1,705.7,-0.3,606.5,515.3,732.6,-0.6,15.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2871.0,Orewa,729.9,727.6,682.6,789.2,-0.3,725.6,671.3,818.5,-0.6,393.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8652.0,Ostend,678.2,676.1,634.4,733.4,-0.3,674.3,623.8,760.6,-0.6,54.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8825.0,Oteha,716.6,714.3,670.2,774.8,-0.3,712.4,659.0,803.5,-0.6,162.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1182.0,Paerata,781.2,778.8,730.7,844.8,-0.3,776.7,718.5,876.1,-0.6,51.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1185.0,Pahurehure,666.2,664.2,623.1,720.4,-0.3,662.4,612.8,747.1,-0.6,72.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+4780.0,Pakatoa Island,650.0,648.0,561.7,752.0,-0.3,646.2,549.1,780.7,-0.6,12.0,True,False,151700,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2933.0,Pakuranga,678.0,675.9,634.1,733.1,-0.3,674.1,623.6,760.3,-0.6,408.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1190.0,Pakuranga Heights,679.5,677.4,635.6,734.8,-0.3,675.6,625.0,762.0,-0.6,306.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8775.0,Palm Beach,768.8,766.3,719.0,831.2,-0.3,764.3,707.1,862.1,-0.6,39.0,False,False,146900,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2929.0,Panmure,558.9,557.2,522.8,604.4,-0.3,555.7,514.1,626.8,-0.6,603.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1196.0,Papakura,622.2,620.3,581.9,672.8,-0.3,618.6,572.3,697.7,-0.6,1251.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1203.0,Papatoetoe,625.7,623.7,585.2,676.6,-0.3,622.1,575.5,701.7,-0.6,1557.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1207.0,Parakai,512.5,510.9,442.9,592.9,-0.3,509.5,433.0,615.5,-0.6,15.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1211.0,Parau,610.0,608.1,527.1,705.7,-0.3,606.5,515.3,732.6,-0.6,15.0,True,False,130000,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+4131.0,Parnell,725.2,722.9,678.3,784.1,-0.3,721.0,667.0,813.2,-0.6,438.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1228.0,Patumāhoe,640.0,638.0,598.6,692.0,-0.3,636.3,588.6,717.7,-0.6,36.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1237.0,Penrose,575.0,573.2,496.9,665.2,-0.3,571.7,485.8,690.6,-0.6,18.0,True,False,,False,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2955.0,Piha,750.0,747.6,648.1,867.6,-0.3,745.7,633.6,900.8,-0.6,6.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1252.0,Pinehill,851.2,848.6,796.2,920.5,-0.3,846.3,782.9,954.6,-0.6,129.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2914.0,Point Chevalier,783.3,780.9,732.6,847.0,-0.3,778.8,720.5,878.4,-0.6,231.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2928.0,Point England,534.8,533.1,500.1,578.2,-0.3,531.7,491.8,599.7,-0.6,201.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2859.0,Point Wells,819.3,816.8,766.3,885.9,-0.3,814.6,753.6,918.8,-0.6,33.0,False,False,111500,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2226.0,Pollok,510.0,508.4,477.0,551.5,-0.3,507.1,469.1,571.9,-0.6,39.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1279.0,Ponsonby,882.7,879.9,825.6,954.5,-0.3,877.6,811.9,989.8,-0.6,180.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2763.0,Port Albert,575.0,573.2,496.9,665.2,-0.3,571.7,485.8,690.6,-0.6,18.0,True,False,110201,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2869.0,Puhoi,673.8,671.6,630.1,728.5,-0.3,669.9,619.7,755.5,-0.6,51.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1306.0,Pukekohe,624.7,622.8,584.3,675.5,-0.3,621.1,574.6,700.6,-0.6,879.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1307.0,Pukekohe East,781.2,778.8,730.7,844.8,-0.3,776.7,718.5,876.1,-0.6,51.0,False,False,165101,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1333.0,Puni,666.7,664.6,623.5,720.9,-0.3,662.8,613.2,747.6,-0.6,30.0,False,False,165001,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1187.0,Pākiri,611.2,609.3,571.7,660.9,-0.3,607.7,562.2,685.5,-0.6,45.0,False,False,110400,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2961.0,Pāremoremo,748.3,746.0,699.9,809.2,-0.3,744.0,688.3,839.2,-0.6,39.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2865.0,Pōhuehue,673.8,671.6,630.1,728.5,-0.3,669.9,619.7,755.5,-0.6,51.0,False,False,111200,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1356.0,Ramarama,724.5,722.2,677.6,783.4,-0.3,720.3,666.4,812.5,-0.6,90.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1359.0,Randwick Park,670.0,667.9,626.7,724.5,-0.3,666.1,616.2,751.4,-0.6,153.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2876.0,Red Beach,739.2,736.9,691.4,799.3,-0.3,735.0,679.9,829.0,-0.6,171.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1381.0,Red Hill,647.5,645.5,605.6,700.1,-0.3,643.8,595.5,726.1,-0.6,75.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2887.0,Redvale,823.3,820.7,711.4,952.5,-0.3,818.6,695.5,988.8,-0.6,21.0,True,False,114801,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2923.0,Remuera,851.5,848.8,796.4,920.7,-0.3,846.5,783.1,954.8,-0.6,1074.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2958.0,Riverhead,726.2,724.0,679.3,785.3,-0.3,722.1,668.0,814.4,-0.6,63.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1431.0,Rosedale,608.8,606.8,569.4,658.2,-0.3,605.2,559.9,682.7,-0.6,45.0,False,False,,False,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1432.0,Rosehill,662.5,660.4,619.6,716.4,-0.3,658.7,609.3,742.9,-0.6,123.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2881.0,Rothesay Bay,788.8,786.3,737.7,852.9,-0.3,784.2,725.4,884.5,-0.6,81.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+4898.0,Rotoroa Island,650.0,648.0,561.7,752.0,-0.3,646.2,549.1,780.7,-0.6,12.0,True,False,151700,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1444.0,Royal Oak,646.9,644.9,605.1,699.5,-0.3,643.2,595.0,725.5,-0.6,234.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1456.0,Runciman,724.5,722.2,677.6,783.4,-0.3,720.3,666.4,812.5,-0.6,90.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1371.0,Rānui,627.7,625.7,587.1,678.7,-0.3,624.1,577.3,703.9,-0.6,366.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2919.0,Saint Heliers,857.2,854.5,801.7,926.8,-0.3,852.2,788.4,961.2,-0.6,291.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2918.0,Saint Marys Bay,717.5,715.2,671.1,775.8,-0.3,713.4,659.9,804.6,-0.6,120.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1464.0,Sandringham,618.3,616.4,578.3,668.6,-0.3,614.8,568.7,693.4,-0.6,435.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8822.0,Schnapper Rock,696.2,694.1,651.2,752.9,-0.3,692.2,640.4,780.8,-0.6,111.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8693.0,Shamrock Park,913.3,910.5,854.2,987.6,-0.3,908.1,840.0,1024.2,-0.6,30.0,False,False,154701,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2757.0,Shelly Beach,581.5,579.7,502.5,672.7,-0.3,578.1,491.2,698.4,-0.6,12.0,True,False,110700,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1484.0,Shelly Park,683.8,681.6,639.5,739.3,-0.3,679.8,628.9,766.8,-0.6,45.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8690.0,Silverdale,841.1,838.4,786.7,909.5,-0.3,836.2,773.6,943.2,-0.6,270.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8654.0,Snells Beach,630.8,628.8,589.9,682.0,-0.3,627.1,580.1,707.3,-0.6,96.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1500.0,Somerville,823.8,821.2,770.4,890.7,-0.3,819.0,757.6,923.8,-0.6,78.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+4018.0,South Head,581.5,579.7,502.5,672.7,-0.3,578.1,491.2,698.4,-0.6,12.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1525.0,St Johns,599.4,597.5,560.6,648.1,-0.3,595.9,551.3,672.2,-0.6,249.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2894.0,Stanley Point,940.2,937.3,879.4,1016.7,-0.3,934.8,864.8,1054.4,-0.6,39.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2890.0,Stanmore Bay,648.8,646.8,606.9,701.6,-0.3,645.1,596.8,727.6,-0.6,342.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2882.0,Stillwater,675.8,673.6,632.0,730.7,-0.3,671.8,621.5,757.8,-0.6,39.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8878.0,Stonefields,870.5,867.8,814.2,941.3,-0.3,865.5,800.7,976.2,-0.6,126.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8869.0,Sunnyhills,708.0,705.7,662.2,765.5,-0.3,703.9,651.1,793.9,-0.6,147.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1546.0,Sunnynook,731.2,728.9,683.9,790.7,-0.3,727.0,672.6,820.0,-0.6,246.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1547.0,Sunnyvale,611.2,609.3,571.6,660.9,-0.3,607.6,562.1,685.4,-0.6,276.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8776.0,Surfdale,811.2,808.7,758.8,877.2,-0.3,806.6,746.1,909.7,-0.6,51.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1552.0,Swanson,681.4,679.3,637.3,736.8,-0.3,677.5,626.7,764.1,-0.6,96.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1575.0,Takanini,680.0,677.8,636.0,735.3,-0.3,676.0,625.4,762.5,-0.6,480.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8658.0,Takapuna,732.3,730.0,684.9,791.8,-0.3,728.1,673.5,821.2,-0.6,450.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1603.0,Tauhoa,595.0,593.1,514.1,688.3,-0.3,591.6,502.6,714.6,-0.6,6.0,True,False,110800,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1607.0,Taupaki,607.5,605.6,524.9,702.8,-0.3,604.0,513.2,729.6,-0.6,24.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2904.0,Te Atatū Peninsula,625.8,623.9,585.3,676.7,-0.3,622.2,575.6,701.8,-0.6,558.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2908.0,Te Atatū South,603.1,601.2,564.1,652.1,-0.3,599.6,554.7,676.3,-0.6,690.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1621.0,Te Hana,575.0,573.2,496.9,665.2,-0.3,571.7,485.8,690.6,-0.6,18.0,True,False,110201,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2755.0,Te Henga / Bethells Beach,695.0,692.8,600.5,804.0,-0.3,691.0,587.1,834.7,-0.6,9.0,True,False,115300,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2852.0,Te Ārai,611.2,609.3,571.7,660.9,-0.3,607.7,562.2,685.5,-0.6,45.0,False,False,110400,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1665.0,The Gardens,763.8,761.3,714.3,825.8,-0.3,759.3,702.5,856.5,-0.6,51.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1675.0,Three Kings,674.2,672.1,630.6,729.0,-0.3,670.3,620.1,756.1,-0.6,231.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2883.0,Tindalls Beach,766.7,764.3,717.1,829.0,-0.3,762.2,705.1,859.7,-0.6,33.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2390.0,Titirangi,693.6,691.5,648.7,750.0,-0.3,689.6,638.0,777.8,-0.6,270.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1986.0,Tomarata,611.2,609.3,571.7,660.9,-0.3,607.7,562.2,685.5,-0.6,45.0,False,False,110400,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2877.0,Torbay,738.7,736.4,690.9,798.7,-0.3,734.4,679.4,828.4,-0.6,411.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8704.0,Totara Heights,706.2,704.0,660.5,763.7,-0.3,702.2,649.6,792.0,-0.6,60.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8971.0,Tāhekeroa,595.0,593.1,514.1,688.3,-0.3,591.6,502.6,714.6,-0.6,6.0,True,False,110800,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1589.0,Tāpora,575.0,573.2,496.9,665.2,-0.3,571.7,485.8,690.6,-0.6,18.0,True,False,110201,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1614.0,Tāwharanui Peninsula,819.3,816.8,766.3,885.9,-0.3,814.6,753.6,918.8,-0.6,33.0,False,False,111500,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2860.0,Tī Point,611.2,609.3,571.7,660.9,-0.3,607.7,562.2,685.5,-0.6,45.0,False,False,110400,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8695.0,Tōtara Park,643.2,641.2,601.6,695.5,-0.3,639.5,591.6,721.3,-0.6,294.0,False,False,158603,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8829.0,Tōtara Vale,676.2,674.1,632.4,731.2,-0.3,672.3,621.9,758.3,-0.6,222.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8821.0,Unsworth Heights,622.6,620.6,582.3,673.2,-0.3,619.0,572.6,698.2,-0.6,204.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8962.0,Wade Heads,660.8,658.7,618.0,714.5,-0.3,656.9,607.7,741.0,-0.6,117.0,False,True,114902,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8933.0,Wai o Taiki Bay,645.0,643.0,603.3,697.4,-0.3,641.3,593.2,723.3,-0.6,156.0,False,False,145800,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2884.0,Waiake,777.5,775.1,727.2,840.7,-0.3,773.0,715.1,871.9,-0.6,93.0,False,False,117900,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2406.0,Waiatarua,596.7,594.8,515.6,690.3,-0.3,593.2,504.1,716.6,-0.6,21.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1771.0,Waiau Pā,641.0,639.0,553.9,741.5,-0.3,637.3,541.5,769.9,-0.6,18.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+6522.0,Waiheke Island,650.0,648.0,561.7,752.0,-0.3,646.2,549.1,780.7,-0.6,12.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1982.0,Waimauku,622.5,620.5,537.9,720.1,-0.3,618.9,525.9,747.6,-0.6,24.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2870.0,Wainui,800.1,797.5,748.3,865.1,-0.3,795.4,735.9,897.2,-0.6,222.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1859.0,Waitoki,802.5,800.0,750.6,867.7,-0.3,797.9,738.1,899.9,-0.6,36.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2756.0,Waitākere,625.0,623.0,540.1,723.0,-0.3,621.4,528.0,750.6,-0.6,12.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1865.0,Waiuku,593.6,591.7,555.2,641.9,-0.3,590.2,546.0,665.7,-0.6,231.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2868.0,Waiwera,745.0,742.7,696.8,805.6,-0.3,740.7,685.2,835.4,-0.6,45.0,False,False,112101,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2864.0,Warkworth,694.5,692.4,649.6,751.0,-0.3,690.5,638.8,778.9,-0.6,210.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2910.0,Waterview,630.8,628.8,589.9,682.0,-0.3,627.1,580.1,707.3,-0.6,147.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1889.0,Wattle Downs,682.4,680.2,638.2,737.8,-0.3,678.4,627.6,765.2,-0.6,186.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1897.0,Wellsford,550.3,548.6,514.7,595.1,-0.3,547.1,506.1,617.1,-0.6,78.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8970.0,Wesley,636.5,634.5,595.3,688.3,-0.3,632.9,585.5,713.8,-0.6,132.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2905.0,West Harbour,709.7,707.5,663.8,767.4,-0.3,705.6,652.8,795.9,-0.6,291.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2915.0,Western Springs,925.8,922.8,865.8,1001.0,-0.3,920.4,851.5,1038.1,-0.6,84.0,False,False,130300,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8961.0,Westgate,687.9,685.8,643.4,743.9,-0.3,684.0,632.7,771.4,-0.6,312.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2916.0,Westmere,958.0,955.0,896.0,1035.9,-0.3,952.5,881.1,1074.3,-0.6,123.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2731.0,Weymouth,657.0,655.0,614.5,710.4,-0.3,653.2,604.3,736.8,-0.6,336.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2722.0,Whakatīwai,634.5,632.5,593.4,686.1,-0.3,630.8,583.6,711.5,-0.6,33.0,False,False,162701,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+6529.0,Whangaripo,611.2,609.3,571.7,660.9,-0.3,607.7,562.2,685.5,-0.6,45.0,False,False,110400,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8752.0,Whangateau,611.2,609.3,571.7,660.9,-0.3,607.7,562.2,685.5,-0.6,45.0,False,False,110400,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2762.0,Wharehine,575.0,573.2,496.9,665.2,-0.3,571.7,485.8,690.6,-0.6,18.0,True,False,110201,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+4118.0,Whenuapai,712.5,710.3,666.4,770.4,-0.3,708.4,655.3,799.0,-0.6,234.0,False,True,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2727.0,Whitford,730.0,727.7,682.8,789.3,-0.3,725.8,671.4,818.6,-0.6,36.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8823.0,Windsor Park,806.2,803.7,754.1,871.8,-0.3,801.6,741.5,904.1,-0.6,60.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1956.0,Wiri,548.5,546.7,513.0,593.1,-0.3,545.3,504.4,615.1,-0.6,327.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+4120.0,Āwhitu,510.0,508.4,477.0,551.5,-0.3,507.1,469.1,571.9,-0.6,39.0,False,False,149901,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2889.0,Ōkura,823.3,820.7,711.4,952.5,-0.3,818.6,695.5,988.8,-0.6,21.0,True,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2875.0,Ōkura Bush,823.3,820.7,711.4,952.5,-0.3,818.6,695.5,988.8,-0.6,21.0,True,False,114801,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1098.0,Ōmaha,819.3,816.8,766.3,885.9,-0.3,814.6,753.6,918.8,-0.6,33.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8649.0,Ōmiha,650.0,648.0,561.7,752.0,-0.3,646.2,549.1,780.7,-0.6,12.0,True,False,151700,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+1112.0,Ōpaheke,663.8,661.7,620.8,717.7,-0.3,659.9,610.5,744.3,-0.6,96.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2725.0,Ōrere Point,634.5,632.5,593.4,686.1,-0.3,630.8,583.6,711.5,-0.6,33.0,False,False,162701,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2922.0,Ōrākei,920.9,918.0,861.3,995.7,-0.3,915.6,847.0,1032.7,-0.6,147.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+2931.0,Ōtara,647.2,645.1,605.3,699.8,-0.3,643.4,595.2,725.7,-0.6,324.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
+8835.0,Ōtāhuhu,492.8,491.2,460.9,532.8,-0.3,489.9,453.2,552.6,-0.6,792.0,False,False,,True,auckland,Oct 2026 - Sep 2027,Oct 2027 - Sep 2028
