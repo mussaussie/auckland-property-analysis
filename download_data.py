@@ -119,6 +119,21 @@ def boundaries():
     print("ok  ", out.name, len(sa2), "SA2s")
 
 
+def suburbs():
+    """LINZ NZ Suburbs and Localities (CC BY 4.0), Auckland suburbs, rural localities and islands; bays and lakes are water."""
+    out = DATA / "boundaries" / "auckland_suburbs_linz.geojson"
+    if out.exists():
+        return print("skip", out.name)
+    url = ("https://services.arcgis.com/xdsHIIxuCWByZiCB/arcgis/rest/services/LINZ_NZ_Suburbs_and_Localities/FeatureServer/0/query"
+           # LIKE: border suburbs (Pukekohe, Waiuku) are tagged "Auckland, Waikato District"
+           "?where=territorial_authority_ascii+like+%27%25Auckland%25%27+and+type+in+(%27Suburb%27,%27Locality%27,%27Island%27)"
+           "&outFields=id,name,name_ascii,additional_name,type,major_name,population_estimate&outSR=4326&f=geojson")
+    g = gpd.read_file(url)
+    assert 250 < len(g) < 2000, len(g)  # under the 2,000 page limit, so one request is the whole set
+    g.to_file(out, driver="GeoJSON")
+    print("ok  ", out.name, len(g), dict(g["type"].value_counts()))  # g.type is the geometry type
+
+
 def crime():
     """Police victimisations for the Auckland region by month, crime type and meshblock (Tableau CSV export)."""
     out = DATA / "crime" / "police_victimisations_auckland_meshblock.csv"
@@ -354,6 +369,7 @@ if __name__ == "__main__":
     download(ckan_url("urban-development", "NPS UD data catalogue"), DATA / "property_prices" / "hud_ta_sales_rents.zip")
 
     boundaries()
+    suburbs()
 
     # OpenStreetMap NZ extract (~400 MB, ODbL); osm_amenities() keeps Auckland GP practices and halal food places
     download("https://download.geofabrik.de/australia-oceania/new-zealand-latest.osm.pbf", DATA / "amenities" / "osm" / "new-zealand-latest.osm.pbf")
