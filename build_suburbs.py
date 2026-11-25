@@ -2,7 +2,6 @@
 
 Run after download_data.py and build_master.py:  python build_suburbs.py
 """
-import unicodedata
 from pathlib import Path
 
 import geopandas as gpd
@@ -10,12 +9,24 @@ import pandas as pd
 
 DATA = Path(__file__).parent / "data"
 CLEAN = DATA / "clean"
-NAME_MATCH_MIN_PCT = 30
-
-
-def plain(name):
-    """Compare names without macrons, case or the "(Auckland)" Stats NZ adds to repeated names."""
-    return unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode().lower().replace(" (auckland)", "").strip()
+# Reviewed 26 Nov 2026 (data/boundaries/sa2_to_suburb_review.csv). An override needs census residents (2023 SA1 counts,
+# split by where rating units sit) to disagree with the rating-unit pick AND council address labels to agree with the
+# residents. Address labels alone never decide.
+OVERRIDES = {  # sa2_code: (suburb, boundary_confidence, reason)
+    157200: ("Ōtara", "low", "Rongomai East: units near tie (Flat Bush 47.7 / Ōtara 45.8); residents Ōtara 50.3 / Flat Bush 46.1; "
+                             "council addresses 95% Ōtara"),
+    158603: ("Flat Bush", "medium", "Ormiston South East: residents Flat Bush 65.4 / Tōtara Park 34.6 against units Tōtara Park 53.7; "
+                                    "council addresses 99% Flat Bush; 3 of 6 SA1s split by the LINZ line"),
+}
+EXCLUDED = {  # sa2_code: reason; kept in the lookup with no suburb
+    110300: "Water SA2: no census population published, no SA1 residents; units scattered on islands and moorings",
+    110600: "Water SA2: no census population published, no SA1 residents; units scattered on islands and moorings",
+    111000: "Water SA2: no census population published, no SA1 residents; units scattered on islands and moorings",
+    112001: "Water SA2: no census population published, no SA1 residents; units scattered on islands and moorings",
+    141400: "Water SA2: no census population published, no SA1 residents; units scattered on islands and moorings",
+    119301: "Water SA2: 3 census residents in 2023 (84 in 2018, likely living on boats); 30 units spread over 17 suburbs "
+            "(largest 16.7%), so no suburb represents it",
+}
 
 
 def load_layers():
@@ -49,23 +60,39 @@ def sa2_to_suburb(sa2, sub, units):
     p["unit_pct"] = (p.units / p.units_in_sa2 * 100).where(p.units_in_sa2 > 0)
     p["match_basis"] = p.units_in_sa2.gt(0).map({True: "rating_units", False: "area"})
     p["match_pct"] = p.unit_pct.fillna(p.area_pct).fillna(0).round(1)
-    # name-match priority: an SA2 named exactly like a suburb holding 30%+ of its units goes to that suburb
-    # (Waiake 41.6%, Huntington Park 37.4%; the next exact match is 23.5%, all reviewed 26 Nov 2026)
-    p = p.merge(sub[["suburb_id", "suburb_name", "suburb_type"]], on="suburb_id").merge(sa2[["sa2_code", "sa2_name"]], on="sa2_code")
-    p["name_match"] = (p.sa2_name.map(plain) == p.suburb_name.map(plain)) & (p.match_pct >= NAME_MATCH_MIN_PCT)
-    p["top_pct"] = p.groupby("sa2_code").match_pct.transform("max")
-    best = p.sort_values(["name_match", "match_pct", "area_pct"], ascending=False).drop_duplicates("sa2_code")
-    best["match_rule"] = best.match_pct.lt(best.top_pct).map({True: "name_match", False: "most_units"})
+    p = p.merge(sub[["suburb_id", "suburb_name", "suburb_type"]], on="suburb_id")
+    p["override"] = [OVERRIDES.get(c, (None,))[0] == s for c, s in zip(p.sa2_code, p.suburb_name)]
+    assert p.override.sum() == len(OVERRIDES), "each override names a suburb the SA2 overlaps"
+    best = p.sort_values(["override", "match_pct", "area_pct"], ascending=False).drop_duplicates("sa2_code")
+    best["match_rule"] = best.override.map({True: "reviewed_override", False: "most_units"})
     n = p[p.match_pct > 0].groupby("sa2_code").size().rename("suburbs_overlapped")
 
     out = sa2[["sa2_code", "sa2_name"]].merge(best[["sa2_code", "suburb_id", "suburb_name", "suburb_type", "match_basis",
                                                      "match_rule", "match_pct", "units_in_sa2"]], on="sa2_code", how="left").join(n, on="sa2_code")
+    out["exclusion_reason"] = out.sa2_code.map(EXCLUDED)
+    ex = out.exclusion_reason.notna()
+    out.loc[ex, ["suburb_id", "suburb_name", "suburb_type", "match_pct"]] = None
+    out.loc[ex, "match_rule"] = "excluded"
     out["unmapped"] = out.suburb_id.isna()
     out["units_in_sa2"] = out.units_in_sa2.fillna(0).astype(int)
     out["suburbs_overlapped"] = out.suburbs_overlapped.fillna(0).astype(int)
     out["straddles_suburbs"] = ~out.unmapped & (out.match_pct < 60)
+
+    rv = pd.read_csv(DATA / "boundaries" / "sa2_to_suburb_review.csv", encoding="utf-8-sig")
+    out = out.merge(rv[["sa2_code", "boundary_confidence"]], on="sa2_code", how="left")
+    out["boundary_confidence"] = out.boundary_confidence.fillna("not reviewed (60%+ of units in one suburb)")
+    out["override_reason"] = out.sa2_code.map({c: r for c, (_, _, r) in OVERRIDES.items()})
+    for c, (_, conf, _) in OVERRIDES.items():
+        out.loc[out.sa2_code == c, "boundary_confidence"] = conf
+
     assert out.sa2_code.is_unique and len(out) == len(sa2), "one row per SA2"
-    return out.sort_values("sa2_code"), p
+    assert out.unmapped.sum() == len(EXCLUDED), "only the reviewed exclusions are unmapped"
+    # the build must reproduce every reviewed decision
+    chk = rv.merge(out[["sa2_code", "suburb_name"]], on="sa2_code")
+    want = chk.suggested_suburb.where(chk.suggested_suburb != "(none)")
+    bad = chk[~((want == chk.suburb_name) | (want.isna() & chk.suburb_name.isna()))]
+    assert bad.empty, bad[["sa2_name", "suggested_suburb", "suburb_name"]]
+    return out.sort_values("sa2_code"), p[~p.sa2_code.isin(EXCLUDED)]
 
 
 def suburb_list(sub, lookup, pieces, pop):
@@ -92,8 +119,9 @@ def suburb_list(sub, lookup, pieces, pop):
     out["flag_shared_rural_sa2"] = out.sa2_codes.str.split(";").map(lambda c: bool(used & {int(x) for x in c}))
     out["caveat"] = out.flag_shared_rural_sa2.map({True: "Shares figures with neighbouring localities: the data covers the whole "
                                                          "statistical area, not this place alone.", False: ""})
-    # dedup check: counting each source SA2 once must give the Auckland total
-    assert out[out.suburb_source_sa2.isna()].population_2023.sum() == pop.population_2023.sum()
+    # dedup check: counting each source SA2 once must give the Auckland total, less the excluded water SA2s
+    assert out[out.suburb_source_sa2.isna()].population_2023.sum() == lookup[~lookup.unmapped].population_2023.sum()
+    assert lookup[~lookup.unmapped].population_2023.sum() == pop.population_2023.sum() - pop[pop.sa2_code.isin(EXCLUDED)].population_2023.sum()
     cols = ["suburb_id", "suburb_name", "suburb_type", "n_sa2", "sa2_codes", "suburb_source_sa2", "flag_shared_rural_sa2",
             "caveat", "population_2023", "population_estimate"]
     return out[cols].sort_values("suburb_name")
@@ -105,8 +133,6 @@ if __name__ == "__main__":
     lookup, pieces = sa2_to_suburb(sa2, sub, units)
     pop = pd.read_csv(CLEAN / "master_flagged.csv", usecols=["sa2_code", "population_2023"]).fillna({"population_2023": 0})
     subs = suburb_list(sub, lookup, pieces, pop)
-    got = lookup.set_index("sa2_name").suburb_name
-    assert got["Waiake"] == "Waiake" and got["Huntington Park"] == "Huntington Park", "name-match priority"
     lookup.to_csv(CLEAN / "sa2_to_suburb.csv", index=False, encoding="utf-8")
     subs.to_csv(CLEAN / "suburb_list.csv", index=False, encoding="utf-8")
     print("ok   sa2_to_suburb.csv", len(lookup), "SA2s ->", lookup.suburb_id.nunique(), "suburbs;",

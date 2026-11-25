@@ -1,296 +1,296 @@
 suburb_id,suburb_name,suburb_type,n_sa2,sa2_codes,suburb_source_sa2,flag_shared_rural_sa2,caveat,population_2023,population_estimate
-2960,Albany,Suburb,3,117300;117400;118100,,False,,7767.0,9435.0
-8827,Albany Heights,Suburb,1,116701,,False,,4194.0,2770.0
-18,Alfriston,Suburb,0,160401,160401,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3975.0,700.0
-2863,Algies Bay,Suburb,1,111901,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1221.0,779.0
-2754,Anawhata,Locality,0,117100,117100,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1260.0,77.0
-41,Ararimu,Locality,1,166400,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,1075.0
-46,Ardmore,Locality,1,162300,,False,,1323.0,794.0
-2888,Arkles Bay,Suburb,1,114902,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1998.0,1310.0
-2885,Army Bay,Suburb,1,116000,,False,,1482.0,1655.0
-67,Auckland Airport,Suburb,0,147900,147900,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",528.0,11.0
-2728,Auckland Central,Suburb,16,131300;131802;132400;132700;133200;133301;133400;133700;133800;134100;134302;134500;134800;135100;135300;135700,,False,,30666.0,35527.0
-2912,Avondale,Suburb,8,128700;130601;131700;132001;132002;133100;135000;137100,,False,,23364.0,25010.0
-2897,Bayswater,Suburb,1,129400,,False,,2742.0,2715.0
-8820,Bayview,Suburb,3,121001;121401;122101,,False,,9027.0,7870.0
-2898,Beach Haven,Suburb,3,121800;122400;123900,,False,,10845.0,10997.0
-2726,Beachlands,Suburb,2,155000;156400,,False,,7797.0,8428.0
-2895,Belmont,Suburb,1,129300,,False,,3012.0,3918.0
-8751,Big Ōmaha,Suburb,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,249.0
-2900,Birkdale,Suburb,3,122801;122802;124401,,False,,9204.0,9733.0
-2899,Birkenhead,Suburb,4,125201;125202;126500;127400,,False,,10344.0,10614.0
-140,Blockhouse Bay,Suburb,5,137201;137202;138600;138901;139501,,False,,13110.0,16522.0
-144,Bombay,Locality,1,166301,,False,,1989.0,2302.0
-145,Botany Downs,Suburb,2,152201;152900,,False,,5775.0,6193.0
-161,Brookby,Locality,0,157101,157101,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3333.0,422.0
-2872,Browns Bay,Suburb,3,118200;118300;118700,,False,,10311.0,12088.0
-174,Buckland,Locality,1,166200,,False,,1233.0,1581.0
-175,Bucklands Beach,Suburb,4,146400;148300;149701;149702,,False,,9540.0,10523.0
-183,Burswood,Suburb,1,152500,,False,,1596.0,1856.0
-2873,Campbells Bay,Suburb,1,122200,,False,,2847.0,2961.0
-2879,Castor Bay,Suburb,2,123701;123702,,False,,4551.0,4630.0
-2903,Chatswood,Suburb,1,126300,,False,,3438.0,3551.0
-230,Clarks Beach,Suburb,1,159401,,False,,1581.0,1940.0
-235,Clendon Park,Suburb,3,158700;159500;159700,,False,,8463.0,11150.0
-4033,Clevedon,Locality,1,162901,,False,,1581.0,2877.0
-240,Clover Park,Suburb,3,157701;157702;157901,,False,,8598.0,11439.0
-248,Coatesville,Locality,1,115501,,False,,2112.0,1979.0
-6543,Cockle Bay,Suburb,1,153400,,False,,4239.0,5365.0
-254,Conifer Grove,Suburb,2,161800;161900,,False,,5907.0,5372.0
-2753,Cornwallis,Suburb,0,128000,128000,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1149.0,163.0
-276,Dairy Flat,Locality,3,113402;113500;115601,,False,,4980.0,4967.0
-8696,Dannemora,Suburb,2,154701;155301,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4269.0,3856.0
-2896,Devonport,Suburb,3,119301;133000;134000,,False,,5082.0,6926.0
-295,Dome Forest,Locality,0,111200,111200,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4017.0,277.0
-296,Dome Valley,Locality,0,110900,110900,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1641.0,143.0
-306,Drury,Suburb,2,164302;164603,,False,,2847.0,2070.0
-6542,East Tāmaki,Suburb,4,152300;155200;155401;156000,,False,,5187.0,7116.0
-8697,East Tāmaki Heights,Suburb,2,156101;156301,,False,,5547.0,5759.0
-6544,Eastern Beach,Suburb,1,148000,,False,,2163.0,1597.0
-329,Eden Terrace,Suburb,1,136001,,False,,3186.0,4023.0
-341,Ellerslie,Suburb,4,143301;144201;144400;144800,,False,,8802.0,10695.0
-349,Epsom,Suburb,6,138700;140200;140300;140800;141500;141700,,False,,19338.0,20988.0
-8826,Fairview Heights,Suburb,1,116900,,False,,4152.0,3599.0
-370,Farm Cove,Suburb,1,148401,,False,,2061.0,2746.0
-371,Favona,Suburb,4,148200;148600;149400;149600,,False,,10401.0,11261.0
-8694,Flat Bush,Suburb,15,156601;156901;157200;157301;157500;157800;158001;158002;158101;158102;158200;158300;158601;158602;158900,,False,,46245.0,51157.0
-393,Forrest Hill,Suburb,3,122600;123400;123600,,False,,10053.0,10634.0
-399,Freemans Bay,Suburb,2,131801;134301,,False,,4530.0,4560.0
-421,Glen Eden,Suburb,6,129600;130100;130801;130901;130902;131500,,False,,19593.0,24138.0
-435,Glen Innes,Suburb,2,144700;145800,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",9276.0,7813.0
-425,Glenbrook,Locality,1,162400,,False,,2805.0,2080.0
-2906,Glendene,Suburb,3,128901;128902;129501,,False,,7719.0,8560.0
-2926,Glendowie,Suburb,3,144001;145101;145102,,False,,8493.0,8187.0
-2964,Glenfield,Suburb,5,122700;123100;123300;124000;124600,,False,,16731.0,20303.0
-446,Glorit,Locality,0,110800,110800,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,241.0
-448,Golflands,Suburb,1,153100,,False,,2490.0,2900.0
-449,Goodwood Heights,Suburb,2,158501;158502,,False,,4344.0,5644.0
-459,Grafton,Suburb,3,135900;136002;136100,,False,,5319.0,5509.0
-4330,Great Barrier Island (Aotea Island),Island,1,111801,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1239.0,1209.0
-462,Green Bay,Suburb,2,137300;138000,,False,,4914.0,4458.0
-2959,Greenhithe,Suburb,3,118900;119100;119400,,False,,8910.0,9486.0
-467,Greenlane,Suburb,3,142201;142202;143800,,False,,7956.0,7813.0
-475,Grey Lynn,Suburb,4,131600;132100;132800;133500,,False,,11049.0,12458.0
-2874,Gulf Harbour,Suburb,2,115700;116200,,False,,5991.0,6522.0
-488,Half Moon Bay,Suburb,3,147800;148800;149300,,False,,8064.0,7936.0
-2866,Hatfields Beach,Suburb,1,112800,,False,,1512.0,1467.0
-2893,Hauraki,Suburb,1,128800,,False,,4371.0,4707.0
-525,Helensville,Suburb,4,110300;112301;112401;112600,,False,,6648.0,6968.0
-526,Henderson,Suburb,14,124301;124900;125100;125701;126000;126100;126701;126702;126901;127500;127801;127900;128301;128401,,False,,39675.0,42952.0
-2166,Henderson Valley,Suburb,1,124700,,False,,1422.0,2206.0
-4361,Herald Island,Suburb,0,117001,117001,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",5052.0,670.0
-2913,Herne Bay,Suburb,1,129700,,False,,2775.0,3433.0
-2932,Highland Park,Suburb,1,151301,,False,,4008.0,3809.0
-541,Hillcrest,Suburb,3,125600;125800;126200,,False,,10641.0,11580.0
-8976,Hillpark,Suburb,2,159600;160300,,False,,5598.0,6133.0
-545,Hillsborough,Suburb,4,142002;142501;142901;143600,,False,,8862.0,8914.0
-2962,Hobsonville,Suburb,4,119201;120201;120202;120203,,False,,14028.0,15691.0
-578,Howick,Suburb,3,150400;152000;152400,,False,,11523.0,11789.0
-8876,Huapai,Suburb,0,115001,115001,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4770.0,3177.0
-2954,Huia,Suburb,1,128000,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1149.0,687.0
-589,Huntington Park,Suburb,2,154500;154600,,False,,1971.0,705.0
-2174,Hūnua,Locality,1,165200,,False,,1497.0,2334.0
-4407,Kaikōura Island / Selwyn Island,Island,0,111801,111801,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1239.0,1.0
-635,Kaipara Flats,Locality,0,111200,111200,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4017.0,1115.0
-658,Karaka,Locality,5,141400;161400;162500;163400;164301,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",9669.0,9712.0
-2183,Karekare,Locality,0,128000,128000,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1149.0,316.0
-2024,Karioitahi,Locality,0,149901,149901,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3081.0,497.0
-2758,Kaukapakapa,Locality,2,111601;111602,,False,,2832.0,3056.0
-2739,Kawakawa Bay,Locality,1,162701,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2001.0,765.0
-4938,Kawau Island,Island,2,110600;114300,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",138.0,149.0
-2907,Kelston,Suburb,2,130500;131000,,False,,5673.0,5751.0
-693,Kingseat,Locality,0,161400,161400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2994.0,1446.0
-694,Kingsland,Suburb,1,134400,,False,,3162.0,2811.0
-2920,Kohimarama,Suburb,2,141801;141802,,False,,4305.0,4687.0
-2963,Kumeū,Suburb,4,114701;115001;115002;116101,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",10710.0,8107.0
-2017,Laingholm,Suburb,1,137500,,False,,2316.0,2400.0
-2194,Lake Puketi,Locality,0,149901,149901,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3081.0,21.0
-2861,Leigh,Locality,1,110400,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,855.0
-8824,Long Bay,Suburb,1,116500,,False,,3141.0,4196.0
-8828,Lucas Heights,Suburb,0,116601,116601,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2808.0,1106.0
-779,Lynfield,Suburb,2,140901;140902,,False,,4509.0,4713.0
-4085,Mahurangi,Locality,0,111901,111901,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1221.0,369.0
-795,Mahurangi West,Locality,0,111200,111200,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4017.0,303.0
-2880,Mairangi Bay,Suburb,2,120500;120800,,False,,5832.0,6239.0
-805,Makarau,Locality,1,110800,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,1271.0
-822,Mangakura,Locality,0,110800,110800,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,92.0
-833,Mangatāwhiri,Locality,0,166400,166400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,1642.0
-2856,Mangawhai,Suburb,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,4411.0
-2878,Manly,Suburb,2,115200;115800,,False,,5928.0,5145.0
-841,Manukau City Centre,Suburb,2,155500;157000,,False,,3690.0,3103.0
-2953,Manukau Heads,Locality,0,149901,149901,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3081.0,375.0
-844,Manurewa,Suburb,11,158800;159101;159201;159202;159900;160000;160100;160401;160601;160901;160902,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",36609.0,42788.0
-845,Manurewa East,Suburb,1,160800,,False,,3102.0,3843.0
-2721,Maraetai,Suburb,1,157400,,False,,2553.0,2770.0
-4119,Massey,Suburb,9,117003;120101;120600;120900;121600;121701;122300;122501;122901,,False,,25494.0,29863.0
-875,Matakana,Locality,1,110900,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1641.0,1366.0
-8777,Matakatia,Suburb,0,115400,115400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1938.0,869.0
-892,Mauku,Locality,0,165001,165001,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1635.0,945.0
-2921,Meadowbank,Suburb,2,141900;143200,,False,,5592.0,5379.0
-8767,Mellons Bay,Suburb,1,150600,,False,,3990.0,3792.0
-926,Middlemore Hospital,Suburb,1,152700,,False,,138.0,30.0
-2901,Milford,Suburb,3,125400;125500;125900,,False,,7791.0,8486.0
-2924,Mission Bay,Suburb,2,141101;141102,,False,,4332.0,4408.0
-8939,Morningside,Suburb,1,133600,,False,,3609.0,4306.0
-4534,Motuhaku Island,Island,0,111801,111801,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1239.0,1.0
-4609,Motuora Island,Island,0,114300,114300,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",138.0,1.0
-4649,Motutapu Island,Island,0,114300,114300,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",138.0,2.0
-994,Mount Albert,Suburb,7,131900;132200;134200;135200;135500;135800;136801,,False,,19899.0,22216.0
-995,Mount Eden,Suburb,9,136200;136900;137701;137800;138100;138400;139000;139300;139900,,False,,24486.0,26947.0
-996,Mount Roskill,Suburb,10,139601;139700;139801;139802;140400;140601;140700;141300;142101;142301,,False,,29100.0,34208.0
-2925,Mount Wellington,Suburb,11,145300;146000;146201;146501;146600;147201;147202;147400;147700;149100;149500,,False,,26280.0,29763.0
-6526,Muriwai Beach,Locality,3,111000;114500;115300,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2214.0,2253.0
-2886,Murrays Bay,Suburb,2,119500;120000,,False,,4872.0,4539.0
-2737,Māngere,Suburb,7,147900;148501;148901;150200;151000;151600;152800,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",21357.0,23146.0
-836,Māngere Bridge,Suburb,3,146100;146800;147500,,False,,10839.0,12283.0
-837,Māngere East,Suburb,9,150000;150800;151200;151800;152101;152600;153200;153301;153600,,False,,26217.0,28069.0
-2892,Narrow Neck,Suburb,1,130700,,False,,4416.0,2324.0
-4006,Ness Valley,Locality,0,162701,162701,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2001.0,219.0
-2911,New Lynn,Suburb,8,132300;132600;132900;133900;134900;135600;136501;136502,,False,,20877.0,23008.0
-8842,New Windsor,Suburb,3,136601;138301;138302,,False,,7737.0,8323.0
-1018,Newmarket,Suburb,1,138501,,False,,2613.0,2286.0
-2285,Nihotupu,Suburb,0,130000,130000,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2142.0,2.0
-2902,Northcote,Suburb,4,127100;127200;127300;128101,,False,,8475.0,9920.0
-8819,Northcote Point,Suburb,1,128200,,False,,3066.0,2784.0
-1061,Northcross,Suburb,1,117700,,False,,3258.0,3836.0
-8768,Northpark,Suburb,2,153700;153900,,False,,4917.0,4362.0
-1106,One Tree Hill,Suburb,2,142801;142802,,False,,4497.0,4842.0
-1107,Onehunga,Suburb,6,144101;144300;145000;145200;145500;145600,,False,,17133.0,20631.0
-8651,Oneroa,Suburb,2,144600;146900,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2586.0,2241.0
-8650,Onetangi,Suburb,1,151100,,False,,1368.0,1033.0
-1127,Oratia,Suburb,1,130000,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2142.0,2152.0
-2871,Orewa,Suburb,5,112701;112702;112901;112902;113000,,False,,12984.0,12811.0
-8652,Ostend,Suburb,2,147300;148700,,False,,1983.0,2013.0
-8825,Oteha,Suburb,2,117600;117800,,False,,5379.0,5338.0
-1182,Paerata,Locality,1,165101,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2931.0,1652.0
-1185,Pahurehure,Suburb,1,163100,,False,,3366.0,3667.0
-4780,Pakatoa Island,Island,0,151700,151700,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1092.0,1.0
-2933,Pakuranga,Suburb,3,148102;149001;149800,,False,,8898.0,10385.0
-1190,Pakuranga Heights,Suburb,3,150500;150700;151500,,False,,9177.0,10038.0
-8775,Palm Beach,Suburb,0,146900,146900,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1242.0,422.0
-2929,Panmure,Suburb,4,146700;147001;147002;147100,,False,,7890.0,8487.0
-1196,Papakura,Suburb,13,162601;162602;162800;163001;163200;163301;163302;163501;163502;163600;163901;163902;164100,,False,,31932.0,34943.0
-1203,Papatoetoe,Suburb,15,153000;154001;154101;154201;154202;154801;154802;154901;154902;155601;155602;155901;156201;156500;156700,,False,,47910.0,54754.0
-1207,Parakai,Suburb,1,112200,,False,,1083.0,1295.0
-1211,Parau,Suburb,0,130000,130000,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2142.0,510.0
-4131,Parnell,Suburb,2,136400;137400,,False,,7785.0,8360.0
-1228,Patumāhoe,Locality,2,163801;163803,,False,,2688.0,2091.0
-1237,Penrose,Suburb,1,145900,,False,,1029.0,953.0
-2955,Piha,Locality,1,124100,,False,,1044.0,1091.0
-1252,Pinehill,Suburb,2,118501;118502,,False,,4824.0,4960.0
-2914,Point Chevalier,Suburb,3,129201;129901;129902,,False,,8535.0,9291.0
-2928,Point England,Suburb,2,146301;146302,,False,,4803.0,5827.0
-2859,Point Wells,Locality,0,111500,111500,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2187.0,742.0
-2226,Pollok,Locality,1,149901,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3081.0,1445.0
-1279,Ponsonby,Suburb,2,130400;131200,,False,,5286.0,5301.0
-2763,Port Albert,Locality,0,110201,110201,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1563.0,195.0
-2869,Puhoi,Locality,1,111200,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4017.0,1772.0
-1306,Pukekohe,Suburb,12,165001;165301;165302;165400;165501;165502;165600;165700;165800;165901;166000;166100,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",27441.0,28343.0
-1307,Pukekohe East,Locality,0,165101,165101,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2931.0,720.0
-1333,Puni,Locality,0,165001,165001,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1635.0,648.0
-1187,Pākiri,Locality,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,171.0
-2961,Pāremoremo,Suburb,1,116601,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2808.0,1775.0
-2865,Pōhuehue,Locality,0,111200,111200,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4017.0,185.0
-1356,Ramarama,Locality,1,164602,,False,,693.0,1985.0
-1359,Randwick Park,Suburb,2,161000;161300,,False,,5952.0,6341.0
-4869,Rangiahua Island (Flat Island),Island,0,111801,111801,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1239.0,7.0
-4872,Rangitoto Island,Island,0,114300,114300,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",138.0,2.0
-2876,Red Beach,Suburb,3,113600;113900;114000,,False,,9543.0,9603.0
-1381,Red Hill,Suburb,1,164201,,False,,2655.0,2835.0
-2887,Redvale,Suburb,0,114801,114801,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1395.0,752.0
-2923,Remuera,Suburb,9,138502;139400;140000;140500;141000;141600;142400;143100;143900,,False,,26706.0,28202.0
-2958,Riverhead,Suburb,3,113700;115901;116300,,False,,4527.0,5234.0
-1431,Rosedale,Suburb,1,118600,,False,,738.0,1335.0
-1432,Rosehill,Suburb,1,163700,,False,,4245.0,4596.0
-2881,Rothesay Bay,Suburb,1,119000,,False,,2892.0,3541.0
-4898,Rotoroa Island,Island,0,151700,151700,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1092.0,6.0
-1444,Royal Oak,Suburb,2,142600;143400,,False,,5358.0,5554.0
-1456,Runciman,Locality,1,164601,,False,,741.0,564.0
-4867,Rākino Island,Island,0,114300,114300,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",138.0,25.0
-1371,Rānui,Suburb,4,123000;123800;124200;125000,,False,,13368.0,14010.0
-2919,Saint Heliers,Suburb,3,142700;143000;143500,,False,,11439.0,12475.0
-2918,Saint Marys Bay,Suburb,1,130200,,False,,2049.0,1655.0
-1464,Sandringham,Suburb,4,136300;137000;137600;138200,,False,,11517.0,12775.0
-2862,Sandspit,Locality,1,111400,,False,,990.0,431.0
-8822,Schnapper Rock,Suburb,1,118400,,False,,3867.0,4264.0
-8693,Shamrock Park,Suburb,0,154701,154701,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2397.0,846.0
-2757,Shelly Beach,Locality,0,110700,110700,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2859.0,291.0
-1484,Shelly Park,Suburb,1,154300,,False,,2850.0,2220.0
-8690,Silverdale,Suburb,3,113101;113300;113800,,False,,8847.0,11090.0
-8654,Snells Beach,Suburb,1,111700,,False,,3678.0,3882.0
-1500,Somerville,Suburb,1,153800,,False,,4338.0,4134.0
-4018,South Head,Locality,1,110700,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2859.0,1641.0
-1525,St Johns,Suburb,3,143700;144500;145400,,False,,6024.0,6859.0
-2894,Stanley Point,Suburb,1,131400,,False,,1977.0,1940.0
-2890,Stanmore Bay,Suburb,4,114400;114600;114901;115100,,False,,10767.0,12438.0
-2882,Stillwater,Locality,2,114101;114102,,False,,2082.0,2188.0
-8878,Stonefields,Suburb,2,144900;145700,,False,,3945.0,4245.0
-8869,Sunnyhills,Suburb,2,148101;149200,,False,,5667.0,5111.0
-1546,Sunnynook,Suburb,2,121200;121300,,False,,5532.0,5610.0
-1547,Sunnyvale,Suburb,2,129000;129101,,False,,6333.0,5805.0
-8776,Surfdale,Suburb,1,147600,,False,,2058.0,1924.0
-1552,Swanson,Suburb,2,121100;122001,,False,,5985.0,5977.0
-1575,Takanini,Suburb,6,161600;161700;162000;162101;162102;162200,,False,,14436.0,18644.0
-8658,Takapuna,Suburb,3,126601;126801;128601,,False,,8487.0,8660.0
-1603,Tauhoa,Locality,0,110800,110800,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,118.0
-1607,Taupaki,Locality,1,116401,,False,,1797.0,1479.0
-2904,Te Atatū Peninsula,Suburb,4,123200;124500;124800;125300,,False,,14451.0,15270.0
-2908,Te Atatū South,Suburb,5,126401;127001;127002;127701;128501,,False,,15336.0,16965.0
-1621,Te Hana,Locality,0,110201,110201,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1563.0,93.0
-2755,Te Henga / Bethells Beach,Locality,0,115300,115300,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1089.0,338.0
-2852,Te Ārai,Locality,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,563.0
-1665,The Gardens,Suburb,1,159301,,False,,4014.0,3761.0
-1675,Three Kings,Suburb,2,141201;142001,,False,,4098.0,3009.0
-2883,Tindalls Beach,Suburb,1,115400,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1938.0,1088.0
-2390,Titirangi,Suburb,5,132501;134600;134700;135401;136700,,False,,14853.0,15938.0
-1986,Tomarata,Locality,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,220.0
-2877,Torbay,Suburb,4,116801;117201;117202;117500,,False,,12069.0,14836.0
-8704,Totara Heights,Suburb,1,159000,,False,,2934.0,2958.0
-8971,Tāhekeroa,Locality,0,110800,110800,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,264.0
-1589,Tāpora,Locality,0,110201,110201,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1563.0,208.0
-1614,Tāwharanui Peninsula,Locality,0,111500,111500,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2187.0,528.0
-2860,Tī Point,Locality,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,144.0
-8695,Tōtara Park,Suburb,1,158603,,False,,1008.0,1547.0
-8829,Tōtara Vale,Suburb,2,121500;121901,,False,,6435.0,7122.0
-8821,Unsworth Heights,Suburb,2,119901;120400,,False,,6345.0,6640.0
-8962,Wade Heads,Suburb,0,114902,114902,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1998.0,481.0
-8933,Wai o Taiki Bay,Suburb,0,145800,145800,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4992.0,1986.0
-2884,Waiake,Suburb,1,117900,,False,,3912.0,1574.0
-2406,Waiatarua,Suburb,1,127601,,False,,2307.0,1198.0
-1771,Waiau Pā,Locality,1,159801,,False,,1611.0,1221.0
-6522,Waiheke Island,Island,1,151700,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1092.0,894.0
-1982,Waimauku,Suburb,2,113201;114201,,False,,2943.0,4039.0
-2870,Wainui,Locality,3,112101;112102;113401,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4047.0,4707.0
-1838,Wairau Valley,Suburb,1,123500,,False,,120.0,395.0
-1859,Waitoki,Locality,1,112500,,False,,1698.0,1763.0
-2756,Waitākere,Suburb,2,117100;118001,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3072.0,3057.0
-1865,Waiuku,Suburb,5,164401;164500;164700;164800;164900,,False,,9528.0,11594.0
-2868,Waiwera,Locality,0,112101,112101,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1686.0,357.0
-2864,Warkworth,Suburb,2,111100;111300,,False,,6675.0,8194.0
-2910,Waterview,Suburb,1,131100,,False,,4077.0,3870.0
-1889,Wattle Downs,Suburb,3,161100;161201;161500,,False,,9552.0,8798.0
-1897,Wellsford,Suburb,2,110201;110501,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3600.0,4067.0
-8970,Wesley,Suburb,3,137901;138800;139100,,False,,4725.0,6285.0
-2905,West Harbour,Suburb,3,119800;120301;120701,,False,,11169.0,11609.0
-2915,Western Springs,Suburb,0,130300,130300,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2859.0,68.0
-8961,Westgate,Suburb,3,117002;118800;119600,,False,,4305.0,2640.0
-2916,Westmere,Suburb,2,129800;130300,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",5163.0,4802.0
-2731,Weymouth,Suburb,4,160201;160202;160501;160700,,False,,11712.0,11806.0
-2722,Whakatīwai,Locality,0,162701,162701,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2001.0,406.0
-6529,Whangaripo,Locality,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,534.0
-8752,Whangateau,Suburb,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,255.0
-2762,Wharehine,Locality,0,110201,110201,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1563.0,222.0
-4118,Whenuapai,Suburb,1,117001,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",5052.0,4953.0
-2727,Whitford,Locality,1,157101,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3333.0,2533.0
-8823,Windsor Park,Suburb,1,119700,,False,,1713.0,2110.0
-1956,Wiri,Suburb,3,157600;158401;158402,,False,,6504.0,5329.0
-4120,Āwhitu,Locality,0,149901,149901,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3081.0,685.0
-2889,Ōkura,Suburb,1,114801,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1395.0,683.0
-2875,Ōkura Bush,Locality,0,114801,114801,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1395.0,30.0
-1098,Ōmaha,Locality,1,111500,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2187.0,788.0
-8649,Ōmiha,Suburb,0,151700,151700,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1092.0,553.0
-1112,Ōpaheke,Suburb,1,164001,,False,,3237.0,4664.0
-2725,Ōrere Point,Locality,0,162701,162701,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2001.0,438.0
-2922,Ōrākei,Suburb,2,139201;140100,,False,,5571.0,5819.0
-2931,Ōtara,Suburb,7,153500;154400;155100;155701;155702;155801;156800,,False,,19605.0,24431.0
-8835,Ōtāhuhu,Suburb,7,112001;150101;150301;150302;150900;151400;151900,,False,,14631.0,17705.0
+2960.0,Albany,Suburb,3,117300;117400;118100,,False,,7767.0,9435.0
+8827.0,Albany Heights,Suburb,1,116701,,False,,4194.0,2770.0
+18.0,Alfriston,Suburb,0,160401,160401,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3975.0,700.0
+2863.0,Algies Bay,Suburb,1,111901,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1221.0,779.0
+2754.0,Anawhata,Locality,0,117100,117100,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1260.0,77.0
+41.0,Ararimu,Locality,1,166400,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,1075.0
+46.0,Ardmore,Locality,1,162300,,False,,1323.0,794.0
+2888.0,Arkles Bay,Suburb,1,114902,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1998.0,1310.0
+2885.0,Army Bay,Suburb,1,116000,,False,,1482.0,1655.0
+67.0,Auckland Airport,Suburb,0,147900,147900,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",528.0,11.0
+2728.0,Auckland Central,Suburb,16,131300;131802;132400;132700;133200;133301;133400;133700;133800;134100;134302;134500;134800;135100;135300;135700,,False,,30666.0,35527.0
+2912.0,Avondale,Suburb,8,128700;130601;131700;132001;132002;133100;135000;137100,,False,,23364.0,25010.0
+2897.0,Bayswater,Suburb,1,129400,,False,,2742.0,2715.0
+8820.0,Bayview,Suburb,3,121001;121401;122101,,False,,9027.0,7870.0
+2898.0,Beach Haven,Suburb,3,121800;122400;123900,,False,,10845.0,10997.0
+2726.0,Beachlands,Suburb,2,155000;156400,,False,,7797.0,8428.0
+2895.0,Belmont,Suburb,1,129300,,False,,3012.0,3918.0
+8751.0,Big Ōmaha,Suburb,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,249.0
+2900.0,Birkdale,Suburb,3,122801;122802;124401,,False,,9204.0,9733.0
+2899.0,Birkenhead,Suburb,4,125201;125202;126500;127400,,False,,10344.0,10614.0
+140.0,Blockhouse Bay,Suburb,5,137201;137202;138600;138901;139501,,False,,13110.0,16522.0
+144.0,Bombay,Locality,1,166301,,False,,1989.0,2302.0
+145.0,Botany Downs,Suburb,2,152201;152900,,False,,5775.0,6193.0
+161.0,Brookby,Locality,0,157101,157101,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3333.0,422.0
+2872.0,Browns Bay,Suburb,3,118200;118300;118700,,False,,10311.0,12088.0
+174.0,Buckland,Locality,1,166200,,False,,1233.0,1581.0
+175.0,Bucklands Beach,Suburb,4,146400;148300;149701;149702,,False,,9540.0,10523.0
+183.0,Burswood,Suburb,1,152500,,False,,1596.0,1856.0
+2873.0,Campbells Bay,Suburb,1,122200,,False,,2847.0,2961.0
+2879.0,Castor Bay,Suburb,2,123701;123702,,False,,4551.0,4630.0
+2903.0,Chatswood,Suburb,1,126300,,False,,3438.0,3551.0
+230.0,Clarks Beach,Suburb,1,159401,,False,,1581.0,1940.0
+235.0,Clendon Park,Suburb,3,158700;159500;159700,,False,,8463.0,11150.0
+4033.0,Clevedon,Locality,1,162901,,False,,1581.0,2877.0
+240.0,Clover Park,Suburb,3,157701;157702;157901,,False,,8598.0,11439.0
+248.0,Coatesville,Locality,1,115501,,False,,2112.0,1979.0
+6543.0,Cockle Bay,Suburb,1,153400,,False,,4239.0,5365.0
+254.0,Conifer Grove,Suburb,2,161800;161900,,False,,5907.0,5372.0
+2753.0,Cornwallis,Suburb,0,128000,128000,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1149.0,163.0
+276.0,Dairy Flat,Locality,3,113402;113500;115601,,False,,4980.0,4967.0
+8696.0,Dannemora,Suburb,2,154701;155301,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4269.0,3856.0
+2896.0,Devonport,Suburb,2,133000;134000,,False,,5079.0,6926.0
+295.0,Dome Forest,Locality,0,111200,111200,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4017.0,277.0
+296.0,Dome Valley,Locality,0,110900,110900,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1641.0,143.0
+306.0,Drury,Suburb,2,164302;164603,,False,,2847.0,2070.0
+6542.0,East Tāmaki,Suburb,5,152300;154500;155200;155401;156000,,False,,7152.0,7116.0
+8697.0,East Tāmaki Heights,Suburb,2,156101;156301,,False,,5547.0,5759.0
+6544.0,Eastern Beach,Suburb,1,148000,,False,,2163.0,1597.0
+329.0,Eden Terrace,Suburb,1,136001,,False,,3186.0,4023.0
+341.0,Ellerslie,Suburb,4,143301;144201;144400;144800,,False,,8802.0,10695.0
+349.0,Epsom,Suburb,6,138700;140200;140300;140800;141500;141700,,False,,19338.0,20988.0
+8826.0,Fairview Heights,Suburb,1,116900,,False,,4152.0,3599.0
+370.0,Farm Cove,Suburb,1,148401,,False,,2061.0,2746.0
+371.0,Favona,Suburb,4,148200;148600;149400;149600,,False,,10401.0,11261.0
+8694.0,Flat Bush,Suburb,15,156601;156901;157301;157500;157800;158001;158002;158101;158102;158200;158300;158601;158602;158603;158900,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",45147.0,51157.0
+393.0,Forrest Hill,Suburb,3,122600;123400;123600,,False,,10053.0,10634.0
+399.0,Freemans Bay,Suburb,2,131801;134301,,False,,4530.0,4560.0
+421.0,Glen Eden,Suburb,6,129600;130100;130801;130901;130902;131500,,False,,19593.0,24138.0
+435.0,Glen Innes,Suburb,2,144700;145800,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",9276.0,7813.0
+425.0,Glenbrook,Locality,1,162400,,False,,2805.0,2080.0
+2906.0,Glendene,Suburb,3,128901;128902;129501,,False,,7719.0,8560.0
+2926.0,Glendowie,Suburb,3,144001;145101;145102,,False,,8493.0,8187.0
+2964.0,Glenfield,Suburb,5,122700;123100;123300;124000;124600,,False,,16731.0,20303.0
+446.0,Glorit,Locality,0,110800,110800,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,241.0
+448.0,Golflands,Suburb,1,153100,,False,,2490.0,2900.0
+449.0,Goodwood Heights,Suburb,2,158501;158502,,False,,4344.0,5644.0
+459.0,Grafton,Suburb,3,135900;136002;136100,,False,,5319.0,5509.0
+4330.0,Great Barrier Island (Aotea Island),Island,1,111801,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1239.0,1209.0
+462.0,Green Bay,Suburb,2,137300;138000,,False,,4914.0,4458.0
+2959.0,Greenhithe,Suburb,3,118900;119100;119400,,False,,8910.0,9486.0
+467.0,Greenlane,Suburb,3,142201;142202;143800,,False,,7956.0,7813.0
+475.0,Grey Lynn,Suburb,4,131600;132100;132800;133500,,False,,11049.0,12458.0
+2874.0,Gulf Harbour,Suburb,2,115700;116200,,False,,5991.0,6522.0
+488.0,Half Moon Bay,Suburb,3,147800;148800;149300,,False,,8064.0,7936.0
+2866.0,Hatfields Beach,Suburb,1,112800,,False,,1512.0,1467.0
+2893.0,Hauraki,Suburb,1,128800,,False,,4371.0,4707.0
+525.0,Helensville,Suburb,3,112301;112401;112600,,False,,6648.0,6968.0
+526.0,Henderson,Suburb,14,124301;124900;125100;125701;126000;126100;126701;126702;126901;127500;127801;127900;128301;128401,,False,,39675.0,42952.0
+2166.0,Henderson Valley,Suburb,1,124700,,False,,1422.0,2206.0
+4361.0,Herald Island,Suburb,0,117001,117001,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",5052.0,670.0
+2913.0,Herne Bay,Suburb,1,129700,,False,,2775.0,3433.0
+2932.0,Highland Park,Suburb,1,151301,,False,,4008.0,3809.0
+541.0,Hillcrest,Suburb,3,125600;125800;126200,,False,,10641.0,11580.0
+8976.0,Hillpark,Suburb,2,159600;160300,,False,,5598.0,6133.0
+545.0,Hillsborough,Suburb,4,142002;142501;142901;143600,,False,,8862.0,8914.0
+2962.0,Hobsonville,Suburb,4,119201;120201;120202;120203,,False,,14028.0,15691.0
+578.0,Howick,Suburb,3,150400;152000;152400,,False,,11523.0,11789.0
+8876.0,Huapai,Suburb,0,115001,115001,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4770.0,3177.0
+2954.0,Huia,Suburb,1,128000,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1149.0,687.0
+589.0,Huntington Park,Suburb,1,154600,,False,,6.0,705.0
+2174.0,Hūnua,Locality,1,165200,,False,,1497.0,2334.0
+4407.0,Kaikōura Island / Selwyn Island,Island,0,111801,111801,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1239.0,1.0
+635.0,Kaipara Flats,Locality,0,111200,111200,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4017.0,1115.0
+658.0,Karaka,Locality,4,161400;162500;163400;164301,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",9669.0,9712.0
+2183.0,Karekare,Locality,0,128000,128000,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1149.0,316.0
+2024.0,Karioitahi,Locality,0,149901,149901,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3081.0,497.0
+2758.0,Kaukapakapa,Locality,2,111601;111602,,False,,2832.0,3056.0
+2739.0,Kawakawa Bay,Locality,1,162701,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2001.0,765.0
+4938.0,Kawau Island,Island,1,114300,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",138.0,149.0
+2907.0,Kelston,Suburb,2,130500;131000,,False,,5673.0,5751.0
+693.0,Kingseat,Locality,0,161400,161400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2994.0,1446.0
+694.0,Kingsland,Suburb,1,134400,,False,,3162.0,2811.0
+2920.0,Kohimarama,Suburb,2,141801;141802,,False,,4305.0,4687.0
+2963.0,Kumeū,Suburb,4,114701;115001;115002;116101,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",10710.0,8107.0
+2017.0,Laingholm,Suburb,1,137500,,False,,2316.0,2400.0
+2194.0,Lake Puketi,Locality,0,149901,149901,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3081.0,21.0
+2861.0,Leigh,Locality,1,110400,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,855.0
+8824.0,Long Bay,Suburb,1,116500,,False,,3141.0,4196.0
+8828.0,Lucas Heights,Suburb,0,116601,116601,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2808.0,1106.0
+779.0,Lynfield,Suburb,2,140901;140902,,False,,4509.0,4713.0
+4085.0,Mahurangi,Locality,0,111901,111901,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1221.0,369.0
+795.0,Mahurangi West,Locality,0,111200,111200,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4017.0,303.0
+2880.0,Mairangi Bay,Suburb,2,120500;120800,,False,,5832.0,6239.0
+805.0,Makarau,Locality,1,110800,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,1271.0
+822.0,Mangakura,Locality,0,110800,110800,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,92.0
+833.0,Mangatāwhiri,Locality,0,166400,166400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,1642.0
+2856.0,Mangawhai,Suburb,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,4411.0
+2878.0,Manly,Suburb,2,115200;115800,,False,,5928.0,5145.0
+841.0,Manukau City Centre,Suburb,2,155500;157000,,False,,3690.0,3103.0
+2953.0,Manukau Heads,Locality,0,149901,149901,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3081.0,375.0
+844.0,Manurewa,Suburb,11,158800;159101;159201;159202;159900;160000;160100;160401;160601;160901;160902,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",36609.0,42788.0
+845.0,Manurewa East,Suburb,1,160800,,False,,3102.0,3843.0
+2721.0,Maraetai,Suburb,1,157400,,False,,2553.0,2770.0
+4119.0,Massey,Suburb,9,117003;120101;120600;120900;121600;121701;122300;122501;122901,,False,,25494.0,29863.0
+875.0,Matakana,Locality,1,110900,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1641.0,1366.0
+8777.0,Matakatia,Suburb,0,115400,115400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1938.0,869.0
+892.0,Mauku,Locality,0,165001,165001,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1635.0,945.0
+2921.0,Meadowbank,Suburb,2,141900;143200,,False,,5592.0,5379.0
+8767.0,Mellons Bay,Suburb,1,150600,,False,,3990.0,3792.0
+926.0,Middlemore Hospital,Suburb,1,152700,,False,,138.0,30.0
+2901.0,Milford,Suburb,3,125400;125500;125900,,False,,7791.0,8486.0
+2924.0,Mission Bay,Suburb,2,141101;141102,,False,,4332.0,4408.0
+8939.0,Morningside,Suburb,1,133600,,False,,3609.0,4306.0
+4534.0,Motuhaku Island,Island,0,111801,111801,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1239.0,1.0
+4609.0,Motuora Island,Island,0,114300,114300,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",138.0,1.0
+4649.0,Motutapu Island,Island,0,114300,114300,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",138.0,2.0
+994.0,Mount Albert,Suburb,7,131900;132200;134200;135200;135500;135800;136801,,False,,19899.0,22216.0
+995.0,Mount Eden,Suburb,9,136200;136900;137701;137800;138100;138400;139000;139300;139900,,False,,24486.0,26947.0
+996.0,Mount Roskill,Suburb,10,139601;139700;139801;139802;140400;140601;140700;141300;142101;142301,,False,,29100.0,34208.0
+2925.0,Mount Wellington,Suburb,11,145300;146000;146201;146501;146600;147201;147202;147400;147700;149100;149500,,False,,26280.0,29763.0
+6526.0,Muriwai Beach,Locality,2,114500;115300,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2214.0,2253.0
+2886.0,Murrays Bay,Suburb,2,119500;120000,,False,,4872.0,4539.0
+2737.0,Māngere,Suburb,7,147900;148501;148901;150200;151000;151600;152800,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",21357.0,23146.0
+836.0,Māngere Bridge,Suburb,3,146100;146800;147500,,False,,10839.0,12283.0
+837.0,Māngere East,Suburb,9,150000;150800;151200;151800;152101;152600;153200;153301;153600,,False,,26217.0,28069.0
+2892.0,Narrow Neck,Suburb,1,130700,,False,,4416.0,2324.0
+4006.0,Ness Valley,Locality,0,162701,162701,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2001.0,219.0
+2911.0,New Lynn,Suburb,8,132300;132600;132900;133900;134900;135600;136501;136502,,False,,20877.0,23008.0
+8842.0,New Windsor,Suburb,3,136601;138301;138302,,False,,7737.0,8323.0
+1018.0,Newmarket,Suburb,1,138501,,False,,2613.0,2286.0
+2285.0,Nihotupu,Suburb,0,130000,130000,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2142.0,2.0
+2902.0,Northcote,Suburb,4,127100;127200;127300;128101,,False,,8475.0,9920.0
+8819.0,Northcote Point,Suburb,1,128200,,False,,3066.0,2784.0
+1061.0,Northcross,Suburb,1,117700,,False,,3258.0,3836.0
+8768.0,Northpark,Suburb,2,153700;153900,,False,,4917.0,4362.0
+1106.0,One Tree Hill,Suburb,2,142801;142802,,False,,4497.0,4842.0
+1107.0,Onehunga,Suburb,6,144101;144300;145000;145200;145500;145600,,False,,17133.0,20631.0
+8651.0,Oneroa,Suburb,2,144600;146900,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2586.0,2241.0
+8650.0,Onetangi,Suburb,1,151100,,False,,1368.0,1033.0
+1127.0,Oratia,Suburb,1,130000,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2142.0,2152.0
+2871.0,Orewa,Suburb,5,112701;112702;112901;112902;113000,,False,,12984.0,12811.0
+8652.0,Ostend,Suburb,2,147300;148700,,False,,1983.0,2013.0
+8825.0,Oteha,Suburb,2,117600;117800,,False,,5379.0,5338.0
+1182.0,Paerata,Locality,1,165101,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2931.0,1652.0
+1185.0,Pahurehure,Suburb,1,163100,,False,,3366.0,3667.0
+4780.0,Pakatoa Island,Island,0,151700,151700,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1092.0,1.0
+2933.0,Pakuranga,Suburb,3,148102;149001;149800,,False,,8898.0,10385.0
+1190.0,Pakuranga Heights,Suburb,3,150500;150700;151500,,False,,9177.0,10038.0
+8775.0,Palm Beach,Suburb,0,146900,146900,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1242.0,422.0
+2929.0,Panmure,Suburb,4,146700;147001;147002;147100,,False,,7890.0,8487.0
+1196.0,Papakura,Suburb,13,162601;162602;162800;163001;163200;163301;163302;163501;163502;163600;163901;163902;164100,,False,,31932.0,34943.0
+1203.0,Papatoetoe,Suburb,15,153000;154001;154101;154201;154202;154801;154802;154901;154902;155601;155602;155901;156201;156500;156700,,False,,47910.0,54754.0
+1207.0,Parakai,Suburb,1,112200,,False,,1083.0,1295.0
+1211.0,Parau,Suburb,0,130000,130000,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2142.0,510.0
+4131.0,Parnell,Suburb,2,136400;137400,,False,,7785.0,8360.0
+1228.0,Patumāhoe,Locality,2,163801;163803,,False,,2688.0,2091.0
+1237.0,Penrose,Suburb,1,145900,,False,,1029.0,953.0
+2955.0,Piha,Locality,1,124100,,False,,1044.0,1091.0
+1252.0,Pinehill,Suburb,2,118501;118502,,False,,4824.0,4960.0
+2914.0,Point Chevalier,Suburb,3,129201;129901;129902,,False,,8535.0,9291.0
+2928.0,Point England,Suburb,2,146301;146302,,False,,4803.0,5827.0
+2859.0,Point Wells,Locality,0,111500,111500,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2187.0,742.0
+2226.0,Pollok,Locality,1,149901,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3081.0,1445.0
+1279.0,Ponsonby,Suburb,2,130400;131200,,False,,5286.0,5301.0
+2763.0,Port Albert,Locality,0,110201,110201,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1563.0,195.0
+2869.0,Puhoi,Locality,1,111200,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4017.0,1772.0
+1306.0,Pukekohe,Suburb,12,165001;165301;165302;165400;165501;165502;165600;165700;165800;165901;166000;166100,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",27441.0,28343.0
+1307.0,Pukekohe East,Locality,0,165101,165101,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2931.0,720.0
+1333.0,Puni,Locality,0,165001,165001,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1635.0,648.0
+1187.0,Pākiri,Locality,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,171.0
+2961.0,Pāremoremo,Suburb,1,116601,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2808.0,1775.0
+2865.0,Pōhuehue,Locality,0,111200,111200,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4017.0,185.0
+1356.0,Ramarama,Locality,1,164602,,False,,693.0,1985.0
+1359.0,Randwick Park,Suburb,2,161000;161300,,False,,5952.0,6341.0
+4869.0,Rangiahua Island (Flat Island),Island,0,111801,111801,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1239.0,7.0
+4872.0,Rangitoto Island,Island,0,114300,114300,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",138.0,2.0
+2876.0,Red Beach,Suburb,3,113600;113900;114000,,False,,9543.0,9603.0
+1381.0,Red Hill,Suburb,1,164201,,False,,2655.0,2835.0
+2887.0,Redvale,Suburb,0,114801,114801,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1395.0,752.0
+2923.0,Remuera,Suburb,9,138502;139400;140000;140500;141000;141600;142400;143100;143900,,False,,26706.0,28202.0
+2958.0,Riverhead,Suburb,3,113700;115901;116300,,False,,4527.0,5234.0
+1431.0,Rosedale,Suburb,1,118600,,False,,738.0,1335.0
+1432.0,Rosehill,Suburb,1,163700,,False,,4245.0,4596.0
+2881.0,Rothesay Bay,Suburb,1,119000,,False,,2892.0,3541.0
+4898.0,Rotoroa Island,Island,0,151700,151700,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1092.0,6.0
+1444.0,Royal Oak,Suburb,2,142600;143400,,False,,5358.0,5554.0
+1456.0,Runciman,Locality,1,164601,,False,,741.0,564.0
+4867.0,Rākino Island,Island,0,114300,114300,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",138.0,25.0
+1371.0,Rānui,Suburb,4,123000;123800;124200;125000,,False,,13368.0,14010.0
+2919.0,Saint Heliers,Suburb,3,142700;143000;143500,,False,,11439.0,12475.0
+2918.0,Saint Marys Bay,Suburb,1,130200,,False,,2049.0,1655.0
+1464.0,Sandringham,Suburb,4,136300;137000;137600;138200,,False,,11517.0,12775.0
+2862.0,Sandspit,Locality,1,111400,,False,,990.0,431.0
+8822.0,Schnapper Rock,Suburb,1,118400,,False,,3867.0,4264.0
+8693.0,Shamrock Park,Suburb,0,154701,154701,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2397.0,846.0
+2757.0,Shelly Beach,Locality,0,110700,110700,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2859.0,291.0
+1484.0,Shelly Park,Suburb,1,154300,,False,,2850.0,2220.0
+8690.0,Silverdale,Suburb,3,113101;113300;113800,,False,,8847.0,11090.0
+8654.0,Snells Beach,Suburb,1,111700,,False,,3678.0,3882.0
+1500.0,Somerville,Suburb,1,153800,,False,,4338.0,4134.0
+4018.0,South Head,Locality,1,110700,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2859.0,1641.0
+1525.0,St Johns,Suburb,3,143700;144500;145400,,False,,6024.0,6859.0
+2894.0,Stanley Point,Suburb,1,131400,,False,,1977.0,1940.0
+2890.0,Stanmore Bay,Suburb,4,114400;114600;114901;115100,,False,,10767.0,12438.0
+2882.0,Stillwater,Locality,2,114101;114102,,False,,2082.0,2188.0
+8878.0,Stonefields,Suburb,2,144900;145700,,False,,3945.0,4245.0
+8869.0,Sunnyhills,Suburb,2,148101;149200,,False,,5667.0,5111.0
+1546.0,Sunnynook,Suburb,2,121200;121300,,False,,5532.0,5610.0
+1547.0,Sunnyvale,Suburb,2,129000;129101,,False,,6333.0,5805.0
+8776.0,Surfdale,Suburb,1,147600,,False,,2058.0,1924.0
+1552.0,Swanson,Suburb,2,121100;122001,,False,,5985.0,5977.0
+1575.0,Takanini,Suburb,6,161600;161700;162000;162101;162102;162200,,False,,14436.0,18644.0
+8658.0,Takapuna,Suburb,3,126601;126801;128601,,False,,8487.0,8660.0
+1603.0,Tauhoa,Locality,0,110800,110800,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,118.0
+1607.0,Taupaki,Locality,1,116401,,False,,1797.0,1479.0
+2904.0,Te Atatū Peninsula,Suburb,4,123200;124500;124800;125300,,False,,14451.0,15270.0
+2908.0,Te Atatū South,Suburb,5,126401;127001;127002;127701;128501,,False,,15336.0,16965.0
+1621.0,Te Hana,Locality,0,110201,110201,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1563.0,93.0
+2755.0,Te Henga / Bethells Beach,Locality,0,115300,115300,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1089.0,338.0
+2852.0,Te Ārai,Locality,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,563.0
+1665.0,The Gardens,Suburb,1,159301,,False,,4014.0,3761.0
+1675.0,Three Kings,Suburb,2,141201;142001,,False,,4098.0,3009.0
+2883.0,Tindalls Beach,Suburb,1,115400,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1938.0,1088.0
+2390.0,Titirangi,Suburb,5,132501;134600;134700;135401;136700,,False,,14853.0,15938.0
+1986.0,Tomarata,Locality,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,220.0
+2877.0,Torbay,Suburb,5,116801;117201;117202;117500;117900,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",15981.0,14836.0
+8704.0,Totara Heights,Suburb,1,159000,,False,,2934.0,2958.0
+8971.0,Tāhekeroa,Locality,0,110800,110800,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,264.0
+1589.0,Tāpora,Locality,0,110201,110201,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1563.0,208.0
+1614.0,Tāwharanui Peninsula,Locality,0,111500,111500,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2187.0,528.0
+2860.0,Tī Point,Locality,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,144.0
+8695.0,Tōtara Park,Suburb,0,158603,158603,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1008.0,1547.0
+8829.0,Tōtara Vale,Suburb,2,121500;121901,,False,,6435.0,7122.0
+8821.0,Unsworth Heights,Suburb,2,119901;120400,,False,,6345.0,6640.0
+8962.0,Wade Heads,Suburb,0,114902,114902,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1998.0,481.0
+8933.0,Wai o Taiki Bay,Suburb,0,145800,145800,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4992.0,1986.0
+2884.0,Waiake,Suburb,0,117900,117900,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3912.0,1574.0
+2406.0,Waiatarua,Suburb,1,127601,,False,,2307.0,1198.0
+1771.0,Waiau Pā,Locality,1,159801,,False,,1611.0,1221.0
+6522.0,Waiheke Island,Island,1,151700,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1092.0,894.0
+1982.0,Waimauku,Suburb,2,113201;114201,,False,,2943.0,4039.0
+2870.0,Wainui,Locality,3,112101;112102;113401,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4047.0,4707.0
+1838.0,Wairau Valley,Suburb,1,123500,,False,,120.0,395.0
+1859.0,Waitoki,Locality,1,112500,,False,,1698.0,1763.0
+2756.0,Waitākere,Suburb,2,117100;118001,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3072.0,3057.0
+1865.0,Waiuku,Suburb,5,164401;164500;164700;164800;164900,,False,,9528.0,11594.0
+2868.0,Waiwera,Locality,0,112101,112101,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1686.0,357.0
+2864.0,Warkworth,Suburb,2,111100;111300,,False,,6675.0,8194.0
+2910.0,Waterview,Suburb,1,131100,,False,,4077.0,3870.0
+1889.0,Wattle Downs,Suburb,3,161100;161201;161500,,False,,9552.0,8798.0
+1897.0,Wellsford,Suburb,2,110201;110501,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3600.0,4067.0
+8970.0,Wesley,Suburb,3,137901;138800;139100,,False,,4725.0,6285.0
+2905.0,West Harbour,Suburb,3,119800;120301;120701,,False,,11169.0,11609.0
+2915.0,Western Springs,Suburb,0,130300,130300,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2859.0,68.0
+8961.0,Westgate,Suburb,3,117002;118800;119600,,False,,4305.0,2640.0
+2916.0,Westmere,Suburb,2,129800;130300,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",5163.0,4802.0
+2731.0,Weymouth,Suburb,4,160201;160202;160501;160700,,False,,11712.0,11806.0
+2722.0,Whakatīwai,Locality,0,162701,162701,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2001.0,406.0
+6529.0,Whangaripo,Locality,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,534.0
+8752.0,Whangateau,Suburb,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,255.0
+2762.0,Wharehine,Locality,0,110201,110201,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1563.0,222.0
+4118.0,Whenuapai,Suburb,1,117001,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",5052.0,4953.0
+2727.0,Whitford,Locality,1,157101,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3333.0,2533.0
+8823.0,Windsor Park,Suburb,1,119700,,False,,1713.0,2110.0
+1956.0,Wiri,Suburb,3,157600;158401;158402,,False,,6504.0,5329.0
+4120.0,Āwhitu,Locality,0,149901,149901,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3081.0,685.0
+2889.0,Ōkura,Suburb,1,114801,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1395.0,683.0
+2875.0,Ōkura Bush,Locality,0,114801,114801,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1395.0,30.0
+1098.0,Ōmaha,Locality,1,111500,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2187.0,788.0
+8649.0,Ōmiha,Suburb,0,151700,151700,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1092.0,553.0
+1112.0,Ōpaheke,Suburb,1,164001,,False,,3237.0,4664.0
+2725.0,Ōrere Point,Locality,0,162701,162701,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2001.0,438.0
+2922.0,Ōrākei,Suburb,2,139201;140100,,False,,5571.0,5819.0
+2931.0,Ōtara,Suburb,8,153500;154400;155100;155701;155702;155801;156800;157200,,False,,21711.0,24431.0
+8835.0,Ōtāhuhu,Suburb,6,150101;150301;150302;150900;151400;151900,,False,,14631.0,17705.0

@@ -134,6 +134,26 @@ def suburbs():
     print("ok  ", out.name, len(g), dict(g["type"].value_counts()))  # g.type is the geometry type
 
 
+def sa1_population():
+    """2023 census residents by SA1 (Stats NZ, coast-clipped layer); evidence for the SA2 -> suburb review."""
+    out = DATA / "census" / "sa1_2023_population_auckland.geojson"
+    if out.exists():
+        return print("skip", out.name)
+    x0, y0, x1, y1 = gpd.read_file(DATA / "boundaries" / "auckland_sa2_2023.geojson").total_bounds
+    q = (f"{STATSNZ}/2023_Census_totals_by_topic_for_individuals_by_SA1/FeatureServer/0/query?where=1%3D1"
+         f"&geometry={x0},{y0},{x1},{y1}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects"
+         "&outFields=SA12023_V1_00,VAR_1_3&outSR=4326&orderByFields=OBJECTID&f=geojson")  # VAR_1_3 = 2023 residents
+    parts, offset = [], 0
+    while True:  # the envelope also takes in some Northland and Waikato SA1s; match SA1s to Auckland SA2s before use
+        g = gpd.read_file(f"{q}&resultOffset={offset}")
+        parts.append(g)
+        offset += len(g)
+        if len(g) < 2000:
+            break
+    pd.concat(parts).to_file(out, driver="GeoJSON")
+    print("ok  ", out.name, offset, "SA1s")
+
+
 def crime():
     """Police victimisations for the Auckland region by month, crime type and meshblock (Tableau CSV export)."""
     out = DATA / "crime" / "police_victimisations_auckland_meshblock.csv"
@@ -370,6 +390,7 @@ if __name__ == "__main__":
 
     boundaries()
     suburbs()
+    sa1_population()
 
     # OpenStreetMap NZ extract (~400 MB, ODbL); osm_amenities() keeps Auckland GP practices and halal food places
     download("https://download.geofabrik.de/australia-oceania/new-zealand-latest.osm.pbf", DATA / "amenities" / "osm" / "new-zealand-latest.osm.pbf")

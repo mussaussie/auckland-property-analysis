@@ -1,634 +1,634 @@
-sa2_code,sa2_name,suburb_id,suburb_name,suburb_type,match_basis,match_rule,match_pct,units_in_sa2,suburbs_overlapped,unmapped,straddles_suburbs
-110201,Okahukura Peninsula,1897,Wellsford,Suburb,rating_units,most_units,44.9,815,6,False,True
-110300,Inlet Kaipara Harbour South,525,Helensville,Suburb,rating_units,most_units,50.0,4,3,False,True
-110400,Cape Rodney,2861,Leigh,Locality,rating_units,most_units,28.3,2440,11,False,True
-110501,Wellsford,1897,Wellsford,Suburb,rating_units,most_units,100.0,941,1,False,False
-110600,Oceanic Auckland Region East,4938,Kawau Island,Island,rating_units,most_units,16.7,12,10,False,True
-110700,South Head,4018,South Head,Locality,rating_units,most_units,56.2,1062,6,False,True
-110800,Kaipara Hills,805,Makarau,Locality,rating_units,most_units,54.2,931,9,False,True
-110900,Dome Valley-Matakana,875,Matakana,Locality,rating_units,most_units,73.3,922,6,False,False
-111000,Oceanic Auckland Region West,6526,Muriwai Beach,Locality,rating_units,most_units,50.0,2,2,False,True
-111100,Warkworth West,2864,Warkworth,Suburb,rating_units,most_units,99.2,1445,2,False,False
-111200,Puhoi Valley,2869,Puhoi,Locality,rating_units,most_units,36.4,1774,10,False,True
-111300,Warkworth East,2864,Warkworth,Suburb,rating_units,most_units,100.0,1770,1,False,False
-111400,Sandspit,2862,Sandspit,Locality,rating_units,most_units,50.0,526,3,False,True
-111500,Tawharanui Peninsula,1098,Ōmaha,Locality,rating_units,most_units,57.7,2437,4,False,True
-111601,Kaukapakapa,2758,Kaukapakapa,Locality,rating_units,most_units,100.0,388,1,False,False
-111602,Kaukapakapa Rural,2758,Kaukapakapa,Locality,rating_units,most_units,92.7,685,5,False,False
-111700,Snells Beach,8654,Snells Beach,Suburb,rating_units,most_units,99.8,1928,3,False,False
-111801,Barrier Islands,4330,Great Barrier Island (Aotea Island),Island,rating_units,most_units,98.9,1518,17,False,False
-111901,Mahurangi Peninsula,2863,Algies Bay,Suburb,rating_units,most_units,59.4,864,4,False,True
-112001,Inlets other Auckland,8835,Ōtāhuhu,Suburb,rating_units,most_units,12.5,24,16,False,True
-112101,Wainui-Waiwera,2870,Wainui,Locality,rating_units,most_units,52.5,794,7,False,True
-112102,Ara Hill,2870,Wainui,Locality,rating_units,most_units,100.0,146,1,False,False
-112200,Parakai,1207,Parakai,Suburb,rating_units,most_units,100.0,414,1,False,False
-112301,Helensville Rural,525,Helensville,Suburb,rating_units,most_units,95.2,541,2,False,False
-112401,Helensville,525,Helensville,Suburb,rating_units,most_units,100.0,1472,1,False,False
-112500,Waitoki,1859,Waitoki,Locality,rating_units,most_units,75.3,588,4,False,False
-112600,Waikoukou Valley,525,Helensville,Suburb,rating_units,most_units,62.4,588,2,False,False
-112701,Orewa North,2871,Orewa,Suburb,rating_units,most_units,100.0,2096,1,False,False
-112702,Orewa West,2871,Orewa,Suburb,rating_units,most_units,100.0,429,1,False,False
-112800,Hatfields Beach,2866,Hatfields Beach,Suburb,rating_units,most_units,88.4,585,2,False,False
-112901,Orewa South,2871,Orewa,Suburb,rating_units,most_units,100.0,1288,1,False,False
-112902,Millwater North,2871,Orewa,Suburb,rating_units,most_units,100.0,545,1,False,False
-113000,Orewa Central,2871,Orewa,Suburb,rating_units,most_units,100.0,1881,1,False,False
-113101,Millwater Central,8690,Silverdale,Suburb,rating_units,most_units,100.0,1319,1,False,False
-113201,Waipatukahu,1982,Waimauku,Suburb,rating_units,most_units,96.6,528,3,False,False
-113300,Millwater South,8690,Silverdale,Suburb,rating_units,most_units,99.7,1491,2,False,False
-113401,Milldale,2870,Wainui,Locality,rating_units,most_units,99.9,1408,2,False,False
-113402,Dairy Flat North,276,Dairy Flat,Locality,rating_units,most_units,99.0,600,2,False,False
-113500,Dairy Flat West,276,Dairy Flat,Locality,rating_units,most_units,88.0,523,3,False,False
-113600,Kingsway,2876,Red Beach,Suburb,rating_units,most_units,93.6,784,2,False,False
-113700,Riverhead Forest,2958,Riverhead,Suburb,rating_units,most_units,88.9,9,2,False,False
-113800,Silverdale Central (Auckland),8690,Silverdale,Suburb,rating_units,most_units,90.7,997,2,False,False
-113900,Red Beach West,2876,Red Beach,Suburb,rating_units,most_units,100.0,1112,1,False,False
-114000,Red Beach East,2876,Red Beach,Suburb,rating_units,most_units,98.0,1476,2,False,False
-114101,Silverdale South (Auckland),2882,Stillwater,Locality,rating_units,most_units,100.0,421,1,False,False
-114102,Stillwater,2882,Stillwater,Locality,rating_units,most_units,100.0,325,1,False,False
-114201,Waimauku,1982,Waimauku,Suburb,rating_units,most_units,100.0,505,1,False,False
-114300,Gulf Islands,4938,Kawau Island,Island,rating_units,most_units,68.6,698,15,False,False
-114400,Vipond,2890,Stanmore Bay,Suburb,rating_units,most_units,98.0,945,2,False,False
-114500,Muriwai,6526,Muriwai Beach,Locality,rating_units,most_units,100.0,525,1,False,False
-114600,Stanmore Bay West,2890,Stanmore Bay,Suburb,rating_units,most_units,100.0,1006,1,False,False
-114701,Kumeū Rural West,2963,Kumeū,Suburb,rating_units,most_units,91.5,543,3,False,False
-114801,Ōkura Bush,2889,Ōkura,Suburb,rating_units,most_units,41.7,672,5,False,True
-114901,Whangaparāoa Central,2890,Stanmore Bay,Suburb,rating_units,most_units,100.0,1128,1,False,False
-114902,Wade Heads-Arkles Bay,2888,Arkles Bay,Suburb,rating_units,most_units,65.3,801,3,False,False
-115001,Kumeū-Huapai North,2963,Kumeū,Suburb,rating_units,most_units,56.6,1929,3,False,True
-115002,Kumeū-Huapai South,2963,Kumeū,Suburb,rating_units,most_units,80.2,963,2,False,False
-115100,Stanmore Bay East,2890,Stanmore Bay,Suburb,rating_units,most_units,100.0,1085,1,False,False
-115200,Manly West,2878,Manly,Suburb,rating_units,most_units,63.1,966,3,False,False
-115300,Muriwai Valley-Bethells Beach,6526,Muriwai Beach,Locality,rating_units,most_units,61.2,428,6,False,False
-115400,Tindalls-Matakatia,2883,Tindalls Beach,Suburb,rating_units,most_units,49.7,872,4,False,True
-115501,Coatesville,248,Coatesville,Locality,rating_units,most_units,84.7,848,3,False,False
-115601,Dairy Flat South,276,Dairy Flat,Locality,rating_units,most_units,89.2,576,2,False,False
-115700,Gulf Harbour North,2874,Gulf Harbour,Suburb,rating_units,most_units,99.0,1056,2,False,False
-115800,Manly East,2878,Manly,Suburb,rating_units,most_units,99.4,1457,2,False,False
-115901,Riverhead,2958,Riverhead,Suburb,rating_units,most_units,100.0,1220,1,False,False
-116000,Army Bay,2885,Army Bay,Suburb,rating_units,most_units,100.0,593,1,False,False
-116101,Kumeū Rural East,2963,Kumeū,Suburb,rating_units,most_units,84.8,631,4,False,False
-116200,Gulf Harbour South,2874,Gulf Harbour,Suburb,rating_units,most_units,98.5,1524,3,False,False
-116300,Pāremoremo West,2958,Riverhead,Suburb,rating_units,most_units,92.4,344,2,False,False
-116401,Taupaki,1607,Taupaki,Locality,rating_units,most_units,81.6,571,4,False,False
-116500,Long Bay,8824,Long Bay,Suburb,rating_units,most_units,99.7,1484,2,False,False
-116601,Pāremoremo East,2961,Pāremoremo,Suburb,rating_units,most_units,54.8,723,2,False,True
-116701,Albany Heights,8827,Albany Heights,Suburb,rating_units,most_units,61.5,1602,3,False,False
-116801,Awaruku,2877,Torbay,Suburb,rating_units,most_units,100.0,1170,1,False,False
-116900,Fairview Heights,8826,Fairview Heights,Suburb,rating_units,most_units,73.1,1197,2,False,False
-117001,Whenuapai,4118,Whenuapai,Suburb,rating_units,most_units,85.3,1907,4,False,False
-117002,Whenuapai West,8961,Westgate,Suburb,rating_units,most_units,79.8,485,2,False,False
-117003,Massey Red Hills,4119,Massey,Suburb,rating_units,most_units,98.1,528,2,False,False
-117100,Waitākere Ranges North,2756,Waitākere,Suburb,rating_units,most_units,80.2,480,6,False,False
-117201,Torbay West,2877,Torbay,Suburb,rating_units,most_units,94.5,974,2,False,False
-117202,Torbay East,2877,Torbay,Suburb,rating_units,most_units,99.9,934,2,False,False
-117300,Albany Central,2960,Albany,Suburb,rating_units,most_units,99.9,1398,2,False,False
-117400,Albany West,2960,Albany,Suburb,rating_units,most_units,100.0,701,1,False,False
-117500,Glamorgan,2877,Torbay,Suburb,rating_units,most_units,100.0,1098,1,False,False
-117600,Oteha East,8825,Oteha,Suburb,rating_units,most_units,91.6,1039,2,False,False
-117700,Northcross,1061,Northcross,Suburb,rating_units,most_units,62.0,1141,3,False,False
-117800,Oteha West,8825,Oteha,Suburb,rating_units,most_units,100.0,759,1,False,False
-117900,Waiake,2884,Waiake,Suburb,rating_units,name_match,41.6,1362,3,False,True
-118001,Waitākere,2756,Waitākere,Suburb,rating_units,most_units,96.7,582,3,False,False
-118100,Albany South,2960,Albany,Suburb,rating_units,most_units,95.0,1331,2,False,False
-118200,Browns Bay South West,2872,Browns Bay,Suburb,rating_units,most_units,100.0,1415,1,False,False
-118300,Browns Bay Central,2872,Browns Bay,Suburb,rating_units,most_units,99.9,1583,2,False,False
-118400,Schnapper Rock,8822,Schnapper Rock,Suburb,rating_units,most_units,98.7,1181,2,False,False
-118501,Pinehill North,1252,Pinehill,Suburb,rating_units,most_units,100.0,643,1,False,False
-118502,Pinehill South,1252,Pinehill,Suburb,rating_units,most_units,96.0,653,2,False,False
-118600,North Harbour,1431,Rosedale,Suburb,rating_units,most_units,92.2,2468,3,False,False
-118700,Browns Bay South East,2872,Browns Bay,Suburb,rating_units,most_units,100.0,982,1,False,False
-118800,Westgate Central,8961,Westgate,Suburb,rating_units,most_units,89.2,388,2,False,False
-118900,Greenhithe West,2959,Greenhithe,Suburb,rating_units,most_units,100.0,1222,1,False,False
-119000,Rothesay Bay,2881,Rothesay Bay,Suburb,rating_units,most_units,98.5,1033,2,False,False
-119100,Greenhithe East,2959,Greenhithe,Suburb,rating_units,most_units,100.0,1042,1,False,False
-119201,Hobsonville,2962,Hobsonville,Suburb,rating_units,most_units,93.2,1067,3,False,False
-119301,Inlet Waitemata Harbour,2896,Devonport,Suburb,rating_units,most_units,16.7,30,17,False,True
-119400,Greenhithe South,2959,Greenhithe,Suburb,rating_units,most_units,100.0,720,1,False,False
-119500,Murrays Bay West,2886,Murrays Bay,Suburb,rating_units,most_units,83.2,889,2,False,False
-119600,Westgate South,8961,Westgate,Suburb,rating_units,most_units,59.1,1482,2,False,True
-119700,Windsor Park,8823,Windsor Park,Suburb,rating_units,most_units,99.8,459,2,False,False
-119800,West Harbour West,2905,West Harbour,Suburb,rating_units,most_units,98.9,1411,2,False,False
-119901,Unsworth Heights West,8821,Unsworth Heights,Suburb,rating_units,most_units,100.0,801,1,False,False
-120000,Murrays Bay East,2886,Murrays Bay,Suburb,rating_units,most_units,95.0,800,2,False,False
-120101,Birdwood West,4119,Massey,Suburb,rating_units,most_units,55.7,253,3,False,True
-120201,Hobsonville Point Catalina Bay,2962,Hobsonville,Suburb,rating_units,most_units,100.0,1659,1,False,False
-120202,Hobsonville Point Park,2962,Hobsonville,Suburb,rating_units,most_units,100.0,2426,1,False,False
-120203,Hobsonville Scott Point,2962,Hobsonville,Suburb,rating_units,most_units,100.0,1297,1,False,False
-120301,West Harbour Clearwater Cove,2905,West Harbour,Suburb,rating_units,most_units,89.0,1195,2,False,False
-120400,Unsworth Heights East,8821,Unsworth Heights,Suburb,rating_units,most_units,100.0,1096,1,False,False
-120500,Mairangi Bay North,2880,Mairangi Bay,Suburb,rating_units,most_units,100.0,1023,1,False,False
-120600,Massey Central,4119,Massey,Suburb,rating_units,most_units,100.0,1029,1,False,False
-120701,West Harbour Luckens Point,2905,West Harbour,Suburb,rating_units,most_units,100.0,1127,1,False,False
-120800,Mairangi Bay South,2880,Mairangi Bay,Suburb,rating_units,most_units,100.0,947,1,False,False
-120900,Massey Royal Road West,4119,Massey,Suburb,rating_units,most_units,100.0,955,1,False,False
-121001,Bayview East (Auckland),8820,Bayview,Suburb,rating_units,most_units,93.1,1197,3,False,False
-121100,Swanson Rural,1552,Swanson,Suburb,rating_units,most_units,82.7,808,4,False,False
-121200,Sunnynook South,1546,Sunnynook,Suburb,rating_units,most_units,92.3,893,2,False,False
-121300,Sunnynook North,1546,Sunnynook,Suburb,rating_units,most_units,86.9,957,2,False,False
-121401,Bayview West (Auckland),8820,Bayview,Suburb,rating_units,most_units,100.0,751,1,False,False
-121500,Totara Vale North,8829,Tōtara Vale,Suburb,rating_units,most_units,94.5,981,2,False,False
-121600,Royal Heights North,4119,Massey,Suburb,rating_units,most_units,100.0,1340,1,False,False
-121701,Massey West,4119,Massey,Suburb,rating_units,most_units,100.0,921,1,False,False
-121800,Beach Haven West,2898,Beach Haven,Suburb,rating_units,most_units,100.0,1309,1,False,False
-121901,Totara Vale South,8829,Tōtara Vale,Suburb,rating_units,most_units,99.8,1179,2,False,False
-122001,Swanson,1552,Swanson,Suburb,rating_units,most_units,96.5,1427,2,False,False
-122101,Bayview South (Auckland),8820,Bayview,Suburb,rating_units,most_units,57.6,977,2,False,True
-122200,Campbells Bay,2873,Campbells Bay,Suburb,rating_units,most_units,99.6,1018,2,False,False
-122300,Royal Heights South,4119,Massey,Suburb,rating_units,most_units,100.0,1148,1,False,False
-122400,Beach Haven East,2898,Beach Haven,Suburb,rating_units,most_units,99.9,1334,2,False,False
-122501,Massey Keegan,4119,Massey,Suburb,rating_units,most_units,100.0,1081,1,False,False
-122600,Forrest Hill North,393,Forrest Hill,Suburb,rating_units,most_units,100.0,827,1,False,False
-122700,Glenfield North,2964,Glenfield,Suburb,rating_units,most_units,98.3,1159,2,False,False
-122801,Birkdale North,2900,Birkdale,Suburb,rating_units,most_units,100.0,849,1,False,False
-122802,Birkdale Central,2900,Birkdale,Suburb,rating_units,most_units,100.0,1036,1,False,False
-122901,Massey South,4119,Massey,Suburb,rating_units,most_units,100.0,1096,1,False,False
-123000,Rānui North,1371,Rānui,Suburb,rating_units,most_units,96.4,1206,3,False,False
-123100,Glenfield West,2964,Glenfield,Suburb,rating_units,most_units,100.0,986,1,False,False
-123200,Te Atatū Peninsula North West,2904,Te Atatū Peninsula,Suburb,rating_units,most_units,100.0,1416,1,False,False
-123300,Glenfield South West,2964,Glenfield,Suburb,rating_units,most_units,100.0,1258,1,False,False
-123400,Forrest Hill West,393,Forrest Hill,Suburb,rating_units,most_units,100.0,1222,1,False,False
-123500,Wairau Valley,1838,Wairau Valley,Suburb,rating_units,most_units,86.2,1236,3,False,False
-123600,Forrest Hill East,393,Forrest Hill,Suburb,rating_units,most_units,97.6,1221,2,False,False
-123701,Castor Bay North,2879,Castor Bay,Suburb,rating_units,most_units,100.0,922,1,False,False
-123702,Castor Bay South,2879,Castor Bay,Suburb,rating_units,most_units,100.0,784,1,False,False
-123800,Rānui Domain,1371,Rānui,Suburb,rating_units,most_units,92.7,1159,2,False,False
-123900,Beach Haven South,2898,Beach Haven,Suburb,rating_units,most_units,100.0,1170,1,False,False
-124000,Glenfield Central,2964,Glenfield,Suburb,rating_units,most_units,100.0,1359,1,False,False
-124100,Piha,2955,Piha,Locality,rating_units,most_units,99.7,783,2,False,False
-124200,Rānui South West,1371,Rānui,Suburb,rating_units,most_units,90.1,878,2,False,False
-124301,Henderson Larnoch,526,Henderson,Suburb,rating_units,most_units,91.4,1046,2,False,False
-124401,Birkdale South,2900,Birkdale,Suburb,rating_units,most_units,99.9,1258,2,False,False
-124500,Te Atatū Peninsula Central,2904,Te Atatū Peninsula,Suburb,rating_units,most_units,100.0,1377,1,False,False
-124600,Glenfield East,2964,Glenfield,Suburb,rating_units,most_units,98.7,741,2,False,False
-124700,Henderson Valley,2166,Henderson Valley,Suburb,rating_units,most_units,98.3,527,3,False,False
-124800,Te Atatū Peninsula West,2904,Te Atatū Peninsula,Suburb,rating_units,most_units,100.0,1461,1,False,False
-124900,Henderson Lincoln West,526,Henderson,Suburb,rating_units,most_units,100.0,1035,1,False,False
-125000,Rānui South East,1371,Rānui,Suburb,rating_units,most_units,99.8,824,2,False,False
-125100,Henderson Lincoln East,526,Henderson,Suburb,rating_units,most_units,100.0,538,1,False,False
-125201,Birkenhead West,2899,Birkenhead,Suburb,rating_units,most_units,100.0,898,1,False,False
-125202,Birkenhead North West,2899,Birkenhead,Suburb,rating_units,most_units,100.0,556,1,False,False
-125300,Te Atatū Peninsula East,2904,Te Atatū Peninsula,Suburb,rating_units,most_units,100.0,1054,1,False,False
-125400,Milford West,2901,Milford,Suburb,rating_units,most_units,99.9,1281,2,False,False
-125500,Westlake,2901,Milford,Suburb,rating_units,most_units,100.0,1040,1,False,False
-125600,Hillcrest North (Auckland),541,Hillcrest,Suburb,rating_units,most_units,100.0,1191,1,False,False
-125701,Henderson Lincoln South,526,Henderson,Suburb,rating_units,most_units,100.0,1085,1,False,False
-125800,Hillcrest West (Auckland),541,Hillcrest,Suburb,rating_units,most_units,100.0,1114,1,False,False
-125900,Milford Central,2901,Milford,Suburb,rating_units,most_units,100.0,1055,1,False,False
-126000,Summerland South,526,Henderson,Suburb,rating_units,most_units,90.1,980,2,False,False
-126100,Summerland North,526,Henderson,Suburb,rating_units,most_units,100.0,843,1,False,False
-126200,Hillcrest East (Auckland),541,Hillcrest,Suburb,rating_units,most_units,100.0,1314,1,False,False
-126300,Chatswood,2903,Chatswood,Suburb,rating_units,most_units,99.9,1174,2,False,False
-126401,Te Atatū South-Edmonton,2908,Te Atatū South,Suburb,rating_units,most_units,100.0,1110,1,False,False
-126500,Birkenhead North,2899,Birkenhead,Suburb,rating_units,most_units,91.2,1054,2,False,False
-126601,Takapuna West,8658,Takapuna,Suburb,rating_units,most_units,99.9,1506,3,False,False
-126701,Henderson North,526,Henderson,Suburb,rating_units,most_units,100.0,837,1,False,False
-126702,Henderson West,526,Henderson,Suburb,rating_units,most_units,100.0,961,1,False,False
-126801,Takapuna Central,8658,Takapuna,Suburb,rating_units,most_units,100.0,1885,1,False,False
-126901,Western Heights (Auckland),526,Henderson,Suburb,rating_units,most_units,100.0,1032,1,False,False
-127001,Te Atatū South-North,2908,Te Atatū South,Suburb,rating_units,most_units,99.9,1112,2,False,False
-127002,Te Atatū South-Central,2908,Te Atatū South,Suburb,rating_units,most_units,99.8,1076,2,False,False
-127100,Northcote Central (Auckland),2902,Northcote,Suburb,rating_units,most_units,100.0,1037,1,False,False
-127200,Akoranga,2902,Northcote,Suburb,rating_units,most_units,100.0,239,1,False,False
-127300,Northcote South (Auckland),2902,Northcote,Suburb,rating_units,most_units,96.6,936,2,False,False
-127400,Birkenhead South,2899,Birkenhead,Suburb,rating_units,most_units,100.0,1472,1,False,False
-127500,Henderson Central,526,Henderson,Suburb,rating_units,most_units,100.0,1193,1,False,False
-127601,Waiatarua,2406,Waiatarua,Suburb,rating_units,most_units,51.8,847,4,False,True
-127701,Te Atatū South-McLeod North,2908,Te Atatū South,Suburb,rating_units,most_units,100.0,928,1,False,False
-127801,Henderson Valley Park,526,Henderson,Suburb,rating_units,most_units,100.0,885,1,False,False
-127900,Henderson North East,526,Henderson,Suburb,rating_units,most_units,94.7,949,2,False,False
-128000,Waitākere Ranges South,2954,Huia,Suburb,rating_units,most_units,52.1,662,5,False,True
-128101,Northcote Tuff Crater,2902,Northcote,Suburb,rating_units,most_units,100.0,790,1,False,False
-128200,Northcote Point (Auckland),8819,Northcote Point,Suburb,rating_units,most_units,85.0,1210,2,False,False
-128301,McLaren Memorial Park,526,Henderson,Suburb,rating_units,most_units,100.0,1020,1,False,False
-128401,Henderson East,526,Henderson,Suburb,rating_units,most_units,84.0,1666,3,False,False
-128501,Te Atatū South-McLeod South,2908,Te Atatū South,Suburb,rating_units,most_units,90.1,1122,2,False,False
-128601,Takapuna South,8658,Takapuna,Suburb,rating_units,most_units,59.6,903,2,False,True
-128700,Rosebank Peninsula,2912,Avondale,Suburb,rating_units,most_units,99.8,512,2,False,False
-128800,Hauraki,2893,Hauraki,Suburb,rating_units,most_units,90.4,1608,2,False,False
-128901,Glendene North West,2906,Glendene,Suburb,rating_units,most_units,97.7,812,3,False,False
-128902,Glendene North East,2906,Glendene,Suburb,rating_units,most_units,100.0,620,1,False,False
-129000,Sunnyvale West-Parrs Park,1547,Sunnyvale,Suburb,rating_units,most_units,58.7,799,2,False,True
-129101,Sunnyvale East,1547,Sunnyvale,Suburb,rating_units,most_units,96.6,1177,2,False,False
-129201,Point Chevalier West,2914,Point Chevalier,Suburb,rating_units,most_units,100.0,917,1,False,False
-129300,Belmont (Auckland),2895,Belmont,Suburb,rating_units,most_units,98.0,1245,3,False,False
-129400,Bayswater,2897,Bayswater,Suburb,rating_units,most_units,96.3,1075,2,False,False
-129501,Glendene South,2906,Glendene,Suburb,rating_units,most_units,86.5,1004,3,False,False
-129600,Glen Eden West,421,Glen Eden,Suburb,rating_units,most_units,95.7,1316,2,False,False
-129700,Herne Bay,2913,Herne Bay,Suburb,rating_units,most_units,100.0,1253,1,False,False
-129800,Westmere North,2916,Westmere,Suburb,rating_units,most_units,100.0,809,1,False,False
-129901,Point Chevalier North,2914,Point Chevalier,Suburb,rating_units,most_units,100.0,914,1,False,False
-129902,Point Chevalier East,2914,Point Chevalier,Suburb,rating_units,most_units,99.9,1287,2,False,False
-130000,Oratia,1127,Oratia,Suburb,rating_units,most_units,58.1,751,5,False,True
-130100,Glen Eden Rosier,421,Glen Eden,Suburb,rating_units,most_units,100.0,1124,1,False,False
-130200,Saint Marys Bay,2918,Saint Marys Bay,Suburb,rating_units,most_units,79.3,939,6,False,False
-130300,Westmere South-Western Springs,2916,Westmere,Suburb,rating_units,most_units,86.1,1092,3,False,False
-130400,Ponsonby West,1279,Ponsonby,Suburb,rating_units,most_units,86.0,840,4,False,False
-130500,Kelston North,2907,Kelston,Suburb,rating_units,most_units,100.0,755,1,False,False
-130601,Avondale Rosebank (Auckland),2912,Avondale,Suburb,rating_units,most_units,100.0,1237,1,False,False
-130700,Narrow Neck,2892,Narrow Neck,Suburb,rating_units,most_units,59.0,1550,4,False,True
-130801,Glen Eden North,421,Glen Eden,Suburb,rating_units,most_units,100.0,1197,1,False,False
-130901,Glen Eden Woodglen,421,Glen Eden,Suburb,rating_units,most_units,100.0,1146,1,False,False
-130902,Glen Eden Konini,421,Glen Eden,Suburb,rating_units,most_units,98.7,924,2,False,False
-131000,Kelston South,2907,Kelston,Suburb,rating_units,most_units,76.9,912,3,False,False
-131100,Waterview,2910,Waterview,Suburb,rating_units,most_units,100.0,1446,1,False,False
-131200,Ponsonby East,1279,Ponsonby,Suburb,rating_units,most_units,95.6,1419,3,False,False
-131300,Wynyard-Viaduct,2728,Auckland Central,Suburb,rating_units,most_units,100.0,2854,1,False,False
-131400,Stanley Point,2894,Stanley Point,Suburb,rating_units,most_units,100.0,698,1,False,False
-131500,Glen Eden Central,421,Glen Eden,Suburb,rating_units,most_units,97.2,1353,2,False,False
-131600,Grey Lynn North,475,Grey Lynn,Suburb,rating_units,most_units,100.0,1094,1,False,False
-131700,Avondale West (Auckland),2912,Avondale,Suburb,rating_units,most_units,100.0,1088,1,False,False
-131801,Freemans Bay,399,Freemans Bay,Suburb,rating_units,most_units,94.9,1734,3,False,False
-131802,College Hill,2728,Auckland Central,Suburb,rating_units,most_units,98.6,562,2,False,False
-131900,Mount Albert West,994,Mount Albert,Suburb,rating_units,most_units,94.3,890,2,False,False
-132001,Avondale North West (Auckland),2912,Avondale,Suburb,rating_units,most_units,100.0,958,1,False,False
-132002,Avondale North East (Auckland),2912,Avondale,Suburb,rating_units,most_units,99.8,903,2,False,False
-132100,Grey Lynn West,475,Grey Lynn,Suburb,rating_units,most_units,99.8,1171,2,False,False
-132200,Mount Albert North,994,Mount Albert,Suburb,rating_units,most_units,94.9,1498,2,False,False
-132300,New Lynn North,2911,New Lynn,Suburb,rating_units,most_units,100.0,1102,1,False,False
-132400,Victoria Park,2728,Auckland Central,Suburb,rating_units,most_units,100.0,2722,1,False,False
-132501,Konini Road,2390,Titirangi,Suburb,rating_units,most_units,97.2,758,2,False,False
-132600,New Lynn North West,2911,New Lynn,Suburb,rating_units,most_units,100.0,1121,1,False,False
-132700,Hobson Ridge North,2728,Auckland Central,Suburb,rating_units,most_units,100.0,2345,1,False,False
-132800,Grey Lynn Central,475,Grey Lynn,Suburb,rating_units,most_units,100.0,1379,1,False,False
-132900,Fruitvale,2911,New Lynn,Suburb,rating_units,most_units,57.1,1053,2,False,True
-133000,Devonport,2896,Devonport,Suburb,rating_units,most_units,100.0,1359,1,False,False
-133100,Avondale Central (Auckland),2912,Avondale,Suburb,rating_units,most_units,93.9,1286,3,False,False
-133200,Queen Street,2728,Auckland Central,Suburb,rating_units,most_units,100.0,2419,1,False,False
-133301,Quay Street-Customs Street,2728,Auckland Central,Suburb,rating_units,most_units,99.8,1838,2,False,False
-133400,Hobson Ridge Central,2728,Auckland Central,Suburb,rating_units,most_units,100.0,2054,1,False,False
-133500,Grey Lynn East,475,Grey Lynn,Suburb,rating_units,most_units,98.4,1416,3,False,False
-133600,Morningside (Auckland),8939,Morningside,Suburb,rating_units,most_units,97.4,1419,3,False,False
-133700,Shortland Street,2728,Auckland Central,Suburb,rating_units,most_units,100.0,2350,1,False,False
-133800,Hobson Ridge South,2728,Auckland Central,Suburb,rating_units,most_units,100.0,1005,1,False,False
-133900,New Lynn Central,2911,New Lynn,Suburb,rating_units,most_units,99.9,782,2,False,False
-134000,Cheltenham,2896,Devonport,Suburb,rating_units,most_units,100.0,825,1,False,False
-134100,Queen Street South West,2728,Auckland Central,Suburb,rating_units,most_units,100.0,1820,1,False,False
-134200,Mount Albert Central,994,Mount Albert,Suburb,rating_units,most_units,99.9,1236,2,False,False
-134301,Karangahape West,399,Freemans Bay,Suburb,rating_units,most_units,80.1,820,3,False,False
-134302,Karangahape East,2728,Auckland Central,Suburb,rating_units,most_units,100.0,762,1,False,False
-134400,Kingsland,694,Kingsland,Suburb,rating_units,most_units,82.5,1303,4,False,False
-134500,Anzac Avenue,2728,Auckland Central,Suburb,rating_units,most_units,100.0,2722,1,False,False
-134600,Waima-Woodlands Park,2390,Titirangi,Suburb,rating_units,most_units,100.0,920,1,False,False
-134700,Kaurilands,2390,Titirangi,Suburb,rating_units,most_units,99.2,1066,2,False,False
-134800,Auckland-University,2728,Auckland Central,Suburb,rating_units,most_units,100.0,147,1,False,False
-134900,New Lynn Seabrook,2911,New Lynn,Suburb,rating_units,most_units,99.8,1047,2,False,False
-135000,Avondale South (Auckland),2912,Avondale,Suburb,rating_units,most_units,93.3,1593,2,False,False
-135100,Symonds Street North West,2728,Auckland Central,Suburb,rating_units,most_units,87.7,2062,2,False,False
-135200,Mount Albert South,994,Mount Albert,Suburb,rating_units,most_units,100.0,732,1,False,False
-135300,Symonds Street West,2728,Auckland Central,Suburb,rating_units,most_units,96.5,2261,3,False,False
-135401,Titirangi East,2390,Titirangi,Suburb,rating_units,most_units,97.3,1092,4,False,False
-135500,Ōwairaka West,994,Mount Albert,Suburb,rating_units,most_units,99.8,1359,2,False,False
-135600,New Lynn Central South,2911,New Lynn,Suburb,rating_units,most_units,100.0,1222,1,False,False
-135700,The Strand,2728,Auckland Central,Suburb,rating_units,most_units,64.5,921,2,False,False
-135800,St Lukes,994,Mount Albert,Suburb,rating_units,most_units,93.3,1134,2,False,False
-135900,Symonds Street East,459,Grafton,Suburb,rating_units,most_units,100.0,1439,1,False,False
-136001,Eden Terrace,329,Eden Terrace,Suburb,rating_units,most_units,91.6,1985,3,False,False
-136002,Grafton West,459,Grafton,Suburb,rating_units,most_units,84.6,1684,2,False,False
-136100,Grafton,459,Grafton,Suburb,rating_units,most_units,100.0,525,1,False,False
-136200,Eden Park,995,Mount Eden,Suburb,rating_units,most_units,100.0,564,1,False,False
-136300,Sandringham North,1464,Sandringham,Suburb,rating_units,most_units,89.4,1319,4,False,False
-136400,Parnell West,4131,Parnell,Suburb,rating_units,most_units,99.0,2523,2,False,False
-136501,New Lynn South,2911,New Lynn,Suburb,rating_units,most_units,100.0,905,1,False,False
-136502,New Lynn South East,2911,New Lynn,Suburb,rating_units,most_units,98.7,744,2,False,False
-136601,New Windsor North,8842,New Windsor,Suburb,rating_units,most_units,100.0,923,1,False,False
-136700,Titirangi South,2390,Titirangi,Suburb,rating_units,most_units,99.7,1521,2,False,False
-136801,Ōwairaka East,994,Mount Albert,Suburb,rating_units,most_units,100.0,725,1,False,False
-136900,Eden Valley,995,Mount Eden,Suburb,rating_units,most_units,100.0,936,1,False,False
-137000,Sandringham Central,1464,Sandringham,Suburb,rating_units,most_units,100.0,865,1,False,False
-137100,Glenavon,2912,Avondale,Suburb,rating_units,most_units,60.4,785,3,False,False
-137201,Blockhouse Bay North,140,Blockhouse Bay,Suburb,rating_units,most_units,99.9,797,2,False,False
-137202,Blockhouse Bay Central,140,Blockhouse Bay,Suburb,rating_units,most_units,100.0,1049,1,False,False
-137300,Green Bay North,462,Green Bay,Suburb,rating_units,most_units,82.3,542,3,False,False
-137400,Parnell East,4131,Parnell,Suburb,rating_units,most_units,100.0,1437,1,False,False
-137500,Laingholm,2017,Laingholm,Suburb,rating_units,most_units,100.0,895,1,False,False
-137600,Sandringham West,1464,Sandringham,Suburb,rating_units,most_units,97.5,844,2,False,False
-137701,Mount Eden North East,995,Mount Eden,Suburb,rating_units,most_units,97.2,753,3,False,False
-137800,Mount Eden North,995,Mount Eden,Suburb,rating_units,most_units,100.0,1215,1,False,False
-137901,Wesley West,8970,Wesley,Suburb,rating_units,most_units,95.4,744,2,False,False
-138000,Green Bay South,462,Green Bay,Suburb,rating_units,most_units,98.9,883,2,False,False
-138100,Balmoral,995,Mount Eden,Suburb,rating_units,most_units,99.0,1084,2,False,False
-138200,Sandringham East,1464,Sandringham,Suburb,rating_units,most_units,98.9,1130,2,False,False
-138301,New Windsor South,8842,New Windsor,Suburb,rating_units,most_units,91.1,593,2,False,False
-138302,New Windsor East,8842,New Windsor,Suburb,rating_units,most_units,73.1,640,4,False,False
-138400,Mount Eden West,995,Mount Eden,Suburb,rating_units,most_units,100.0,1142,1,False,False
-138501,Newmarket,1018,Newmarket,Suburb,rating_units,most_units,83.8,2612,4,False,False
-138502,Newmarket Park,2923,Remuera,Suburb,rating_units,most_units,99.5,627,3,False,False
-138600,Blockhouse Bay North East,140,Blockhouse Bay,Suburb,rating_units,most_units,100.0,691,1,False,False
-138700,Epsom North,349,Epsom,Suburb,rating_units,most_units,100.0,1156,1,False,False
-138800,Wesley South,8970,Wesley,Suburb,rating_units,most_units,70.8,106,3,False,False
-138901,Blockhouse Bay South,140,Blockhouse Bay,Suburb,rating_units,most_units,100.0,947,1,False,False
-139000,Mount Eden East,995,Mount Eden,Suburb,rating_units,most_units,97.7,1050,2,False,False
-139100,Wesley East,8970,Wesley,Suburb,rating_units,most_units,100.0,543,1,False,False
-139201,Orakei West,2922,Ōrākei,Suburb,rating_units,most_units,99.7,1246,2,False,False
-139300,Maungawhau,995,Mount Eden,Suburb,rating_units,most_units,100.0,940,1,False,False
-139400,Remuera West,2923,Remuera,Suburb,rating_units,most_units,100.0,1079,1,False,False
-139501,Blockhouse Bay East,140,Blockhouse Bay,Suburb,rating_units,most_units,99.0,601,2,False,False
-139601,Mount Roskill West,996,Mount Roskill,Suburb,rating_units,most_units,83.6,940,3,False,False
-139700,Mount Roskill North,996,Mount Roskill,Suburb,rating_units,most_units,90.7,1372,3,False,False
-139801,Mount Roskill White Swan,996,Mount Roskill,Suburb,rating_units,most_units,100.0,770,1,False,False
-139802,Mount Roskill Nirvana,996,Mount Roskill,Suburb,rating_units,most_units,100.0,693,1,False,False
-139900,Mount Eden South,995,Mount Eden,Suburb,rating_units,most_units,98.9,1272,2,False,False
-140000,Remuera Waitaramoa,2923,Remuera,Suburb,rating_units,most_units,99.9,1578,2,False,False
-140100,Orakei East,2922,Ōrākei,Suburb,rating_units,most_units,100.0,932,1,False,False
-140200,Epsom Central-North,349,Epsom,Suburb,rating_units,most_units,100.0,1236,1,False,False
-140300,Mount St John,349,Epsom,Suburb,rating_units,most_units,96.4,1148,2,False,False
-140400,Mount Roskill Central North,996,Mount Roskill,Suburb,rating_units,most_units,100.0,978,1,False,False
-140500,Remuera North,2923,Remuera,Suburb,rating_units,most_units,100.0,1318,1,False,False
-140601,Mount Roskill North East,996,Mount Roskill,Suburb,rating_units,most_units,88.6,736,3,False,False
-140700,Mount Roskill Central South,996,Mount Roskill,Suburb,rating_units,most_units,100.0,735,1,False,False
-140800,Epsom Central-South,349,Epsom,Suburb,rating_units,most_units,100.0,1309,1,False,False
-140901,Lynfield Central,779,Lynfield,Suburb,rating_units,most_units,97.6,878,2,False,False
-140902,Lynfield Harbour View,779,Lynfield,Suburb,rating_units,most_units,94.7,561,2,False,False
-141000,Remuera South,2923,Remuera,Suburb,rating_units,most_units,100.0,1376,1,False,False
-141101,Mission Bay,2924,Mission Bay,Suburb,rating_units,most_units,95.3,1260,2,False,False
-141102,Mission Bay Eastridge,2924,Mission Bay,Suburb,rating_units,most_units,95.8,786,3,False,False
-141201,Three Kings North,1675,Three Kings,Suburb,rating_units,most_units,85.9,750,4,False,False
-141300,Mount Roskill South,996,Mount Roskill,Suburb,rating_units,most_units,100.0,841,1,False,False
-141400,Inlet Manukau Harbour,658,Karaka,Locality,rating_units,most_units,13.0,23,14,False,True
-141500,Epsom East,349,Epsom,Suburb,rating_units,most_units,97.9,1120,3,False,False
-141600,Remuera Waiata,2923,Remuera,Suburb,rating_units,most_units,100.0,1142,1,False,False
-141700,Epsom South,349,Epsom,Suburb,rating_units,most_units,93.5,843,2,False,False
-141801,Kohimarama Bay,2920,Kohimarama,Suburb,rating_units,most_units,100.0,1071,1,False,False
-141802,Kohimarama Stadium,2920,Kohimarama,Suburb,rating_units,most_units,93.5,766,3,False,False
-141900,Meadowbank West,2921,Meadowbank,Suburb,rating_units,most_units,93.9,991,2,False,False
-142001,Three Kings South,1675,Three Kings,Suburb,rating_units,most_units,59.2,767,3,False,True
-142002,Hillsborough North (Auckland),545,Hillsborough,Suburb,rating_units,most_units,88.1,463,3,False,False
-142101,Mount Roskill Central East,996,Mount Roskill,Suburb,rating_units,most_units,99.2,1158,2,False,False
-142201,Greenlane North,467,Greenlane,Suburb,rating_units,most_units,100.0,728,1,False,False
-142202,Greenlane Central,467,Greenlane,Suburb,rating_units,most_units,100.0,829,1,False,False
-142301,Mount Roskill South East,996,Mount Roskill,Suburb,rating_units,most_units,98.0,914,2,False,False
-142400,Remuera East,2923,Remuera,Suburb,rating_units,most_units,94.5,1029,2,False,False
-142501,Waikowhai Bay,545,Hillsborough,Suburb,rating_units,most_units,68.7,675,2,False,False
-142600,Royal Oak West (Auckland),1444,Royal Oak,Suburb,rating_units,most_units,85.4,900,4,False,False
-142700,Saint Heliers West,2919,Saint Heliers,Suburb,rating_units,most_units,94.5,1474,2,False,False
-142801,One Tree Hill Oranga,1106,One Tree Hill,Suburb,rating_units,most_units,91.4,800,3,False,False
-142802,One Tree Hill Amaru,1106,One Tree Hill,Suburb,rating_units,most_units,83.1,961,2,False,False
-142901,Hillsborough Central (Auckland),545,Hillsborough,Suburb,rating_units,most_units,100.0,763,1,False,False
-143000,Saint Heliers North,2919,Saint Heliers,Suburb,rating_units,most_units,100.0,1737,1,False,False
-143100,Remuera Abbotts Park,2923,Remuera,Suburb,rating_units,most_units,97.6,1345,2,False,False
-143200,Meadowbank East,2921,Meadowbank,Suburb,rating_units,most_units,87.9,989,2,False,False
-143301,Ellerslie Central,341,Ellerslie,Suburb,rating_units,most_units,96.2,1338,3,False,False
-143400,Royal Oak East (Auckland),1444,Royal Oak,Suburb,rating_units,most_units,88.3,1108,2,False,False
-143500,Saint Heliers South,2919,Saint Heliers,Suburb,rating_units,most_units,98.7,1643,2,False,False
-143600,Hillsborough South (Auckland),545,Hillsborough,Suburb,rating_units,most_units,100.0,889,1,False,False
-143700,Saint Johns West,1525,St Johns,Suburb,rating_units,most_units,91.3,1107,2,False,False
-143800,Greenlane South,467,Greenlane,Suburb,rating_units,most_units,74.7,1278,4,False,False
-143900,Remuera Waiatarua,2923,Remuera,Suburb,rating_units,most_units,100.0,885,1,False,False
-144001,Glendowie North,2926,Glendowie,Suburb,rating_units,most_units,89.7,1188,2,False,False
-144101,Onehunga West,1107,Onehunga,Suburb,rating_units,most_units,100.0,1184,1,False,False
-144201,Ellerslie West,341,Ellerslie,Suburb,rating_units,most_units,99.2,522,2,False,False
-144300,Onehunga North,1107,Onehunga,Suburb,rating_units,most_units,98.5,1420,3,False,False
-144400,Ellerslie East,341,Ellerslie,Suburb,rating_units,most_units,100.0,1217,1,False,False
-144500,Saint Johns East,1525,St Johns,Suburb,rating_units,most_units,100.0,980,1,False,False
-144600,Oneroa West,8651,Oneroa,Suburb,rating_units,most_units,89.3,1170,5,False,False
-144700,Glen Innes West,435,Glen Innes,Suburb,rating_units,most_units,90.3,1511,3,False,False
-144800,Ellerslie South,341,Ellerslie,Suburb,rating_units,most_units,99.9,1031,2,False,False
-144900,Stonefields West,8878,Stonefields,Suburb,rating_units,most_units,99.2,868,2,False,False
-145000,Onehunga Central,1107,Onehunga,Suburb,rating_units,most_units,100.0,1722,1,False,False
-145101,Glendowie South West,2926,Glendowie,Suburb,rating_units,most_units,87.7,1120,3,False,False
-145102,Glendowie South East,2926,Glendowie,Suburb,rating_units,most_units,91.1,586,2,False,False
-145200,Oranga,1107,Onehunga,Suburb,rating_units,most_units,86.5,1006,3,False,False
-145300,Mount Wellington North West,2925,Mount Wellington,Suburb,rating_units,most_units,65.0,1588,3,False,False
-145400,Panmure Glen Innes Industrial,1525,St Johns,Suburb,rating_units,most_units,70.9,628,6,False,False
-145500,Onehunga-Te Papapa Industrial,1107,Onehunga,Suburb,rating_units,most_units,99.8,1259,2,False,False
-145600,Te Papapa,1107,Onehunga,Suburb,rating_units,most_units,100.0,1096,1,False,False
-145700,Stonefields East,8878,Stonefields,Suburb,rating_units,most_units,94.6,904,3,False,False
-145800,Glen Innes East-Wai O Taiki Bay,435,Glen Innes,Suburb,rating_units,most_units,62.2,1725,2,False,False
-145900,Penrose,1237,Penrose,Suburb,rating_units,most_units,66.7,1420,4,False,False
-146000,Mount Wellington North East,2925,Mount Wellington,Suburb,rating_units,most_units,100.0,789,1,False,False
-146100,Māngere Bridge Ambury,836,Māngere Bridge,Suburb,rating_units,most_units,100.0,1192,1,False,False
-146201,Mount Wellington Ferndale,2925,Mount Wellington,Suburb,rating_units,most_units,100.0,1068,1,False,False
-146301,Point England North,2928,Point England,Suburb,rating_units,most_units,100.0,666,1,False,False
-146302,Point England South,2928,Point England,Suburb,rating_units,most_units,100.0,854,1,False,False
-146400,Bucklands Beach North,175,Bucklands Beach,Suburb,rating_units,most_units,100.0,1144,1,False,False
-146501,Mount Wellington East,2925,Mount Wellington,Suburb,rating_units,most_units,100.0,1016,1,False,False
-146600,Mount Wellington West,2925,Mount Wellington,Suburb,rating_units,most_units,100.0,979,1,False,False
-146700,Panmure West,2929,Panmure,Suburb,rating_units,most_units,53.4,354,2,False,True
-146800,Māngere Bridge,836,Māngere Bridge,Suburb,rating_units,most_units,99.9,1118,2,False,False
-146900,Oneroa East-Palm Beach,8651,Oneroa,Suburb,rating_units,most_units,58.9,1169,5,False,True
-147001,Tamaki West,2929,Panmure,Suburb,rating_units,most_units,100.0,858,1,False,False
-147002,Tamaki East,2929,Panmure,Suburb,rating_units,most_units,100.0,565,1,False,False
-147100,Panmure East,2929,Panmure,Suburb,rating_units,most_units,73.3,1286,2,False,False
-147201,Mount Wellington Central,2925,Mount Wellington,Suburb,rating_units,most_units,100.0,851,1,False,False
-147202,Mount Wellington Hamlin,2925,Mount Wellington,Suburb,rating_units,most_units,100.0,811,1,False,False
-147300,Bays Waiheke Island,8652,Ostend,Suburb,rating_units,most_units,100.0,2,1,False,False
-147400,Sylvia Park,2925,Mount Wellington,Suburb,rating_units,most_units,100.0,49,1,False,False
-147500,Māngere Mountain View,836,Māngere Bridge,Suburb,rating_units,most_units,100.0,1336,1,False,False
-147600,Surfdale,8776,Surfdale,Suburb,rating_units,most_units,91.3,1059,4,False,False
-147700,Mount Wellington Industrial,2925,Mount Wellington,Suburb,rating_units,most_units,100.0,431,1,False,False
-147800,Half Moon Bay West,488,Half Moon Bay,Suburb,rating_units,most_units,98.4,1046,2,False,False
-147900,Auckland Airport,2737,Māngere,Suburb,rating_units,most_units,96.3,695,3,False,False
-148000,Eastern Beach,6544,Eastern Beach,Suburb,rating_units,most_units,74.8,812,2,False,False
-148101,Sunnyhills West,8869,Sunnyhills,Suburb,rating_units,most_units,98.2,768,2,False,False
-148102,Pakuranga North,2933,Pakuranga,Suburb,rating_units,most_units,100.0,1060,1,False,False
-148200,Favona North,371,Favona,Suburb,rating_units,most_units,99.8,665,2,False,False
-148300,Bucklands Beach Central,175,Bucklands Beach,Suburb,rating_units,most_units,81.3,658,2,False,False
-148401,Farm Cove,370,Farm Cove,Suburb,rating_units,most_units,98.1,774,2,False,False
-148501,Māngere North,2737,Māngere,Suburb,rating_units,most_units,91.3,1061,2,False,False
-148600,Favona West,371,Favona,Suburb,rating_units,most_units,100.0,811,1,False,False
-148700,Ostend,8652,Ostend,Suburb,rating_units,most_units,97.4,1042,3,False,False
-148800,Half Moon Bay North East,488,Half Moon Bay,Suburb,rating_units,most_units,93.2,705,2,False,False
-148901,Māngere West,2737,Māngere,Suburb,rating_units,most_units,95.2,707,2,False,False
-149001,Pakuranga West,2933,Pakuranga,Suburb,rating_units,most_units,100.0,866,1,False,False
-149100,Mount Wellington South West,2925,Mount Wellington,Suburb,rating_units,most_units,99.2,1376,2,False,False
-149200,Sunnyhills East,8869,Sunnyhills,Suburb,rating_units,most_units,75.8,1011,4,False,False
-149300,Half Moon Bay South East,488,Half Moon Bay,Suburb,rating_units,most_units,86.8,988,3,False,False
-149400,Favona East,371,Favona,Suburb,rating_units,most_units,100.0,752,1,False,False
-149500,Mount Wellington South East,2925,Mount Wellington,Suburb,rating_units,most_units,100.0,863,1,False,False
-149600,Ōtāhuhu Industrial,371,Favona,Suburb,rating_units,most_units,100.0,126,1,False,False
-149701,Bucklands Beach Murvale,175,Bucklands Beach,Suburb,rating_units,most_units,96.4,781,2,False,False
-149702,Bucklands Beach South,175,Bucklands Beach,Suburb,rating_units,most_units,99.8,553,2,False,False
-149800,Pakuranga Central,2933,Pakuranga,Suburb,rating_units,most_units,99.8,1299,2,False,False
-149901,Āwhitu,2226,Pollok,Locality,rating_units,most_units,37.5,1903,6,False,True
-150000,Harania North,837,Māngere East,Suburb,rating_units,most_units,99.2,762,2,False,False
-150101,Ōtāhuhu Central,8835,Ōtāhuhu,Suburb,rating_units,most_units,99.9,969,2,False,False
-150200,Māngere Central,2737,Māngere,Suburb,rating_units,most_units,100.0,955,1,False,False
-150301,Ōtāhuhu North West,8835,Ōtāhuhu,Suburb,rating_units,most_units,100.0,616,1,False,False
-150302,Ōtāhuhu North East,8835,Ōtāhuhu,Suburb,rating_units,most_units,100.0,500,1,False,False
-150400,Howick West,578,Howick,Suburb,rating_units,most_units,91.0,1385,3,False,False
-150500,Pakuranga Heights North West,1190,Pakuranga Heights,Suburb,rating_units,most_units,94.9,894,2,False,False
-150600,Mellons Bay,8767,Mellons Bay,Suburb,rating_units,most_units,89.3,1429,4,False,False
-150700,Pakuranga Heights East,1190,Pakuranga Heights,Suburb,rating_units,most_units,97.4,1047,2,False,False
-150800,Sutton Park,837,Māngere East,Suburb,rating_units,most_units,100.0,709,1,False,False
-150900,Ōtāhuhu East,8835,Ōtāhuhu,Suburb,rating_units,most_units,100.0,790,1,False,False
-151000,Māngere South,2737,Māngere,Suburb,rating_units,most_units,100.0,776,1,False,False
-151100,Onetangi,8650,Onetangi,Suburb,rating_units,most_units,77.7,1194,3,False,False
-151200,Harania South,837,Māngere East,Suburb,rating_units,most_units,100.0,760,1,False,False
-151301,Highland Park (Auckland),2932,Highland Park,Suburb,rating_units,most_units,94.5,1389,3,False,False
-151400,Ōtāhuhu South West,8835,Ōtāhuhu,Suburb,rating_units,most_units,100.0,884,1,False,False
-151500,Pakuranga Heights South West,1190,Pakuranga Heights,Suburb,rating_units,most_units,94.5,1058,2,False,False
-151600,Māngere Mascot,2737,Māngere,Suburb,rating_units,most_units,100.0,763,1,False,False
-151700,Waiheke East,6522,Waiheke Island,Island,rating_units,most_units,52.6,971,8,False,True
-151800,Massey Road West,837,Māngere East,Suburb,rating_units,most_units,100.0,852,1,False,False
-151900,Ōtāhuhu South,8835,Ōtāhuhu,Suburb,rating_units,most_units,100.0,977,1,False,False
-152000,Howick Central,578,Howick,Suburb,rating_units,most_units,98.3,1270,2,False,False
-152101,Massey Road North,837,Māngere East,Suburb,rating_units,most_units,100.0,810,1,False,False
-152201,Botany Downs West,145,Botany Downs,Suburb,rating_units,most_units,99.5,1121,2,False,False
-152300,East Tamaki,6542,East Tāmaki,Suburb,rating_units,most_units,91.6,1721,3,False,False
-152400,Howick East,578,Howick,Suburb,rating_units,most_units,92.5,1627,2,False,False
-152500,Burswood,183,Burswood,Suburb,rating_units,most_units,100.0,556,1,False,False
-152600,Massey Road South,837,Māngere East,Suburb,rating_units,most_units,100.0,414,1,False,False
-152700,Middlemore,926,Middlemore Hospital,Suburb,rating_units,most_units,100.0,5,1,False,False
-152800,Māngere South East,2737,Māngere,Suburb,rating_units,most_units,99.0,906,2,False,False
-152900,Botany Downs East,145,Botany Downs,Suburb,rating_units,most_units,100.0,817,1,False,False
-153000,Grange,1203,Papatoetoe,Suburb,rating_units,most_units,56.5,676,2,False,True
-153100,Golflands,448,Golflands,Suburb,rating_units,most_units,100.0,947,1,False,False
-153200,Aorere North,837,Māngere East,Suburb,rating_units,most_units,100.0,361,1,False,False
-153301,Māngere East,837,Māngere East,Suburb,rating_units,most_units,91.8,613,2,False,False
-153400,Cockle Bay,6543,Cockle Bay,Suburb,rating_units,most_units,97.9,1456,3,False,False
-153500,Ōtara West,2931,Ōtara,Suburb,rating_units,most_units,100.0,570,1,False,False
-153600,Aorere Central,837,Māngere East,Suburb,rating_units,most_units,84.2,488,2,False,False
-153700,Northpark North,8768,Northpark,Suburb,rating_units,most_units,88.1,994,5,False,False
-153800,Somerville,1500,Somerville,Suburb,rating_units,most_units,89.4,1584,6,False,False
-153900,Northpark South,8768,Northpark,Suburb,rating_units,most_units,83.7,742,3,False,False
-154001,Papatoetoe North,1203,Papatoetoe,Suburb,rating_units,most_units,100.0,1121,1,False,False
-154101,Dingwall,1203,Papatoetoe,Suburb,rating_units,most_units,100.0,743,1,False,False
-154201,Aorere South West,1203,Papatoetoe,Suburb,rating_units,most_units,100.0,695,1,False,False
-154202,Aorere South East,1203,Papatoetoe,Suburb,rating_units,most_units,100.0,603,1,False,False
-154300,Shelly Park,1484,Shelly Park,Suburb,rating_units,most_units,77.0,940,2,False,False
-154400,Ōtara Central,2931,Ōtara,Suburb,rating_units,most_units,100.0,622,1,False,False
-154500,Huntington Park,589,Huntington Park,Suburb,rating_units,name_match,37.4,705,2,False,True
-154600,Botany Central,589,Huntington Park,Suburb,rating_units,most_units,72.2,36,4,False,False
-154701,Dannemora North-Shamrock Park,8696,Dannemora,Suburb,rating_units,most_units,76.2,848,2,False,False
-154801,Papatoetoe North West,1203,Papatoetoe,Suburb,rating_units,most_units,98.4,817,2,False,False
-154802,Papatoetoe West,1203,Papatoetoe,Suburb,rating_units,most_units,100.0,1042,1,False,False
-154901,Papatoetoe Central West,1203,Papatoetoe,Suburb,rating_units,most_units,100.0,1285,1,False,False
-154902,Papatoetoe Central East,1203,Papatoetoe,Suburb,rating_units,most_units,100.0,1151,1,False,False
-155000,Sunkist Bay,2726,Beachlands,Suburb,rating_units,most_units,100.0,1087,1,False,False
-155100,Ōtara East,2931,Ōtara,Suburb,rating_units,most_units,100.0,694,1,False,False
-155200,Redcastle,6542,East Tāmaki,Suburb,rating_units,most_units,100.0,776,1,False,False
-155301,Dannemora South,8696,Dannemora,Suburb,rating_units,most_units,98.8,586,2,False,False
-155401,Armoy,6542,East Tāmaki,Suburb,rating_units,most_units,100.0,820,1,False,False
-155500,Manukau Central,841,Manukau City Centre,Suburb,rating_units,most_units,70.6,1508,3,False,False
-155601,Papatoetoe North East,1203,Papatoetoe,Suburb,rating_units,most_units,100.0,966,1,False,False
-155602,Papatoetoe East,1203,Papatoetoe,Suburb,rating_units,most_units,100.0,956,1,False,False
-155701,Ōtara South West,2931,Ōtara,Suburb,rating_units,most_units,100.0,379,1,False,False
-155702,Ōtara South,2931,Ōtara,Suburb,rating_units,most_units,91.8,537,2,False,False
-155801,Ferguson,2931,Ōtara,Suburb,rating_units,most_units,100.0,537,1,False,False
-155901,Papatoetoe South West,1203,Papatoetoe,Suburb,rating_units,most_units,97.6,754,2,False,False
-156000,Botany Junction,6542,East Tāmaki,Suburb,rating_units,most_units,63.2,470,3,False,False
-156101,Middlefield,8697,East Tāmaki Heights,Suburb,rating_units,most_units,88.0,822,3,False,False
-156201,Papatoetoe South,1203,Papatoetoe,Suburb,rating_units,most_units,100.0,1033,1,False,False
-156301,Point View,8697,East Tāmaki Heights,Suburb,rating_units,most_units,100.0,929,1,False,False
-156400,Te Puru,2726,Beachlands,Suburb,rating_units,most_units,100.0,1699,1,False,False
-156500,Puhinui North,1203,Papatoetoe,Suburb,rating_units,most_units,100.0,1110,1,False,False
-156601,Savonna,8694,Flat Bush,Suburb,rating_units,most_units,97.9,726,2,False,False
-156700,Puhinui South,1203,Papatoetoe,Suburb,rating_units,most_units,100.0,707,1,False,False
-156800,Rongomai West,2931,Ōtara,Suburb,rating_units,most_units,88.3,437,2,False,False
-156901,Baverstock,8694,Flat Bush,Suburb,rating_units,most_units,99.9,1087,2,False,False
-157000,Puhinui East,841,Manukau City Centre,Suburb,rating_units,most_units,70.7,743,2,False,False
-157101,Turanga,2727,Whitford,Locality,rating_units,most_units,73.5,1321,11,False,False
-157200,Rongomai East,8694,Flat Bush,Suburb,rating_units,most_units,47.7,493,3,False,True
-157301,Ormiston North,8694,Flat Bush,Suburb,rating_units,most_units,100.0,625,1,False,False
-157400,Maraetai,2721,Maraetai,Suburb,rating_units,most_units,100.0,1016,1,False,False
-157500,Chapel Downs,8694,Flat Bush,Suburb,rating_units,most_units,98.9,933,2,False,False
-157600,Wiri West,1956,Wiri,Suburb,rating_units,most_units,71.8,1160,3,False,False
-157701,Clover Park North,240,Clover Park,Suburb,rating_units,most_units,100.0,606,1,False,False
-157702,Clover Park East,240,Clover Park,Suburb,rating_units,most_units,96.2,555,2,False,False
-157800,Mission Heights North,8694,Flat Bush,Suburb,rating_units,most_units,100.0,975,1,False,False
-157901,Clover Park South,240,Clover Park,Suburb,rating_units,most_units,92.6,798,2,False,False
-158001,Donegal Park West,8694,Flat Bush,Suburb,rating_units,most_units,100.0,560,1,False,False
-158002,Donegal Park East,8694,Flat Bush,Suburb,rating_units,most_units,100.0,519,1,False,False
-158101,Ormiston Central,8694,Flat Bush,Suburb,rating_units,most_units,100.0,1112,1,False,False
-158102,Ormiston South,8694,Flat Bush,Suburb,rating_units,most_units,100.0,1043,1,False,False
-158200,Mission Heights South,8694,Flat Bush,Suburb,rating_units,most_units,100.0,970,1,False,False
-158300,Hilltop (Auckland),8694,Flat Bush,Suburb,rating_units,most_units,62.4,1198,3,False,False
-158401,Wiri North,1956,Wiri,Suburb,rating_units,most_units,57.7,560,2,False,True
-158402,Wiri East,1956,Wiri,Suburb,rating_units,most_units,75.4,777,3,False,False
-158501,Goodwood Heights West,449,Goodwood Heights,Suburb,rating_units,most_units,100.0,431,1,False,False
-158502,Goodwood Heights East,449,Goodwood Heights,Suburb,rating_units,most_units,99.7,738,3,False,False
-158601,Ormiston East,8694,Flat Bush,Suburb,rating_units,most_units,100.0,1117,1,False,False
-158602,Bremner Ridge,8694,Flat Bush,Suburb,rating_units,most_units,100.0,1017,1,False,False
-158603,Ormiston South East,8695,Tōtara Park,Suburb,rating_units,most_units,53.7,700,2,False,True
-158700,Clendon Park North,235,Clendon Park,Suburb,rating_units,most_units,100.0,702,1,False,False
-158800,Burbank,844,Manurewa,Suburb,rating_units,most_units,91.5,775,2,False,False
-158900,Tuscany Heights,8694,Flat Bush,Suburb,rating_units,most_units,74.6,622,4,False,False
-159000,Totara Heights,8704,Totara Heights,Suburb,rating_units,most_units,93.6,856,2,False,False
-159101,Homai East,844,Manurewa,Suburb,rating_units,most_units,100.0,824,1,False,False
-159201,Homai West,844,Manurewa,Suburb,rating_units,most_units,100.0,567,1,False,False
-159202,Homai Central,844,Manurewa,Suburb,rating_units,most_units,100.0,912,1,False,False
-159301,The Gardens (Auckland),1665,The Gardens,Suburb,rating_units,most_units,87.8,1220,4,False,False
-159401,Clarks Beach,230,Clarks Beach,Suburb,rating_units,most_units,100.0,876,1,False,False
-159500,Clendon Park West,235,Clendon Park,Suburb,rating_units,most_units,100.0,741,1,False,False
-159600,Hillpark North,8976,Hillpark,Suburb,rating_units,most_units,89.5,697,2,False,False
-159700,Clendon Park East,235,Clendon Park,Suburb,rating_units,most_units,100.0,512,1,False,False
-159801,Karaka Creek,1771,Waiau Pā,Locality,rating_units,most_units,69.1,619,3,False,False
-159900,Rowandale West,844,Manurewa,Suburb,rating_units,most_units,94.3,812,2,False,False
-160000,Rowandale East,844,Manurewa,Suburb,rating_units,most_units,100.0,908,1,False,False
-160100,Manurewa Central,844,Manurewa,Suburb,rating_units,most_units,91.1,1220,3,False,False
-160201,Weymouth West,2731,Weymouth,Suburb,rating_units,most_units,74.8,563,2,False,False
-160202,Weymouth Central,2731,Weymouth,Suburb,rating_units,most_units,93.3,715,2,False,False
-160300,Hillpark South,8976,Hillpark,Suburb,rating_units,most_units,71.2,1003,3,False,False
-160401,Alfriston,844,Manurewa,Suburb,rating_units,most_units,84.6,1030,4,False,False
-160501,Weymouth East,2731,Weymouth,Suburb,rating_units,most_units,98.9,625,2,False,False
-160601,Leabank,844,Manurewa,Suburb,rating_units,most_units,94.5,762,2,False,False
-160700,Weymouth South,2731,Weymouth,Suburb,rating_units,most_units,100.0,1105,1,False,False
-160800,Manurewa East,845,Manurewa East,Suburb,rating_units,most_units,95.4,841,2,False,False
-160901,Manurewa West,844,Manurewa,Suburb,rating_units,most_units,100.0,812,1,False,False
-160902,Manurewa South,844,Manurewa,Suburb,rating_units,most_units,100.0,848,1,False,False
-161000,Randwick Park East,1359,Randwick Park,Suburb,rating_units,most_units,86.1,713,2,False,False
-161100,Wattle Downs West,1889,Wattle Downs,Suburb,rating_units,most_units,100.0,1131,1,False,False
-161201,Wattle Downs North,1889,Wattle Downs,Suburb,rating_units,most_units,68.2,827,3,False,False
-161300,Randwick Park West,1359,Randwick Park,Suburb,rating_units,most_units,100.0,836,1,False,False
-161400,Kingseat-Karaka,658,Karaka,Locality,rating_units,most_units,75.3,1237,2,False,False
-161500,Wattle Downs East,1889,Wattle Downs,Suburb,rating_units,most_units,100.0,721,1,False,False
-161600,Takanini North,1575,Takanini,Suburb,rating_units,most_units,88.5,802,3,False,False
-161700,Takanini Industrial,1575,Takanini,Suburb,rating_units,most_units,99.4,167,2,False,False
-161800,Conifer Grove West,254,Conifer Grove,Suburb,rating_units,most_units,56.6,1509,3,False,True
-161900,Conifer Grove East,254,Conifer Grove,Suburb,rating_units,most_units,95.9,687,2,False,False
-162000,Takanini West,1575,Takanini,Suburb,rating_units,most_units,100.0,883,1,False,False
-162101,Takanini South,1575,Takanini,Suburb,rating_units,most_units,100.0,1237,1,False,False
-162102,Takanini East,1575,Takanini,Suburb,rating_units,most_units,100.0,1001,1,False,False
-162200,Takanini Central,1575,Takanini,Suburb,rating_units,most_units,98.9,465,2,False,False
-162300,Ardmore,46,Ardmore,Locality,rating_units,most_units,50.9,515,7,False,True
-162400,Glenbrook,425,Glenbrook,Locality,rating_units,most_units,78.6,1258,3,False,False
-162500,Hingaia,658,Karaka,Locality,rating_units,most_units,99.9,1047,2,False,False
-162601,Takanini South East,1196,Papakura,Suburb,rating_units,most_units,89.4,1215,2,False,False
-162602,Takanini McLennan,1196,Papakura,Suburb,rating_units,most_units,96.5,791,2,False,False
-162701,Kawakawa Bay-Orere,2739,Kawakawa Bay,Locality,rating_units,most_units,35.5,1090,5,False,True
-162800,Papakura West,1196,Papakura,Suburb,rating_units,most_units,81.8,687,2,False,False
-162901,Clevedon,4033,Clevedon,Locality,rating_units,most_units,98.5,715,2,False,False
-163001,Papakura North,1196,Papakura,Suburb,rating_units,most_units,100.0,1286,1,False,False
-163100,Pahurehure,1185,Pahurehure,Suburb,rating_units,most_units,94.3,1185,3,False,False
-163200,Papakura Central,1196,Papakura,Suburb,rating_units,most_units,100.0,1718,1,False,False
-163301,Papakura North East,1196,Papakura,Suburb,rating_units,most_units,100.0,720,1,False,False
-163302,Twin Parks Rise,1196,Papakura,Suburb,rating_units,most_units,100.0,670,1,False,False
-163400,Karaka Lakes,658,Karaka,Locality,rating_units,most_units,65.8,1534,2,False,False
-163501,Papakura Kelvin,1196,Papakura,Suburb,rating_units,most_units,100.0,666,1,False,False
-163502,Papakura Eastburn,1196,Papakura,Suburb,rating_units,most_units,100.0,909,1,False,False
-163600,Papakura Massey Park,1196,Papakura,Suburb,rating_units,most_units,100.0,891,1,False,False
-163700,Rosehill,1432,Rosehill,Suburb,rating_units,most_units,86.7,1301,3,False,False
-163801,Patumāhoe,1228,Patumāhoe,Locality,rating_units,most_units,100.0,573,1,False,False
-163803,Patumāhoe Rural,1228,Patumāhoe,Locality,rating_units,most_units,35.6,447,7,False,True
-163901,Papakura East,1196,Papakura,Suburb,rating_units,most_units,100.0,790,1,False,False
-163902,Harbour View Heights,1196,Papakura,Suburb,rating_units,most_units,97.9,429,3,False,False
-164001,Ōpaheke,1112,Ōpaheke,Suburb,rating_units,most_units,95.8,1179,2,False,False
-164100,Papakura Industrial,1196,Papakura,Suburb,rating_units,most_units,86.5,230,3,False,False
-164201,Red Hill,1381,Red Hill,Suburb,rating_units,most_units,97.4,774,2,False,False
-164301,Drury West,658,Karaka,Locality,rating_units,most_units,100.0,746,1,False,False
-164302,Drury East,306,Drury,Suburb,rating_units,most_units,79.3,440,3,False,False
-164401,Tamakae,1865,Waiuku,Suburb,rating_units,most_units,100.0,1131,1,False,False
-164500,Hamilton Estate,1865,Waiuku,Suburb,rating_units,most_units,100.0,1061,1,False,False
-164601,Runciman,1456,Runciman,Locality,rating_units,most_units,56.1,312,4,False,True
-164602,Drury South Crossing,1356,Ramarama,Locality,rating_units,most_units,78.0,531,2,False,False
-164603,Waihoehoe,306,Drury,Suburb,rating_units,most_units,54.8,757,3,False,True
-164700,Waiuku Central,1865,Waiuku,Suburb,rating_units,most_units,100.0,619,1,False,False
-164800,Waiuku East,1865,Waiuku,Suburb,rating_units,most_units,100.0,641,1,False,False
-164900,Kendallvale,1865,Waiuku,Suburb,rating_units,most_units,100.0,390,1,False,False
-165001,Puni,1306,Pukekohe,Suburb,rating_units,most_units,45.0,604,5,False,True
-165101,Ramarama,1182,Paerata,Locality,rating_units,most_units,37.1,1448,7,False,True
-165200,Hunua,2174,Hūnua,Locality,rating_units,most_units,92.6,568,3,False,False
-165301,Pukekohe North,1306,Pukekohe,Suburb,rating_units,most_units,87.3,840,2,False,False
-165302,Pukekohe North West,1306,Pukekohe,Suburb,rating_units,most_units,100.0,992,1,False,False
-165400,Anselmi Ridge,1306,Pukekohe,Suburb,rating_units,most_units,95.1,1154,4,False,False
-165501,Pukekohe West,1306,Pukekohe,Suburb,rating_units,most_units,100.0,1430,1,False,False
-165502,Pukekohe South West,1306,Pukekohe,Suburb,rating_units,most_units,100.0,964,1,False,False
-165600,Cape Hill,1306,Pukekohe,Suburb,rating_units,most_units,100.0,563,1,False,False
-165700,Rosa Birch Park,1306,Pukekohe,Suburb,rating_units,most_units,100.0,800,1,False,False
-165800,Rooseville Park,1306,Pukekohe,Suburb,rating_units,most_units,100.0,977,1,False,False
-165901,Cloverlea (Auckland),1306,Pukekohe,Suburb,rating_units,most_units,100.0,1023,1,False,False
-166000,Pukekohe Central,1306,Pukekohe,Suburb,rating_units,most_units,99.8,664,2,False,False
-166100,Pukekohe Hospital,1306,Pukekohe,Suburb,rating_units,most_units,100.0,638,1,False,False
-166200,Buckland,174,Buckland,Locality,rating_units,most_units,55.5,470,3,False,True
-166301,Bombay Hills,144,Bombay,Locality,rating_units,most_units,84.0,795,4,False,False
-166400,Ararimu,41,Ararimu,Locality,rating_units,most_units,43.5,758,5,False,True
+sa2_code,sa2_name,suburb_id,suburb_name,suburb_type,match_basis,match_rule,match_pct,units_in_sa2,suburbs_overlapped,exclusion_reason,unmapped,straddles_suburbs,boundary_confidence,override_reason
+110201,Okahukura Peninsula,1897.0,Wellsford,Suburb,rating_units,most_units,44.9,815,6,,False,True,high,
+110300,Inlet Kaipara Harbour South,,,,rating_units,excluded,,4,3,"Water SA2: no census population published, no SA1 residents; units scattered on islands and moorings",True,False,not reviewed (60%+ of units in one suburb),
+110400,Cape Rodney,2861.0,Leigh,Locality,rating_units,most_units,28.3,2440,11,,False,True,low,
+110501,Wellsford,1897.0,Wellsford,Suburb,rating_units,most_units,100.0,941,1,,False,False,not reviewed (60%+ of units in one suburb),
+110600,Oceanic Auckland Region East,,,,rating_units,excluded,,12,10,"Water SA2: no census population published, no SA1 residents; units scattered on islands and moorings",True,False,not reviewed (60%+ of units in one suburb),
+110700,South Head,4018.0,South Head,Locality,rating_units,most_units,56.2,1062,6,,False,True,high,
+110800,Kaipara Hills,805.0,Makarau,Locality,rating_units,most_units,54.2,931,9,,False,True,high,
+110900,Dome Valley-Matakana,875.0,Matakana,Locality,rating_units,most_units,73.3,922,6,,False,False,not reviewed (60%+ of units in one suburb),
+111000,Oceanic Auckland Region West,,,,rating_units,excluded,,2,2,"Water SA2: no census population published, no SA1 residents; units scattered on islands and moorings",True,False,not reviewed (60%+ of units in one suburb),
+111100,Warkworth West,2864.0,Warkworth,Suburb,rating_units,most_units,99.2,1445,2,,False,False,not reviewed (60%+ of units in one suburb),
+111200,Puhoi Valley,2869.0,Puhoi,Locality,rating_units,most_units,36.4,1774,10,,False,True,medium,
+111300,Warkworth East,2864.0,Warkworth,Suburb,rating_units,most_units,100.0,1770,1,,False,False,not reviewed (60%+ of units in one suburb),
+111400,Sandspit,2862.0,Sandspit,Locality,rating_units,most_units,50.0,526,3,,False,True,low,
+111500,Tawharanui Peninsula,1098.0,Ōmaha,Locality,rating_units,most_units,57.7,2437,4,,False,True,low,
+111601,Kaukapakapa,2758.0,Kaukapakapa,Locality,rating_units,most_units,100.0,388,1,,False,False,not reviewed (60%+ of units in one suburb),
+111602,Kaukapakapa Rural,2758.0,Kaukapakapa,Locality,rating_units,most_units,92.7,685,5,,False,False,not reviewed (60%+ of units in one suburb),
+111700,Snells Beach,8654.0,Snells Beach,Suburb,rating_units,most_units,99.8,1928,3,,False,False,not reviewed (60%+ of units in one suburb),
+111801,Barrier Islands,4330.0,Great Barrier Island (Aotea Island),Island,rating_units,most_units,98.9,1518,17,,False,False,not reviewed (60%+ of units in one suburb),
+111901,Mahurangi Peninsula,2863.0,Algies Bay,Suburb,rating_units,most_units,59.4,864,4,,False,True,high,
+112001,Inlets other Auckland,,,,rating_units,excluded,,24,16,"Water SA2: no census population published, no SA1 residents; units scattered on islands and moorings",True,False,not reviewed (60%+ of units in one suburb),
+112101,Wainui-Waiwera,2870.0,Wainui,Locality,rating_units,most_units,52.5,794,7,,False,True,high,
+112102,Ara Hill,2870.0,Wainui,Locality,rating_units,most_units,100.0,146,1,,False,False,not reviewed (60%+ of units in one suburb),
+112200,Parakai,1207.0,Parakai,Suburb,rating_units,most_units,100.0,414,1,,False,False,not reviewed (60%+ of units in one suburb),
+112301,Helensville Rural,525.0,Helensville,Suburb,rating_units,most_units,95.2,541,2,,False,False,not reviewed (60%+ of units in one suburb),
+112401,Helensville,525.0,Helensville,Suburb,rating_units,most_units,100.0,1472,1,,False,False,not reviewed (60%+ of units in one suburb),
+112500,Waitoki,1859.0,Waitoki,Locality,rating_units,most_units,75.3,588,4,,False,False,not reviewed (60%+ of units in one suburb),
+112600,Waikoukou Valley,525.0,Helensville,Suburb,rating_units,most_units,62.4,588,2,,False,False,not reviewed (60%+ of units in one suburb),
+112701,Orewa North,2871.0,Orewa,Suburb,rating_units,most_units,100.0,2096,1,,False,False,not reviewed (60%+ of units in one suburb),
+112702,Orewa West,2871.0,Orewa,Suburb,rating_units,most_units,100.0,429,1,,False,False,not reviewed (60%+ of units in one suburb),
+112800,Hatfields Beach,2866.0,Hatfields Beach,Suburb,rating_units,most_units,88.4,585,2,,False,False,not reviewed (60%+ of units in one suburb),
+112901,Orewa South,2871.0,Orewa,Suburb,rating_units,most_units,100.0,1288,1,,False,False,not reviewed (60%+ of units in one suburb),
+112902,Millwater North,2871.0,Orewa,Suburb,rating_units,most_units,100.0,545,1,,False,False,not reviewed (60%+ of units in one suburb),
+113000,Orewa Central,2871.0,Orewa,Suburb,rating_units,most_units,100.0,1881,1,,False,False,not reviewed (60%+ of units in one suburb),
+113101,Millwater Central,8690.0,Silverdale,Suburb,rating_units,most_units,100.0,1319,1,,False,False,not reviewed (60%+ of units in one suburb),
+113201,Waipatukahu,1982.0,Waimauku,Suburb,rating_units,most_units,96.6,528,3,,False,False,not reviewed (60%+ of units in one suburb),
+113300,Millwater South,8690.0,Silverdale,Suburb,rating_units,most_units,99.7,1491,2,,False,False,not reviewed (60%+ of units in one suburb),
+113401,Milldale,2870.0,Wainui,Locality,rating_units,most_units,99.9,1408,2,,False,False,not reviewed (60%+ of units in one suburb),
+113402,Dairy Flat North,276.0,Dairy Flat,Locality,rating_units,most_units,99.0,600,2,,False,False,not reviewed (60%+ of units in one suburb),
+113500,Dairy Flat West,276.0,Dairy Flat,Locality,rating_units,most_units,88.0,523,3,,False,False,not reviewed (60%+ of units in one suburb),
+113600,Kingsway,2876.0,Red Beach,Suburb,rating_units,most_units,93.6,784,2,,False,False,not reviewed (60%+ of units in one suburb),
+113700,Riverhead Forest,2958.0,Riverhead,Suburb,rating_units,most_units,88.9,9,2,,False,False,not reviewed (60%+ of units in one suburb),
+113800,Silverdale Central (Auckland),8690.0,Silverdale,Suburb,rating_units,most_units,90.7,997,2,,False,False,not reviewed (60%+ of units in one suburb),
+113900,Red Beach West,2876.0,Red Beach,Suburb,rating_units,most_units,100.0,1112,1,,False,False,not reviewed (60%+ of units in one suburb),
+114000,Red Beach East,2876.0,Red Beach,Suburb,rating_units,most_units,98.0,1476,2,,False,False,not reviewed (60%+ of units in one suburb),
+114101,Silverdale South (Auckland),2882.0,Stillwater,Locality,rating_units,most_units,100.0,421,1,,False,False,not reviewed (60%+ of units in one suburb),
+114102,Stillwater,2882.0,Stillwater,Locality,rating_units,most_units,100.0,325,1,,False,False,not reviewed (60%+ of units in one suburb),
+114201,Waimauku,1982.0,Waimauku,Suburb,rating_units,most_units,100.0,505,1,,False,False,not reviewed (60%+ of units in one suburb),
+114300,Gulf Islands,4938.0,Kawau Island,Island,rating_units,most_units,68.6,698,15,,False,False,not reviewed (60%+ of units in one suburb),
+114400,Vipond,2890.0,Stanmore Bay,Suburb,rating_units,most_units,98.0,945,2,,False,False,not reviewed (60%+ of units in one suburb),
+114500,Muriwai,6526.0,Muriwai Beach,Locality,rating_units,most_units,100.0,525,1,,False,False,not reviewed (60%+ of units in one suburb),
+114600,Stanmore Bay West,2890.0,Stanmore Bay,Suburb,rating_units,most_units,100.0,1006,1,,False,False,not reviewed (60%+ of units in one suburb),
+114701,Kumeū Rural West,2963.0,Kumeū,Suburb,rating_units,most_units,91.5,543,3,,False,False,not reviewed (60%+ of units in one suburb),
+114801,Ōkura Bush,2889.0,Ōkura,Suburb,rating_units,most_units,41.7,672,5,,False,True,medium,
+114901,Whangaparāoa Central,2890.0,Stanmore Bay,Suburb,rating_units,most_units,100.0,1128,1,,False,False,not reviewed (60%+ of units in one suburb),
+114902,Wade Heads-Arkles Bay,2888.0,Arkles Bay,Suburb,rating_units,most_units,65.3,801,3,,False,False,not reviewed (60%+ of units in one suburb),
+115001,Kumeū-Huapai North,2963.0,Kumeū,Suburb,rating_units,most_units,56.6,1929,3,,False,True,low,
+115002,Kumeū-Huapai South,2963.0,Kumeū,Suburb,rating_units,most_units,80.2,963,2,,False,False,not reviewed (60%+ of units in one suburb),
+115100,Stanmore Bay East,2890.0,Stanmore Bay,Suburb,rating_units,most_units,100.0,1085,1,,False,False,not reviewed (60%+ of units in one suburb),
+115200,Manly West,2878.0,Manly,Suburb,rating_units,most_units,63.1,966,3,,False,False,not reviewed (60%+ of units in one suburb),
+115300,Muriwai Valley-Bethells Beach,6526.0,Muriwai Beach,Locality,rating_units,most_units,61.2,428,6,,False,False,not reviewed (60%+ of units in one suburb),
+115400,Tindalls-Matakatia,2883.0,Tindalls Beach,Suburb,rating_units,most_units,49.7,872,4,,False,True,medium,
+115501,Coatesville,248.0,Coatesville,Locality,rating_units,most_units,84.7,848,3,,False,False,not reviewed (60%+ of units in one suburb),
+115601,Dairy Flat South,276.0,Dairy Flat,Locality,rating_units,most_units,89.2,576,2,,False,False,not reviewed (60%+ of units in one suburb),
+115700,Gulf Harbour North,2874.0,Gulf Harbour,Suburb,rating_units,most_units,99.0,1056,2,,False,False,not reviewed (60%+ of units in one suburb),
+115800,Manly East,2878.0,Manly,Suburb,rating_units,most_units,99.4,1457,2,,False,False,not reviewed (60%+ of units in one suburb),
+115901,Riverhead,2958.0,Riverhead,Suburb,rating_units,most_units,100.0,1220,1,,False,False,not reviewed (60%+ of units in one suburb),
+116000,Army Bay,2885.0,Army Bay,Suburb,rating_units,most_units,100.0,593,1,,False,False,not reviewed (60%+ of units in one suburb),
+116101,Kumeū Rural East,2963.0,Kumeū,Suburb,rating_units,most_units,84.8,631,4,,False,False,not reviewed (60%+ of units in one suburb),
+116200,Gulf Harbour South,2874.0,Gulf Harbour,Suburb,rating_units,most_units,98.5,1524,3,,False,False,not reviewed (60%+ of units in one suburb),
+116300,Pāremoremo West,2958.0,Riverhead,Suburb,rating_units,most_units,92.4,344,2,,False,False,not reviewed (60%+ of units in one suburb),
+116401,Taupaki,1607.0,Taupaki,Locality,rating_units,most_units,81.6,571,4,,False,False,not reviewed (60%+ of units in one suburb),
+116500,Long Bay,8824.0,Long Bay,Suburb,rating_units,most_units,99.7,1484,2,,False,False,not reviewed (60%+ of units in one suburb),
+116601,Pāremoremo East,2961.0,Pāremoremo,Suburb,rating_units,most_units,54.8,723,2,,False,True,medium,
+116701,Albany Heights,8827.0,Albany Heights,Suburb,rating_units,most_units,61.5,1602,3,,False,False,not reviewed (60%+ of units in one suburb),
+116801,Awaruku,2877.0,Torbay,Suburb,rating_units,most_units,100.0,1170,1,,False,False,not reviewed (60%+ of units in one suburb),
+116900,Fairview Heights,8826.0,Fairview Heights,Suburb,rating_units,most_units,73.1,1197,2,,False,False,not reviewed (60%+ of units in one suburb),
+117001,Whenuapai,4118.0,Whenuapai,Suburb,rating_units,most_units,85.3,1907,4,,False,False,not reviewed (60%+ of units in one suburb),
+117002,Whenuapai West,8961.0,Westgate,Suburb,rating_units,most_units,79.8,485,2,,False,False,not reviewed (60%+ of units in one suburb),
+117003,Massey Red Hills,4119.0,Massey,Suburb,rating_units,most_units,98.1,528,2,,False,False,not reviewed (60%+ of units in one suburb),
+117100,Waitākere Ranges North,2756.0,Waitākere,Suburb,rating_units,most_units,80.2,480,6,,False,False,not reviewed (60%+ of units in one suburb),
+117201,Torbay West,2877.0,Torbay,Suburb,rating_units,most_units,94.5,974,2,,False,False,not reviewed (60%+ of units in one suburb),
+117202,Torbay East,2877.0,Torbay,Suburb,rating_units,most_units,99.9,934,2,,False,False,not reviewed (60%+ of units in one suburb),
+117300,Albany Central,2960.0,Albany,Suburb,rating_units,most_units,99.9,1398,2,,False,False,not reviewed (60%+ of units in one suburb),
+117400,Albany West,2960.0,Albany,Suburb,rating_units,most_units,100.0,701,1,,False,False,not reviewed (60%+ of units in one suburb),
+117500,Glamorgan,2877.0,Torbay,Suburb,rating_units,most_units,100.0,1098,1,,False,False,not reviewed (60%+ of units in one suburb),
+117600,Oteha East,8825.0,Oteha,Suburb,rating_units,most_units,91.6,1039,2,,False,False,not reviewed (60%+ of units in one suburb),
+117700,Northcross,1061.0,Northcross,Suburb,rating_units,most_units,62.0,1141,3,,False,False,not reviewed (60%+ of units in one suburb),
+117800,Oteha West,8825.0,Oteha,Suburb,rating_units,most_units,100.0,759,1,,False,False,not reviewed (60%+ of units in one suburb),
+117900,Waiake,2877.0,Torbay,Suburb,rating_units,most_units,54.3,1362,3,,False,True,medium,
+118001,Waitākere,2756.0,Waitākere,Suburb,rating_units,most_units,96.7,582,3,,False,False,not reviewed (60%+ of units in one suburb),
+118100,Albany South,2960.0,Albany,Suburb,rating_units,most_units,95.0,1331,2,,False,False,not reviewed (60%+ of units in one suburb),
+118200,Browns Bay South West,2872.0,Browns Bay,Suburb,rating_units,most_units,100.0,1415,1,,False,False,not reviewed (60%+ of units in one suburb),
+118300,Browns Bay Central,2872.0,Browns Bay,Suburb,rating_units,most_units,99.9,1583,2,,False,False,not reviewed (60%+ of units in one suburb),
+118400,Schnapper Rock,8822.0,Schnapper Rock,Suburb,rating_units,most_units,98.7,1181,2,,False,False,not reviewed (60%+ of units in one suburb),
+118501,Pinehill North,1252.0,Pinehill,Suburb,rating_units,most_units,100.0,643,1,,False,False,not reviewed (60%+ of units in one suburb),
+118502,Pinehill South,1252.0,Pinehill,Suburb,rating_units,most_units,96.0,653,2,,False,False,not reviewed (60%+ of units in one suburb),
+118600,North Harbour,1431.0,Rosedale,Suburb,rating_units,most_units,92.2,2468,3,,False,False,not reviewed (60%+ of units in one suburb),
+118700,Browns Bay South East,2872.0,Browns Bay,Suburb,rating_units,most_units,100.0,982,1,,False,False,not reviewed (60%+ of units in one suburb),
+118800,Westgate Central,8961.0,Westgate,Suburb,rating_units,most_units,89.2,388,2,,False,False,not reviewed (60%+ of units in one suburb),
+118900,Greenhithe West,2959.0,Greenhithe,Suburb,rating_units,most_units,100.0,1222,1,,False,False,not reviewed (60%+ of units in one suburb),
+119000,Rothesay Bay,2881.0,Rothesay Bay,Suburb,rating_units,most_units,98.5,1033,2,,False,False,not reviewed (60%+ of units in one suburb),
+119100,Greenhithe East,2959.0,Greenhithe,Suburb,rating_units,most_units,100.0,1042,1,,False,False,not reviewed (60%+ of units in one suburb),
+119201,Hobsonville,2962.0,Hobsonville,Suburb,rating_units,most_units,93.2,1067,3,,False,False,not reviewed (60%+ of units in one suburb),
+119301,Inlet Waitemata Harbour,,,,rating_units,excluded,,30,17,"Water SA2: 3 census residents in 2023 (84 in 2018, likely living on boats); 30 units spread over 17 suburbs (largest 16.7%), so no suburb represents it",True,False,not reviewed (60%+ of units in one suburb),
+119400,Greenhithe South,2959.0,Greenhithe,Suburb,rating_units,most_units,100.0,720,1,,False,False,not reviewed (60%+ of units in one suburb),
+119500,Murrays Bay West,2886.0,Murrays Bay,Suburb,rating_units,most_units,83.2,889,2,,False,False,not reviewed (60%+ of units in one suburb),
+119600,Westgate South,8961.0,Westgate,Suburb,rating_units,most_units,59.1,1482,2,,False,True,medium,
+119700,Windsor Park,8823.0,Windsor Park,Suburb,rating_units,most_units,99.8,459,2,,False,False,not reviewed (60%+ of units in one suburb),
+119800,West Harbour West,2905.0,West Harbour,Suburb,rating_units,most_units,98.9,1411,2,,False,False,not reviewed (60%+ of units in one suburb),
+119901,Unsworth Heights West,8821.0,Unsworth Heights,Suburb,rating_units,most_units,100.0,801,1,,False,False,not reviewed (60%+ of units in one suburb),
+120000,Murrays Bay East,2886.0,Murrays Bay,Suburb,rating_units,most_units,95.0,800,2,,False,False,not reviewed (60%+ of units in one suburb),
+120101,Birdwood West,4119.0,Massey,Suburb,rating_units,most_units,55.7,253,3,,False,True,medium,
+120201,Hobsonville Point Catalina Bay,2962.0,Hobsonville,Suburb,rating_units,most_units,100.0,1659,1,,False,False,not reviewed (60%+ of units in one suburb),
+120202,Hobsonville Point Park,2962.0,Hobsonville,Suburb,rating_units,most_units,100.0,2426,1,,False,False,not reviewed (60%+ of units in one suburb),
+120203,Hobsonville Scott Point,2962.0,Hobsonville,Suburb,rating_units,most_units,100.0,1297,1,,False,False,not reviewed (60%+ of units in one suburb),
+120301,West Harbour Clearwater Cove,2905.0,West Harbour,Suburb,rating_units,most_units,89.0,1195,2,,False,False,not reviewed (60%+ of units in one suburb),
+120400,Unsworth Heights East,8821.0,Unsworth Heights,Suburb,rating_units,most_units,100.0,1096,1,,False,False,not reviewed (60%+ of units in one suburb),
+120500,Mairangi Bay North,2880.0,Mairangi Bay,Suburb,rating_units,most_units,100.0,1023,1,,False,False,not reviewed (60%+ of units in one suburb),
+120600,Massey Central,4119.0,Massey,Suburb,rating_units,most_units,100.0,1029,1,,False,False,not reviewed (60%+ of units in one suburb),
+120701,West Harbour Luckens Point,2905.0,West Harbour,Suburb,rating_units,most_units,100.0,1127,1,,False,False,not reviewed (60%+ of units in one suburb),
+120800,Mairangi Bay South,2880.0,Mairangi Bay,Suburb,rating_units,most_units,100.0,947,1,,False,False,not reviewed (60%+ of units in one suburb),
+120900,Massey Royal Road West,4119.0,Massey,Suburb,rating_units,most_units,100.0,955,1,,False,False,not reviewed (60%+ of units in one suburb),
+121001,Bayview East (Auckland),8820.0,Bayview,Suburb,rating_units,most_units,93.1,1197,3,,False,False,not reviewed (60%+ of units in one suburb),
+121100,Swanson Rural,1552.0,Swanson,Suburb,rating_units,most_units,82.7,808,4,,False,False,not reviewed (60%+ of units in one suburb),
+121200,Sunnynook South,1546.0,Sunnynook,Suburb,rating_units,most_units,92.3,893,2,,False,False,not reviewed (60%+ of units in one suburb),
+121300,Sunnynook North,1546.0,Sunnynook,Suburb,rating_units,most_units,86.9,957,2,,False,False,not reviewed (60%+ of units in one suburb),
+121401,Bayview West (Auckland),8820.0,Bayview,Suburb,rating_units,most_units,100.0,751,1,,False,False,not reviewed (60%+ of units in one suburb),
+121500,Totara Vale North,8829.0,Tōtara Vale,Suburb,rating_units,most_units,94.5,981,2,,False,False,not reviewed (60%+ of units in one suburb),
+121600,Royal Heights North,4119.0,Massey,Suburb,rating_units,most_units,100.0,1340,1,,False,False,not reviewed (60%+ of units in one suburb),
+121701,Massey West,4119.0,Massey,Suburb,rating_units,most_units,100.0,921,1,,False,False,not reviewed (60%+ of units in one suburb),
+121800,Beach Haven West,2898.0,Beach Haven,Suburb,rating_units,most_units,100.0,1309,1,,False,False,not reviewed (60%+ of units in one suburb),
+121901,Totara Vale South,8829.0,Tōtara Vale,Suburb,rating_units,most_units,99.8,1179,2,,False,False,not reviewed (60%+ of units in one suburb),
+122001,Swanson,1552.0,Swanson,Suburb,rating_units,most_units,96.5,1427,2,,False,False,not reviewed (60%+ of units in one suburb),
+122101,Bayview South (Auckland),8820.0,Bayview,Suburb,rating_units,most_units,57.6,977,2,,False,True,medium,
+122200,Campbells Bay,2873.0,Campbells Bay,Suburb,rating_units,most_units,99.6,1018,2,,False,False,not reviewed (60%+ of units in one suburb),
+122300,Royal Heights South,4119.0,Massey,Suburb,rating_units,most_units,100.0,1148,1,,False,False,not reviewed (60%+ of units in one suburb),
+122400,Beach Haven East,2898.0,Beach Haven,Suburb,rating_units,most_units,99.9,1334,2,,False,False,not reviewed (60%+ of units in one suburb),
+122501,Massey Keegan,4119.0,Massey,Suburb,rating_units,most_units,100.0,1081,1,,False,False,not reviewed (60%+ of units in one suburb),
+122600,Forrest Hill North,393.0,Forrest Hill,Suburb,rating_units,most_units,100.0,827,1,,False,False,not reviewed (60%+ of units in one suburb),
+122700,Glenfield North,2964.0,Glenfield,Suburb,rating_units,most_units,98.3,1159,2,,False,False,not reviewed (60%+ of units in one suburb),
+122801,Birkdale North,2900.0,Birkdale,Suburb,rating_units,most_units,100.0,849,1,,False,False,not reviewed (60%+ of units in one suburb),
+122802,Birkdale Central,2900.0,Birkdale,Suburb,rating_units,most_units,100.0,1036,1,,False,False,not reviewed (60%+ of units in one suburb),
+122901,Massey South,4119.0,Massey,Suburb,rating_units,most_units,100.0,1096,1,,False,False,not reviewed (60%+ of units in one suburb),
+123000,Rānui North,1371.0,Rānui,Suburb,rating_units,most_units,96.4,1206,3,,False,False,not reviewed (60%+ of units in one suburb),
+123100,Glenfield West,2964.0,Glenfield,Suburb,rating_units,most_units,100.0,986,1,,False,False,not reviewed (60%+ of units in one suburb),
+123200,Te Atatū Peninsula North West,2904.0,Te Atatū Peninsula,Suburb,rating_units,most_units,100.0,1416,1,,False,False,not reviewed (60%+ of units in one suburb),
+123300,Glenfield South West,2964.0,Glenfield,Suburb,rating_units,most_units,100.0,1258,1,,False,False,not reviewed (60%+ of units in one suburb),
+123400,Forrest Hill West,393.0,Forrest Hill,Suburb,rating_units,most_units,100.0,1222,1,,False,False,not reviewed (60%+ of units in one suburb),
+123500,Wairau Valley,1838.0,Wairau Valley,Suburb,rating_units,most_units,86.2,1236,3,,False,False,not reviewed (60%+ of units in one suburb),
+123600,Forrest Hill East,393.0,Forrest Hill,Suburb,rating_units,most_units,97.6,1221,2,,False,False,not reviewed (60%+ of units in one suburb),
+123701,Castor Bay North,2879.0,Castor Bay,Suburb,rating_units,most_units,100.0,922,1,,False,False,not reviewed (60%+ of units in one suburb),
+123702,Castor Bay South,2879.0,Castor Bay,Suburb,rating_units,most_units,100.0,784,1,,False,False,not reviewed (60%+ of units in one suburb),
+123800,Rānui Domain,1371.0,Rānui,Suburb,rating_units,most_units,92.7,1159,2,,False,False,not reviewed (60%+ of units in one suburb),
+123900,Beach Haven South,2898.0,Beach Haven,Suburb,rating_units,most_units,100.0,1170,1,,False,False,not reviewed (60%+ of units in one suburb),
+124000,Glenfield Central,2964.0,Glenfield,Suburb,rating_units,most_units,100.0,1359,1,,False,False,not reviewed (60%+ of units in one suburb),
+124100,Piha,2955.0,Piha,Locality,rating_units,most_units,99.7,783,2,,False,False,not reviewed (60%+ of units in one suburb),
+124200,Rānui South West,1371.0,Rānui,Suburb,rating_units,most_units,90.1,878,2,,False,False,not reviewed (60%+ of units in one suburb),
+124301,Henderson Larnoch,526.0,Henderson,Suburb,rating_units,most_units,91.4,1046,2,,False,False,not reviewed (60%+ of units in one suburb),
+124401,Birkdale South,2900.0,Birkdale,Suburb,rating_units,most_units,99.9,1258,2,,False,False,not reviewed (60%+ of units in one suburb),
+124500,Te Atatū Peninsula Central,2904.0,Te Atatū Peninsula,Suburb,rating_units,most_units,100.0,1377,1,,False,False,not reviewed (60%+ of units in one suburb),
+124600,Glenfield East,2964.0,Glenfield,Suburb,rating_units,most_units,98.7,741,2,,False,False,not reviewed (60%+ of units in one suburb),
+124700,Henderson Valley,2166.0,Henderson Valley,Suburb,rating_units,most_units,98.3,527,3,,False,False,not reviewed (60%+ of units in one suburb),
+124800,Te Atatū Peninsula West,2904.0,Te Atatū Peninsula,Suburb,rating_units,most_units,100.0,1461,1,,False,False,not reviewed (60%+ of units in one suburb),
+124900,Henderson Lincoln West,526.0,Henderson,Suburb,rating_units,most_units,100.0,1035,1,,False,False,not reviewed (60%+ of units in one suburb),
+125000,Rānui South East,1371.0,Rānui,Suburb,rating_units,most_units,99.8,824,2,,False,False,not reviewed (60%+ of units in one suburb),
+125100,Henderson Lincoln East,526.0,Henderson,Suburb,rating_units,most_units,100.0,538,1,,False,False,not reviewed (60%+ of units in one suburb),
+125201,Birkenhead West,2899.0,Birkenhead,Suburb,rating_units,most_units,100.0,898,1,,False,False,not reviewed (60%+ of units in one suburb),
+125202,Birkenhead North West,2899.0,Birkenhead,Suburb,rating_units,most_units,100.0,556,1,,False,False,not reviewed (60%+ of units in one suburb),
+125300,Te Atatū Peninsula East,2904.0,Te Atatū Peninsula,Suburb,rating_units,most_units,100.0,1054,1,,False,False,not reviewed (60%+ of units in one suburb),
+125400,Milford West,2901.0,Milford,Suburb,rating_units,most_units,99.9,1281,2,,False,False,not reviewed (60%+ of units in one suburb),
+125500,Westlake,2901.0,Milford,Suburb,rating_units,most_units,100.0,1040,1,,False,False,not reviewed (60%+ of units in one suburb),
+125600,Hillcrest North (Auckland),541.0,Hillcrest,Suburb,rating_units,most_units,100.0,1191,1,,False,False,not reviewed (60%+ of units in one suburb),
+125701,Henderson Lincoln South,526.0,Henderson,Suburb,rating_units,most_units,100.0,1085,1,,False,False,not reviewed (60%+ of units in one suburb),
+125800,Hillcrest West (Auckland),541.0,Hillcrest,Suburb,rating_units,most_units,100.0,1114,1,,False,False,not reviewed (60%+ of units in one suburb),
+125900,Milford Central,2901.0,Milford,Suburb,rating_units,most_units,100.0,1055,1,,False,False,not reviewed (60%+ of units in one suburb),
+126000,Summerland South,526.0,Henderson,Suburb,rating_units,most_units,90.1,980,2,,False,False,not reviewed (60%+ of units in one suburb),
+126100,Summerland North,526.0,Henderson,Suburb,rating_units,most_units,100.0,843,1,,False,False,not reviewed (60%+ of units in one suburb),
+126200,Hillcrest East (Auckland),541.0,Hillcrest,Suburb,rating_units,most_units,100.0,1314,1,,False,False,not reviewed (60%+ of units in one suburb),
+126300,Chatswood,2903.0,Chatswood,Suburb,rating_units,most_units,99.9,1174,2,,False,False,not reviewed (60%+ of units in one suburb),
+126401,Te Atatū South-Edmonton,2908.0,Te Atatū South,Suburb,rating_units,most_units,100.0,1110,1,,False,False,not reviewed (60%+ of units in one suburb),
+126500,Birkenhead North,2899.0,Birkenhead,Suburb,rating_units,most_units,91.2,1054,2,,False,False,not reviewed (60%+ of units in one suburb),
+126601,Takapuna West,8658.0,Takapuna,Suburb,rating_units,most_units,99.9,1506,3,,False,False,not reviewed (60%+ of units in one suburb),
+126701,Henderson North,526.0,Henderson,Suburb,rating_units,most_units,100.0,837,1,,False,False,not reviewed (60%+ of units in one suburb),
+126702,Henderson West,526.0,Henderson,Suburb,rating_units,most_units,100.0,961,1,,False,False,not reviewed (60%+ of units in one suburb),
+126801,Takapuna Central,8658.0,Takapuna,Suburb,rating_units,most_units,100.0,1885,1,,False,False,not reviewed (60%+ of units in one suburb),
+126901,Western Heights (Auckland),526.0,Henderson,Suburb,rating_units,most_units,100.0,1032,1,,False,False,not reviewed (60%+ of units in one suburb),
+127001,Te Atatū South-North,2908.0,Te Atatū South,Suburb,rating_units,most_units,99.9,1112,2,,False,False,not reviewed (60%+ of units in one suburb),
+127002,Te Atatū South-Central,2908.0,Te Atatū South,Suburb,rating_units,most_units,99.8,1076,2,,False,False,not reviewed (60%+ of units in one suburb),
+127100,Northcote Central (Auckland),2902.0,Northcote,Suburb,rating_units,most_units,100.0,1037,1,,False,False,not reviewed (60%+ of units in one suburb),
+127200,Akoranga,2902.0,Northcote,Suburb,rating_units,most_units,100.0,239,1,,False,False,not reviewed (60%+ of units in one suburb),
+127300,Northcote South (Auckland),2902.0,Northcote,Suburb,rating_units,most_units,96.6,936,2,,False,False,not reviewed (60%+ of units in one suburb),
+127400,Birkenhead South,2899.0,Birkenhead,Suburb,rating_units,most_units,100.0,1472,1,,False,False,not reviewed (60%+ of units in one suburb),
+127500,Henderson Central,526.0,Henderson,Suburb,rating_units,most_units,100.0,1193,1,,False,False,not reviewed (60%+ of units in one suburb),
+127601,Waiatarua,2406.0,Waiatarua,Suburb,rating_units,most_units,51.8,847,4,,False,True,medium,
+127701,Te Atatū South-McLeod North,2908.0,Te Atatū South,Suburb,rating_units,most_units,100.0,928,1,,False,False,not reviewed (60%+ of units in one suburb),
+127801,Henderson Valley Park,526.0,Henderson,Suburb,rating_units,most_units,100.0,885,1,,False,False,not reviewed (60%+ of units in one suburb),
+127900,Henderson North East,526.0,Henderson,Suburb,rating_units,most_units,94.7,949,2,,False,False,not reviewed (60%+ of units in one suburb),
+128000,Waitākere Ranges South,2954.0,Huia,Suburb,rating_units,most_units,52.1,662,5,,False,True,medium,
+128101,Northcote Tuff Crater,2902.0,Northcote,Suburb,rating_units,most_units,100.0,790,1,,False,False,not reviewed (60%+ of units in one suburb),
+128200,Northcote Point (Auckland),8819.0,Northcote Point,Suburb,rating_units,most_units,85.0,1210,2,,False,False,not reviewed (60%+ of units in one suburb),
+128301,McLaren Memorial Park,526.0,Henderson,Suburb,rating_units,most_units,100.0,1020,1,,False,False,not reviewed (60%+ of units in one suburb),
+128401,Henderson East,526.0,Henderson,Suburb,rating_units,most_units,84.0,1666,3,,False,False,not reviewed (60%+ of units in one suburb),
+128501,Te Atatū South-McLeod South,2908.0,Te Atatū South,Suburb,rating_units,most_units,90.1,1122,2,,False,False,not reviewed (60%+ of units in one suburb),
+128601,Takapuna South,8658.0,Takapuna,Suburb,rating_units,most_units,59.6,903,2,,False,True,medium,
+128700,Rosebank Peninsula,2912.0,Avondale,Suburb,rating_units,most_units,99.8,512,2,,False,False,not reviewed (60%+ of units in one suburb),
+128800,Hauraki,2893.0,Hauraki,Suburb,rating_units,most_units,90.4,1608,2,,False,False,not reviewed (60%+ of units in one suburb),
+128901,Glendene North West,2906.0,Glendene,Suburb,rating_units,most_units,97.7,812,3,,False,False,not reviewed (60%+ of units in one suburb),
+128902,Glendene North East,2906.0,Glendene,Suburb,rating_units,most_units,100.0,620,1,,False,False,not reviewed (60%+ of units in one suburb),
+129000,Sunnyvale West-Parrs Park,1547.0,Sunnyvale,Suburb,rating_units,most_units,58.7,799,2,,False,True,medium,
+129101,Sunnyvale East,1547.0,Sunnyvale,Suburb,rating_units,most_units,96.6,1177,2,,False,False,not reviewed (60%+ of units in one suburb),
+129201,Point Chevalier West,2914.0,Point Chevalier,Suburb,rating_units,most_units,100.0,917,1,,False,False,not reviewed (60%+ of units in one suburb),
+129300,Belmont (Auckland),2895.0,Belmont,Suburb,rating_units,most_units,98.0,1245,3,,False,False,not reviewed (60%+ of units in one suburb),
+129400,Bayswater,2897.0,Bayswater,Suburb,rating_units,most_units,96.3,1075,2,,False,False,not reviewed (60%+ of units in one suburb),
+129501,Glendene South,2906.0,Glendene,Suburb,rating_units,most_units,86.5,1004,3,,False,False,not reviewed (60%+ of units in one suburb),
+129600,Glen Eden West,421.0,Glen Eden,Suburb,rating_units,most_units,95.7,1316,2,,False,False,not reviewed (60%+ of units in one suburb),
+129700,Herne Bay,2913.0,Herne Bay,Suburb,rating_units,most_units,100.0,1253,1,,False,False,not reviewed (60%+ of units in one suburb),
+129800,Westmere North,2916.0,Westmere,Suburb,rating_units,most_units,100.0,809,1,,False,False,not reviewed (60%+ of units in one suburb),
+129901,Point Chevalier North,2914.0,Point Chevalier,Suburb,rating_units,most_units,100.0,914,1,,False,False,not reviewed (60%+ of units in one suburb),
+129902,Point Chevalier East,2914.0,Point Chevalier,Suburb,rating_units,most_units,99.9,1287,2,,False,False,not reviewed (60%+ of units in one suburb),
+130000,Oratia,1127.0,Oratia,Suburb,rating_units,most_units,58.1,751,5,,False,True,high,
+130100,Glen Eden Rosier,421.0,Glen Eden,Suburb,rating_units,most_units,100.0,1124,1,,False,False,not reviewed (60%+ of units in one suburb),
+130200,Saint Marys Bay,2918.0,Saint Marys Bay,Suburb,rating_units,most_units,79.3,939,6,,False,False,not reviewed (60%+ of units in one suburb),
+130300,Westmere South-Western Springs,2916.0,Westmere,Suburb,rating_units,most_units,86.1,1092,3,,False,False,not reviewed (60%+ of units in one suburb),
+130400,Ponsonby West,1279.0,Ponsonby,Suburb,rating_units,most_units,86.0,840,4,,False,False,not reviewed (60%+ of units in one suburb),
+130500,Kelston North,2907.0,Kelston,Suburb,rating_units,most_units,100.0,755,1,,False,False,not reviewed (60%+ of units in one suburb),
+130601,Avondale Rosebank (Auckland),2912.0,Avondale,Suburb,rating_units,most_units,100.0,1237,1,,False,False,not reviewed (60%+ of units in one suburb),
+130700,Narrow Neck,2892.0,Narrow Neck,Suburb,rating_units,most_units,59.0,1550,4,,False,True,medium,
+130801,Glen Eden North,421.0,Glen Eden,Suburb,rating_units,most_units,100.0,1197,1,,False,False,not reviewed (60%+ of units in one suburb),
+130901,Glen Eden Woodglen,421.0,Glen Eden,Suburb,rating_units,most_units,100.0,1146,1,,False,False,not reviewed (60%+ of units in one suburb),
+130902,Glen Eden Konini,421.0,Glen Eden,Suburb,rating_units,most_units,98.7,924,2,,False,False,not reviewed (60%+ of units in one suburb),
+131000,Kelston South,2907.0,Kelston,Suburb,rating_units,most_units,76.9,912,3,,False,False,not reviewed (60%+ of units in one suburb),
+131100,Waterview,2910.0,Waterview,Suburb,rating_units,most_units,100.0,1446,1,,False,False,not reviewed (60%+ of units in one suburb),
+131200,Ponsonby East,1279.0,Ponsonby,Suburb,rating_units,most_units,95.6,1419,3,,False,False,not reviewed (60%+ of units in one suburb),
+131300,Wynyard-Viaduct,2728.0,Auckland Central,Suburb,rating_units,most_units,100.0,2854,1,,False,False,not reviewed (60%+ of units in one suburb),
+131400,Stanley Point,2894.0,Stanley Point,Suburb,rating_units,most_units,100.0,698,1,,False,False,not reviewed (60%+ of units in one suburb),
+131500,Glen Eden Central,421.0,Glen Eden,Suburb,rating_units,most_units,97.2,1353,2,,False,False,not reviewed (60%+ of units in one suburb),
+131600,Grey Lynn North,475.0,Grey Lynn,Suburb,rating_units,most_units,100.0,1094,1,,False,False,not reviewed (60%+ of units in one suburb),
+131700,Avondale West (Auckland),2912.0,Avondale,Suburb,rating_units,most_units,100.0,1088,1,,False,False,not reviewed (60%+ of units in one suburb),
+131801,Freemans Bay,399.0,Freemans Bay,Suburb,rating_units,most_units,94.9,1734,3,,False,False,not reviewed (60%+ of units in one suburb),
+131802,College Hill,2728.0,Auckland Central,Suburb,rating_units,most_units,98.6,562,2,,False,False,not reviewed (60%+ of units in one suburb),
+131900,Mount Albert West,994.0,Mount Albert,Suburb,rating_units,most_units,94.3,890,2,,False,False,not reviewed (60%+ of units in one suburb),
+132001,Avondale North West (Auckland),2912.0,Avondale,Suburb,rating_units,most_units,100.0,958,1,,False,False,not reviewed (60%+ of units in one suburb),
+132002,Avondale North East (Auckland),2912.0,Avondale,Suburb,rating_units,most_units,99.8,903,2,,False,False,not reviewed (60%+ of units in one suburb),
+132100,Grey Lynn West,475.0,Grey Lynn,Suburb,rating_units,most_units,99.8,1171,2,,False,False,not reviewed (60%+ of units in one suburb),
+132200,Mount Albert North,994.0,Mount Albert,Suburb,rating_units,most_units,94.9,1498,2,,False,False,not reviewed (60%+ of units in one suburb),
+132300,New Lynn North,2911.0,New Lynn,Suburb,rating_units,most_units,100.0,1102,1,,False,False,not reviewed (60%+ of units in one suburb),
+132400,Victoria Park,2728.0,Auckland Central,Suburb,rating_units,most_units,100.0,2722,1,,False,False,not reviewed (60%+ of units in one suburb),
+132501,Konini Road,2390.0,Titirangi,Suburb,rating_units,most_units,97.2,758,2,,False,False,not reviewed (60%+ of units in one suburb),
+132600,New Lynn North West,2911.0,New Lynn,Suburb,rating_units,most_units,100.0,1121,1,,False,False,not reviewed (60%+ of units in one suburb),
+132700,Hobson Ridge North,2728.0,Auckland Central,Suburb,rating_units,most_units,100.0,2345,1,,False,False,not reviewed (60%+ of units in one suburb),
+132800,Grey Lynn Central,475.0,Grey Lynn,Suburb,rating_units,most_units,100.0,1379,1,,False,False,not reviewed (60%+ of units in one suburb),
+132900,Fruitvale,2911.0,New Lynn,Suburb,rating_units,most_units,57.1,1053,2,,False,True,medium,
+133000,Devonport,2896.0,Devonport,Suburb,rating_units,most_units,100.0,1359,1,,False,False,not reviewed (60%+ of units in one suburb),
+133100,Avondale Central (Auckland),2912.0,Avondale,Suburb,rating_units,most_units,93.9,1286,3,,False,False,not reviewed (60%+ of units in one suburb),
+133200,Queen Street,2728.0,Auckland Central,Suburb,rating_units,most_units,100.0,2419,1,,False,False,not reviewed (60%+ of units in one suburb),
+133301,Quay Street-Customs Street,2728.0,Auckland Central,Suburb,rating_units,most_units,99.8,1838,2,,False,False,not reviewed (60%+ of units in one suburb),
+133400,Hobson Ridge Central,2728.0,Auckland Central,Suburb,rating_units,most_units,100.0,2054,1,,False,False,not reviewed (60%+ of units in one suburb),
+133500,Grey Lynn East,475.0,Grey Lynn,Suburb,rating_units,most_units,98.4,1416,3,,False,False,not reviewed (60%+ of units in one suburb),
+133600,Morningside (Auckland),8939.0,Morningside,Suburb,rating_units,most_units,97.4,1419,3,,False,False,not reviewed (60%+ of units in one suburb),
+133700,Shortland Street,2728.0,Auckland Central,Suburb,rating_units,most_units,100.0,2350,1,,False,False,not reviewed (60%+ of units in one suburb),
+133800,Hobson Ridge South,2728.0,Auckland Central,Suburb,rating_units,most_units,100.0,1005,1,,False,False,not reviewed (60%+ of units in one suburb),
+133900,New Lynn Central,2911.0,New Lynn,Suburb,rating_units,most_units,99.9,782,2,,False,False,not reviewed (60%+ of units in one suburb),
+134000,Cheltenham,2896.0,Devonport,Suburb,rating_units,most_units,100.0,825,1,,False,False,not reviewed (60%+ of units in one suburb),
+134100,Queen Street South West,2728.0,Auckland Central,Suburb,rating_units,most_units,100.0,1820,1,,False,False,not reviewed (60%+ of units in one suburb),
+134200,Mount Albert Central,994.0,Mount Albert,Suburb,rating_units,most_units,99.9,1236,2,,False,False,not reviewed (60%+ of units in one suburb),
+134301,Karangahape West,399.0,Freemans Bay,Suburb,rating_units,most_units,80.1,820,3,,False,False,not reviewed (60%+ of units in one suburb),
+134302,Karangahape East,2728.0,Auckland Central,Suburb,rating_units,most_units,100.0,762,1,,False,False,not reviewed (60%+ of units in one suburb),
+134400,Kingsland,694.0,Kingsland,Suburb,rating_units,most_units,82.5,1303,4,,False,False,not reviewed (60%+ of units in one suburb),
+134500,Anzac Avenue,2728.0,Auckland Central,Suburb,rating_units,most_units,100.0,2722,1,,False,False,not reviewed (60%+ of units in one suburb),
+134600,Waima-Woodlands Park,2390.0,Titirangi,Suburb,rating_units,most_units,100.0,920,1,,False,False,not reviewed (60%+ of units in one suburb),
+134700,Kaurilands,2390.0,Titirangi,Suburb,rating_units,most_units,99.2,1066,2,,False,False,not reviewed (60%+ of units in one suburb),
+134800,Auckland-University,2728.0,Auckland Central,Suburb,rating_units,most_units,100.0,147,1,,False,False,not reviewed (60%+ of units in one suburb),
+134900,New Lynn Seabrook,2911.0,New Lynn,Suburb,rating_units,most_units,99.8,1047,2,,False,False,not reviewed (60%+ of units in one suburb),
+135000,Avondale South (Auckland),2912.0,Avondale,Suburb,rating_units,most_units,93.3,1593,2,,False,False,not reviewed (60%+ of units in one suburb),
+135100,Symonds Street North West,2728.0,Auckland Central,Suburb,rating_units,most_units,87.7,2062,2,,False,False,not reviewed (60%+ of units in one suburb),
+135200,Mount Albert South,994.0,Mount Albert,Suburb,rating_units,most_units,100.0,732,1,,False,False,not reviewed (60%+ of units in one suburb),
+135300,Symonds Street West,2728.0,Auckland Central,Suburb,rating_units,most_units,96.5,2261,3,,False,False,not reviewed (60%+ of units in one suburb),
+135401,Titirangi East,2390.0,Titirangi,Suburb,rating_units,most_units,97.3,1092,4,,False,False,not reviewed (60%+ of units in one suburb),
+135500,Ōwairaka West,994.0,Mount Albert,Suburb,rating_units,most_units,99.8,1359,2,,False,False,not reviewed (60%+ of units in one suburb),
+135600,New Lynn Central South,2911.0,New Lynn,Suburb,rating_units,most_units,100.0,1222,1,,False,False,not reviewed (60%+ of units in one suburb),
+135700,The Strand,2728.0,Auckland Central,Suburb,rating_units,most_units,64.5,921,2,,False,False,not reviewed (60%+ of units in one suburb),
+135800,St Lukes,994.0,Mount Albert,Suburb,rating_units,most_units,93.3,1134,2,,False,False,not reviewed (60%+ of units in one suburb),
+135900,Symonds Street East,459.0,Grafton,Suburb,rating_units,most_units,100.0,1439,1,,False,False,not reviewed (60%+ of units in one suburb),
+136001,Eden Terrace,329.0,Eden Terrace,Suburb,rating_units,most_units,91.6,1985,3,,False,False,not reviewed (60%+ of units in one suburb),
+136002,Grafton West,459.0,Grafton,Suburb,rating_units,most_units,84.6,1684,2,,False,False,not reviewed (60%+ of units in one suburb),
+136100,Grafton,459.0,Grafton,Suburb,rating_units,most_units,100.0,525,1,,False,False,not reviewed (60%+ of units in one suburb),
+136200,Eden Park,995.0,Mount Eden,Suburb,rating_units,most_units,100.0,564,1,,False,False,not reviewed (60%+ of units in one suburb),
+136300,Sandringham North,1464.0,Sandringham,Suburb,rating_units,most_units,89.4,1319,4,,False,False,not reviewed (60%+ of units in one suburb),
+136400,Parnell West,4131.0,Parnell,Suburb,rating_units,most_units,99.0,2523,2,,False,False,not reviewed (60%+ of units in one suburb),
+136501,New Lynn South,2911.0,New Lynn,Suburb,rating_units,most_units,100.0,905,1,,False,False,not reviewed (60%+ of units in one suburb),
+136502,New Lynn South East,2911.0,New Lynn,Suburb,rating_units,most_units,98.7,744,2,,False,False,not reviewed (60%+ of units in one suburb),
+136601,New Windsor North,8842.0,New Windsor,Suburb,rating_units,most_units,100.0,923,1,,False,False,not reviewed (60%+ of units in one suburb),
+136700,Titirangi South,2390.0,Titirangi,Suburb,rating_units,most_units,99.7,1521,2,,False,False,not reviewed (60%+ of units in one suburb),
+136801,Ōwairaka East,994.0,Mount Albert,Suburb,rating_units,most_units,100.0,725,1,,False,False,not reviewed (60%+ of units in one suburb),
+136900,Eden Valley,995.0,Mount Eden,Suburb,rating_units,most_units,100.0,936,1,,False,False,not reviewed (60%+ of units in one suburb),
+137000,Sandringham Central,1464.0,Sandringham,Suburb,rating_units,most_units,100.0,865,1,,False,False,not reviewed (60%+ of units in one suburb),
+137100,Glenavon,2912.0,Avondale,Suburb,rating_units,most_units,60.4,785,3,,False,False,not reviewed (60%+ of units in one suburb),
+137201,Blockhouse Bay North,140.0,Blockhouse Bay,Suburb,rating_units,most_units,99.9,797,2,,False,False,not reviewed (60%+ of units in one suburb),
+137202,Blockhouse Bay Central,140.0,Blockhouse Bay,Suburb,rating_units,most_units,100.0,1049,1,,False,False,not reviewed (60%+ of units in one suburb),
+137300,Green Bay North,462.0,Green Bay,Suburb,rating_units,most_units,82.3,542,3,,False,False,not reviewed (60%+ of units in one suburb),
+137400,Parnell East,4131.0,Parnell,Suburb,rating_units,most_units,100.0,1437,1,,False,False,not reviewed (60%+ of units in one suburb),
+137500,Laingholm,2017.0,Laingholm,Suburb,rating_units,most_units,100.0,895,1,,False,False,not reviewed (60%+ of units in one suburb),
+137600,Sandringham West,1464.0,Sandringham,Suburb,rating_units,most_units,97.5,844,2,,False,False,not reviewed (60%+ of units in one suburb),
+137701,Mount Eden North East,995.0,Mount Eden,Suburb,rating_units,most_units,97.2,753,3,,False,False,not reviewed (60%+ of units in one suburb),
+137800,Mount Eden North,995.0,Mount Eden,Suburb,rating_units,most_units,100.0,1215,1,,False,False,not reviewed (60%+ of units in one suburb),
+137901,Wesley West,8970.0,Wesley,Suburb,rating_units,most_units,95.4,744,2,,False,False,not reviewed (60%+ of units in one suburb),
+138000,Green Bay South,462.0,Green Bay,Suburb,rating_units,most_units,98.9,883,2,,False,False,not reviewed (60%+ of units in one suburb),
+138100,Balmoral,995.0,Mount Eden,Suburb,rating_units,most_units,99.0,1084,2,,False,False,not reviewed (60%+ of units in one suburb),
+138200,Sandringham East,1464.0,Sandringham,Suburb,rating_units,most_units,98.9,1130,2,,False,False,not reviewed (60%+ of units in one suburb),
+138301,New Windsor South,8842.0,New Windsor,Suburb,rating_units,most_units,91.1,593,2,,False,False,not reviewed (60%+ of units in one suburb),
+138302,New Windsor East,8842.0,New Windsor,Suburb,rating_units,most_units,73.1,640,4,,False,False,not reviewed (60%+ of units in one suburb),
+138400,Mount Eden West,995.0,Mount Eden,Suburb,rating_units,most_units,100.0,1142,1,,False,False,not reviewed (60%+ of units in one suburb),
+138501,Newmarket,1018.0,Newmarket,Suburb,rating_units,most_units,83.8,2612,4,,False,False,not reviewed (60%+ of units in one suburb),
+138502,Newmarket Park,2923.0,Remuera,Suburb,rating_units,most_units,99.5,627,3,,False,False,not reviewed (60%+ of units in one suburb),
+138600,Blockhouse Bay North East,140.0,Blockhouse Bay,Suburb,rating_units,most_units,100.0,691,1,,False,False,not reviewed (60%+ of units in one suburb),
+138700,Epsom North,349.0,Epsom,Suburb,rating_units,most_units,100.0,1156,1,,False,False,not reviewed (60%+ of units in one suburb),
+138800,Wesley South,8970.0,Wesley,Suburb,rating_units,most_units,70.8,106,3,,False,False,not reviewed (60%+ of units in one suburb),
+138901,Blockhouse Bay South,140.0,Blockhouse Bay,Suburb,rating_units,most_units,100.0,947,1,,False,False,not reviewed (60%+ of units in one suburb),
+139000,Mount Eden East,995.0,Mount Eden,Suburb,rating_units,most_units,97.7,1050,2,,False,False,not reviewed (60%+ of units in one suburb),
+139100,Wesley East,8970.0,Wesley,Suburb,rating_units,most_units,100.0,543,1,,False,False,not reviewed (60%+ of units in one suburb),
+139201,Orakei West,2922.0,Ōrākei,Suburb,rating_units,most_units,99.7,1246,2,,False,False,not reviewed (60%+ of units in one suburb),
+139300,Maungawhau,995.0,Mount Eden,Suburb,rating_units,most_units,100.0,940,1,,False,False,not reviewed (60%+ of units in one suburb),
+139400,Remuera West,2923.0,Remuera,Suburb,rating_units,most_units,100.0,1079,1,,False,False,not reviewed (60%+ of units in one suburb),
+139501,Blockhouse Bay East,140.0,Blockhouse Bay,Suburb,rating_units,most_units,99.0,601,2,,False,False,not reviewed (60%+ of units in one suburb),
+139601,Mount Roskill West,996.0,Mount Roskill,Suburb,rating_units,most_units,83.6,940,3,,False,False,not reviewed (60%+ of units in one suburb),
+139700,Mount Roskill North,996.0,Mount Roskill,Suburb,rating_units,most_units,90.7,1372,3,,False,False,not reviewed (60%+ of units in one suburb),
+139801,Mount Roskill White Swan,996.0,Mount Roskill,Suburb,rating_units,most_units,100.0,770,1,,False,False,not reviewed (60%+ of units in one suburb),
+139802,Mount Roskill Nirvana,996.0,Mount Roskill,Suburb,rating_units,most_units,100.0,693,1,,False,False,not reviewed (60%+ of units in one suburb),
+139900,Mount Eden South,995.0,Mount Eden,Suburb,rating_units,most_units,98.9,1272,2,,False,False,not reviewed (60%+ of units in one suburb),
+140000,Remuera Waitaramoa,2923.0,Remuera,Suburb,rating_units,most_units,99.9,1578,2,,False,False,not reviewed (60%+ of units in one suburb),
+140100,Orakei East,2922.0,Ōrākei,Suburb,rating_units,most_units,100.0,932,1,,False,False,not reviewed (60%+ of units in one suburb),
+140200,Epsom Central-North,349.0,Epsom,Suburb,rating_units,most_units,100.0,1236,1,,False,False,not reviewed (60%+ of units in one suburb),
+140300,Mount St John,349.0,Epsom,Suburb,rating_units,most_units,96.4,1148,2,,False,False,not reviewed (60%+ of units in one suburb),
+140400,Mount Roskill Central North,996.0,Mount Roskill,Suburb,rating_units,most_units,100.0,978,1,,False,False,not reviewed (60%+ of units in one suburb),
+140500,Remuera North,2923.0,Remuera,Suburb,rating_units,most_units,100.0,1318,1,,False,False,not reviewed (60%+ of units in one suburb),
+140601,Mount Roskill North East,996.0,Mount Roskill,Suburb,rating_units,most_units,88.6,736,3,,False,False,not reviewed (60%+ of units in one suburb),
+140700,Mount Roskill Central South,996.0,Mount Roskill,Suburb,rating_units,most_units,100.0,735,1,,False,False,not reviewed (60%+ of units in one suburb),
+140800,Epsom Central-South,349.0,Epsom,Suburb,rating_units,most_units,100.0,1309,1,,False,False,not reviewed (60%+ of units in one suburb),
+140901,Lynfield Central,779.0,Lynfield,Suburb,rating_units,most_units,97.6,878,2,,False,False,not reviewed (60%+ of units in one suburb),
+140902,Lynfield Harbour View,779.0,Lynfield,Suburb,rating_units,most_units,94.7,561,2,,False,False,not reviewed (60%+ of units in one suburb),
+141000,Remuera South,2923.0,Remuera,Suburb,rating_units,most_units,100.0,1376,1,,False,False,not reviewed (60%+ of units in one suburb),
+141101,Mission Bay,2924.0,Mission Bay,Suburb,rating_units,most_units,95.3,1260,2,,False,False,not reviewed (60%+ of units in one suburb),
+141102,Mission Bay Eastridge,2924.0,Mission Bay,Suburb,rating_units,most_units,95.8,786,3,,False,False,not reviewed (60%+ of units in one suburb),
+141201,Three Kings North,1675.0,Three Kings,Suburb,rating_units,most_units,85.9,750,4,,False,False,not reviewed (60%+ of units in one suburb),
+141300,Mount Roskill South,996.0,Mount Roskill,Suburb,rating_units,most_units,100.0,841,1,,False,False,not reviewed (60%+ of units in one suburb),
+141400,Inlet Manukau Harbour,,,,rating_units,excluded,,23,14,"Water SA2: no census population published, no SA1 residents; units scattered on islands and moorings",True,False,not reviewed (60%+ of units in one suburb),
+141500,Epsom East,349.0,Epsom,Suburb,rating_units,most_units,97.9,1120,3,,False,False,not reviewed (60%+ of units in one suburb),
+141600,Remuera Waiata,2923.0,Remuera,Suburb,rating_units,most_units,100.0,1142,1,,False,False,not reviewed (60%+ of units in one suburb),
+141700,Epsom South,349.0,Epsom,Suburb,rating_units,most_units,93.5,843,2,,False,False,not reviewed (60%+ of units in one suburb),
+141801,Kohimarama Bay,2920.0,Kohimarama,Suburb,rating_units,most_units,100.0,1071,1,,False,False,not reviewed (60%+ of units in one suburb),
+141802,Kohimarama Stadium,2920.0,Kohimarama,Suburb,rating_units,most_units,93.5,766,3,,False,False,not reviewed (60%+ of units in one suburb),
+141900,Meadowbank West,2921.0,Meadowbank,Suburb,rating_units,most_units,93.9,991,2,,False,False,not reviewed (60%+ of units in one suburb),
+142001,Three Kings South,1675.0,Three Kings,Suburb,rating_units,most_units,59.2,767,3,,False,True,high,
+142002,Hillsborough North (Auckland),545.0,Hillsborough,Suburb,rating_units,most_units,88.1,463,3,,False,False,not reviewed (60%+ of units in one suburb),
+142101,Mount Roskill Central East,996.0,Mount Roskill,Suburb,rating_units,most_units,99.2,1158,2,,False,False,not reviewed (60%+ of units in one suburb),
+142201,Greenlane North,467.0,Greenlane,Suburb,rating_units,most_units,100.0,728,1,,False,False,not reviewed (60%+ of units in one suburb),
+142202,Greenlane Central,467.0,Greenlane,Suburb,rating_units,most_units,100.0,829,1,,False,False,not reviewed (60%+ of units in one suburb),
+142301,Mount Roskill South East,996.0,Mount Roskill,Suburb,rating_units,most_units,98.0,914,2,,False,False,not reviewed (60%+ of units in one suburb),
+142400,Remuera East,2923.0,Remuera,Suburb,rating_units,most_units,94.5,1029,2,,False,False,not reviewed (60%+ of units in one suburb),
+142501,Waikowhai Bay,545.0,Hillsborough,Suburb,rating_units,most_units,68.7,675,2,,False,False,not reviewed (60%+ of units in one suburb),
+142600,Royal Oak West (Auckland),1444.0,Royal Oak,Suburb,rating_units,most_units,85.4,900,4,,False,False,not reviewed (60%+ of units in one suburb),
+142700,Saint Heliers West,2919.0,Saint Heliers,Suburb,rating_units,most_units,94.5,1474,2,,False,False,not reviewed (60%+ of units in one suburb),
+142801,One Tree Hill Oranga,1106.0,One Tree Hill,Suburb,rating_units,most_units,91.4,800,3,,False,False,not reviewed (60%+ of units in one suburb),
+142802,One Tree Hill Amaru,1106.0,One Tree Hill,Suburb,rating_units,most_units,83.1,961,2,,False,False,not reviewed (60%+ of units in one suburb),
+142901,Hillsborough Central (Auckland),545.0,Hillsborough,Suburb,rating_units,most_units,100.0,763,1,,False,False,not reviewed (60%+ of units in one suburb),
+143000,Saint Heliers North,2919.0,Saint Heliers,Suburb,rating_units,most_units,100.0,1737,1,,False,False,not reviewed (60%+ of units in one suburb),
+143100,Remuera Abbotts Park,2923.0,Remuera,Suburb,rating_units,most_units,97.6,1345,2,,False,False,not reviewed (60%+ of units in one suburb),
+143200,Meadowbank East,2921.0,Meadowbank,Suburb,rating_units,most_units,87.9,989,2,,False,False,not reviewed (60%+ of units in one suburb),
+143301,Ellerslie Central,341.0,Ellerslie,Suburb,rating_units,most_units,96.2,1338,3,,False,False,not reviewed (60%+ of units in one suburb),
+143400,Royal Oak East (Auckland),1444.0,Royal Oak,Suburb,rating_units,most_units,88.3,1108,2,,False,False,not reviewed (60%+ of units in one suburb),
+143500,Saint Heliers South,2919.0,Saint Heliers,Suburb,rating_units,most_units,98.7,1643,2,,False,False,not reviewed (60%+ of units in one suburb),
+143600,Hillsborough South (Auckland),545.0,Hillsborough,Suburb,rating_units,most_units,100.0,889,1,,False,False,not reviewed (60%+ of units in one suburb),
+143700,Saint Johns West,1525.0,St Johns,Suburb,rating_units,most_units,91.3,1107,2,,False,False,not reviewed (60%+ of units in one suburb),
+143800,Greenlane South,467.0,Greenlane,Suburb,rating_units,most_units,74.7,1278,4,,False,False,not reviewed (60%+ of units in one suburb),
+143900,Remuera Waiatarua,2923.0,Remuera,Suburb,rating_units,most_units,100.0,885,1,,False,False,not reviewed (60%+ of units in one suburb),
+144001,Glendowie North,2926.0,Glendowie,Suburb,rating_units,most_units,89.7,1188,2,,False,False,not reviewed (60%+ of units in one suburb),
+144101,Onehunga West,1107.0,Onehunga,Suburb,rating_units,most_units,100.0,1184,1,,False,False,not reviewed (60%+ of units in one suburb),
+144201,Ellerslie West,341.0,Ellerslie,Suburb,rating_units,most_units,99.2,522,2,,False,False,not reviewed (60%+ of units in one suburb),
+144300,Onehunga North,1107.0,Onehunga,Suburb,rating_units,most_units,98.5,1420,3,,False,False,not reviewed (60%+ of units in one suburb),
+144400,Ellerslie East,341.0,Ellerslie,Suburb,rating_units,most_units,100.0,1217,1,,False,False,not reviewed (60%+ of units in one suburb),
+144500,Saint Johns East,1525.0,St Johns,Suburb,rating_units,most_units,100.0,980,1,,False,False,not reviewed (60%+ of units in one suburb),
+144600,Oneroa West,8651.0,Oneroa,Suburb,rating_units,most_units,89.3,1170,5,,False,False,not reviewed (60%+ of units in one suburb),
+144700,Glen Innes West,435.0,Glen Innes,Suburb,rating_units,most_units,90.3,1511,3,,False,False,not reviewed (60%+ of units in one suburb),
+144800,Ellerslie South,341.0,Ellerslie,Suburb,rating_units,most_units,99.9,1031,2,,False,False,not reviewed (60%+ of units in one suburb),
+144900,Stonefields West,8878.0,Stonefields,Suburb,rating_units,most_units,99.2,868,2,,False,False,not reviewed (60%+ of units in one suburb),
+145000,Onehunga Central,1107.0,Onehunga,Suburb,rating_units,most_units,100.0,1722,1,,False,False,not reviewed (60%+ of units in one suburb),
+145101,Glendowie South West,2926.0,Glendowie,Suburb,rating_units,most_units,87.7,1120,3,,False,False,not reviewed (60%+ of units in one suburb),
+145102,Glendowie South East,2926.0,Glendowie,Suburb,rating_units,most_units,91.1,586,2,,False,False,not reviewed (60%+ of units in one suburb),
+145200,Oranga,1107.0,Onehunga,Suburb,rating_units,most_units,86.5,1006,3,,False,False,not reviewed (60%+ of units in one suburb),
+145300,Mount Wellington North West,2925.0,Mount Wellington,Suburb,rating_units,most_units,65.0,1588,3,,False,False,not reviewed (60%+ of units in one suburb),
+145400,Panmure Glen Innes Industrial,1525.0,St Johns,Suburb,rating_units,most_units,70.9,628,6,,False,False,not reviewed (60%+ of units in one suburb),
+145500,Onehunga-Te Papapa Industrial,1107.0,Onehunga,Suburb,rating_units,most_units,99.8,1259,2,,False,False,not reviewed (60%+ of units in one suburb),
+145600,Te Papapa,1107.0,Onehunga,Suburb,rating_units,most_units,100.0,1096,1,,False,False,not reviewed (60%+ of units in one suburb),
+145700,Stonefields East,8878.0,Stonefields,Suburb,rating_units,most_units,94.6,904,3,,False,False,not reviewed (60%+ of units in one suburb),
+145800,Glen Innes East-Wai O Taiki Bay,435.0,Glen Innes,Suburb,rating_units,most_units,62.2,1725,2,,False,False,not reviewed (60%+ of units in one suburb),
+145900,Penrose,1237.0,Penrose,Suburb,rating_units,most_units,66.7,1420,4,,False,False,not reviewed (60%+ of units in one suburb),
+146000,Mount Wellington North East,2925.0,Mount Wellington,Suburb,rating_units,most_units,100.0,789,1,,False,False,not reviewed (60%+ of units in one suburb),
+146100,Māngere Bridge Ambury,836.0,Māngere Bridge,Suburb,rating_units,most_units,100.0,1192,1,,False,False,not reviewed (60%+ of units in one suburb),
+146201,Mount Wellington Ferndale,2925.0,Mount Wellington,Suburb,rating_units,most_units,100.0,1068,1,,False,False,not reviewed (60%+ of units in one suburb),
+146301,Point England North,2928.0,Point England,Suburb,rating_units,most_units,100.0,666,1,,False,False,not reviewed (60%+ of units in one suburb),
+146302,Point England South,2928.0,Point England,Suburb,rating_units,most_units,100.0,854,1,,False,False,not reviewed (60%+ of units in one suburb),
+146400,Bucklands Beach North,175.0,Bucklands Beach,Suburb,rating_units,most_units,100.0,1144,1,,False,False,not reviewed (60%+ of units in one suburb),
+146501,Mount Wellington East,2925.0,Mount Wellington,Suburb,rating_units,most_units,100.0,1016,1,,False,False,not reviewed (60%+ of units in one suburb),
+146600,Mount Wellington West,2925.0,Mount Wellington,Suburb,rating_units,most_units,100.0,979,1,,False,False,not reviewed (60%+ of units in one suburb),
+146700,Panmure West,2929.0,Panmure,Suburb,rating_units,most_units,53.4,354,2,,False,True,medium,
+146800,Māngere Bridge,836.0,Māngere Bridge,Suburb,rating_units,most_units,99.9,1118,2,,False,False,not reviewed (60%+ of units in one suburb),
+146900,Oneroa East-Palm Beach,8651.0,Oneroa,Suburb,rating_units,most_units,58.9,1169,5,,False,True,high,
+147001,Tamaki West,2929.0,Panmure,Suburb,rating_units,most_units,100.0,858,1,,False,False,not reviewed (60%+ of units in one suburb),
+147002,Tamaki East,2929.0,Panmure,Suburb,rating_units,most_units,100.0,565,1,,False,False,not reviewed (60%+ of units in one suburb),
+147100,Panmure East,2929.0,Panmure,Suburb,rating_units,most_units,73.3,1286,2,,False,False,not reviewed (60%+ of units in one suburb),
+147201,Mount Wellington Central,2925.0,Mount Wellington,Suburb,rating_units,most_units,100.0,851,1,,False,False,not reviewed (60%+ of units in one suburb),
+147202,Mount Wellington Hamlin,2925.0,Mount Wellington,Suburb,rating_units,most_units,100.0,811,1,,False,False,not reviewed (60%+ of units in one suburb),
+147300,Bays Waiheke Island,8652.0,Ostend,Suburb,rating_units,most_units,100.0,2,1,,False,False,not reviewed (60%+ of units in one suburb),
+147400,Sylvia Park,2925.0,Mount Wellington,Suburb,rating_units,most_units,100.0,49,1,,False,False,not reviewed (60%+ of units in one suburb),
+147500,Māngere Mountain View,836.0,Māngere Bridge,Suburb,rating_units,most_units,100.0,1336,1,,False,False,not reviewed (60%+ of units in one suburb),
+147600,Surfdale,8776.0,Surfdale,Suburb,rating_units,most_units,91.3,1059,4,,False,False,not reviewed (60%+ of units in one suburb),
+147700,Mount Wellington Industrial,2925.0,Mount Wellington,Suburb,rating_units,most_units,100.0,431,1,,False,False,not reviewed (60%+ of units in one suburb),
+147800,Half Moon Bay West,488.0,Half Moon Bay,Suburb,rating_units,most_units,98.4,1046,2,,False,False,not reviewed (60%+ of units in one suburb),
+147900,Auckland Airport,2737.0,Māngere,Suburb,rating_units,most_units,96.3,695,3,,False,False,not reviewed (60%+ of units in one suburb),
+148000,Eastern Beach,6544.0,Eastern Beach,Suburb,rating_units,most_units,74.8,812,2,,False,False,not reviewed (60%+ of units in one suburb),
+148101,Sunnyhills West,8869.0,Sunnyhills,Suburb,rating_units,most_units,98.2,768,2,,False,False,not reviewed (60%+ of units in one suburb),
+148102,Pakuranga North,2933.0,Pakuranga,Suburb,rating_units,most_units,100.0,1060,1,,False,False,not reviewed (60%+ of units in one suburb),
+148200,Favona North,371.0,Favona,Suburb,rating_units,most_units,99.8,665,2,,False,False,not reviewed (60%+ of units in one suburb),
+148300,Bucklands Beach Central,175.0,Bucklands Beach,Suburb,rating_units,most_units,81.3,658,2,,False,False,not reviewed (60%+ of units in one suburb),
+148401,Farm Cove,370.0,Farm Cove,Suburb,rating_units,most_units,98.1,774,2,,False,False,not reviewed (60%+ of units in one suburb),
+148501,Māngere North,2737.0,Māngere,Suburb,rating_units,most_units,91.3,1061,2,,False,False,not reviewed (60%+ of units in one suburb),
+148600,Favona West,371.0,Favona,Suburb,rating_units,most_units,100.0,811,1,,False,False,not reviewed (60%+ of units in one suburb),
+148700,Ostend,8652.0,Ostend,Suburb,rating_units,most_units,97.4,1042,3,,False,False,not reviewed (60%+ of units in one suburb),
+148800,Half Moon Bay North East,488.0,Half Moon Bay,Suburb,rating_units,most_units,93.2,705,2,,False,False,not reviewed (60%+ of units in one suburb),
+148901,Māngere West,2737.0,Māngere,Suburb,rating_units,most_units,95.2,707,2,,False,False,not reviewed (60%+ of units in one suburb),
+149001,Pakuranga West,2933.0,Pakuranga,Suburb,rating_units,most_units,100.0,866,1,,False,False,not reviewed (60%+ of units in one suburb),
+149100,Mount Wellington South West,2925.0,Mount Wellington,Suburb,rating_units,most_units,99.2,1376,2,,False,False,not reviewed (60%+ of units in one suburb),
+149200,Sunnyhills East,8869.0,Sunnyhills,Suburb,rating_units,most_units,75.8,1011,4,,False,False,not reviewed (60%+ of units in one suburb),
+149300,Half Moon Bay South East,488.0,Half Moon Bay,Suburb,rating_units,most_units,86.8,988,3,,False,False,not reviewed (60%+ of units in one suburb),
+149400,Favona East,371.0,Favona,Suburb,rating_units,most_units,100.0,752,1,,False,False,not reviewed (60%+ of units in one suburb),
+149500,Mount Wellington South East,2925.0,Mount Wellington,Suburb,rating_units,most_units,100.0,863,1,,False,False,not reviewed (60%+ of units in one suburb),
+149600,Ōtāhuhu Industrial,371.0,Favona,Suburb,rating_units,most_units,100.0,126,1,,False,False,not reviewed (60%+ of units in one suburb),
+149701,Bucklands Beach Murvale,175.0,Bucklands Beach,Suburb,rating_units,most_units,96.4,781,2,,False,False,not reviewed (60%+ of units in one suburb),
+149702,Bucklands Beach South,175.0,Bucklands Beach,Suburb,rating_units,most_units,99.8,553,2,,False,False,not reviewed (60%+ of units in one suburb),
+149800,Pakuranga Central,2933.0,Pakuranga,Suburb,rating_units,most_units,99.8,1299,2,,False,False,not reviewed (60%+ of units in one suburb),
+149901,Āwhitu,2226.0,Pollok,Locality,rating_units,most_units,37.5,1903,6,,False,True,medium,
+150000,Harania North,837.0,Māngere East,Suburb,rating_units,most_units,99.2,762,2,,False,False,not reviewed (60%+ of units in one suburb),
+150101,Ōtāhuhu Central,8835.0,Ōtāhuhu,Suburb,rating_units,most_units,99.9,969,2,,False,False,not reviewed (60%+ of units in one suburb),
+150200,Māngere Central,2737.0,Māngere,Suburb,rating_units,most_units,100.0,955,1,,False,False,not reviewed (60%+ of units in one suburb),
+150301,Ōtāhuhu North West,8835.0,Ōtāhuhu,Suburb,rating_units,most_units,100.0,616,1,,False,False,not reviewed (60%+ of units in one suburb),
+150302,Ōtāhuhu North East,8835.0,Ōtāhuhu,Suburb,rating_units,most_units,100.0,500,1,,False,False,not reviewed (60%+ of units in one suburb),
+150400,Howick West,578.0,Howick,Suburb,rating_units,most_units,91.0,1385,3,,False,False,not reviewed (60%+ of units in one suburb),
+150500,Pakuranga Heights North West,1190.0,Pakuranga Heights,Suburb,rating_units,most_units,94.9,894,2,,False,False,not reviewed (60%+ of units in one suburb),
+150600,Mellons Bay,8767.0,Mellons Bay,Suburb,rating_units,most_units,89.3,1429,4,,False,False,not reviewed (60%+ of units in one suburb),
+150700,Pakuranga Heights East,1190.0,Pakuranga Heights,Suburb,rating_units,most_units,97.4,1047,2,,False,False,not reviewed (60%+ of units in one suburb),
+150800,Sutton Park,837.0,Māngere East,Suburb,rating_units,most_units,100.0,709,1,,False,False,not reviewed (60%+ of units in one suburb),
+150900,Ōtāhuhu East,8835.0,Ōtāhuhu,Suburb,rating_units,most_units,100.0,790,1,,False,False,not reviewed (60%+ of units in one suburb),
+151000,Māngere South,2737.0,Māngere,Suburb,rating_units,most_units,100.0,776,1,,False,False,not reviewed (60%+ of units in one suburb),
+151100,Onetangi,8650.0,Onetangi,Suburb,rating_units,most_units,77.7,1194,3,,False,False,not reviewed (60%+ of units in one suburb),
+151200,Harania South,837.0,Māngere East,Suburb,rating_units,most_units,100.0,760,1,,False,False,not reviewed (60%+ of units in one suburb),
+151301,Highland Park (Auckland),2932.0,Highland Park,Suburb,rating_units,most_units,94.5,1389,3,,False,False,not reviewed (60%+ of units in one suburb),
+151400,Ōtāhuhu South West,8835.0,Ōtāhuhu,Suburb,rating_units,most_units,100.0,884,1,,False,False,not reviewed (60%+ of units in one suburb),
+151500,Pakuranga Heights South West,1190.0,Pakuranga Heights,Suburb,rating_units,most_units,94.5,1058,2,,False,False,not reviewed (60%+ of units in one suburb),
+151600,Māngere Mascot,2737.0,Māngere,Suburb,rating_units,most_units,100.0,763,1,,False,False,not reviewed (60%+ of units in one suburb),
+151700,Waiheke East,6522.0,Waiheke Island,Island,rating_units,most_units,52.6,971,8,,False,True,low,
+151800,Massey Road West,837.0,Māngere East,Suburb,rating_units,most_units,100.0,852,1,,False,False,not reviewed (60%+ of units in one suburb),
+151900,Ōtāhuhu South,8835.0,Ōtāhuhu,Suburb,rating_units,most_units,100.0,977,1,,False,False,not reviewed (60%+ of units in one suburb),
+152000,Howick Central,578.0,Howick,Suburb,rating_units,most_units,98.3,1270,2,,False,False,not reviewed (60%+ of units in one suburb),
+152101,Massey Road North,837.0,Māngere East,Suburb,rating_units,most_units,100.0,810,1,,False,False,not reviewed (60%+ of units in one suburb),
+152201,Botany Downs West,145.0,Botany Downs,Suburb,rating_units,most_units,99.5,1121,2,,False,False,not reviewed (60%+ of units in one suburb),
+152300,East Tamaki,6542.0,East Tāmaki,Suburb,rating_units,most_units,91.6,1721,3,,False,False,not reviewed (60%+ of units in one suburb),
+152400,Howick East,578.0,Howick,Suburb,rating_units,most_units,92.5,1627,2,,False,False,not reviewed (60%+ of units in one suburb),
+152500,Burswood,183.0,Burswood,Suburb,rating_units,most_units,100.0,556,1,,False,False,not reviewed (60%+ of units in one suburb),
+152600,Massey Road South,837.0,Māngere East,Suburb,rating_units,most_units,100.0,414,1,,False,False,not reviewed (60%+ of units in one suburb),
+152700,Middlemore,926.0,Middlemore Hospital,Suburb,rating_units,most_units,100.0,5,1,,False,False,not reviewed (60%+ of units in one suburb),
+152800,Māngere South East,2737.0,Māngere,Suburb,rating_units,most_units,99.0,906,2,,False,False,not reviewed (60%+ of units in one suburb),
+152900,Botany Downs East,145.0,Botany Downs,Suburb,rating_units,most_units,100.0,817,1,,False,False,not reviewed (60%+ of units in one suburb),
+153000,Grange,1203.0,Papatoetoe,Suburb,rating_units,most_units,56.5,676,2,,False,True,low,
+153100,Golflands,448.0,Golflands,Suburb,rating_units,most_units,100.0,947,1,,False,False,not reviewed (60%+ of units in one suburb),
+153200,Aorere North,837.0,Māngere East,Suburb,rating_units,most_units,100.0,361,1,,False,False,not reviewed (60%+ of units in one suburb),
+153301,Māngere East,837.0,Māngere East,Suburb,rating_units,most_units,91.8,613,2,,False,False,not reviewed (60%+ of units in one suburb),
+153400,Cockle Bay,6543.0,Cockle Bay,Suburb,rating_units,most_units,97.9,1456,3,,False,False,not reviewed (60%+ of units in one suburb),
+153500,Ōtara West,2931.0,Ōtara,Suburb,rating_units,most_units,100.0,570,1,,False,False,not reviewed (60%+ of units in one suburb),
+153600,Aorere Central,837.0,Māngere East,Suburb,rating_units,most_units,84.2,488,2,,False,False,not reviewed (60%+ of units in one suburb),
+153700,Northpark North,8768.0,Northpark,Suburb,rating_units,most_units,88.1,994,5,,False,False,not reviewed (60%+ of units in one suburb),
+153800,Somerville,1500.0,Somerville,Suburb,rating_units,most_units,89.4,1584,6,,False,False,not reviewed (60%+ of units in one suburb),
+153900,Northpark South,8768.0,Northpark,Suburb,rating_units,most_units,83.7,742,3,,False,False,not reviewed (60%+ of units in one suburb),
+154001,Papatoetoe North,1203.0,Papatoetoe,Suburb,rating_units,most_units,100.0,1121,1,,False,False,not reviewed (60%+ of units in one suburb),
+154101,Dingwall,1203.0,Papatoetoe,Suburb,rating_units,most_units,100.0,743,1,,False,False,not reviewed (60%+ of units in one suburb),
+154201,Aorere South West,1203.0,Papatoetoe,Suburb,rating_units,most_units,100.0,695,1,,False,False,not reviewed (60%+ of units in one suburb),
+154202,Aorere South East,1203.0,Papatoetoe,Suburb,rating_units,most_units,100.0,603,1,,False,False,not reviewed (60%+ of units in one suburb),
+154300,Shelly Park,1484.0,Shelly Park,Suburb,rating_units,most_units,77.0,940,2,,False,False,not reviewed (60%+ of units in one suburb),
+154400,Ōtara Central,2931.0,Ōtara,Suburb,rating_units,most_units,100.0,622,1,,False,False,not reviewed (60%+ of units in one suburb),
+154500,Huntington Park,6542.0,East Tāmaki,Suburb,rating_units,most_units,62.6,705,2,,False,False,high,
+154600,Botany Central,589.0,Huntington Park,Suburb,rating_units,most_units,72.2,36,4,,False,False,not reviewed (60%+ of units in one suburb),
+154701,Dannemora North-Shamrock Park,8696.0,Dannemora,Suburb,rating_units,most_units,76.2,848,2,,False,False,not reviewed (60%+ of units in one suburb),
+154801,Papatoetoe North West,1203.0,Papatoetoe,Suburb,rating_units,most_units,98.4,817,2,,False,False,not reviewed (60%+ of units in one suburb),
+154802,Papatoetoe West,1203.0,Papatoetoe,Suburb,rating_units,most_units,100.0,1042,1,,False,False,not reviewed (60%+ of units in one suburb),
+154901,Papatoetoe Central West,1203.0,Papatoetoe,Suburb,rating_units,most_units,100.0,1285,1,,False,False,not reviewed (60%+ of units in one suburb),
+154902,Papatoetoe Central East,1203.0,Papatoetoe,Suburb,rating_units,most_units,100.0,1151,1,,False,False,not reviewed (60%+ of units in one suburb),
+155000,Sunkist Bay,2726.0,Beachlands,Suburb,rating_units,most_units,100.0,1087,1,,False,False,not reviewed (60%+ of units in one suburb),
+155100,Ōtara East,2931.0,Ōtara,Suburb,rating_units,most_units,100.0,694,1,,False,False,not reviewed (60%+ of units in one suburb),
+155200,Redcastle,6542.0,East Tāmaki,Suburb,rating_units,most_units,100.0,776,1,,False,False,not reviewed (60%+ of units in one suburb),
+155301,Dannemora South,8696.0,Dannemora,Suburb,rating_units,most_units,98.8,586,2,,False,False,not reviewed (60%+ of units in one suburb),
+155401,Armoy,6542.0,East Tāmaki,Suburb,rating_units,most_units,100.0,820,1,,False,False,not reviewed (60%+ of units in one suburb),
+155500,Manukau Central,841.0,Manukau City Centre,Suburb,rating_units,most_units,70.6,1508,3,,False,False,not reviewed (60%+ of units in one suburb),
+155601,Papatoetoe North East,1203.0,Papatoetoe,Suburb,rating_units,most_units,100.0,966,1,,False,False,not reviewed (60%+ of units in one suburb),
+155602,Papatoetoe East,1203.0,Papatoetoe,Suburb,rating_units,most_units,100.0,956,1,,False,False,not reviewed (60%+ of units in one suburb),
+155701,Ōtara South West,2931.0,Ōtara,Suburb,rating_units,most_units,100.0,379,1,,False,False,not reviewed (60%+ of units in one suburb),
+155702,Ōtara South,2931.0,Ōtara,Suburb,rating_units,most_units,91.8,537,2,,False,False,not reviewed (60%+ of units in one suburb),
+155801,Ferguson,2931.0,Ōtara,Suburb,rating_units,most_units,100.0,537,1,,False,False,not reviewed (60%+ of units in one suburb),
+155901,Papatoetoe South West,1203.0,Papatoetoe,Suburb,rating_units,most_units,97.6,754,2,,False,False,not reviewed (60%+ of units in one suburb),
+156000,Botany Junction,6542.0,East Tāmaki,Suburb,rating_units,most_units,63.2,470,3,,False,False,not reviewed (60%+ of units in one suburb),
+156101,Middlefield,8697.0,East Tāmaki Heights,Suburb,rating_units,most_units,88.0,822,3,,False,False,not reviewed (60%+ of units in one suburb),
+156201,Papatoetoe South,1203.0,Papatoetoe,Suburb,rating_units,most_units,100.0,1033,1,,False,False,not reviewed (60%+ of units in one suburb),
+156301,Point View,8697.0,East Tāmaki Heights,Suburb,rating_units,most_units,100.0,929,1,,False,False,not reviewed (60%+ of units in one suburb),
+156400,Te Puru,2726.0,Beachlands,Suburb,rating_units,most_units,100.0,1699,1,,False,False,not reviewed (60%+ of units in one suburb),
+156500,Puhinui North,1203.0,Papatoetoe,Suburb,rating_units,most_units,100.0,1110,1,,False,False,not reviewed (60%+ of units in one suburb),
+156601,Savonna,8694.0,Flat Bush,Suburb,rating_units,most_units,97.9,726,2,,False,False,not reviewed (60%+ of units in one suburb),
+156700,Puhinui South,1203.0,Papatoetoe,Suburb,rating_units,most_units,100.0,707,1,,False,False,not reviewed (60%+ of units in one suburb),
+156800,Rongomai West,2931.0,Ōtara,Suburb,rating_units,most_units,88.3,437,2,,False,False,not reviewed (60%+ of units in one suburb),
+156901,Baverstock,8694.0,Flat Bush,Suburb,rating_units,most_units,99.9,1087,2,,False,False,not reviewed (60%+ of units in one suburb),
+157000,Puhinui East,841.0,Manukau City Centre,Suburb,rating_units,most_units,70.7,743,2,,False,False,not reviewed (60%+ of units in one suburb),
+157101,Turanga,2727.0,Whitford,Locality,rating_units,most_units,73.5,1321,11,,False,False,not reviewed (60%+ of units in one suburb),
+157200,Rongomai East,2931.0,Ōtara,Suburb,rating_units,reviewed_override,45.8,493,3,,False,True,low,Rongomai East: units near tie (Flat Bush 47.7 / Ōtara 45.8); residents Ōtara 50.3 / Flat Bush 46.1; council addresses 95% Ōtara
+157301,Ormiston North,8694.0,Flat Bush,Suburb,rating_units,most_units,100.0,625,1,,False,False,not reviewed (60%+ of units in one suburb),
+157400,Maraetai,2721.0,Maraetai,Suburb,rating_units,most_units,100.0,1016,1,,False,False,not reviewed (60%+ of units in one suburb),
+157500,Chapel Downs,8694.0,Flat Bush,Suburb,rating_units,most_units,98.9,933,2,,False,False,not reviewed (60%+ of units in one suburb),
+157600,Wiri West,1956.0,Wiri,Suburb,rating_units,most_units,71.8,1160,3,,False,False,not reviewed (60%+ of units in one suburb),
+157701,Clover Park North,240.0,Clover Park,Suburb,rating_units,most_units,100.0,606,1,,False,False,not reviewed (60%+ of units in one suburb),
+157702,Clover Park East,240.0,Clover Park,Suburb,rating_units,most_units,96.2,555,2,,False,False,not reviewed (60%+ of units in one suburb),
+157800,Mission Heights North,8694.0,Flat Bush,Suburb,rating_units,most_units,100.0,975,1,,False,False,not reviewed (60%+ of units in one suburb),
+157901,Clover Park South,240.0,Clover Park,Suburb,rating_units,most_units,92.6,798,2,,False,False,not reviewed (60%+ of units in one suburb),
+158001,Donegal Park West,8694.0,Flat Bush,Suburb,rating_units,most_units,100.0,560,1,,False,False,not reviewed (60%+ of units in one suburb),
+158002,Donegal Park East,8694.0,Flat Bush,Suburb,rating_units,most_units,100.0,519,1,,False,False,not reviewed (60%+ of units in one suburb),
+158101,Ormiston Central,8694.0,Flat Bush,Suburb,rating_units,most_units,100.0,1112,1,,False,False,not reviewed (60%+ of units in one suburb),
+158102,Ormiston South,8694.0,Flat Bush,Suburb,rating_units,most_units,100.0,1043,1,,False,False,not reviewed (60%+ of units in one suburb),
+158200,Mission Heights South,8694.0,Flat Bush,Suburb,rating_units,most_units,100.0,970,1,,False,False,not reviewed (60%+ of units in one suburb),
+158300,Hilltop (Auckland),8694.0,Flat Bush,Suburb,rating_units,most_units,62.4,1198,3,,False,False,not reviewed (60%+ of units in one suburb),
+158401,Wiri North,1956.0,Wiri,Suburb,rating_units,most_units,57.7,560,2,,False,True,high,
+158402,Wiri East,1956.0,Wiri,Suburb,rating_units,most_units,75.4,777,3,,False,False,not reviewed (60%+ of units in one suburb),
+158501,Goodwood Heights West,449.0,Goodwood Heights,Suburb,rating_units,most_units,100.0,431,1,,False,False,not reviewed (60%+ of units in one suburb),
+158502,Goodwood Heights East,449.0,Goodwood Heights,Suburb,rating_units,most_units,99.7,738,3,,False,False,not reviewed (60%+ of units in one suburb),
+158601,Ormiston East,8694.0,Flat Bush,Suburb,rating_units,most_units,100.0,1117,1,,False,False,not reviewed (60%+ of units in one suburb),
+158602,Bremner Ridge,8694.0,Flat Bush,Suburb,rating_units,most_units,100.0,1017,1,,False,False,not reviewed (60%+ of units in one suburb),
+158603,Ormiston South East,8694.0,Flat Bush,Suburb,rating_units,reviewed_override,46.3,700,2,,False,True,medium,Ormiston South East: residents Flat Bush 65.4 / Tōtara Park 34.6 against units Tōtara Park 53.7; council addresses 99% Flat Bush; 3 of 6 SA1s split by the LINZ line
+158700,Clendon Park North,235.0,Clendon Park,Suburb,rating_units,most_units,100.0,702,1,,False,False,not reviewed (60%+ of units in one suburb),
+158800,Burbank,844.0,Manurewa,Suburb,rating_units,most_units,91.5,775,2,,False,False,not reviewed (60%+ of units in one suburb),
+158900,Tuscany Heights,8694.0,Flat Bush,Suburb,rating_units,most_units,74.6,622,4,,False,False,not reviewed (60%+ of units in one suburb),
+159000,Totara Heights,8704.0,Totara Heights,Suburb,rating_units,most_units,93.6,856,2,,False,False,not reviewed (60%+ of units in one suburb),
+159101,Homai East,844.0,Manurewa,Suburb,rating_units,most_units,100.0,824,1,,False,False,not reviewed (60%+ of units in one suburb),
+159201,Homai West,844.0,Manurewa,Suburb,rating_units,most_units,100.0,567,1,,False,False,not reviewed (60%+ of units in one suburb),
+159202,Homai Central,844.0,Manurewa,Suburb,rating_units,most_units,100.0,912,1,,False,False,not reviewed (60%+ of units in one suburb),
+159301,The Gardens (Auckland),1665.0,The Gardens,Suburb,rating_units,most_units,87.8,1220,4,,False,False,not reviewed (60%+ of units in one suburb),
+159401,Clarks Beach,230.0,Clarks Beach,Suburb,rating_units,most_units,100.0,876,1,,False,False,not reviewed (60%+ of units in one suburb),
+159500,Clendon Park West,235.0,Clendon Park,Suburb,rating_units,most_units,100.0,741,1,,False,False,not reviewed (60%+ of units in one suburb),
+159600,Hillpark North,8976.0,Hillpark,Suburb,rating_units,most_units,89.5,697,2,,False,False,not reviewed (60%+ of units in one suburb),
+159700,Clendon Park East,235.0,Clendon Park,Suburb,rating_units,most_units,100.0,512,1,,False,False,not reviewed (60%+ of units in one suburb),
+159801,Karaka Creek,1771.0,Waiau Pā,Locality,rating_units,most_units,69.1,619,3,,False,False,not reviewed (60%+ of units in one suburb),
+159900,Rowandale West,844.0,Manurewa,Suburb,rating_units,most_units,94.3,812,2,,False,False,not reviewed (60%+ of units in one suburb),
+160000,Rowandale East,844.0,Manurewa,Suburb,rating_units,most_units,100.0,908,1,,False,False,not reviewed (60%+ of units in one suburb),
+160100,Manurewa Central,844.0,Manurewa,Suburb,rating_units,most_units,91.1,1220,3,,False,False,not reviewed (60%+ of units in one suburb),
+160201,Weymouth West,2731.0,Weymouth,Suburb,rating_units,most_units,74.8,563,2,,False,False,not reviewed (60%+ of units in one suburb),
+160202,Weymouth Central,2731.0,Weymouth,Suburb,rating_units,most_units,93.3,715,2,,False,False,not reviewed (60%+ of units in one suburb),
+160300,Hillpark South,8976.0,Hillpark,Suburb,rating_units,most_units,71.2,1003,3,,False,False,not reviewed (60%+ of units in one suburb),
+160401,Alfriston,844.0,Manurewa,Suburb,rating_units,most_units,84.6,1030,4,,False,False,not reviewed (60%+ of units in one suburb),
+160501,Weymouth East,2731.0,Weymouth,Suburb,rating_units,most_units,98.9,625,2,,False,False,not reviewed (60%+ of units in one suburb),
+160601,Leabank,844.0,Manurewa,Suburb,rating_units,most_units,94.5,762,2,,False,False,not reviewed (60%+ of units in one suburb),
+160700,Weymouth South,2731.0,Weymouth,Suburb,rating_units,most_units,100.0,1105,1,,False,False,not reviewed (60%+ of units in one suburb),
+160800,Manurewa East,845.0,Manurewa East,Suburb,rating_units,most_units,95.4,841,2,,False,False,not reviewed (60%+ of units in one suburb),
+160901,Manurewa West,844.0,Manurewa,Suburb,rating_units,most_units,100.0,812,1,,False,False,not reviewed (60%+ of units in one suburb),
+160902,Manurewa South,844.0,Manurewa,Suburb,rating_units,most_units,100.0,848,1,,False,False,not reviewed (60%+ of units in one suburb),
+161000,Randwick Park East,1359.0,Randwick Park,Suburb,rating_units,most_units,86.1,713,2,,False,False,not reviewed (60%+ of units in one suburb),
+161100,Wattle Downs West,1889.0,Wattle Downs,Suburb,rating_units,most_units,100.0,1131,1,,False,False,not reviewed (60%+ of units in one suburb),
+161201,Wattle Downs North,1889.0,Wattle Downs,Suburb,rating_units,most_units,68.2,827,3,,False,False,not reviewed (60%+ of units in one suburb),
+161300,Randwick Park West,1359.0,Randwick Park,Suburb,rating_units,most_units,100.0,836,1,,False,False,not reviewed (60%+ of units in one suburb),
+161400,Kingseat-Karaka,658.0,Karaka,Locality,rating_units,most_units,75.3,1237,2,,False,False,not reviewed (60%+ of units in one suburb),
+161500,Wattle Downs East,1889.0,Wattle Downs,Suburb,rating_units,most_units,100.0,721,1,,False,False,not reviewed (60%+ of units in one suburb),
+161600,Takanini North,1575.0,Takanini,Suburb,rating_units,most_units,88.5,802,3,,False,False,not reviewed (60%+ of units in one suburb),
+161700,Takanini Industrial,1575.0,Takanini,Suburb,rating_units,most_units,99.4,167,2,,False,False,not reviewed (60%+ of units in one suburb),
+161800,Conifer Grove West,254.0,Conifer Grove,Suburb,rating_units,most_units,56.6,1509,3,,False,True,medium,
+161900,Conifer Grove East,254.0,Conifer Grove,Suburb,rating_units,most_units,95.9,687,2,,False,False,not reviewed (60%+ of units in one suburb),
+162000,Takanini West,1575.0,Takanini,Suburb,rating_units,most_units,100.0,883,1,,False,False,not reviewed (60%+ of units in one suburb),
+162101,Takanini South,1575.0,Takanini,Suburb,rating_units,most_units,100.0,1237,1,,False,False,not reviewed (60%+ of units in one suburb),
+162102,Takanini East,1575.0,Takanini,Suburb,rating_units,most_units,100.0,1001,1,,False,False,not reviewed (60%+ of units in one suburb),
+162200,Takanini Central,1575.0,Takanini,Suburb,rating_units,most_units,98.9,465,2,,False,False,not reviewed (60%+ of units in one suburb),
+162300,Ardmore,46.0,Ardmore,Locality,rating_units,most_units,50.9,515,7,,False,True,high,
+162400,Glenbrook,425.0,Glenbrook,Locality,rating_units,most_units,78.6,1258,3,,False,False,not reviewed (60%+ of units in one suburb),
+162500,Hingaia,658.0,Karaka,Locality,rating_units,most_units,99.9,1047,2,,False,False,not reviewed (60%+ of units in one suburb),
+162601,Takanini South East,1196.0,Papakura,Suburb,rating_units,most_units,89.4,1215,2,,False,False,not reviewed (60%+ of units in one suburb),
+162602,Takanini McLennan,1196.0,Papakura,Suburb,rating_units,most_units,96.5,791,2,,False,False,not reviewed (60%+ of units in one suburb),
+162701,Kawakawa Bay-Orere,2739.0,Kawakawa Bay,Locality,rating_units,most_units,35.5,1090,5,,False,True,low,
+162800,Papakura West,1196.0,Papakura,Suburb,rating_units,most_units,81.8,687,2,,False,False,not reviewed (60%+ of units in one suburb),
+162901,Clevedon,4033.0,Clevedon,Locality,rating_units,most_units,98.5,715,2,,False,False,not reviewed (60%+ of units in one suburb),
+163001,Papakura North,1196.0,Papakura,Suburb,rating_units,most_units,100.0,1286,1,,False,False,not reviewed (60%+ of units in one suburb),
+163100,Pahurehure,1185.0,Pahurehure,Suburb,rating_units,most_units,94.3,1185,3,,False,False,not reviewed (60%+ of units in one suburb),
+163200,Papakura Central,1196.0,Papakura,Suburb,rating_units,most_units,100.0,1718,1,,False,False,not reviewed (60%+ of units in one suburb),
+163301,Papakura North East,1196.0,Papakura,Suburb,rating_units,most_units,100.0,720,1,,False,False,not reviewed (60%+ of units in one suburb),
+163302,Twin Parks Rise,1196.0,Papakura,Suburb,rating_units,most_units,100.0,670,1,,False,False,not reviewed (60%+ of units in one suburb),
+163400,Karaka Lakes,658.0,Karaka,Locality,rating_units,most_units,65.8,1534,2,,False,False,not reviewed (60%+ of units in one suburb),
+163501,Papakura Kelvin,1196.0,Papakura,Suburb,rating_units,most_units,100.0,666,1,,False,False,not reviewed (60%+ of units in one suburb),
+163502,Papakura Eastburn,1196.0,Papakura,Suburb,rating_units,most_units,100.0,909,1,,False,False,not reviewed (60%+ of units in one suburb),
+163600,Papakura Massey Park,1196.0,Papakura,Suburb,rating_units,most_units,100.0,891,1,,False,False,not reviewed (60%+ of units in one suburb),
+163700,Rosehill,1432.0,Rosehill,Suburb,rating_units,most_units,86.7,1301,3,,False,False,not reviewed (60%+ of units in one suburb),
+163801,Patumāhoe,1228.0,Patumāhoe,Locality,rating_units,most_units,100.0,573,1,,False,False,not reviewed (60%+ of units in one suburb),
+163803,Patumāhoe Rural,1228.0,Patumāhoe,Locality,rating_units,most_units,35.6,447,7,,False,True,medium,
+163901,Papakura East,1196.0,Papakura,Suburb,rating_units,most_units,100.0,790,1,,False,False,not reviewed (60%+ of units in one suburb),
+163902,Harbour View Heights,1196.0,Papakura,Suburb,rating_units,most_units,97.9,429,3,,False,False,not reviewed (60%+ of units in one suburb),
+164001,Ōpaheke,1112.0,Ōpaheke,Suburb,rating_units,most_units,95.8,1179,2,,False,False,not reviewed (60%+ of units in one suburb),
+164100,Papakura Industrial,1196.0,Papakura,Suburb,rating_units,most_units,86.5,230,3,,False,False,not reviewed (60%+ of units in one suburb),
+164201,Red Hill,1381.0,Red Hill,Suburb,rating_units,most_units,97.4,774,2,,False,False,not reviewed (60%+ of units in one suburb),
+164301,Drury West,658.0,Karaka,Locality,rating_units,most_units,100.0,746,1,,False,False,not reviewed (60%+ of units in one suburb),
+164302,Drury East,306.0,Drury,Suburb,rating_units,most_units,79.3,440,3,,False,False,not reviewed (60%+ of units in one suburb),
+164401,Tamakae,1865.0,Waiuku,Suburb,rating_units,most_units,100.0,1131,1,,False,False,not reviewed (60%+ of units in one suburb),
+164500,Hamilton Estate,1865.0,Waiuku,Suburb,rating_units,most_units,100.0,1061,1,,False,False,not reviewed (60%+ of units in one suburb),
+164601,Runciman,1456.0,Runciman,Locality,rating_units,most_units,56.1,312,4,,False,True,high,
+164602,Drury South Crossing,1356.0,Ramarama,Locality,rating_units,most_units,78.0,531,2,,False,False,not reviewed (60%+ of units in one suburb),
+164603,Waihoehoe,306.0,Drury,Suburb,rating_units,most_units,54.8,757,3,,False,True,medium,
+164700,Waiuku Central,1865.0,Waiuku,Suburb,rating_units,most_units,100.0,619,1,,False,False,not reviewed (60%+ of units in one suburb),
+164800,Waiuku East,1865.0,Waiuku,Suburb,rating_units,most_units,100.0,641,1,,False,False,not reviewed (60%+ of units in one suburb),
+164900,Kendallvale,1865.0,Waiuku,Suburb,rating_units,most_units,100.0,390,1,,False,False,not reviewed (60%+ of units in one suburb),
+165001,Puni,1306.0,Pukekohe,Suburb,rating_units,most_units,45.0,604,5,,False,True,medium,
+165101,Ramarama,1182.0,Paerata,Locality,rating_units,most_units,37.1,1448,7,,False,True,medium,
+165200,Hunua,2174.0,Hūnua,Locality,rating_units,most_units,92.6,568,3,,False,False,not reviewed (60%+ of units in one suburb),
+165301,Pukekohe North,1306.0,Pukekohe,Suburb,rating_units,most_units,87.3,840,2,,False,False,not reviewed (60%+ of units in one suburb),
+165302,Pukekohe North West,1306.0,Pukekohe,Suburb,rating_units,most_units,100.0,992,1,,False,False,not reviewed (60%+ of units in one suburb),
+165400,Anselmi Ridge,1306.0,Pukekohe,Suburb,rating_units,most_units,95.1,1154,4,,False,False,not reviewed (60%+ of units in one suburb),
+165501,Pukekohe West,1306.0,Pukekohe,Suburb,rating_units,most_units,100.0,1430,1,,False,False,not reviewed (60%+ of units in one suburb),
+165502,Pukekohe South West,1306.0,Pukekohe,Suburb,rating_units,most_units,100.0,964,1,,False,False,not reviewed (60%+ of units in one suburb),
+165600,Cape Hill,1306.0,Pukekohe,Suburb,rating_units,most_units,100.0,563,1,,False,False,not reviewed (60%+ of units in one suburb),
+165700,Rosa Birch Park,1306.0,Pukekohe,Suburb,rating_units,most_units,100.0,800,1,,False,False,not reviewed (60%+ of units in one suburb),
+165800,Rooseville Park,1306.0,Pukekohe,Suburb,rating_units,most_units,100.0,977,1,,False,False,not reviewed (60%+ of units in one suburb),
+165901,Cloverlea (Auckland),1306.0,Pukekohe,Suburb,rating_units,most_units,100.0,1023,1,,False,False,not reviewed (60%+ of units in one suburb),
+166000,Pukekohe Central,1306.0,Pukekohe,Suburb,rating_units,most_units,99.8,664,2,,False,False,not reviewed (60%+ of units in one suburb),
+166100,Pukekohe Hospital,1306.0,Pukekohe,Suburb,rating_units,most_units,100.0,638,1,,False,False,not reviewed (60%+ of units in one suburb),
+166200,Buckland,174.0,Buckland,Locality,rating_units,most_units,55.5,470,3,,False,True,medium,
+166301,Bombay Hills,144.0,Bombay,Locality,rating_units,most_units,84.0,795,4,,False,False,not reviewed (60%+ of units in one suburb),
+166400,Ararimu,41.0,Ararimu,Locality,rating_units,most_units,43.5,758,5,,False,True,medium,
