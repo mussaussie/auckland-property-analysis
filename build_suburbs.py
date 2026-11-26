@@ -85,6 +85,7 @@ def sa2_to_suburb(sa2, sub, units):
     out["override_reason"] = out.sa2_code.map({c: r for c, (_, _, r) in OVERRIDES.items()})
     for c, (_, conf, _) in OVERRIDES.items():
         out.loc[out.sa2_code == c, "boundary_confidence"] = conf
+    out.loc[ex, "boundary_confidence"] = "not applicable (reviewed exclusion)"
 
     assert out.sa2_code.is_unique and len(out) == len(sa2), "one row per SA2"
     assert out.unmapped.sum() == len(EXCLUDED), "only the reviewed exclusions are unmapped"
@@ -120,6 +121,7 @@ def suburb_list(sub, lookup, pieces, pop):
     out["flag_shared_rural_sa2"] = out.sa2_codes.str.split(";").map(lambda c: bool(used & {int(x) for x in c}))
     out["caveat"] = out.flag_shared_rural_sa2.map({True: "Shares figures with neighbouring localities: the data covers the whole "
                                                          "statistical area, not this place alone.", False: ""})
+    out["caveat"] = (out.suburb_name.map(SPECIAL).fillna("") + " " + out.caveat).str.strip()  # odd rows lead the caveat too
     # dedup check: counting each source SA2 once must give the Auckland total, less the excluded water SA2s
     assert out[out.suburb_source_sa2.isna()].population_2023.sum() == lookup[~lookup.unmapped].population_2023.sum()
     assert lookup[~lookup.unmapped].population_2023.sum() == pop.population_2023.sum() - pop[pop.sa2_code.isin(EXCLUDED)].population_2023.sum()
@@ -429,6 +431,115 @@ def map_file(sub, subs):
     m.to_crs(4326).to_file(DATA / "boundaries" / "auckland_suburbs_map.geojson", driver="GeoJSON", COORDINATE_PRECISION=5)
 
 
+def analysis_map(sa2, subs):
+    """The area the SA2-derived figures cover: the union of each suburb's assigned SA2s (a borrowing place gets its parent
+    SA2). Own-SA2 rows tile Auckland without overlap; borrowed rows repeat their parent SA2's shape."""
+    mem = subs.assign(code=subs.sa2_codes.str.split(";")).explode("code")
+    mem["sa2_code"] = mem.code.astype(int)
+    a = sa2.merge(mem[["suburb_id", "sa2_code"]], on="sa2_code").dissolve("suburb_id").reset_index()[["suburb_id", "geometry"]]
+    a["geometry"] = a.simplify(25, preserve_topology=True)
+    a["suburb_id"] = a.suburb_id.astype(int)
+    assert len(a) == len(subs)
+    a.to_crs(4326).to_file(DATA / "boundaries" / "auckland_suburbs_analysis_map.geojson", driver="GeoJSON", COORDINATE_PRECISION=5)
+
+
+def linz_facilities(sub, subs):
+    """Facilities inside each LINZ suburb boundary (what the map shows), and the nearest of each measured from a point
+    inside that boundary (LINZ polygon representative point), so 'inside this suburb' matches the boundary users see."""
+    import facilities
+    poly = sub[sub.suburb_id.isin(subs.suburb_id)][["suburb_id", "geometry"]]
+    centre = gpd.GeoDataFrame(poly[["suburb_id"]], geometry=poly.representative_point(), crs=poly.crs)
+    out = pd.DataFrame(index=poly.suburb_id.values)
+    for key, (p, label, count) in facilities.load_points().items():
+        hits = gpd.sjoin(p[["geometry"]], poly, predicate="within")
+        out[count] = hits[~hits.index.duplicated()].groupby("suburb_id").size()
+        if key == "halal_place":
+            continue
+        cols = [label] + (["Authority", "Enrolment_Scheme"] if key == "year1_school" else [])
+        near = (gpd.sjoin_nearest(centre, p[cols + ["geometry"]], distance_col="d").drop_duplicates("suburb_id").set_index("suburb_id"))
+        out[f"nearest_{key}"] = near[label].fillna("(unnamed)")
+        out[f"km_to_nearest_{key}"] = (near.d / 1000).round(1)
+        if key == "year1_school":
+            out["nearest_year1_school_authority"], out["nearest_year1_school_enrolment_scheme"] = near.Authority, near.Enrolment_Scheme
+    counts = [c for _, _, c in facilities.load_points().values()]
+    out[counts] = out[counts].fillna(0).astype(int)
+    # Islamic schools: the two named in File 3 (MoE directory ids 544 and 471)
+    s = pd.read_csv(DATA / "amenities" / "schools_directory.csv", usecols=["School_Id", "Latitude", "Longitude"]).set_index("School_Id")
+    isl = gpd.GeoSeries(gpd.points_from_xy(s.Longitude, s.Latitude), index=s.index, crs=4326).to_crs(2193)
+    pts = centre.set_index("suburb_id").geometry
+    out["km_to_al_madinah_coed"], out["km_to_zayed_college_girls"] = (pts.distance(isl[544]) / 1000).round(1), (pts.distance(isl[471]) / 1000).round(1)
+    return out
+
+
+def rate_crime(df, bench):
+    """Crime rating with thresholds from the benchmark rows only (independently represented, analysis-ready, not hotspots),
+    then applied to every row, so a borrowing place can never move another suburb's rating."""
+    b = df[bench & df.analysis_ready & ~df.flag_crime_hotspot]
+    lo, hi = b.crime_per_1000_residents.quantile([1 / 3, 2 / 3])
+    r = df.crime_per_1000_residents
+    out = pd.Series(np.select([df.flag_crime_hotspot, r <= lo, r <= hi, r > hi], ["Hotspot", "Low", "Moderate", "High"], "—"), index=df.index)
+    return out.where(df.analysis_ready, "—")
+
+
+def rent_sources(shares, rq, lookup):
+    """Suburb -> MBIE rent area: the real source ids (MBIE Location Id = SA2 code), the suburb's share of each area's rented
+    households, the area's own lodgements (last 4 quarters, all homes) and the part apportioned to the suburb."""
+    raw = load_rent_by_type()
+    a = raw[(raw.dwelling == "ALL") & (raw.beds == "ALL")]
+    a = a[a.quarter > rq.quarter.max() - pd.DateOffset(years=1)].groupby("rent_source_sa2").lodged_bonds.sum().rename("source_lodged_4q")
+    t = shares.join(a, on="rent_source_sa2")
+    t["apportioned_lodged_4q"] = t.source_lodged_4q * t.share
+    t["weight"] = t.apportioned_lodged_4q / t.groupby("suburb_id").apportioned_lodged_4q.transform("sum")
+    # MBIE areas carry their own ids; name each by the 2023 SA2s whose rent comes from it (File 1 rent_source_sa2)
+    m = pd.read_csv(CLEAN / "master_flagged.csv", usecols=["sa2_name", "rent_source_sa2"]).dropna()
+    t["rent_source_name"] = t.rent_source_sa2.map(m.groupby(m.rent_source_sa2.astype(int)).sa2_name.agg(lambda x: " + ".join(sorted(x))))
+    return t.rename(columns={"main": "own_sa2"})[["suburb_id", "rent_source_sa2", "rent_source_name", "own_sa2", "share",
+                                                   "source_lodged_4q", "apportioned_lodged_4q", "weight"]]
+
+
+def coverage(subs, lookup):
+    """How each row is represented: 'own' SA2s, 'parent' (own SA2s, one also standing in for places without an SA2) or
+    'borrowed' (no SA2 of its own: SA2-based figures are the whole parent SA2's), with the wording shown next to results."""
+    name = lookup.set_index("sa2_code").sa2_name
+    owner = lookup.dropna(subset=["suburb_id"]).set_index("sa2_code").suburb_name
+    b = subs.dropna(subset=["suburb_source_sa2"])
+    src = b.suburb_source_sa2.astype(int)
+    by_src = b.groupby(src).suburb_name.agg(lambda s: ", ".join(sorted(s)))
+    c = subs[["suburb_id", "suburb_name"]].copy()
+    codes = subs.sa2_codes.str.split(";").map(lambda x: [int(v) for v in x])
+    borrowed = subs.suburb_source_sa2.notna()
+    lent = codes.map(lambda x: [v for v in x if v in by_src.index])
+    c["coverage"] = np.select([borrowed, lent.str.len() > 0], ["borrowed", "parent"], "own")
+    c["coverage_source_sa2"] = subs.suburb_source_sa2
+    c["coverage_source_name"] = src.map(name).reindex(subs.index)
+    c["coverage_parent_suburb"] = src.map(owner).reindex(subs.index)
+    note = []
+    for i, r in c.iterrows():
+        if r.coverage == "borrowed":
+            others = ", ".join(x for x in by_src[int(r.coverage_source_sa2)].split(", ") if x != r.suburb_name)
+            note.append(f"Wider-area estimate—covers neighbouring places. Census, valuation, crime, rent, trend, community and forecast "
+                        f"figures are those of the whole {r.coverage_source_name} SA2, which belongs to {r.coverage_parent_suburb}"
+                        + (f" and also stands in for {others}" if others else "") + ". Facility counts and distances are for "
+                        f"{r.suburb_name}'s own boundary. Not ranked or used in benchmarks.")
+        elif r.coverage == "parent":
+            note.append(f"Its own figures. Its SA2 ({', '.join(name[v] for v in lent[i])}) also stands in for "
+                        f"{', '.join(by_src[v] for v in lent[i])}, which have no SA2 of their own.")
+        else:
+            note.append("")
+    c["coverage_note"] = note
+    c["special_note"] = c.suburb_name.map(SPECIAL).fillna("")
+    assert (c.coverage == "borrowed").sum() == borrowed.sum() and c.suburb_id.is_unique
+    return c.drop(columns="suburb_name")
+
+
+SPECIAL = {  # places whose figures need a prominent warning (METRIC_RULES 'Known odd rows')
+    "Huntington Park": "Statistical coverage is tiny: 6 census residents. Its figures come from the Botany Central SA2 (mostly shops); "
+                       "the SA2 named Huntington Park, where most of its homes are, was assigned to East Tāmaki. Use East Tāmaki for the area.",
+    "Mangawhai": "Mostly outside Auckland: most of the town is in Northland (Kaipara District). The figures are those of Auckland's Cape "
+                 "Rodney SA2, a wide rural area, not the town.",
+}
+
+
 if __name__ == "__main__":
     sa2, sub = load_layers()
     units = unit_pieces(sa2, sub)
@@ -457,22 +568,27 @@ if __name__ == "__main__":
     multi = shares[shares.main].groupby("rent_source_sa2").suburb_id.nunique()
     core["flag_shared_rent_area"] = core.index.map(
         shares.assign(m=shares.rent_source_sa2.map(multi) > 1).groupby("suburb_id").m.any()).fillna(False).astype(bool)
-    comparable = core.analysis_ready & ~core.flag_crime_hotspot
-    lo, hi = core.loc[comparable, "crime_per_1000_residents"].quantile([1 / 3, 2 / 3])
-    r = core.crime_per_1000_residents
-    core["crime_rating"] = np.select([core.flag_crime_hotspot, r <= lo, r <= hi, r > hi], ["Hotspot", "Low", "Moderate", "High"], "—")
-    core.loc[~core.analysis_ready, "crime_rating"] = "—"
+    # facilities: counted inside the LINZ boundary the map shows; the SA2 sums stay as *_in_assigned_sa2s
+    lf = linz_facilities(sub, subs)
+    cnt = [c for c in lf.columns if c.endswith("_in_area")]
+    core = core.rename(columns={c: c.replace("_in_area", "_in_assigned_sa2s") for c in cnt})
+    core = core.drop(columns=[c for c in lf.columns if c in core.columns]).join(lf)
+    # benchmarks from independently represented rows only (parents keep theirs), then applied to every row
+    bench = pd.Series(core.index.map(subs.set_index("suburb_id").suburb_source_sa2.isna()), index=core.index, dtype=bool)
+    core["crime_rating"] = rate_crime(core, bench)
+    assert core.crime_rating[bench].equals(rate_crime(core[bench], bench[bench])), "borrowed rows must not move a benchmark"
     prof = subs[["suburb_id", "suburb_name", "suburb_type", "n_sa2", "sa2_codes", "suburb_source_sa2",
                  "flag_shared_rural_sa2", "caveat"]].merge(core, left_on="suburb_id", right_index=True, how="left")
+    prof = prof.merge(coverage(subs, lookup), on="suburb_id", how="left")
 
     # checks: each SA2 counted once (own-SA2 rows) must give the SA2 totals, less the excluded water SA2s
     master = pd.read_csv(CLEAN / "master_flagged.csv")
     kept = master[~master.sa2_code.isin(EXCLUDED)]
     own = prof[prof.suburb_source_sa2.isna()]
     kept = kept.merge(pd.read_csv(CLEAN / "area_profiles_by_sa2.csv")[["sa2_code", "mosques_in_area", "gp_clinics_in_area"]], on="sa2_code")
-    for c in ["population_2023", "households_2023", "dwellings_2023", "crime_total", "rating_units", "schools",
-              "mosques_in_area", "gp_clinics_in_area"]:
-        assert abs(own[c].sum() - kept[c].sum()) < 1e-6, (c, own[c].sum(), kept[c].sum())
+    for c, k in [(c, c) for c in ["population_2023", "households_2023", "dwellings_2023", "crime_total", "rating_units", "schools"]] + [
+            ("mosques_in_assigned_sa2s", "mosques_in_area"), ("gp_clinics_in_assigned_sa2s", "gp_clinics_in_area")]:
+        assert abs(own[c].sum() - kept[k].sum()) < 1e-6, (c, own[c].sum(), kept[k].sum())
     # bonds: each rent area's shares over the own-SA2 suburbs add to 1, so apportioned bonds sum back to MBIE totals
     tot = shares[shares.main].groupby("rent_source_sa2").share.sum()
     assert tot[tot > 0].sub(1).abs().max() < 1e-9, tot[(tot - 1).abs() > 1e-9]
@@ -483,7 +599,9 @@ if __name__ == "__main__":
     premium(prof, rq, mem).round(2).to_csv(CLEAN / "suburb_rent_premium.csv", index=False, encoding="utf-8")
     rq.to_csv(CLEAN / "suburb_rent_quarterly.csv", index=False, encoding="utf-8", date_format="%Y-%m-%d")
     community(mem).round(2).to_csv(CLEAN / "suburb_community.csv", index=False, encoding="utf-8")
+    rent_sources(shares, rq, lookup).to_csv(CLEAN / "suburb_rent_sources.csv", index=False, encoding="utf-8")
     map_file(sub, subs)
+    analysis_map(sa2, subs)
     print("ok   suburb_profiles.csv", len(prof), "rows;", int(prof.median_rent_weekly.notna().sum()), "with rent;",
           int(prof.analysis_ready.fillna(False).sum()), "analysis-ready")
     print("ok   sa2_to_suburb.csv", len(lookup), "SA2s ->", lookup.suburb_id.nunique(), "suburbs;",

@@ -88,7 +88,7 @@ suburb_id,suburb_name,suburb_type,n_sa2,sa2_codes,suburb_source_sa2,flag_shared_
 578.0,Howick,Suburb,3,150400;152000;152400,,False,,11523.0,11789.0
 8876.0,Huapai,Suburb,0,115001,115001,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4770.0,3177.0
 2954.0,Huia,Suburb,1,128000,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1149.0,687.0
-589.0,Huntington Park,Suburb,1,154600,,False,,6.0,705.0
+589.0,Huntington Park,Suburb,1,154600,,False,"Statistical coverage is tiny: 6 census residents. Its figures come from the Botany Central SA2 (mostly shops); the SA2 named Huntington Park, where most of its homes are, was assigned to East Tāmaki. Use East Tāmaki for the area.",6.0,705.0
 2174.0,Hūnua,Locality,1,165200,,False,,1497.0,2334.0
 4407.0,Kaikōura Island / Selwyn Island,Island,0,111801,111801,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",1239.0,1.0
 635.0,Kaipara Flats,Locality,0,111200,111200,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",4017.0,1115.0
@@ -115,7 +115,7 @@ suburb_id,suburb_name,suburb_type,n_sa2,sa2_codes,suburb_source_sa2,flag_shared_
 805.0,Makarau,Locality,1,110800,,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,1271.0
 822.0,Mangakura,Locality,0,110800,110800,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,92.0
 833.0,Mangatāwhiri,Locality,0,166400,166400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",2235.0,1642.0
-2856.0,Mangawhai,Suburb,0,110400,110400,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,4411.0
+2856.0,Mangawhai,Suburb,0,110400,110400,True,"Mostly outside Auckland: most of the town is in Northland (Kaipara District). The figures are those of Auckland's Cape Rodney SA2, a wide rural area, not the town. Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3735.0,4411.0
 2878.0,Manly,Suburb,2,115200;115800,,False,,5928.0,5145.0
 841.0,Manukau City Centre,Suburb,2,155500;157000,,False,,3690.0,3103.0
 2953.0,Manukau Heads,Locality,0,149901,149901,True,"Shares figures with neighbouring localities: the data covers the whole statistical area, not this place alone.",3081.0,375.0

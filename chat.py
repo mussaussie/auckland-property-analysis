@@ -7,15 +7,60 @@ Self-check (no API call): python chat.py
 """
 import json
 import re
+import time
 import unicodedata
 from typing import Literal, Optional
 
+import numpy as np
 import pandas as pd
 from pydantic import BaseModel, Field
 
 from search import rent_period, rental_search, with_home_rent
 
 MODEL = "gemini-3.5-flash-lite"  # free tier about 500 requests/day (Nov 2026); Flash is about 20/day. One request per question.
+TIMEOUT_MS = 20_000   # per Gemini request; a hung connection ends as a timeout error (httpx2 backend) and the manual fallback is shown
+RETRIES = 2           # extra tries for 5xx and network errors only (a 429 quota error is never retried)
+SESSION_LIMIT = 30    # questions per browser session
+DAILY_LIMIT = 400     # questions per day for the whole app, under the ~500/day free quota
+
+
+def make_client(key):
+    from google import genai
+    from google.genai import types
+    return genai.Client(api_key=key, http_options=types.HttpOptions(timeout=TIMEOUT_MS))
+
+
+def net_errors():
+    """Network error classes of the HTTP backends google-genai may use: httpx2 (its default from 3.6) and httpx (fallback)."""
+    import importlib
+    out = []
+    for m in ("httpx2", "httpx"):
+        try:
+            out.append(importlib.import_module(m).TransportError)
+        except ImportError:
+            pass
+    return tuple(out)
+
+
+def with_retries(fn, *a, retries=RETRIES, sleep=time.sleep):
+    """fn(*a), retried with a short back-off on Google 5xx errors and network failures (timeouts, dropped connections)."""
+    from google.genai import errors
+    for i in range(retries + 1):
+        try:
+            return fn(*a)
+        except (errors.ServerError, *net_errors()):
+            if i == retries:
+                raise
+            sleep(2 * (i + 1))
+
+
+def over_limit(used_session, used_today):
+    """Message when a usage cap is reached, else None."""
+    if used_session >= SESSION_LIMIT:
+        return (f"You have asked {SESSION_LIMIT} questions in this session, the limit that protects the shared free AI quota. "
+                "Reload the page later, or use the manual filters:")
+    if used_today >= DAILY_LIMIT:
+        return "Ask Auckland has reached its daily question limit (shared free AI quota). It resets tomorrow; the manual filters give the same results:"
 
 
 EXTRAS = Literal["muslim", "mosque", "halal", "park", "playground", "supermarket"]
@@ -146,6 +191,12 @@ def home_label(dwelling, beds):
     return f"{'' if beds == 'ALL' else beds + '-bedroom '}{'home' if dwelling == 'ALL' else dwelling.lower()}"
 
 
+def one_bed(data, beds):
+    """File 2's one-bedroom data note (Tenancy Services), carried into every chat answer about 1-bedroom homes."""
+    n = data["by_type"].loc[data["by_type"]["beds"] == "1", "data_note"].dropna()
+    return [n.iloc[0]] if beds == "1" and len(n) else []
+
+
 CHECK = {"ok": "Passes sample checks", "verify": "Fails sample checks (few rentals or jumpy price)", "no estimate": "No published figure"}
 
 
@@ -157,7 +208,11 @@ def area_table(df, home, extras=(), level="SA2"):
         t = t.rename(columns={f"Rent $/wk ({home})": "Broader rent $/wk"}).assign(**{"Rent covers": df["basis"]})
     else:
         t["Sample check"] = df["check"].map(CHECK)
-    t = t.assign(**{"New rentals (12 months)": df["lodged_bonds_4q"],
+    if "coverage" in df:  # suburb level: which rows are wider-area estimates, beside the figures
+        t.insert(1, "Coverage", np.where(df["coverage"].eq("borrowed"), "Wider-area estimate—covers neighbouring places ("
+                                         + df["coverage_source_name"].fillna("") + " SA2)", "Own SA2s"))
+    t = t.assign(**{"Source-area bonds (12 months)": df["lodged_bonds_4q"],
+                    **({"Est. bonds apportioned (estimate)": df["bonds_apportioned"].round(1)} if "bonds_apportioned" in df else {}),
                        "Crime per 1,000 residents": df["crime_per_1000_residents"].round(0), "Crime rating": df["crime_rating"],
                        "Primary schools in area": df["primary_schools_in_area"], "Secondary schools in area": df["secondary_schools_in_area"],
                        "GP clinics in area": df["gp_clinics_in_area"], "Nearest GP km": df["km_to_nearest_gp_clinic"],
@@ -171,15 +226,19 @@ def area_table(df, home, extras=(), level="SA2"):
 
 def notes(data, extra=(), extras=()):
     return [*extra,
-            f"Rent = median weekly rent on new tenancies (MBIE bonds), average of the last 4 quarters ({rent_period(data)}). It is not what all "
-            "renters pay. 'Passes sample checks' = 30+ new rentals in 12 months and a steady price between quarters; it does not make the "
-            "figure precise or mean a home is available at that price.",
+            f"Rent = median weekly rent on new tenancies (MBIE bonds), average of the last 4 quarters ({rent_period(data)}). It is a typical "
+            "rent, not what all renters pay and not a listing available at that price. 'Passes sample checks' = 30+ new bonds in 12 months "
+            "and a steady price between quarters; it does not make the figure precise."
+            + (" At suburb level the 30-bond rule is applied to the MBIE source area's bonds (Source-area bonds); the share apportioned "
+               "to the suburb is an estimate, shown but not tested." if unit(data) == "suburb" else ""),
             "Crime = NZ Police recorded victimisations per 1,000 residents, Oct 2025–Sep 2026; busy centres with many visitors look worse. "
             "Hotspots are not rated.",
             "Schools are counted inside the area boundary by year levels served. GPs, shopping centres, parks, playgrounds and "
             "supermarkets come from OpenStreetMap: 0 means none mapped, not none. Distances are straight-line. "
-            + ("Areas are LINZ suburbs built from Stats NZ SA2 areas: suburb rents are approximate (a lodgement-weighted mean of MBIE "
-               "rent-area medians; MBIE publishes no suburb median)." if unit(data) == "suburb" else
+            + ("Areas are LINZ suburbs. Facility counts and distances use the suburb's own LINZ boundary (distances from a point inside "
+               "it); census, valuation, crime and rent figures come from the Stats NZ SA2 areas assigned to it, so they approximate the "
+               "suburb. Suburb rents are a lodgement-weighted mean of MBIE rent-area medians (MBIE publishes no suburb median)."
+               if unit(data) == "suburb" else
                "Areas are Stats NZ SA2 areas, close to but not the same as suburbs."),
             *[EXTRA_NOTES[x] for x in extras if EXTRA_NOTES[x]]]
 
@@ -208,6 +267,11 @@ def answer(data, ask, prefs):
     if ask.show:
         p["show"] = sorted(set(prefs.get("show", [])) | set(ask.show))
     extras = extras_for(p)
+    bad = [m for m, k, ok in (("a weekly budget above $0", "max_rent", lambda v: v > 0), ("a distance above 0 km", "near_km", lambda v: v > 0),
+                              ("a Muslim share between 0 and 100%", "min_muslim_pct", lambda v: 0 <= v <= 100))
+           if getattr(ask, k) is not None and not ok(getattr(ask, k))]
+    if bad:  # never search on an impossible filter; earlier preferences stay as they were
+        return reply("Please give " + " and ".join(bad) + ".", prefs)
     if ask.intent == "other":
         return reply("I can only answer from this project's data: rents by area and home type, recorded crime, schools, GPs, shops, "
                      "parks, census communities and mapped mosques and halal food in each Auckland area. Try a budget search (\"3-bed houses under $650 a week\") or ask about an area (\"crime and schools "
@@ -227,8 +291,9 @@ def answer(data, ask, prefs):
         res = rental_search(data, budget or 100_000, dwelling, beds, p.get("include_apt"))
 
         def cut(res, keep):  # same search, fewer areas: keep(df) -> bool mask
-            res = {**res, **{k: res[k][keep(res[k])] for k in ("areas", "under", "matches", "fallbacks")}}
-            return {**res, "cheapest_ok": res["areas"].loc[res["areas"]["check"] == "ok", "rent"].min()}
+            res = {**res, **{k: res[k][keep(res[k])] for k in ("areas", "under", "matches", "fallbacks", "shared")}}
+            a = res["areas"]
+            return {**res, "cheapest_ok": a.loc[a["independent"] & (a["check"] == "ok"), "rent"].min()}
         # Areas named in this message, or kept from a previous budget search in named areas ("and 2 bedrooms?")
         where = ask.areas or (prefs.get("areas", []) if prefs.get("intent") == "rental_search" else [])
         p.pop("areas", None)
@@ -282,7 +347,13 @@ def answer(data, ask, prefs):
             tables.append((f"Areas to investigate ({len(fb)}): not matches, broader rent data", area_table(fb, home, extras, unit(data))))
             text += (f" {len(fb)} areas have a broader steady rent{' under budget' if budget else ''}, listed separately: a rent across "
                      f"all sizes cannot show what a {home} costs, so check live listings.")
-        return reply(text, p, tables, notes(data, [*assumed, excluded], extras))
+        sh = res["shared"]
+        if len(sh):
+            tables.append((f"Wider-area estimates ({len(sh)}): places with no SA2 of their own, not budget matches",
+                           area_table(sh, home, extras, unit(data))))
+            text += (f" {len(sh)} more places have a figure{' under budget' if budget else ''} that is a wider-area estimate (the whole "
+                     "neighbouring SA2's), listed separately.")
+        return reply(text, p, tables, notes(data, [*assumed, *one_bed(data, beds), excluded], extras))
 
     # area_info / compare: one row per area, same rent and sample-check rule as the manual search
     found, missing, split = [], [], []
@@ -313,8 +384,14 @@ def answer(data, ask, prefs):
         extra.append("Not found: " + ", ".join(missing) + ".")
     if (~rows["analysis_ready"]).any():
         extra.append("Not analysis-ready (too few residents or rentals): " + ", ".join(rows.loc[~rows["analysis_ready"], "sa2_name"]) + ".")
-    if rows["flag_borrowed_rent"].eq(True).any():
+    for _, x in rows.iterrows():  # exceptional-place and shared-area warnings, named per row
+        extra += [f"{x['sa2_name']}: {x[c]}" for c in ("special_note", "coverage_note") if x.get(c)]
+    if unit(data) == "suburb" and rows["flag_shared_rent_area"].eq(True).any():
+        extra.append("Rent series shared with another suburb (same MBIE rent area): "
+                     + ", ".join(rows.loc[rows["flag_shared_rent_area"].eq(True), "sa2_name"]) + ".")
+    elif unit(data) == "SA2" and rows["flag_borrowed_rent"].eq(True).any():
         extra.append("Shares rent figures with a neighbouring area: " + ", ".join(rows.loc[rows["flag_borrowed_rent"].eq(True), "sa2_name"]) + ".")
+    extra += one_bed(data, beds)
     text = ((f"Comparing {len(found)} areas" if len(found) > 1 else f"**{found[0]}**") + f": rent for a {home}, crime, schools, GPs and "
             "shopping centres" + "".join(f", {EXTRA_NAMES[x]}" for x in extras) + ".")
     return reply(text, p, [(f"{home.capitalize()} rent and area facts", t)], notes(data, extra, extras))
@@ -335,6 +412,25 @@ if __name__ == "__main__":
     rs = respond(s, "x", {}, [], stub(Ask(intent="rental_search", max_rent=700, dwelling="House", beds="3")))
     assert rs["tables"][0][1]["Area"].tolist() == rental_search(s, 700, "House", "3")["matches"]["sa2_name"].tolist()
     assert any("LINZ suburbs" in n for n in rs["notes"])
+    assert rs["tables"][-1][0].startswith("Wider-area estimates") and "Coverage" in rs["tables"][0][1]
+    assert set(rs["tables"][-1][1]["Area"]) == set(rental_search(s, 700, "House", "3")["shared"]["sa2_name"])
+    wk = respond(s, "x", {}, [], stub(Ask(intent="area_info", areas=["Waiake"])))
+    assert any("Wider-area estimate" in n and "Torbay" in n for n in wk["notes"])
+    assert any("6 census residents" in n for n in respond(s, "x", {}, [], stub(Ask(intent="area_info", areas=["Huntington Park"])))["notes"])
+    assert any("one-bedroom" in n for n in respond(s, "x", {}, [], stub(Ask(intent="rental_search", max_rent=500, beds="1")))["notes"])
+    for bad in (dict(max_rent=-5), dict(max_rent=0), dict(near_km=-1), dict(min_muslim_pct=150)):
+        assert respond(s, "x", {"max_rent": 600}, [], stub(Ask(intent="rental_search", **bad)))["prefs"] == {"max_rent": 600}
+    import httpx2  # google-genai's default backend
+    calls = []
+
+    def flaky(*a):
+        calls.append(1)
+        raise httpx2.ReadTimeout("timed out")
+    try:
+        with_retries(flaky, sleep=lambda s: None)
+    except httpx2.ReadTimeout:
+        assert len(calls) == RETRIES + 1  # bounded: tried, retried twice, then the app shows the manual fallback
+    assert over_limit(SESSION_LIMIT, 0) and over_limit(0, DAILY_LIMIT) and over_limit(0, 0) is None
     ai = respond(s, "x", {}, [], stub(Ask(intent="area_info", areas=["Mt Roskill"], show=["mosque"])))
     assert ai["tables"][0][1]["Area"].tolist() == ["Mount Roskill"] and "this SA2" not in ai["tables"][0][1].to_string()
     d = load_data("sa2")

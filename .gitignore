@@ -28,6 +28,7 @@ data/amenities/osm/
 data/amenities/at_gtfs.zip
 data/amenities/schools_directory.csv
 data/boundaries/nz_sa2_*.geojson
+data/boundaries/auckland_suburbs_linz.geojson
 data/census/
 data/crime/
 data/property_prices/

@@ -41,7 +41,7 @@ def run(view, suburb=None, setup=None, mosques=False, level="sa2"):  # the SA2 c
 
 
 def text(at):
-    return html.unescape("\n".join(str(e.value) for e in list(at.markdown) + list(at.caption) + list(at.info) + list(at.warning)))
+    return html.unescape("\n".join(str(e.value) for e in list(at.markdown) + list(at.caption) + list(at.info) + list(at.warning) + list(at.error)))
 
 
 def kpi(at, label):
@@ -114,7 +114,7 @@ check("Zero-match search at $200: no matches, no fallbacks", "No area has a typi
 at = run("Find a rental under my budget", setup=lambda a: widget(a.number_input, "My budget ($ a week)").set_value(700))
 ok = [d.value for d in at.dataframe if "Quarters with data (of 4)" in d.value.columns]
 check("Budget matches show lodgements, quarters and data period ($700, 3-bed house)",
-      bool(ok) and len(ok[0]) > 0 and (ok[0]["New rentals (12 months)"] >= 30).all() and "average of Oct 2025–Sep 2026" in text(at),
+      bool(ok) and len(ok[0]) > 0 and (ok[0]["Source-area bonds (12 months)"] >= 30).all() and "average of Oct 2025–Sep 2026" in text(at),
       f"rows {len(ok[0]) if ok else 0}")
 
 # The shared search (search.py) the AI chat will call gives the same answers as the pages
@@ -193,7 +193,7 @@ for view, sub, setup in pages:
     if view == "Explore suburb":
         check("Downloads (PDF and Word): mosque row only when enabled; reports still build",
               len(r_off) == 2 and not any("Mosques (mapped)" in t for t in r_off.values())
-              and all("Mosques (mapped): 1 inside the area" in t for t in r_on.values()))
+              and all("Mosques (mapped): 1 inside the SA2" in t for t in r_on.values()))
     if view == "Compare suburbs":
         tab = [d.value for d in on_.dataframe if "Nearest mapped mosque" in d.value.index][0]
         check("Compare (enabled): nearest mosque agrees with the profile",
@@ -273,11 +273,11 @@ m = run("Find a rental under my budget", setup=lambda a: widget(a.number_input, 
 cm, mm = table(c, home3), table(m, "Quarters with data (of 4)")
 check("Chat = manual, $700 3-bed house: same budget-match areas, rents and lodgement counts",
       bool(cm and mm) and cm[0]["Area"].tolist() == mm[0]["Area"].tolist() and cm[0][home3].tolist() == mm[0]["Typical rent"].tolist()
-      and cm[0]["New rentals (12 months)"].tolist() == mm[0]["New rentals (12 months)"].tolist(), f"chat {len(cm[0]) if cm else 0}, manual {len(mm[0]) if mm else 0}")
+      and cm[0]["Source-area bonds (12 months)"].tolist() == mm[0]["Source-area bonds (12 months)"].tolist(), f"chat {len(cm[0]) if cm else 0}, manual {len(mm[0]) if mm else 0}")
 check("Chat answers always show sample check, crime, schools, GPs and shopping centres with the rent period; nothing else unasked",
       bool(cm) and {"Sample check", "Crime per 1,000 residents", "Crime rating", "Primary schools in area", "GP clinics in area",
                     "Nearest shopping centre"} <= set(cm[0].columns) and not {"Parks in area", "Muslim residents % (2023 Census)"} & set(cm[0].columns)
-      and "(Oct 2025–Sep 2026)" in text(c) and "30+ new rentals" in text(c))
+      and "(Oct 2025–Sep 2026)" in text(c) and "30+ new bonds" in text(c))
 c = ask(A(intent="rental_search", max_rent=580, dwelling="House", beds="3"))
 check("Chat = Family screen reference ($580 3-bed house): 0 matches, 4 under budget that fail the checks, 138 with no figure",
       "No area matches" in text(c) and "4 more areas have a figure under budget that fails" in text(c) and "138 areas have no published rent" in text(c))
@@ -321,8 +321,8 @@ btn[0].click().run() if btn else None
 check("API limit button opens the manual search", c.session_state["view"] == "Find a rental under my budget")
 busy = errors.ServerError(503, {"error": {"code": 503, "message": "The model is overloaded", "status": "UNAVAILABLE"}})
 c = ask(busy, A(intent="rental_search", max_rent=600, dwelling="House", beds="3"), messages=1)
-c2 = ask(busy, busy, messages=1)
-check("Gemini 503: retried once and answered; if it fails twice, says try again and offers manual filters",
+c2 = ask(busy, busy, busy, messages=1)
+check(f"Gemini 503: retried and answered; after {chat.RETRIES} retries says try again and offers manual filters",
       "No area matches" in text(c) and "try again in a moment" in text(c2) and any(b.label.startswith("Open Find") for b in c2.button))
 try:
     A.model_validate_json('{"intent": "nonsense"}')
@@ -360,6 +360,184 @@ check("Suburb map: one polygon per suburb row", ids == set(S2["sa2_code"]), f"{l
 at = run("Suburb in plain English", suburb=S2[S2["analysis_ready"] & S2["mosques_in_area"].eq(0)]["sa2_name"].iloc[0], mosques=True, level="suburb")
 check("Suburb level zero-mosque wording says 'this suburb'", "No mosque mapped inside this suburb" in text(at) and "this SA2" not in text(at))
 check("Suburb screen: shared-SA2 places are never ranked", S2.loc[S2["suburb_source_sa2"].notna(), "ranked"].ne(True).all())
+
+# ---------- audit of b3f2aaa: geography, shared areas, benchmarks, rent provenance, rent quality, chat hardening ----------
+import os  # noqa: E402
+
+import geopandas as gpd  # noqa: E402
+
+from build_suburbs import rate_crime  # noqa: E402
+
+LINZ = "data/boundaries/auckland_suburbs_linz.geojson"  # raw LINZ file, not in git (27 MB); download_data.py fetches it
+prof_s = pd.read_csv(f"{CLEAN}/suburb_profiles.csv").set_index("suburb_name")
+if os.path.exists(LINZ):
+    # Independent recount: raw point files and the raw LINZ polygons, without facilities.py or build_suburbs.py
+    poly = gpd.read_file(LINZ).to_crs(2193)[["id", "geometry"]].rename(columns={"id": "suburb_id"})
+    poly["geometry"] = poly.make_valid()
+    gp = pd.read_csv("data/amenities/gp_clinics_auckland.csv")
+    gp = gp[~gp["osm_id"].isin(pd.read_csv("data/amenities/gp_clinic_corrections.csv").query("decision == 'drop'")["osm_id"])]
+    mq = pd.concat([pd.read_csv("data/amenities/mosques_verified.csv").query("status == 'verified'"),
+                    pd.read_csv("data/amenities/mosques_osm_candidates.csv").query("status == 'keep'")])
+    pts = {"gp_clinics_in_area": gp, "mosques_in_area": mq, "playgrounds_in_area": pd.read_csv("data/amenities/playgrounds_auckland.csv"),
+           "parks_in_area": pd.read_csv("data/amenities/parks_auckland.csv"),
+           "supermarkets_in_area": pd.read_csv("data/amenities/supermarkets_auckland.csv"),
+           "shopping_centres_in_area": pd.read_csv("data/amenities/shopping_centres_auckland.csv"),
+           "halal_places_in_area": pd.read_csv("data/amenities/halal_shops_auckland.csv")}
+    ids = prof_s.reset_index().set_index("suburb_id")
+    bad = {}
+    for col, d in pts.items():
+        g = gpd.GeoDataFrame(geometry=gpd.points_from_xy(d["lon"], d["lat"]), crs=4326).to_crs(2193)
+        n = gpd.sjoin(g, poly, predicate="within").groupby("suburb_id").size().reindex(ids.index, fill_value=0)
+        bad[col] = int((n != ids[col]).sum())
+    check("Boundary = counts: facilities recounted independently inside the LINZ boundaries match every suburb (7 measures)",
+          sum(bad.values()) == 0, str(bad))
+else:
+    check("Boundary = counts: raw LINZ boundary file present for the independent recount", False, f"{LINZ} missing: run download_data.py")
+w = prof_s.loc["Wai o Taiki Bay"]
+check("Wai o Taiki Bay: 0 GPs inside its LINZ boundary (1 in its assigned SA2 is kept as gp_clinics_in_assigned_sa2s)",
+      (w["gp_clinics_in_area"], w["gp_clinics_in_assigned_sa2s"]) == (0, 1))
+corr = pd.read_csv("data/amenities/gp_clinic_corrections.csv")
+names = set(pd.read_csv("data/amenities/gp_clinics_auckland.csv").query("osm_id in @corr.osm_id")["name"].dropna())
+check("GP corrections: reviewed list with reasons; specialists (e.g. Franklin Cardiology) dropped and absent from nearest-GP names",
+      corr["reason"].notna().all() and {"Epsom Anaesthetic Group", "Franklin Cardiology", "Mark Gittos Plastic Surgery"} <= set(corr.query("decision == 'drop'")["name"])
+      and not set(corr.query("decision == 'drop'")["name"]) & set(prof_s["nearest_gp_clinic"]) and names <= set(corr["name"].dropna()))
+
+# shared areas: 70 borrowed rows, each with its source SA2 and the disclosure wording
+b = prof_s[prof_s["coverage"] == "borrowed"]
+check("Shared areas: 70 places borrow a parent SA2; each names its source SA2 and carries the wider-area wording",
+      len(b) == 70 and b["coverage_source_name"].notna().all()
+      and b["coverage_note"].str.startswith("Wider-area estimate—covers neighbouring places").all())
+z = search.rental_search(sub, 700, "House", "3")
+check("$700 3-bed house (suburbs): borrowed places are separated from budget matches (4 that pass checks, listed apart)",
+      z["matches"]["independent"].all() and (z["shared"]["check"] == "ok").sum() == 4 and not z["shared"]["independent"].any())
+m = run("Find a rental under my budget", setup=lambda a: widget(a.number_input, "My budget ($ a week)").set_value(700), level="suburb")
+shared_t = [d.value for d in m.dataframe if "Covers (SA2)" in d.value.columns]
+check("Find a rental (suburbs): wider-area estimates shown in their own table with the source SA2",
+      "Wider-area estimates under budget" in text(m) and bool(shared_t) and set(shared_t[0]["Area"]) == set(z["shared"]["sa2_name"]))
+c = ask(A(intent="rental_search", max_rent=700, dwelling="House", beds="3"), level="suburb")
+check("Chat (suburbs): wider-area estimates in a separate table; every table has a Coverage column",
+      any("Wider-area estimates" in str(e.value) for e in c.markdown) and all("Coverage" in d.value.columns for d in c.dataframe))
+at = run("Explore suburb", suburb="Waiake", level="suburb")
+rw = reports(at)
+check("Explore Waiake: wider-area warning names Torbay and the SA2 beside the figures, and in both reports",
+      "Wider-area estimate—covers neighbouring places" in text(at) and "Torbay" in text(at)
+      and len(rw) == 2 and all("Wider-area estimate" in t for t in rw.values()))
+at = run("Suburb in plain English", suburb="Waiake", level="suburb")
+check("Plain English Waiake: wider-area warning shown (not only the shared-rent note)", "Wider-area estimate—covers neighbouring places" in text(at))
+at = run("Compare suburbs", level="suburb", setup=lambda a: widget(a.multiselect, "Compare suburbs").set_value(["Waiake", "Torbay"]))
+ct = [d.value for d in at.dataframe if "Coverage" in d.value.index]
+check("Compare: Coverage row marks Waiake as a wider-area estimate and Torbay as own SA2s",
+      bool(ct) and ct[0].loc["Coverage", "Waiake"].startswith("Wider-area estimate") and ct[0].loc["Coverage", "Torbay"] == "Own SA2s")
+at = run("Map lab", suburb="Waiake", level="suburb")
+check("Map lab (suburbs): borrowed places uncoloured and unranked; LINZ and SA2 analysis outlines explained",
+      "Not ranked on this map: wider-area estimate" in text(at) and "amber = the Stats NZ SA2 areas" in text(at) and not at.exception)
+
+# benchmarks from independent rows: adding or removing a borrowed row moves nobody else's crime rating, CV median or rank
+cr = prof_s.reset_index()
+ind = cr["coverage"].ne("borrowed")
+base_r = rate_crime(cr, ind)
+fake = cr[ind & cr["analysis_ready"]].nlargest(1, "crime_per_1000_residents").assign(crime_per_1000_residents=1e6, suburb_name="Fake alias")
+plus = pd.concat([cr, fake], ignore_index=True)
+check("Benchmark invariance: crime ratings unchanged when borrowed rows are removed or an extreme alias is added",
+      base_r[ind].equals(rate_crime(cr[ind], ind[ind])) and rate_crime(plus, plus["coverage"].ne("borrowed") & ~plus.index.isin([len(cr)]))[:len(cr)][ind].equals(base_r[ind])
+      and prof_s["crime_rating"].reset_index(drop=True)[ind].equals(base_r[ind]))
+own_med = cr.loc[ind & cr["analysis_ready"], "cv_change_2021_2024_pct"].median()
+at = run("Overview", level="suburb")
+check(f"Overview CV median uses suburbs with their own SA2s ({own_med:+.2f}%, not the {cr.loc[cr['analysis_ready'], 'cv_change_2021_2024_pct'].median():+.2f}% with borrowed rows)",
+      kpi(at, "CV change 2021–24")[0] == f"{own_med:+.2f}%", str(kpi(at, "CV change 2021–24")))
+
+# rent provenance: real MBIE ids, shared series counted once, source vs apportioned bonds
+src = pd.read_csv(f"{CLEAN}/suburb_rent_sources.csv")
+mbie = set(sa2["rent_source_sa2"].dropna().astype(int))
+key = S2.set_index("sa2_name")["rent_source_sa2"]
+main = src[src["own_sa2"]]
+check("MBIE sources: every source id is a real MBIE rent area; Arkles Bay and Wade Heads share 114900; apportioned bonds add back to MBIE totals",
+      set(src["rent_source_sa2"]) <= mbie and key["Arkles Bay"] == key["Wade Heads"] == "114900"
+      and (main.groupby("rent_source_sa2")["apportioned_lodged_4q"].sum() - main.groupby("rent_source_sa2")["source_lodged_4q"].first()).abs().max() < 1e-6)
+at = run("Rent in Auckland", suburb="Tōtara Park", level="suburb")
+rt = [d.value for d in at.dataframe if "Est. bonds apportioned (estimate)" in d.value.columns]
+h3 = rt[0].set_index("Home").loc["3-bedroom house"] if rt else None
+check("Tōtara Park 3-bed house: 45 source-area bonds and about 7.9 apportioned, labelled separately",
+      h3 is not None and h3["Source-area bonds (12 months)"] == 45 and round(h3["Est. bonds apportioned (estimate)"], 1) == 7.9)
+
+# rent quality: failing figures are never green or 'cheaper than most', everywhere they appear
+at = run("Suburb in plain English", suburb="Cornwallis", level="suburb")
+t = text(at)
+check("Cornwallis (18 bonds, unstable): plain English shows 'fails sample checks', no 'cheaper than most', no green",
+      "fails sample checks" in t and "cheaper than most" not in t and "18 source-area bonds" in t)
+at = run("Explore suburb", suburb="Cornwallis", level="suburb")
+check("Cornwallis Explore: rent KPI flagged, warning beside it, badge shown",
+      "(fails sample checks)" in kpi(at, "Weekly rent")[0] and "Rent fails sample checks" in text(at) and "18 source-area bonds" in text(at))
+c = ask(A(intent="area_info", areas=["Cornwallis"]), level="suburb")
+check("Chat Cornwallis: sample check says it fails", "Fails sample checks" in " ".join(table(c, "Sample check")[0]["Sample check"].astype(str)))
+
+# exceptional places, one-bedroom note, missing data
+for name, phrase in [("Huntington Park", "6 census residents"), ("Mangawhai", "Northland")]:
+    at = run("Explore suburb", suburb=name, level="suburb")
+    c = ask(A(intent="area_info", areas=[name]), level="suburb")
+    check(f"{name}: prominent warning on Explore and in chat", phrase in text(at) and phrase in text(c))
+c = ask(A(intent="rental_search", max_rent=500, beds="1"), level="suburb")
+check("Chat carries the one-bedroom data warning", "one-bedroom counts and rents with caution" in text(c))
+scr = pd.read_csv(f"{CLEAN}/suburb_screen.csv")
+check("Missing data stays missing: 18 screened suburbs without volatility are unranked with that reason, not filled",
+      (scr["missing_inputs"].fillna("").str.contains("rent_volatility") & ~scr["ranked"]).sum() == 18 and scr.loc[scr["ranked"], "rent_volatility"].notna().all())
+
+# mapping reproducibility
+lk = pd.read_csv(f"{CLEAN}/sa2_to_suburb.csv")
+check("Mapping: 633 lookup rows kept; 6 water SA2s are reviewed exclusions (confidence 'not applicable', reasons kept); "
+      "Inlet Waitematā Harbour keeps its 3 residents in the SA2 data",
+      len(lk) == 633 and (lk["match_rule"] == "excluded").sum() == 6
+      and lk.loc[lk["match_rule"] == "excluded", "boundary_confidence"].eq("not applicable (reviewed exclusion)").all()
+      and lk.loc[lk["match_rule"] == "excluded", "exclusion_reason"].notna().all()
+      and sa2.set_index("sa2_code").loc[119301, "population_2023"] == 3)
+if os.path.exists(LINZ):
+    import review_evidence  # noqa: E402
+    rv = pd.read_csv("data/boundaries/sa2_to_suburb_review.csv", encoding="utf-8-sig")
+    diff = review_evidence.compare(rv, review_evidence.evidence(rv["sa2_code"]))
+    check("Review evidence regenerated for all 50 reviewed SA2s (SA1 residents, rating units, council addresses) matches the committed review",
+          diff.empty, diff.to_string()[:300])
+
+# app helpers (were import-time asserts in app.py), compiled from app.py without running the page
+import ast  # noqa: E402
+from urllib.parse import quote  # noqa: E402
+
+with open("app.py", encoding="utf-8") as fh:
+    _tree = ast.parse(fh.read())
+_ns = {"quote": quote, "SUB": False}
+exec(compile(ast.Module([n for n in _tree.body if isinstance(n, ast.FunctionDef) and n.name in ("suburb_word", "listings_url")], []),
+             "app.py", "exec"), _ns)
+sw, lu = _ns["suburb_word"], _ns["listings_url"]
+check("Trade Me helpers: suburb word from SA2 names, search URL carries budget, beds and type",
+      sw("Glen Innes East-Wai O Taiki Bay") == "Glen Innes" and sw("Massey Central") == "Massey"
+      and sw("Te Atatū Peninsula West") == "Te Atatū Peninsula" and sw("Āwhitu") == "Āwhitu"
+      and lu("Pukekohe", "House", "3", 600).endswith("search_string=Pukekohe&price_max=600&bedrooms_min=3&bedrooms_max=3&property_type=house"))
+_p = pd.read_csv(f"{CLEAN}/suburb_profiles.csv").set_index("suburb_name")
+check("Huntington Park and Mangawhai caveat column leads with their warning",
+      _p.loc["Huntington Park", "caveat"].startswith("Statistical coverage is tiny") and _p.loc["Mangawhai", "caveat"].startswith("Mostly outside Auckland"))
+at = run("Explore suburb", "Newmarket", level="suburb")
+check("Commercial / mixed units badge (rating units > 1.4 per dwelling) on Explore: Newmarket",
+      not at.exception and "Commercial / mixed units" in "".join(m.value for m in at.markdown), f"{(_p.units_per_dwelling > 1.4).sum()} suburbs carry it")
+
+# chat hardening: timeout recovery, validation, usage caps, geography in history
+import httpx2  # noqa: E402  google-genai's default HTTP backend from 3.6
+
+c = ask(*[httpx2.ReadTimeout("timed out")] * (chat.RETRIES + 1), messages=1)
+check("Chat timeout (httpx2.ReadTimeout, the SDK's default backend, after retries): clear message and manual fallback, no crash",
+      not c.exception and "timed out" in text(c) and any(b.label.startswith("Open Find") for b in c.button))
+c = ask(A(intent="rental_search", max_rent=-5))
+check("Chat validation: a negative budget is refused, not searched", "Please give a weekly budget above" in text(c) and not c.dataframe)
+at = AppTest.from_file("app.py", default_timeout=180)
+at.session_state["view"], at.session_state["ask_used"] = "Ask Auckland", chat.SESSION_LIMIT
+at.secrets["GEMINI_API_KEY"] = "test-key"
+chat.gemini_extract = lambda *a: (_ for _ in ()).throw(AssertionError("Gemini must not be called over the cap"))
+at.run()
+at.chat_input[0].set_value("a question").run()
+check(f"Chat usage cap: after {chat.SESSION_LIMIT} questions in a session, no Gemini call; manual fallback offered",
+      not at.exception and f"asked {chat.SESSION_LIMIT} questions" in text(at))
+c = ask(A(intent="area_info", areas=["Ponsonby"]), level="suburb")
+c.session_state["level"] = "sa2"
+c.run()
+check("Chat history marks the geography and says when it switches", "Figures for LINZ suburbs" in text(c) and "Switched to Stats NZ SA2 areas" in text(c))
 
 # ---------- report ----------
 width = max(len(n) for n, _, _ in results)

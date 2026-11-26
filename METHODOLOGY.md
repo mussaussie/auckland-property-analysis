@@ -395,5 +395,33 @@ SA2 view stays one click away ("Show figures for" in the sidebar) and each subur
 4. **Checks:** own-row totals equal SA2 totals (population, households, crime, schools, mosques, GPs); rent shares sum to 1 per
    rent area; single-SA2 suburbs reproduce the SA2 files; `release_checks.py` checks chat = manual = shared search at suburb level.
 
-**Weak points:** suburb rents and medians are approximations (no official suburb figure exists); distances run from SA2 points;
+**Weak points:** suburb rents and medians are approximations (no official suburb figure exists);
 Huntington Park (6 residents) and Mangawhai (mostly in Northland) are odd rows kept with caveats.
+
+### 11a. Audit of the suburb release (26 Nov 2026)
+
+An audit of commit b3f2aaa found figures that did not match the geography shown, shared areas that were not disclosed and
+benchmarks that borrowed rows could move. Fixes (SA2 source files and reviewed mappings unchanged):
+
+1. **Geography.** "Inside this suburb" counts are now made inside the LINZ boundary the map shows (`linz_facilities`, File 3's
+   point rules via `facilities.py`); the SA2 sums stay as `*_in_assigned_sa2s`. 38 suburbs had a GP count that disagreed with
+   their boundary (Wai o Taiki Bay showed 1; it is 0). Nearest distances run from the LINZ polygon's representative point. Map lab
+   outlines the combined assigned SA2s (`auckland_suburbs_analysis_map.geojson`) beside the LINZ boundary.
+2. **Coverage.** Each row is `own`, `parent` or `borrowed`; borrowed rows carry "Wider-area estimate—covers neighbouring places"
+   with the source SA2 beside every result (pages, chat, compare, map, reports). They are searchable but listed apart from budget
+   matches. Shared SA2 coverage and shared MBIE rent series (`flag_shared_rent_area`) are reported separately.
+3. **Benchmarks** come from independently represented rows (parents kept) and are then applied to all rows (`rate_crime`).
+   Dropping the borrowed rows from the crime thresholds changed 19 independent suburbs' ratings; the Overview CV median moves from
+   −5.00% to −7.55%.
+4. **Rent provenance.** `suburb_rent_sources.csv` stores the real MBIE ids, shares and source/apportioned lodgements. The 30-bond
+   rule stays on the source-area bonds: the rule was set for MBIE's published areas, and an apportioned count (bonds × the
+   suburb's share of rented households) is a modelled estimate with no sampling distribution of its own, so testing it against
+   30 would mix an estimate with an observed-count threshold. It is shown, labelled "estimate", never tested.
+5. **Rent quality.** A failing all-home rent is flagged beside the figure everywhere and is never green, ranked or called cheap.
+6. **GPs.** 18 specialist and non-GP OpenStreetMap entries are dropped by `gp_clinic_corrections.csv` (reasons kept, 7 unverified
+   kept); File 3 and the suburb build both apply it (310 GPs).
+7. **Mapping reproducibility.** `review_evidence.py` regenerates the 50 reviewed SA2s' evidence (SA1 residents split by rating-unit
+   location, unit shares, council address labels) and reproduces the committed review within rounding (one stored `nan`, Inlet
+   Waitematā Harbour's 0/0, is a formatting artefact). Water exclusions are labelled "not applicable (reviewed exclusion)".
+8. **Chat.** 20 s request timeout, 2 bounded retries on 5xx and network errors, manual fallback on timeout, 30 questions a session
+   and 400 a day, numeric filters validated, and each answer tagged with its geography.

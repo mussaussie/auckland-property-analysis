@@ -59,7 +59,28 @@ python download_data.py
 python build_master.py
 ```
 
-Then run the notebooks in order, 01 to 08. Some source links carry a date in the file name and may need updating.
+Then run the notebooks in order, 01 to 08, and `python build_suburbs.py` for the suburb files. Some source links carry a date in
+the file name and may need updating. `python review_evidence.py` regenerates the evidence behind the 50 reviewed SA2-to-suburb
+decisions and reports any difference from `data/boundaries/sa2_to_suburb_review.csv`.
+
+## Release checks and rollback
+
+`python release_checks.py` (needs `requirements-analysis.txt` and the raw LINZ suburb file from `download_data.py`) checks the
+figures every page shows: headline numbers, chat = manual search, facility counts recounted inside the LINZ boundaries, shared-area
+disclosures, benchmark invariance, MBIE source ids, rent-quality labels, timeout recovery and the exceptional suburbs. Run it before
+every push to `main`; exit code 0 = release.
+
+Streamlit Community Cloud deploys `main`. To roll back a bad release:
+
+```bash
+git revert --no-edit <bad-commit>   # one commit; for a range: git revert --no-edit <first-bad>^..<last-bad>
+python release_checks.py
+git push origin main
+```
+
+`git revert` keeps history (no force-push). The app redeploys from the new commit in a few minutes; if it does not, use **Manage
+app → Reboot app** on share.streamlit.io. Data files are versioned with the code, so a revert restores matching data. The Gemini key
+lives only in the app's Secrets and is untouched by a rollback.
 
 ## Data sources
 
@@ -76,7 +97,11 @@ Then run the notebooks in order, 01 to 08. Some source links carry a date in the
 
 ## Read the numbers with their caveats
 
-- **Rent** is new-tenancy bond rent, not what all renters pay; 142 areas share a rent series with a neighbour.
+- **Suburbs** are LINZ suburbs. Facility counts use the suburb's own boundary; census, valuation, crime and rent figures come from
+  the SA2 areas assigned to it, so they approximate the suburb. 70 small places have no SA2 of their own and are shown as
+  "Wider-area estimate—covers neighbouring places", never ranked or used in benchmarks.
+- **Rent** is new-tenancy bond rent, not what all renters pay; 142 SA2s share a rent series with a neighbour. A figure that fails the
+  sample checks (under 30 source-area bonds, or a jumpy price) is labelled so beside the number.
 - **Gross yield** is a 2024 council-valuation proxy, not a sale-price yield, and is inflated in apartment areas.
 - **Sale prices** are Auckland-wide only; there are no suburb sale prices in this project.
 - **Rent forecasts** apply Auckland's damped trend to each area's current rent (about 5% typical error in a one-year backtest). Don't rank areas by them.

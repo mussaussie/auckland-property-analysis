@@ -1,0 +1,28 @@
+osm_id,name,decision,reason,evidence
+664332173,Epsom Anaesthetic Group,drop,Anaesthetists (specialist service); not a general practice,name
+926022691,Osteopathic Clinic,drop,Osteopathy (allied health); not a general practice,name
+3610458268,Mercy Ascot Endoscopy North Shore,drop,Endoscopy unit of a private hospital; specialist referral service,name
+3683343768,Remuera Chiropractic Centre,drop,Chiropractic (allied health); not a general practice,name
+3683343771,Spinewave,drop,Chiropractic / wellness centre (directory listings: Spinewave Wellness Centre; chiropractic),web search 26 Nov 2026
+12251462302,Axis Sports Medicine,drop,Sports medicine clinic; not an enrolling general practice,name
+13946649204,Auckland Day Surgery Centre,drop,Day-surgery facility; specialist referral service,name
+13986925304,Mark Gittos Plastic Surgery,drop,Plastic surgeon (specialist),name
+14016521201,Waitemata Endoscopy,drop,Endoscopy unit; specialist referral service,name
+14040558214,Franklin Cardiology,drop,Cardiologists (specialist),name
+14307825503,cardia,drop,Cardia Care: private cardiology service (Healthpoint listing; GP referral),web search 26 Nov 2026
+262457904,Optimum Health Chiropractic,drop,Chiropractic (allied health); not a general practice,name
+334140892,Franklin Day Surgery,drop,Day-surgery facility; specialist referral service,name
+8272731358,Airport Aesthetic,drop,Cosmetic / aesthetic clinic,name
+8369698105,MoleMap,drop,Skin-check service; not a general practice,name
+10892579305,Ease Nervous System Wellness,drop,Wellness therapy; not a general practice,name
+12590431811,NZ Society of Genealogists,drop,Not a health service (OpenStreetMap tagging error),name
+13785505002,Speedy Manograms,drop,Breast imaging (mammograms); not a general practice,name
+3577963843,IBOD,keep (unverified),Tagged amenity=doctors in OpenStreetMap; name not identified by a web search,web search 26 Nov 2026
+10872400012,Blue Waters,keep (unverified),Tagged amenity=doctors in OpenStreetMap; name not identified by a web search,web search 26 Nov 2026
+316890885,The Fono,keep,Pacific health provider with general practice clinics,name
+3745165053,Three Kings Accident and Medical,keep,Accident and medical clinic with GP services,name
+961406641,,keep (unverified),Tagged amenity=doctors with no name; cannot be reviewed,no name
+4974631014,,keep (unverified),Tagged amenity=doctors with no name; cannot be reviewed,no name
+6082243818,,keep (unverified),Tagged amenity=doctors with no name; cannot be reviewed,no name
+339310385,,keep (unverified),Tagged amenity=doctors with no name; cannot be reviewed,no name
+501959320,,keep (unverified),Tagged amenity=doctors with no name; cannot be reviewed,no name

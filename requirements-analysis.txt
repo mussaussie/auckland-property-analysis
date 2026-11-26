@@ -2,7 +2,10 @@
 -r requirements.txt
 geopandas==1.1.1
 pyogrio==0.11.1
+pyproj==3.7.2         # pinned with shapely: review_evidence.py reproduces the reviewed SA2 evidence (3.8/2.2 move harbour-edge points)
+shapely==2.1.2
 matplotlib==3.10.6
 scikit-learn==1.7.2
 statsmodels==0.14.6
 requests==2.32.5
+pypdf==5.9.0          # release_checks.py reads the PDF report

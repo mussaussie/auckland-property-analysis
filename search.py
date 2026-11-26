@@ -45,8 +45,13 @@ def _suburb_rows():
         s[c] = s[c].fillna(False).astype(bool)
     # 'shares rent figures with a neighbour': a place with no SA2 of its own, or a rent area that also feeds another suburb
     s["flag_borrowed_rent"] = s["flag_shared_rural_sa2"] | s["flag_shared_rent_area"]
-    # one key per independent rent figure: shared places count once with their parent SA2 (used for 'distinct rent areas')
-    s["rent_source_sa2"] = s["suburb_source_sa2"].fillna(s["sa2_code"]).astype(int)
+    # one key per independent rent figure: the set of MBIE rent areas behind it (suburb_rent_sources.csv, real MBIE ids), so
+    # Arkles Bay and Wade Heads, fed by the same area, count once in 'distinct rent areas'
+    src = pd.read_csv(f"{CLEAN}/suburb_rent_sources.csv")
+    key = src.groupby("suburb_id")["rent_source_sa2"].agg(lambda x: ";".join(map(str, sorted(set(x)))))
+    s["rent_source_sa2"] = s["sa2_code"].map(key)
+    for c in ["coverage_note", "special_note"]:
+        s[c] = s[c].fillna("")
     return s
 
 
@@ -60,6 +65,8 @@ def load_data(level="suburb"):
     rows["crime_property"] = rows[["crime_burglary", "crime_theft"]].sum(axis=1, min_count=1)
     rows["return_score"] = (rows["value_score"] + rows["growth_score"]) / 2
     rows["risk_level"] = 100 - rows["risk_score"]          # risk_score: 100 = lowest risk
+    # independently represented rows: the base for benchmarks, rankings and budget matches (borrowed places are listed apart)
+    rows["independent"] = rows["coverage"].ne("borrowed") if sub else True
     by_sa2 = pd.read_csv(f"{CLEAN}/rent_by_type_sa2.csv", dtype={"beds": str})
     if sub:
         by_type = pd.read_csv(f"{CLEAN}/suburb_rent_by_type.csv", dtype={"beds": str}).rename(columns={"suburb_id": "sa2_code"})
@@ -91,13 +98,30 @@ def rent_period(data):
 def with_home_rent(df, data, dwelling, beds):
     """df (SA2 rows) plus the rent for one home (dwelling x beds) and its sample check: ok / verify / no estimate."""
     bt = data["by_type"]
-    r = bt[(bt["dwelling"] == dwelling) & (bt["beds"] == beds)][
-        ["sa2_code", "rent", "rent_min_quarter", "rent_max_quarter", "lodged_bonds_4q", "quarters", "flag_thin_sample", "flag_unstable_rent"]]
+    cols = ["sa2_code", "rent", "rent_min_quarter", "rent_max_quarter", "lodged_bonds_4q", "quarters", "flag_thin_sample", "flag_unstable_rent"]
+    r = bt[(bt["dwelling"] == dwelling) & (bt["beds"] == beds)][cols + (["lodged_bonds_4q_in_suburb"] if "lodged_bonds_4q_in_suburb" in bt else [])]
+    r = r.rename(columns={"lodged_bonds_4q_in_suburb": "bonds_apportioned"})  # this home's; the profile's column is all homes
     s = df.merge(r, on="sa2_code", how="left")
     s["check"] = "ok"
     s.loc[s["flag_thin_sample"].eq(True) | s["flag_unstable_rent"].eq(True), "check"] = "verify"
     s.loc[s["rent"].isna(), "check"] = "no estimate"
+    s["check_note"] = [check_note(r) for _, r in s.iterrows()]
     return s
+
+
+def check_note(r):
+    """Why a rent passes or fails, beside the figure. The 30-bond rule is applied to the MBIE source area's lodgements;
+    at suburb level the share apportioned to the suburb is an estimate, shown but not tested (METRIC_RULES)."""
+    if pd.isna(r.get("rent")):
+        return "No published figure for this home"
+    why = [w for w, f in (("thin sample: fewer than 30 new bonds", "flag_thin_sample"),
+                          ("unstable: highest quarter over 1.5x the lowest", "flag_unstable_rent")) if r.get(f) == True]  # noqa: E712 (numpy bools)
+    n = f"{r['lodged_bonds_4q']:,.0f} source-area bonds"
+    if pd.notna(r.get("bonds_apportioned")):
+        # a borrowed place's count is its source SA2's share (it has no SA2 of its own), so say whose share it is
+        whose = f"its source SA2 ({r['coverage_source_name']})" if r.get("coverage") == "borrowed" else "this suburb"
+        n += f"; about {r['bonds_apportioned']:,.1f} apportioned to {whose} (estimate)"
+    return ("Fails sample checks (" + "; ".join(why) + f"); {n}") if why else f"Passes sample checks; {n}"
 
 
 def rental_search(data, max_rent, dwelling="House", beds="3", include_apt=None):
@@ -111,6 +135,8 @@ def rental_search(data, max_rent, dwelling="House", beds="3", include_apt=None):
       fallbacks   areas to investigate: no rent for this home passes the checks, but a broader steady rent
                   (same type any size, else any home; column 'basis') is within budget. Never budget matches.
       cheapest_ok cheapest rent that passes the checks at any budget (NaN if none)
+      shared      places with no SA2 of their own (suburb level) under budget, any check: their rent is the whole parent SA2's,
+                  so they are listed apart and never counted in under / matches / fallbacks
     Crime hotspots are always left out; apartment and inner-city areas only when include_apt (default: apartment searches).
     """
     include_apt = dwelling == "Apartment" if include_apt is None else include_apt
@@ -127,8 +153,11 @@ def rental_search(data, max_rent, dwelling="House", beds="3", include_apt=None):
                                                              else f"{d}s only, all bedroom counts")
                       for d in dict.fromkeys([dwelling, "ALL"])]).drop_duplicates("sa2_code")
     fb = s[s["check"] == "verify"].merge(wide[["sa2_code", "rent", "lodged_bonds_4q", "basis"]], on="sa2_code", suffixes=("_thin", ""))
-    return dict(areas=s, under=under, matches=under[under["check"] == "ok"].sort_values("rent"),
-                fallbacks=fb[fb["rent"] <= max_rent].sort_values("rent"), cheapest_ok=s.loc[s["check"] == "ok", "rent"].min())
+    ind = s["independent"]
+    fb = fb[fb["independent"] & (fb["rent"] <= max_rent)]
+    return dict(areas=s, under=under[under["independent"]], matches=under[under["independent"] & (under["check"] == "ok")].sort_values("rent"),
+                fallbacks=fb.sort_values("rent"), cheapest_ok=s.loc[ind & (s["check"] == "ok"), "rent"].min(),
+                shared=under[~under["independent"]].sort_values("rent"))
 
 
 if __name__ == "__main__":
@@ -138,6 +167,9 @@ if __name__ == "__main__":
     assert s["rent_ts"]["sa2_code"].isin(sub["sa2_code"]).all() and s["by_type"]["sa2_code"].isin(sub["sa2_code"]).all()
     z = rental_search(s, 700, "House", "3")
     assert len(z["areas"]) and set(z["matches"]["check"]) <= {"ok"} and z["matches"]["rent"].le(700).all()
+    assert z["matches"]["independent"].all() and len(z["shared"]) and not z["shared"]["independent"].any()  # borrowed places apart
+    ids = sub.set_index("sa2_name")["rent_source_sa2"]
+    assert ids["Arkles Bay"] == ids["Wade Heads"] == "114900"  # same MBIE rent area -> one distinct source
     d = load_data("sa2")
     # Reference result (METRIC_RULES.md, Family screen): 3-bed house <= $580 -> 4 under budget on 2 rent areas, none ok, 138 no estimate
     x = rental_search(d, 580, "House", "3")
