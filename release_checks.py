@@ -184,10 +184,13 @@ pages = [("Family screen", None, None), ("Find a rental under my budget", None,
                                          lambda a: widget(a.number_input, "My budget ($ a week)").set_value(800)),
          ("Suburb in plain English", av_name, None), ("Explore suburb", av_name, None), ("Compare suburbs", None, pick2)]
 for view, sub, setup in pages:
-    off, on_ = run(view, suburb=sub, setup=setup), run(view, suburb=sub, setup=setup, mosques=True)
+    # Reports are read straight after each run: a run's download files can be cleaned up once later runs start (seen on Streamlit 1.67)
+    off = run(view, suburb=sub, setup=setup)
+    r_off = reports(off) if view == "Explore suburb" else None
+    on_ = run(view, suburb=sub, setup=setup, mosques=True)
+    r_on = reports(on_) if view == "Explore suburb" else None
     check(f"Mosque info hidden by default, shown when enabled: {view}", not mosque_shown(off) and mosque_shown(on_))
     if view == "Explore suburb":
-        r_off, r_on = reports(off), reports(on_)
         check("Downloads (PDF and Word): mosque row only when enabled; reports still build",
               len(r_off) == 2 and not any("Mosques (mapped)" in t for t in r_off.values())
               and all("Mosques (mapped): 1 inside the area" in t for t in r_on.values()))
