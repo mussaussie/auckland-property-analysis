@@ -21,7 +21,7 @@ from fpdf import FPDF, XPos, YPos
 from plotly.subplots import make_subplots
 
 import chat
-from search import _sa2_rows, check_note, load_data, rent_period, rental_search
+from search import _sa2_rows, check_note, load_data, rent_areas, rent_period, rental_search
 
 CLEAN = "data/clean"
 st.set_page_config(page_title="Auckland Property Insights", page_icon="🏠", layout="wide")
@@ -861,7 +861,7 @@ def view_opportunity():
         ("Matches", f"{len(m)}", f"of {len(base)} areas with all four measures", GREEN),
         ("Median rent of matches", money(m["median_rent_weekly"].median()), "New tenancies", AMBER),
         ("Median yield of matches", num(m["gross_yield_pct"].median(), "{:.2f}", "%"), "2024 CV proxy", BLUE),
-        ("Distinct rent areas", f"{m['rent_source_sa2'].nunique()}", "Independent rent observations behind the matches", RED),
+        ("MBIE rent areas", f"{rent_areas(m)}", "Distinct MBIE source areas behind the matches' rents", RED),
     ])
     if m.empty:
         st.info("No area matches. Loosen a filter.")
@@ -918,7 +918,7 @@ def view_family():
     missing = s[s["check"] == "no estimate"]
     kpis([
         ("Areas pass other filters", f"{len(s)}", f"{s['rent'].notna().sum()} have a rent estimate for this home", GREEN),
-        ("Under budget", f"{len(under)}", f"On published figures; {under['rent_source_sa2'].nunique()} distinct MBIE rent areas", AMBER),
+        ("Under budget", f"{len(under)}", f"On published figures; {rent_areas(under)} distinct MBIE rent areas", AMBER),
         ("Passes sample checks", f"{len(ok)}", f"Under budget, 30+ new rentals and a steady price; {len(under) - len(ok)} fail the checks", BLUE),
         ("No rent figure", f"{len(missing)}", "No published rent for this home, so we can't say if it fits", RED),
     ])
@@ -1439,11 +1439,14 @@ def view_ask():
     elif limit:
         r = dict(text=limit, manual=True)
     else:
-        st.session_state["ask_used"] = st.session_state.get("ask_used", 0) + 1
-        today[day] = today.get(day, 0) + 1
         try:
+            def counted(*a):  # every Gemini request counts toward the caps, retries included
+                st.session_state["ask_used"] = st.session_state.get("ask_used", 0) + 1
+                today[day] = today.get(day, 0) + 1
+                return chat.gemini_extract(*a)
+
             def extract(*a):  # 5xx and network errors: bounded retries with back-off (a 429 limit is not retried)
-                return chat.with_retries(chat.gemini_extract, gemini_client(key), *a)
+                return chat.with_retries(counted, gemini_client(key), *a)
             history = [(m["role"], m["text"][:300]) for m in msgs]
             with st.spinner("Reading your question…"):
                 r = chat.respond(D, q, st.session_state.get("ask_prefs", {}), history, extract)

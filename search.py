@@ -48,6 +48,7 @@ def _suburb_rows():
     # one key per independent rent figure: the set of MBIE rent areas behind it (suburb_rent_sources.csv, real MBIE ids), so
     # Arkles Bay and Wade Heads, fed by the same area, count once in 'distinct rent areas'
     src = pd.read_csv(f"{CLEAN}/suburb_rent_sources.csv")
+    src = src[src["weight"] > 0]  # only sources that feed the rent (no lodgements: no weight, no figure)
     key = src.groupby("suburb_id")["rent_source_sa2"].agg(lambda x: ";".join(map(str, sorted(set(x)))))
     s["rent_source_sa2"] = s["sa2_code"].map(key)
     for c in ["coverage_note", "special_note"]:
@@ -124,6 +125,11 @@ def check_note(r):
     return ("Fails sample checks (" + "; ".join(why) + f"); {n}") if why else f"Passes sample checks; {n}"
 
 
+def rent_areas(df):
+    """Distinct MBIE rent areas behind the rows. A suburb's key can join several ids ("114900;115000"), so count the ids, not the keys."""
+    return df["rent_source_sa2"].dropna().astype(str).str.split(";").explode().nunique()
+
+
 def rental_search(data, max_rent, dwelling="House", beds="3", include_apt=None):
     """Areas for a budget and a home (dwelling: House / Apartment / Flat / ALL; beds: 1-4, 5+, ALL). Rules as File 3 shortlist().
 
@@ -170,6 +176,8 @@ if __name__ == "__main__":
     assert z["matches"]["independent"].all() and len(z["shared"]) and not z["shared"]["independent"].any()  # borrowed places apart
     ids = sub.set_index("sa2_name")["rent_source_sa2"]
     assert ids["Arkles Bay"] == ids["Wade Heads"] == "114900"  # same MBIE rent area -> one distinct source
+    assert rent_areas(sub[sub["sa2_name"].isin(["Arkles Bay", "Wade Heads"])]) == 1
+    assert rent_areas(sub) > sub["rent_source_sa2"].nunique()  # multi-source suburbs count each id
     d = load_data("sa2")
     # Reference result (METRIC_RULES.md, Family screen): 3-bed house <= $580 -> 4 under budget on 2 rent areas, none ok, 138 no estimate
     x = rental_search(d, 580, "House", "3")

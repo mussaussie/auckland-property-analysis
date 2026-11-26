@@ -20,8 +20,10 @@ from search import rent_period, rental_search, with_home_rent
 MODEL = "gemini-3.5-flash-lite"  # free tier about 500 requests/day (Nov 2026); Flash is about 20/day. One request per question.
 TIMEOUT_MS = 20_000   # per Gemini request; a hung connection ends as a timeout error (httpx2 backend) and the manual fallback is shown
 RETRIES = 2           # extra tries for 5xx and network errors only (a 429 quota error is never retried)
-SESSION_LIMIT = 30    # questions per browser session
-DAILY_LIMIT = 400     # questions per day for the whole app, under the ~500/day free quota
+# Basic protection only: both caps count Gemini requests (retries included) in app memory, so they reset when the app restarts.
+# The real daily quota is Google's (a 429 then shows the manual fallback); this is not a persistent daily request limit.
+SESSION_LIMIT = 30    # Gemini requests per browser session
+DAILY_LIMIT = 400     # Gemini requests per app process per day, under the ~500/day free quota
 
 
 def make_client(key):
@@ -57,10 +59,10 @@ def with_retries(fn, *a, retries=RETRIES, sleep=time.sleep):
 def over_limit(used_session, used_today):
     """Message when a usage cap is reached, else None."""
     if used_session >= SESSION_LIMIT:
-        return (f"You have asked {SESSION_LIMIT} questions in this session, the limit that protects the shared free AI quota. "
+        return (f"You have used {SESSION_LIMIT} AI requests in this session (retries count), the limit that protects the shared free AI quota. "
                 "Reload the page later, or use the manual filters:")
     if used_today >= DAILY_LIMIT:
-        return "Ask Auckland has reached its daily question limit (shared free AI quota). It resets tomorrow; the manual filters give the same results:"
+        return "Ask Auckland has reached its daily AI request limit (shared free AI quota). It resets tomorrow; the manual filters give the same results:"
 
 
 EXTRAS = Literal["muslim", "mosque", "halal", "park", "playground", "supermarket"]

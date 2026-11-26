@@ -514,6 +514,9 @@ check("Trade Me helpers: suburb word from SA2 names, search URL carries budget, 
 _p = pd.read_csv(f"{CLEAN}/suburb_profiles.csv").set_index("suburb_name")
 check("Huntington Park and Mangawhai caveat column leads with their warning",
       _p.loc["Huntington Park", "caveat"].startswith("Statistical coverage is tiny") and _p.loc["Mangawhai", "caveat"].startswith("Mostly outside Auckland"))
+at = run("Opportunity finder", level="suburb")
+check("Opportunity 'MBIE rent areas' counts the source ids behind the matches (288), not id combinations (93)",
+      not at.exception and kpi(at, "MBIE rent areas")[0] == "288", str(kpi(at, "MBIE rent areas")))
 at = run("Explore suburb", "Newmarket", level="suburb")
 check("Commercial / mixed units badge (rating units > 1.4 per dwelling) on Explore: Newmarket",
       not at.exception and "Commercial / mixed units" in "".join(m.value for m in at.markdown), f"{(_p.units_per_dwelling > 1.4).sum()} suburbs carry it")
@@ -524,6 +527,8 @@ import httpx2  # noqa: E402  google-genai's default HTTP backend from 3.6
 c = ask(*[httpx2.ReadTimeout("timed out")] * (chat.RETRIES + 1), messages=1)
 check("Chat timeout (httpx2.ReadTimeout, the SDK's default backend, after retries): clear message and manual fallback, no crash",
       not c.exception and "timed out" in text(c) and any(b.label.startswith("Open Find") for b in c.button))
+check("Chat usage caps count every Gemini request: one question with 2 retries uses 3", c.session_state["ask_used"] == chat.RETRIES + 1,
+      str(c.session_state["ask_used"]))
 c = ask(A(intent="rental_search", max_rent=-5))
 check("Chat validation: a negative budget is refused, not searched", "Please give a weekly budget above" in text(c) and not c.dataframe)
 at = AppTest.from_file("app.py", default_timeout=180)
@@ -532,8 +537,8 @@ at.secrets["GEMINI_API_KEY"] = "test-key"
 chat.gemini_extract = lambda *a: (_ for _ in ()).throw(AssertionError("Gemini must not be called over the cap"))
 at.run()
 at.chat_input[0].set_value("a question").run()
-check(f"Chat usage cap: after {chat.SESSION_LIMIT} questions in a session, no Gemini call; manual fallback offered",
-      not at.exception and f"asked {chat.SESSION_LIMIT} questions" in text(at))
+check(f"Chat usage cap: after {chat.SESSION_LIMIT} AI requests in a session, no Gemini call; manual fallback offered",
+      not at.exception and f"used {chat.SESSION_LIMIT} AI requests" in text(at))
 c = ask(A(intent="area_info", areas=["Ponsonby"]), level="suburb")
 c.session_state["level"] = "sa2"
 c.run()

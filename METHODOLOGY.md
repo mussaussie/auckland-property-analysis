@@ -423,5 +423,8 @@ benchmarks that borrowed rows could move. Fixes (SA2 source files and reviewed m
 7. **Mapping reproducibility.** `review_evidence.py` regenerates the 50 reviewed SA2s' evidence (SA1 residents split by rating-unit
    location, unit shares, council address labels) and reproduces the committed review within rounding (one stored `nan`, Inlet
    Waitematā Harbour's 0/0, is a formatting artefact). Water exclusions are labelled "not applicable (reviewed exclusion)".
-8. **Chat.** 20 s request timeout, 2 bounded retries on 5xx and network errors, manual fallback on timeout, 30 questions a session
-   and 400 a day, numeric filters validated, and each answer tagged with its geography.
+8. **Chat.** 20 s request timeout, 2 bounded retries on 5xx and network errors, manual fallback on timeout, caps of 30 Gemini
+   requests a session and 400 a day (retries count; held in app memory, so they reset on restart: basic protection, not a
+   persistent limit; Google's own quota still applies), numeric filters validated, and each answer tagged with its geography.
+9. **Distinct rent areas.** Counted as the MBIE source ids with a positive weight behind the rows (`search.rent_areas`), not as
+   unique combinations of ids: the default Opportunity result has 288 source areas (93 combinations).
