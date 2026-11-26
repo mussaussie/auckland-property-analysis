@@ -556,7 +556,7 @@ def sa2_parts(r):
 
 def view_explore():
     r = R
-    where = f"{r['suburb_type']} · {int(r['n_sa2']) or 'no'} SA2 part{'s' * (r['n_sa2'] != 1)}" if SUB else f"SA2 {int(r['sa2_code'])}"
+    where = f"{r['suburb_type']} · {int(r['n_sa2']) or 'no'} SA2 part{'' if r['n_sa2'] == 1 else 's'}" if SUB else f"SA2 {int(r['sa2_code'])}"
     card(f'<div class="kicker">{esc(r.get("area_type") or UNIT)} · {esc(where)}</div><h2 style="margin:6px 0">{esc(suburb)}</h2>'
          + badge_html(badges(r)) + f'<p style="margin-top:8px">{esc(positioning(r))}</p>'
          + (f'<p>{esc(r["caveat"])}</p>' if SUB and isinstance(r.get("caveat"), str) and r["caveat"] else ""))
