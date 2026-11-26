@@ -377,3 +377,23 @@ The dashboard and the AI agent should use these exact definitions and figures. C
 - **Renter-only affordability.** The census pull has no household income by tenure, so no renter rent-to-income ratio. A
   modelled column (all-household income × 0.75) was rejected: the factor has no source.
 - **Two-year rent change in the score.** Shown beside the score instead; a 0.5/0.3/0.2 growth blend would keep 16 of the top 20.
+
+## 11. Suburb level (26 Nov 2026)
+
+SA2s are statistical areas, not suburbs (Papatoetoe is 9 SA2s), so the dashboard and chat now show LINZ suburbs by default. The
+SA2 view stays one click away ("Show figures for" in the sidebar) and each suburb lists its SA2 parts in Explore suburb.
+
+1. **Lookup.** Each SA2 goes to the LINZ suburb holding most of its rating units (council CV points), not most of its land
+   (land put Waiake in Torbay). 44 ambiguous SA2s were reviewed by hand; overrides need census residents and council address
+   labels to agree. 6 water SA2s are excluded. Places with no SA2 of their own (70) reuse their parent SA2 and are flagged.
+2. **Combining, one rule per measure** (`build_suburbs.py`): counts summed; census shares from summed counts (never a mean of
+   percentages); medians as weighted means of SA2 medians (`*_approx`); crime summed and re-rated across suburbs; nearest =
+   minimum over the parts; rent = rent-area medians weighted by new lodgements × the suburb's share of each rent area's renters;
+   communities from summed counts over summed denominators (each SA2's denominator backed out of count / share).
+3. **Re-scored, not copied:** the File 4 screen is run again across suburbs (180 ranked); File 8's Auckland factors and bands are
+   applied to suburb rent; File 6's gap uses the approximate census median. Shared places are never ranked, so no SA2 counts twice.
+4. **Checks:** own-row totals equal SA2 totals (population, households, crime, schools, mosques, GPs); rent shares sum to 1 per
+   rent area; single-SA2 suburbs reproduce the SA2 files; `release_checks.py` checks chat = manual = shared search at suburb level.
+
+**Weak points:** suburb rents and medians are approximations (no official suburb figure exists); distances run from SA2 points;
+Huntington Park (6 residents) and Mangawhai (mostly in Northland) are odd rows kept with caveats.

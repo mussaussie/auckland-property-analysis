@@ -87,6 +87,20 @@ def find_areas(names, text):
     return exact or [n for n in names if re.search(rf"\b{re.escape(t)}\b", _norm(n))]
 
 
+def area_hits(data, text):
+    """Area names at the data's level for what the user typed. Suburb level: suburb names first, else an SA2 name
+    ('Ponsonby East') gives the suburb it belongs to."""
+    hits = find_areas(sorted(data["sa2"]["sa2_name"]), text)
+    if hits or data.get("level") != "suburb":
+        return hits
+    lk = data["sa2_to_suburb"].dropna(subset=["suburb_name"])
+    return sorted(set(lk.set_index("sa2_name").loc[find_areas(sorted(lk["sa2_name"]), text), "suburb_name"]))
+
+
+def unit(data):
+    return "suburb" if data.get("level") == "suburb" else "SA2"
+
+
 NEAR_KM = 3  # 'nearby' without a stated distance: within 3 km straight-line
 
 
@@ -135,7 +149,7 @@ def home_label(dwelling, beds):
 CHECK = {"ok": "Passes sample checks", "verify": "Fails sample checks (few rentals or jumpy price)", "no estimate": "No published figure"}
 
 
-def area_table(df, home, extras=()):
+def area_table(df, home, extras=(), level="SA2"):
     """The facts every chat answer shows (rent for the home asked about, its sample check, crime, schools, GPs, shopping centres),
     plus the extra columns asked about."""
     t = pd.DataFrame({"Area": df["sa2_name"], f"Rent $/wk ({home})": df["rent"]})
@@ -151,7 +165,7 @@ def area_table(df, home, extras=()):
                        "Nearest shopping centre": df["nearest_shopping_centre"] + " (" + df["km_to_nearest_shopping_centre"].map("{:.1f}".format) + " km)",
                        **{label: df[col] for x in extras for label, col in EXTRA_COLS[x].items()}}).reset_index(drop=True)
     if "mosque" in extras:  # METRIC_RULES wording for a zero
-        t["Mosque inside area"] = t["Mosque inside area"].map(lambda n: "No mosque mapped inside this SA2" if n == 0 else f"{n:.0f} mapped")
+        t["Mosque inside area"] = t["Mosque inside area"].map(lambda n: f"No mosque mapped inside this {level}" if n == 0 else f"{n:.0f} mapped")
     return t
 
 
@@ -163,8 +177,10 @@ def notes(data, extra=(), extras=()):
             "Crime = NZ Police recorded victimisations per 1,000 residents, Oct 2025–Sep 2026; busy centres with many visitors look worse. "
             "Hotspots are not rated.",
             "Schools are counted inside the area boundary by year levels served. GPs, shopping centres, parks, playgrounds and "
-            "supermarkets come from OpenStreetMap: 0 means none mapped, not none. Distances are straight-line. Areas are Stats NZ "
-            "SA2 areas, close to but not the same as suburbs.",
+            "supermarkets come from OpenStreetMap: 0 means none mapped, not none. Distances are straight-line. "
+            + ("Areas are LINZ suburbs built from Stats NZ SA2 areas: suburb rents are approximate (a lodgement-weighted mean of MBIE "
+               "rent-area medians; MBIE publishes no suburb median)." if unit(data) == "suburb" else
+               "Areas are Stats NZ SA2 areas, close to but not the same as suburbs."),
             *[EXTRA_NOTES[x] for x in extras if EXTRA_NOTES[x]]]
 
 
@@ -217,8 +233,7 @@ def answer(data, ask, prefs):
         where = ask.areas or (prefs.get("areas", []) if prefs.get("intent") == "rental_search" else [])
         p.pop("areas", None)
         p.update({"areas": where} if where else {})
-        names = sorted(data["sa2"]["sa2_name"])
-        hits = {a: find_areas(names, a) for a in where}
+        hits = {a: area_hits(data, a) for a in where}
         unknown = [a for a, h in hits.items() if not h]
         in_area = sorted({n for h in hits.values() for n in h})
         place = ""
@@ -254,7 +269,7 @@ def answer(data, ask, prefs):
             text = (f"**{len(m)} area{'s' * (len(m) > 1)}**{place} {'have' if len(m) > 1 else 'has'} a typical {home} rent{cap} that "
                     f"passes the sample checks. Cheapest: {top}{', …' if len(m) > 5 else '.'} All of them are in the table below.")
             tables.append((f"{'Budget matches' if budget else 'Areas'}: {home}{place}" + (f", up to ${budget:,}/wk" if budget else ""),
-                           area_table(m, home, extras)))
+                           area_table(m, home, extras, unit(data))))
         else:
             cheapest = res["cheapest_ok"]
             text = (f"**No area matches.** No area{place} has a {home} rent{cap} that passes the sample checks."
@@ -264,16 +279,15 @@ def answer(data, ask, prefs):
             text += (f" {fails} more areas have a figure{' under budget' if budget else ''} that fails the sample checks, "
                      "so they are not listed as matches.")
         if len(fb):
-            tables.append((f"Areas to investigate ({len(fb)}): not matches, broader rent data", area_table(fb, home, extras)))
+            tables.append((f"Areas to investigate ({len(fb)}): not matches, broader rent data", area_table(fb, home, extras, unit(data))))
             text += (f" {len(fb)} areas have a broader steady rent{' under budget' if budget else ''}, listed separately: a rent across "
                      f"all sizes cannot show what a {home} costs, so check live listings.")
         return reply(text, p, tables, notes(data, [*assumed, excluded], extras))
 
     # area_info / compare: one row per area, same rent and sample-check rule as the manual search
-    names = sorted(data["sa2"]["sa2_name"])
     found, missing, split = [], [], []
     for a in p.get("areas", []):
-        hits = find_areas(names, a)
+        hits = area_hits(data, a)
         if not hits:
             missing.append(a)
         elif len(hits) > 8:  # up to 8 parts of one suburb are shown; more, and we ask
@@ -286,7 +300,7 @@ def answer(data, ask, prefs):
                       "nearby suburb name.") if missing else "Which area should I look up?", p)
     sa2 = data["sa2"]
     rows = with_home_rent(sa2[sa2["sa2_name"].isin(found)], data, dwelling, beds).set_index("sa2_name").loc[found].reset_index()
-    t = area_table(rows, home, extras)
+    t = area_table(rows, home, extras, unit(data))
     extra = list(assumed)
     if p.get("max_rent"):
         b = p["max_rent"]
@@ -294,7 +308,7 @@ def answer(data, ask, prefs):
                                           "Yes, passes sample checks" if c == "ok" else "Under budget, but fails sample checks"
                                           for r, c in zip(rows["rent"], rows["check"])])
     if split:
-        extra.append(", ".join(split) + " covers more than one SA2 area, so each part is shown.")
+        extra.append(", ".join(split) + f" matches more than one {unit(data)}, so each is shown.")
     if missing:
         extra.append("Not found: " + ", ".join(missing) + ".")
     if (~rows["analysis_ready"]).any():
@@ -314,7 +328,16 @@ def stub(*answers):
 
 if __name__ == "__main__":
     from search import load_data
-    d = load_data()
+    # Suburb level (the default): suburb names first, an SA2 name gives its suburb; chat = manual search
+    s = load_data()
+    assert area_hits(s, "Ponsonby East") == ["Ponsonby"] and area_hits(s, "mt roskill") == ["Mount Roskill"]
+    assert area_hits(s, "Ponsonby") == ["Ponsonby"] and area_hits(s, "Papatoetoe") == ["Papatoetoe"]
+    rs = respond(s, "x", {}, [], stub(Ask(intent="rental_search", max_rent=700, dwelling="House", beds="3")))
+    assert rs["tables"][0][1]["Area"].tolist() == rental_search(s, 700, "House", "3")["matches"]["sa2_name"].tolist()
+    assert any("LINZ suburbs" in n for n in rs["notes"])
+    ai = respond(s, "x", {}, [], stub(Ask(intent="area_info", areas=["Mt Roskill"], show=["mosque"])))
+    assert ai["tables"][0][1]["Area"].tolist() == ["Mount Roskill"] and "this SA2" not in ai["tables"][0][1].to_string()
+    d = load_data("sa2")
     # Same filters as the manual reference search ($600, 3-bed house) -> same areas
     r = respond(d, "3 bed house under 600", {}, [], stub(Ask(intent="rental_search", max_rent=600, dwelling="House", beds="3")))
     ref = rental_search(d, 600, "House", "3")

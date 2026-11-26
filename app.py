@@ -134,25 +134,47 @@ load = st.cache_data(load_data)  # search.py: shared with the future AI chat
 
 
 @st.cache_data
-def geo():
-    # Plain json, no geopandas, so Streamlit Cloud installs only light packages
-    g = json.load(open("data/boundaries/auckland_sa2_2023.geojson", encoding="utf-8"))
+def geo(level):
+    # Plain json, no geopandas, so Streamlit Cloud installs only light packages. Suburb file: build_suburbs.py map_file()
+    if level == "suburb":
+        g = json.load(open("data/boundaries/auckland_suburbs_map.geojson", encoding="utf-8"))
+        key = "suburb_id"
+    else:
+        g = json.load(open("data/boundaries/auckland_sa2_2023.geojson", encoding="utf-8"))
+        key = "SA22023_V1_00"
     for f in g["features"]:
-        f["properties"] = {"sa2_code": int(f["properties"]["SA22023_V1_00"])}
+        f["properties"] = {"sa2_code": int(f["properties"][key])}  # same key as the data rows (search._suburb_rows)
     return g
 
 
-D = load()
+VIEWS = ["Overview", "Ask Auckland", "Rent in Auckland", "Explore suburb", "Compare suburbs", "Opportunity finder", "Map lab", "Suburb in plain English",
+         "Find a rental under my budget", "Family screen", "Data & Methods", "Glossary"]
+with st.sidebar:
+    st.markdown('<div class="brand"><div class="t">Auckland Property Insights</div><div class="s">Suburb Property Dashboard</div></div>',
+                unsafe_allow_html=True)
+    view = st.radio("View", VIEWS, label_visibility="collapsed", key="view")  # key: methods_link() switches to Data & Methods
+    st.divider()
+    LEVEL = st.radio("Show figures for", ["suburb", "sa2"], horizontal=True, key="level",
+                     format_func={"suburb": "Suburbs", "sa2": "SA2 areas"}.get)
+SUB = LEVEL == "suburb"
+UNIT = "suburb" if SUB else "SA2"
+D = load(LEVEL)
 S = D["sa2"]
 READY = S[S["analysis_ready"]]
 RANKED = S[S["ranked"] == True]  # noqa: E712 (object column after merge)
 BY_NAME = S.set_index("sa2_name")
+# Auckland totals count each SA2 once: places sharing a parent SA2 repeat its residents
+OWN = S[S["suburb_source_sa2"].isna()] if SUB else S
+AREAS_DESC = "LINZ suburbs and localities" if SUB else "Stats NZ SA2 areas"
+AREA_NOTE = ("Suburbs are LINZ suburbs built from Stats NZ SA2 areas; suburb rents are a lodgement-weighted mean of MBIE rent-area "
+             "medians and census medians are weighted means of SA2 medians, so both are approximate."
+             if SUB else "SA2 areas are close to suburbs but boundaries differ.")
 # Areas whose all-dwelling rent is thin or swings between quarters (e.g. Otara Central $350-$750): their growth figures are noise
 _all = D["by_type"][(D["by_type"]["dwelling"] == "ALL") & (D["by_type"]["beds"] == "ALL")]
 JUMPY = set(_all.loc[(_all["flag_unstable_rent"] == True) | (_all["flag_thin_sample"] == True), "sa2_code"])  # noqa: E712
 JUMPY_NOTE = "unreliable: few rentals or prices jump around between quarters"
 RENT_PERIOD = rent_period(D)
-DATA_REFRESHED = "24 November 2026"  # last rebuild of data/clean (git log -1 -- data/clean); release_checks.py compares
+DATA_REFRESHED = "26 November 2026"  # last rebuild of data/clean (git log -1 -- data/clean); release_checks.py compares
 # File 8 backtest, shown beside every forecast: the selected model ("auckland") against the unchanged-rent benchmark ("naive")
 _bt = pd.read_csv(f"{CLEAN}/rent_forecast_backtest.csv").set_index(["test", "h", "model"])["mape"]
 LATEST, ROLLING = "trained to Sep 2024", "13 origins 2012-2024"
@@ -191,24 +213,20 @@ def pct_rank(col, v):
 
 
 # ---------- sidebar ----------
-VIEWS = ["Overview", "Ask Auckland", "Rent in Auckland", "Explore suburb", "Compare suburbs", "Opportunity finder", "Map lab", "Suburb in plain English",
-         "Find a rental under my budget", "Family screen", "Data & Methods", "Glossary"]
 NAMES = sorted(S["sa2_name"])
-# The spec's defaults are suburb names; SA2s split them, so the nearest SA2 is used (CBD: Queen Street)
-DEFAULT_SUBURB = "Queen Street"
+# The CBD by default; SA2s split it, so at SA2 level the nearest SA2 is used (Queen Street)
+DEFAULT_SUBURB = "Auckland Central" if SUB else "Queen Street"
 with st.sidebar:
-    st.markdown('<div class="brand"><div class="t">Auckland Property Insights</div><div class="s">Suburb Property Dashboard</div></div>',
-                unsafe_allow_html=True)
-    view = st.radio("View", VIEWS, label_visibility="collapsed", key="view")  # key: methods_link() switches to Data & Methods
-    st.divider()
-    st.session_state.setdefault("suburb", DEFAULT_SUBURB)  # default via state, since a map click also sets it
-    suburb = st.selectbox("Suburb", NAMES, key="suburb")
+    if st.session_state.get("suburb") not in NAMES:  # first run, or a name from the other level
+        st.session_state["suburb"] = DEFAULT_SUBURB  # via state, since a map click also sets it
+    suburb = st.selectbox("Suburb" if SUB else "SA2 area", NAMES, key="suburb")
     if view == "Compare suburbs":  # only that page uses it
         compare = st.multiselect("Compare suburbs", NAMES, max_selections=8, placeholder="Pick up to 8 suburbs")
     R = BY_NAME.loc[suburb]
     # Visitor's choice: mosque names, counts and distances appear only when switched on (every page and the reports)
     MOSQUES = st.toggle("Show nearby mosques", value=False, key="show_mosques")
-    st.caption("Suburbs are Stats NZ SA2 areas: names are close to suburb names, boundaries differ. "
+    st.caption(("Suburbs are LINZ suburbs and localities, built from Stats NZ SA2 areas; suburb rents and medians are approximate. "
+                if SUB else "SA2s are Stats NZ statistical areas: names are close to suburb names, boundaries differ. ") +
                "Sources: Stats NZ 2023 Census, MBIE bonds, Auckland Council valuations, NZ Police, HUD, MoE, Auckland Transport, © OpenStreetMap contributors.")
 
 
@@ -242,13 +260,13 @@ def choropleth(df, col, label, scale, fmt, height=600, highlight=None):
     else:
         kw = dict(color_continuous_scale=SEQ, range_color=(d[col].quantile(0.02), d[col].quantile(0.98)))  # outliers don't flatten the scale
     fig = px.choropleth_mapbox(
-        d, geojson=geo(), locations="sa2_code", featureidkey="properties.sa2_code", color=col,
+        d, geojson=geo(LEVEL), locations="sa2_code", featureidkey="properties.sa2_code", color=col,
         hover_name="sa2_name", hover_data={"sa2_code": False, col: fmt}, labels={col: label},
         mapbox_style="open-street-map", center=dict(lat=-36.9, lon=174.78), zoom=9, opacity=0.62, **kw)
     fig.update_traces(marker_line_width=0.4, marker_line_color="#ffffff",
                       selected_marker_opacity=0.62, unselected_marker_opacity=0.62)  # a click selects; don't fade the map
     if highlight is not None:  # outline the selected suburb
-        fig.add_trace(go.Choroplethmapbox(geojson=geo(), locations=[highlight], z=[0], featureidkey="properties.sa2_code",
+        fig.add_trace(go.Choroplethmapbox(geojson=geo(LEVEL), locations=[highlight], z=[0], featureidkey="properties.sa2_code",
                                           colorscale=[[0, "rgba(0,0,0,0)"], [1, "rgba(0,0,0,0)"]], showscale=False,
                                           marker_line_width=3, marker_line_color=INK, hoverinfo="skip"))
     fig.update_layout(height=height, margin=dict(l=0, r=0, t=0, b=0), paper_bgcolor="#ffffff",
@@ -285,11 +303,11 @@ def snapshot_cards(df, n=6, per_row=3):
 FAMILY_RULE = "a Year 1 school and a mapped public playground inside the area, and crime at or below the Auckland median"
 QUICK = {
     "Best opportunities": (lambda: RANKED.sort_values("rank_Balanced"),
-                           "Balanced rank in the File 4 research screen (481 house-dominated areas, value + growth + risk). Not investment advice."),
+                           f"Balanced rank in the File 4 research screen ({len(RANKED)} house-dominated areas, value + growth + risk). Not investment advice."),
     "Highest yield": (lambda: RANKED.sort_values("gross_yield_pct", ascending=False),
-                      "Gross yield (2024 CV proxy) among the 481 screened house-dominated areas; apartment areas are left out because small units inflate it."),
+                      f"Gross yield (2024 CV proxy) among the {len(RANKED)} screened house-dominated areas; apartment areas are left out because small units inflate it."),
     "Most growing": (lambda: RANKED.sort_values("rent_cagr_10y_pct", ascending=False),
-                     "10-year rent growth, % a year, among the 481 screened areas. Past performance: read it next to the 2-year trend."),
+                     f"10-year rent growth, % a year, among the {len(RANKED)} screened areas. Past performance: read it next to the 2-year trend."),
     "Lowest recorded crime": (lambda: READY[~READY["flag_crime_hotspot"]].sort_values("crime_per_1000_residents"),
                        "Lowest recorded victimisations per 1,000 residents, analysis-ready areas. Counted where crime happens; crimes inside homes other than burglary are not in the data."),
     "Cheapest rent": (lambda: READY[~READY["flag_crime_hotspot"] & ~READY["sa2_code"].isin(JUMPY)].sort_values("median_rent_weekly"),
@@ -313,7 +331,7 @@ QUICK = {
 
 def view_overview():
     card('<div class="hero"><div class="kicker">Property intelligence</div><h1>Auckland property, suburb by suburb</h1>'
-         f'<p>Rent, valuations, risk and community for {len(S)} Stats NZ SA2 areas. Data to September 2026.</p></div>')
+         f'<p>Rent, valuations, risk and community for {len(S)} {AREAS_DESC}. Data to September 2026.</p></div>')
     st.markdown('<div class="note-box">Auckland Property Insights combines new-tenancy rents, council valuations, crime, schools, '
                 'community and a rent outlook for every Auckland area. New here? Start with <b>Suburb in plain English</b> or '
                 '<b>Find a rental under my budget</b> in the sidebar.</div>', unsafe_allow_html=True)
@@ -322,15 +340,15 @@ def view_overview():
     sales_ok = sales[~sales["provisional"]]
     latest, peak = sales_ok.iloc[-1], sales_ok.loc[sales_ok["median_sale_price"].idxmax()]
     kpis([
-        ("Areas", f"{len(S)}", "Stats NZ SA2 areas in Auckland", GREEN),
-        ("Analysis-ready", f"{len(READY)}", f"{100 * READY['population_2023'].sum() / S['population_2023'].sum():.1f}% of residents; "
+        ("Areas", f"{len(S)}", f"{AREAS_DESC} in Auckland", GREEN),
+        ("Analysis-ready", f"{len(READY)}", f"{100 * OWN.loc[OWN['analysis_ready'], 'population_2023'].sum() / OWN['population_2023'].sum():.1f}% of residents; "
          f"{READY['median_rent_weekly'].isna().sum()} have no all-dwelling rent estimate", GREEN),
         ("Avg. of monthly rent medians", f"${last3['median_rent'].mean():,.0f}/wk", f"MBIE, new tenancies, {last3['month'].iloc[0]:%b}–{last3['month'].iloc[-1]:%b %Y}", AMBER),
         ("Median sale price", money(latest["median_sale_price"]),
          f"HUD, Auckland-wide, {latest['quarter_end'].year} Q{latest['quarter_end'].quarter}; "
          f"{latest['median_sale_price'] / peak['median_sale_price'] - 1:+.0%} from peak", AMBER),
-        ("CV change 2021–24", f"{READY['cv_change_2021_2024_pct'].median():+.2f}%", "Median SA2; council valuations, not prices", BLUE),
-        ("Residents", f"{S['population_2023'].sum():,.0f}", "2023 Census", BLUE),
+        ("CV change 2021–24", f"{READY['cv_change_2021_2024_pct'].median():+.2f}%", f"Median {UNIT}; council valuations, not prices", BLUE),
+        ("Residents", f"{OWN['population_2023'].sum():,.0f}", "2023 Census", BLUE),
     ])
 
     st.markdown("#### Quick searches")
@@ -352,8 +370,8 @@ def view_overview():
     caveat("Top six of this list. The badge is the Balanced screen score (0–100, higher is better) where the area is ranked.")
     snapshot_cards(df)
     st.plotly_chart(risk_return(set(df.head(15)["sa2_code"]), f"{st.session_state.qs} (top 15)"), use_container_width=True)
-    caveat("Each bubble is one of the 481 ranked areas, sized by population. Return = mean of the value (yield) and growth (rent, population) "
-           "percentiles; risk = 100 − the risk percentile (crime, rent volatility, CV fall, rental depth). Percentiles are relative to these 481 areas. "
+    caveat(f"Each bubble is one of the {len(RANKED)} ranked areas, sized by population. Return = mean of the value (yield) and growth (rent, population) "
+           f"percentiles; risk = 100 − the risk percentile (crime, rent volatility, CV fall, rental depth). Percentiles are relative to these {len(RANKED)} areas. "
            "A research screen, not investment advice.")
 
 
@@ -477,7 +495,7 @@ def report_sections(r):
 
 REPORT_NOTES = (f"Rent is MBIE new-tenancy bond rent, mean of the last 4 quarters ({RENT_PERIOD}). " + FC_NOTE + " Crime is NZ Police victimisations, Oct 2025 - Sep 2026, "
                 "counted where it happened. OSM = OpenStreetMap, which may be incomplete; distances are straight-line. "
-                "SA2 areas are close to suburbs but boundaries differ. A research summary, not financial advice.")
+                + AREA_NOTE + " A research summary, not financial advice.")
 
 
 def report_pdf(name, r):
@@ -517,17 +535,40 @@ def report_docx(name, r):
     return buf.getvalue()
 
 
+def sa2_parts(r):
+    """Drill-down: the SA2 areas this suburb is built from, with their own figures."""
+    sa2 = load("sa2")["sa2"].set_index("sa2_code")
+    codes = [int(c) for c in str(r["sa2_codes"]).split(";")]
+    lk = D["sa2_to_suburb"].set_index("sa2_code").reindex(codes)
+    p = sa2.reindex(codes)
+    with st.expander(f"SA2 parts of {suburb} ({len(codes)})"):
+        st.dataframe(pd.DataFrame({
+            "SA2 area": p["sa2_name"].values, "Residents 2023": p["population_2023"].values,
+            "% of SA2 in this suburb": lk["match_pct"].where(lk["suburb_name"] == suburb).values,
+            "Weekly rent": p["median_rent_weekly"].values, "Crime /1,000": p["crime_per_1000_residents"].round(0).values,
+            "Analysis-ready": p["analysis_ready"].map({True: "Yes", False: "No"}).values}),
+            hide_index=True, use_container_width=True, column_config={"Weekly rent": st.column_config.NumberColumn(format="$%.0f")})
+        caveat(("This place has no SA2 of its own, so its figures are those of the SA2 above, which also covers neighbouring places. "
+                if r["n_sa2"] == 0 else "Each SA2 belongs to the suburb holding most of its rating units; the % column (rating units) says "
+                "how much of the SA2 lies in this suburb. ") + "Suburb figures combine the parts: counts are summed, shares come from summed "
+               "census counts, rents are weighted by new lodgements. Switch 'Show figures for' to SA2 areas to explore a part.")
+
+
 def view_explore():
     r = R
-    card(f'<div class="kicker">{esc(r.get("area_type") or "SA2")} · SA2 {int(r["sa2_code"])}</div><h2 style="margin:6px 0">{esc(suburb)}</h2>'
-         + badge_html(badges(r)) + f'<p style="margin-top:8px">{esc(positioning(r))}</p>')
+    where = f"{r['suburb_type']} · {int(r['n_sa2']) or 'no'} SA2 part{'s' * (r['n_sa2'] != 1)}" if SUB else f"SA2 {int(r['sa2_code'])}"
+    card(f'<div class="kicker">{esc(r.get("area_type") or UNIT)} · {esc(where)}</div><h2 style="margin:6px 0">{esc(suburb)}</h2>'
+         + badge_html(badges(r)) + f'<p style="margin-top:8px">{esc(positioning(r))}</p>'
+         + (f'<p>{esc(r["caveat"])}</p>' if SUB and isinstance(r.get("caveat"), str) and r["caveat"] else ""))
     kpis([
-        ("Weekly rent", money(r["median_rent_weekly"]), "New tenancies, last 4 quarters", AMBER),
+        ("Weekly rent", money(r["median_rent_weekly"]), "New tenancies, last 4 quarters" + (" (approximate)" if SUB else ""), AMBER),
         ("Capital value 2024", money(r["median_cv_2024"]), "Council valuation, not a sale price", AMBER),
         ("Gross yield", num(r["gross_yield_pct"], "{:.2f}", "%"), "2024 CV proxy, before costs", BLUE),
         ("Rent growth 10y", num(r["rent_cagr_10y_pct"], suffix="%/yr"), "Past performance", GREEN),
         ("Crime /1,000", num(r["crime_per_1000_residents"], "{:.0f}"), f"Rating: {r['crime_rating']}", RED),
     ])
+    if SUB:
+        sa2_parts(r)
     t1, t6, t2, t3, t4, t7, t5, t8 = st.tabs(["Growth & Trends", "Year-to-year growth", "Risk & Rental", "Crime insights", "People",
                                               "Communities", "Amenities & Lifestyle", "Download report"])
     with t6:
@@ -590,9 +631,9 @@ def view_explore():
                      "Rental depth": "s_bonds_per_sa2"}
             fig = go.Figure(go.Bar(x=[r[c] for c in parts.values()], y=list(parts), orientation="h", marker_color=SERIES[0],
                                    hovertemplate="%{y}: %{x:.0f}<extra></extra>"))
-            fig.update_xaxes(range=[0, 100], title="Percentile among 481 (100 = best for an investor)")
+            fig.update_xaxes(range=[0, 100], title=f"Percentile among {len(RANKED)} (100 = best for an investor)")
             st.plotly_chart(style(fig, 300, "Risk and return breakdown"), use_container_width=True)
-            caveat("A research screen, not investment advice. Scores are relative to the 481 ranked areas.")
+            caveat(f"A research screen, not investment advice. Scores are relative to the {len(RANKED)} ranked areas.")
         else:
             card(f"<h4>Not in the investment screen</h4><p>{esc(r.get('not_ranked_reason') if pd.notna(r.get('not_ranked_reason')) else 'Only analysis-ready, house-dominated areas (50%+ separate houses) with all seven inputs are ranked.')}</p>")
         gap = f"{r['rent_premium_pct']:+.1f}%" if on(r, "in_premium_analysis") else "—"
@@ -625,16 +666,16 @@ def view_explore():
     with t4:
         kpis([
             ("Residents", f"{r['population_2023']:,.0f}", f"{num(r['pop_change_2018_2023_pct'], '{:+.1f}', '%')} since 2018", GREEN),
-            ("Median age", num(r["median_age"]), "2023 Census", BLUE),
-            ("Household income", money(r["median_household_income"]), "Median, all households", AMBER),
+            ("Median age", num(r["median_age"]), "2023 Census" + (", approximate" if SUB else ""), BLUE),
+            ("Household income", money(r["median_household_income"]), "Median, all households" + (", approximate" if SUB else ""), AMBER),
             ("Owner-occupied", num(r["pct_owner_occupied"], suffix="%"), "Of households", BLUE),
             ("Under 15", num(r["pct_under_15"], suffix="%"), "Of residents", GREEN),
             ("Crowded", num(r["pct_crowded"], suffix="%"), "Households needing a bedroom", RED),
         ])
         mix = {"European": "pct_european", "Māori": "pct_maori", "Pacific": "pct_pacific", "Asian": "pct_asian",
                "Christian": "pct_christian", "No religion": "pct_no_religion", "Hindu": "pct_hindu", "Muslim": "pct_muslim", "Buddhist": "pct_buddhist"}
-        w = S["population_2023"]
-        akl = {k: (S[c] * w).sum() / w[S[c].notna()].sum() for k, c in mix.items()}
+        w = OWN["population_2023"]
+        akl = {k: (OWN[c] * w).sum() / w[OWN[c].notna()].sum() for k, c in mix.items()}
         fig = go.Figure([go.Bar(y=list(mix), x=[r[c] for c in mix.values()], orientation="h", name=suburb, marker_color=SERIES[0]),
                          go.Bar(y=list(mix), x=list(akl.values()), orientation="h", name="Auckland (population-weighted)", marker_color="#cbd5e1")])
         fig.update_layout(barmode="group", bargap=0.25)
@@ -662,7 +703,7 @@ def view_explore():
         kpis([
             ("Al-Madinah School", num(r["km_to_al_madinah_coed"], suffix=" km"), "Co-educational, Māngere", GREEN),
             ("Zayed College for Girls", num(r["km_to_zayed_college_girls"], suffix=" km"), "Girls, Years 7–15, Māngere", GREEN),
-            ("Stops within 800 m", num(r["pt_stops_800m"], "{:.0f}"), "Bus, train, ferry; frequency not counted", BLUE),
+            ("Stops within 800 m", num(r["pt_stops_800m"], "{:.0f}"), "Bus, train, ferry; frequency not counted" + ("; average of the SA2 parts" if SUB else ""), BLUE),
         ])
         if pd.notna(r["nearest_year1_school_authority"]):
             caveat(f"Nearest Year 1 school: {r['nearest_year1_school_authority']}, enrolment scheme: {r['nearest_year1_school_enrolment_scheme']}. "
@@ -698,7 +739,7 @@ def view_compare():
             ("Experimental scenario, year to Sep 2027", lambda r: money(r.get("forecast_rent_y1"))),
             ("Unchanged-rent benchmark", lambda r: money(r.get("rent_now"))),
             ("Crime /1,000 residents", lambda r: num(r["crime_per_1000_residents"], "{:.0f}")), ("Crime rating", lambda r: r["crime_rating"]),
-            ("Screen rank (of 481)", lambda r: num(r.get("rank_Balanced"), "{:.0f}")), ("Residents 2023", lambda r: f"{r['population_2023']:,.0f}"),
+            (f"Screen rank (of {len(RANKED)})", lambda r: num(r.get("rank_Balanced"), "{:.0f}")), ("Residents 2023", lambda r: f"{r['population_2023']:,.0f}"),
             ("Median household income", lambda r: money(r["median_household_income"])), ("Owner-occupied", lambda r: num(r["pct_owner_occupied"], suffix="%")),
             ("Under 15", lambda r: num(r["pct_under_15"], suffix="%")), ("Muslim", lambda r: num(r["pct_muslim"], suffix="%"))]
     if MOSQUES:
@@ -774,7 +815,7 @@ MOSQUE_NOTE = "Distance is straight-line from the area's representative point. T
 
 
 def mosque_inside(n):
-    return "—" if pd.isna(n) else "No mosque mapped inside this SA2" if n == 0 else f"{int(n)} mapped inside this SA2"
+    return "—" if pd.isna(n) else f"No mosque mapped inside this {UNIT}" if n == 0 else f"{int(n)} mapped inside this {UNIT}"
 
 
 def view_family():
@@ -843,7 +884,7 @@ def view_family():
 
 MAP_METRICS = {
     "median_cv_2024": ("Capital value 2024 ($)", "Council valuation, 1 May 2024; not a sale price; mixes property types, including commercial.", "seq", ":$,.0f"),
-    "median_rent_weekly": ("Weekly rent, new tenancies ($)", "Mean of the last 4 quarters, all dwelling types. 142 areas share a figure with a neighbour.", "seq", ":$,.0f"),
+    "median_rent_weekly": ("Weekly rent, new tenancies ($)", f"Mean of the last 4 quarters, all dwelling types. {int(S['flag_borrowed_rent'].eq(True).sum())} areas share a figure with a neighbour.", "seq", ":$,.0f"),
     "gross_yield_pct": ("Gross yield, 2024 CV proxy (%)", "New-tenancy rent over council CV, before costs. Inflated in apartment areas.", "seq", ":.2f"),
     "rent_cagr_10y_pct": ("Rent growth, 10 years (% a year)", "Past performance.", "seq", ":.1f"),
     "cooling_pa": ("Rent trend, last 2 years (% a year)", "Annualised; noisy.", "div", ":.1f"),
@@ -897,13 +938,19 @@ def view_map():
 
 
 GLOSSARY = [
-    ("Suburb (area)", "A Stats NZ SA2 area. Names are close to suburb names but boundaries differ, and big suburbs are split "
+    ("Suburb (area)", "A LINZ suburb or locality (the official NZ list). The figures are built from the Stats NZ SA2 areas inside it; "
+     "each SA2 goes to the suburb holding most of its properties. Small places with no SA2 of their own share their neighbour's figures. "
+     "Switch to 'SA2 areas' in the sidebar for the finer areas." if SUB else
+     "A Stats NZ SA2 area. Names are close to suburb names but boundaries differ, and big suburbs are split "
      "(for example Ponsonby East and Ponsonby West)."),
-    ("Analysis-ready", "An area with at least 100 residents that is mainly residential: 599 of Auckland's 633 areas. Maps and rankings use only these."),
+    ("Analysis-ready", f"An area with at least 100 residents that is mainly residential: {len(READY)} of Auckland's {len(S)} areas. "
+     "Maps and rankings use only these."),
     ("Typical rent / weekly rent", "The median weekly rent on new tenancies (bonds lodged with Tenancy Services), averaged over the last "
      "4 quarters. It is what a new tenant pays, not what people already renting pay."),
     ("New rentals counted", "How many new tenancies were lodged in the last 12 months: the number of rents the figure is based on."),
-    ("Shared rent figure", "Some areas were split after 2018, but the rent data still uses the 2018 areas, so 142 areas share a figure with a neighbour."),
+    ("Shared rent figure", "The rent data uses 2018 rent areas, and some of them cover more than one area, so "
+     f"{int(S['flag_borrowed_rent'].eq(True).sum())} areas share a figure with a neighbour."
+     + (" A suburb's rent is the mix of the rent areas inside it, weighted by new rentals, so it is approximate." if SUB else "")),
     ("Passes sample checks (ok / verify / no figure)", "ok = at least 30 new rentals of that home in 12 months and a steady price. These are "
      "the project's screening rules: they do not make the figure precise or mean a home is available at that price. verify = fewer "
      "rentals, or a price that jumps between quarters, so check listings. No figure = no rent is published for that home in that area."),
@@ -926,7 +973,7 @@ GLOSSARY = [
     ("Area type", "Six groups of areas with similar people and homes, for example 'Crowded family suburbs' or 'Apartments & inner city'."),
     ("Risk vs return chart", "Return = how an area compares with other house-dominated areas on yield and growth; risk = how it compares on "
      "crime, rent swings, falling values and few rentals. 50 is the middle. A comparison, not advice."),
-    ("Screen rank", "The area's place among 481 house-dominated areas on yield, growth and risk combined, with equal weight. A research "
+    ("Screen rank", f"The area's place among {len(RANKED)} house-dominated areas on yield, growth and risk combined, with equal weight. A research "
      "screen, not advice."),
     ("Inside this area / nearest", "'Inside' counts places within the area's boundary. The nearest is also named with its distance."),
     ("Straight-line distance", "Measured as the crow flies from the middle of the area, not by road, so the trip is longer."),
@@ -947,13 +994,19 @@ def view_data():
     st.markdown("## Data & Methods")
     caveat(f"Where every figure comes from: source, period, calculation, sample rule and limits. Data last refreshed {DATA_REFRESHED}; "
            f"area rents cover {RENT_PERIOD}.")
-    md_card("Areas are not suburbs", "Every figure is for a Stats NZ SA2 area (633 in Auckland; 599 analysis-ready). Names are close to "
-            "suburb names but boundaries differ, and big suburbs are split (for example Ponsonby East and Ponsonby West).")
+    if SUB:
+        md_card("Suburbs", f"Figures are for {len(S)} LINZ suburbs and localities ({len(READY)} analysis-ready), built from the 633 Stats NZ "
+                "SA2 areas. Counts are summed; census shares come from summed counts; medians (rent, income, age) are weighted means of the "
+                "parts, so approximate; crime is summed and rated again across suburbs; nearest places are the nearest over the parts. "
+                "Places with no SA2 of their own share their neighbour's figures and are never ranked.")
+    else:
+        md_card("Areas are not suburbs", f"Every figure is for a Stats NZ SA2 area ({len(S)} in Auckland; {len(READY)} analysis-ready). Names are "
+                "close to suburb names but boundaries differ, and big suburbs are split (for example Ponsonby East and Ponsonby West).")
     # The canonical metric reference; its agent-facing sections ("Rules of use", "Never say") are left out
     text = open("METRIC_RULES.md", encoding="utf-8").read()
     for part in text.split("\n## ")[1:]:
         head, _, body = part.partition("\n")
-        if head in ("Data vintages", "Geography and keys", "Metrics", "Auckland headline figures", "Not in the data"):
+        if head in ("Data vintages", "Geography and keys", "Suburb level (dashboard and chat default)", "Metrics", "Auckland headline figures", "Not in the data"):
             with st.expander(head, expanded=head == "Data vintages"):
                 st.markdown(body.replace("$", "\\$"))
     st.markdown("#### Rent scenario: tested against unchanged rent")
@@ -1130,7 +1183,7 @@ assert suburb_word("Te Atatū Peninsula West") == "Te Atatū Peninsula" and subu
 
 def listings_url(sa2_name, dwelling, beds, max_rent):
     """Trade Me rental search carrying the suburb word, budget, bedrooms and type (parameters checked on trademe.co.nz, Nov 2026)."""
-    p = {"search_string": suburb_word(sa2_name), "price_max": int(max_rent)}
+    p = {"search_string": sa2_name if SUB else suburb_word(sa2_name), "price_max": int(max_rent)}
     if beds != "ALL":
         p["bedrooms_min"] = beds.rstrip("+")
         if not beds.endswith("+"):
@@ -1140,7 +1193,7 @@ def listings_url(sa2_name, dwelling, beds, max_rent):
     return "https://www.trademe.co.nz/a/property/residential/rent/auckland/search?" + "&".join(f"{k}={quote(str(v))}" for k, v in p.items())
 
 
-assert listings_url("Pukekohe West", "House", "3", 600).endswith("search_string=Pukekohe&price_max=600&bedrooms_min=3&bedrooms_max=3&property_type=house")
+assert listings_url("Pukekohe", "House", "3", 600).endswith("search_string=Pukekohe&price_max=600&bedrooms_min=3&bedrooms_max=3&property_type=house")
 
 
 def view_find():

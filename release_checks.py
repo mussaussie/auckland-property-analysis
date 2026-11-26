@@ -26,8 +26,9 @@ def check(name, ok, detail=""):
     results.append((name, bool(ok), detail))
 
 
-def run(view, suburb=None, setup=None, mosques=False):
+def run(view, suburb=None, setup=None, mosques=False, level="sa2"):  # the SA2 checks below pin level; suburb checks at the end
     at = AppTest.from_file("app.py", default_timeout=180)
+    at.session_state["level"] = level
     at.session_state["show_mosques"] = mosques  # the sidebar toggle; off by default for visitors
     if suburb:
         at.session_state["suburb"] = suburb
@@ -119,7 +120,7 @@ check("Budget matches show lodgements, quarters and data period ($700, 3-bed hou
 # The shared search (search.py) the AI chat will call gives the same answers as the pages
 import search  # noqa: E402
 
-data = search.load_data()
+data = search.load_data("sa2")
 x, y = search.rental_search(data, 580, "House", "3"), search.rental_search(data, 600, "House", "3")
 check("Shared search (for AI chat): reference $580 and zero-match $600 3-bed house results",
       (len(x["under"]), len(x["matches"]), (x["areas"]["check"] == "no estimate").sum(), x["cheapest_ok"]) == (4, 0, 138, 607.5)
@@ -221,7 +222,7 @@ check("Explore: scenario labelled experimental, unchanged-rent benchmark and tes
       and "4.7% against 5.0%" in t and "held 79%" in t and "80% band" not in t)
 at = run("Data & Methods")
 check("Data & Methods: refresh date, SA2 note, sources and forecast test table",
-      f"Data last refreshed" in text(at) and "Areas are not suburbs" in text(at) and len(at.dataframe) == 1 and len(at.expander) == 5)
+      f"Data last refreshed" in text(at) and "Areas are not suburbs" in text(at) and len(at.dataframe) == 1 and len(at.expander) == 6)
 
 # ---------- Ask Auckland: chat and manual searches agree ----------
 # Gemini is replaced by stubs that return fixed filters, so these checks use no API quota; the reply itself is computed by chat.py
@@ -232,7 +233,7 @@ from pydantic import ValidationError  # noqa: E402
 A = chat.Ask
 
 
-def ask(*answers, key="test-key", mosques=False, messages=None):  # messages: when a retry uses two answers for one message
+def ask(*answers, key="test-key", mosques=False, messages=None, level="sa2"):  # messages: when a retry uses two answers for one message
     it = iter(answers)
 
     def fake(client, q, prefs, history):
@@ -243,6 +244,7 @@ def ask(*answers, key="test-key", mosques=False, messages=None):  # messages: wh
     chat.gemini_extract = fake  # app.py calls chat.gemini_extract, so the page uses the stub
     at = AppTest.from_file("app.py", default_timeout=180)
     at.session_state["show_mosques"] = mosques
+    at.session_state["level"] = level
     at.session_state["view"] = "Ask Auckland"
     at.secrets["GEMINI_API_KEY"] = key  # "" = no key (overrides a local secrets.toml)
     at.run()
@@ -326,6 +328,35 @@ except ValidationError as e:
 check("Malformed model output: asks to rephrase, offers manual filters", "couldn't turn that into a search" in text(ask(bad)))
 c = ask(A(intent="other"), key="")
 check("No API key: chat says it isn't set up and the page still works", "isn't set up" in text(c) and not c.exception)
+
+# ---------- suburb level (the dashboard default) ----------
+sub = search.load_data()
+S2 = sub["sa2"]
+at = AppTest.from_file("app.py", default_timeout=180)
+at.run()
+check("Suburb level is the default: sidebar lists suburbs, Auckland Central selected",
+      at.session_state["level"] == "suburb" and widget(at.selectbox, "Suburb").value == "Auckland Central" and len(widget(at.selectbox, "Suburb").options) == len(S2))
+c = ask(A(intent="rental_search", max_rent=700, dwelling="House", beds="3"), level="suburb")
+m = run("Find a rental under my budget", setup=lambda a: widget(a.number_input, "My budget ($ a week)").set_value(700), level="suburb")
+cm, mm = table(c, home3), table(m, "Quarters with data (of 4)")
+ref = search.rental_search(sub, 700, "House", "3")["matches"]
+check("Suburb level, chat = manual = shared search ($700 3-bed house): same suburbs, rents and lodgements",
+      bool(cm and mm) and cm[0]["Area"].tolist() == mm[0]["Area"].tolist() == ref["sa2_name"].tolist()
+      and cm[0][home3].tolist() == mm[0]["Typical rent"].tolist() and "LINZ suburbs" in text(c), f"chat {len(cm[0]) if cm else 0}, manual {len(mm[0]) if mm else 0}")
+c = ask(A(intent="area_info", areas=["Ponsonby East"]), level="suburb")
+check("Suburb level chat: an SA2 name finds its suburb (Ponsonby East -> Ponsonby)", table(c, "Rent $/wk (home)")[0]["Area"].tolist() == ["Ponsonby"])
+at = run("Explore suburb", suburb="Papatoetoe", level="suburb")
+parts = [d.value for d in at.dataframe if "SA2 area" in d.value.columns]
+codes = S2.set_index("sa2_name").loc["Papatoetoe", "sa2_codes"].split(";")
+check("Explore suburb: SA2 parts drill-down lists every SA2 of the suburb (Papatoetoe)",
+      bool(parts) and len(parts[0]) == len(codes) and parts[0]["Residents 2023"].sum() == S2.set_index("sa2_name").loc["Papatoetoe", "population_2023"],
+      f"{len(parts[0]) if parts else 0} vs {len(codes)}")
+import json  # noqa: E402
+ids = {f["properties"]["suburb_id"] for f in json.load(open("data/boundaries/auckland_suburbs_map.geojson", encoding="utf-8"))["features"]}
+check("Suburb map: one polygon per suburb row", ids == set(S2["sa2_code"]), f"{len(ids)} polygons, {len(S2)} rows")
+at = run("Suburb in plain English", suburb=S2[S2["analysis_ready"] & S2["mosques_in_area"].eq(0)]["sa2_name"].iloc[0], mosques=True, level="suburb")
+check("Suburb level zero-mosque wording says 'this suburb'", "No mosque mapped inside this suburb" in text(at) and "this SA2" not in text(at))
+check("Suburb screen: shared-SA2 places are never ranked", S2.loc[S2["suburb_source_sa2"].notna(), "ranked"].ne(True).all())
 
 # ---------- report ----------
 width = max(len(n) for n, _, _ in results)

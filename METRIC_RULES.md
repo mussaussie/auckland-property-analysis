@@ -41,6 +41,29 @@ MBIE counts are randomly rounded to base 3 and suppressed below 5 bonds. Census 
 | `analysis_ready` | Not non-residential and 100+ residents: 599 SA2s, 99.3% of residents. Rankings, correlations and maps use these only. |
 | `flag_crime_hotspot` | `crime_per_1000_residents` > 300 (27 SA2s: malls, town centres, CBD). Crime rate not comparable; left out of the investment screen. |
 
+## Suburb level (dashboard and chat default)
+
+Built by `build_suburbs.py` from the SA2 files; keyed on `suburb_id` (LINZ NZ Suburbs and Localities). The dashboard and chat read these
+through `search.load_data()` (`level="suburb"`, default; `"sa2"` for the SA2 areas), under the SA2 column names.
+
+| Item | Rule |
+|---|---|
+| Suburb list (`suburb_list.csv`) | 295 inhabited LINZ suburbs and localities; 289 analysis-ready, 277 with rent. Each SA2 goes to the suburb holding most of its rating units (`sa2_to_suburb.csv`, reviewed overrides, 6 water SA2s excluded). |
+| Shared places (`flag_shared_rural_sa2`) | 70 places with no SA2 of their own reuse their parent SA2's figures (`suburb_source_sa2`); 107 rows carry the flag (the parents too). Say "the figures cover the whole statistical area, not this place alone". Never ranked. |
+| Counts in area | Summed over the SA2 parts. "None mapped" wording as for SA2s, with "this suburb". |
+| Census shares | Summed counts over summed totals, never an average of SA2 percentages. Community shares (`suburb_community.csv`) the same; hub rule as File 7 (LQ ≥ 2 and 300+ people). |
+| Medians (`*_approx`) | Age, income, census rent: population/household-weighted mean of SA2 medians. Say "approximate"; the census publishes no suburb median here. |
+| Rent | Lodgement-weighted mean of MBIE rent-area medians, each rent area split by the suburb's share of its rented households; last 4 quarters. Say "approximate: MBIE publishes no suburb median". Sample check on the summed full lodgements (30+) and steady price (max ≤ 1.5 × min quarter). |
+| Shared rent (`flag_borrowed_rent` at suburb level) | Shared place, or a rent area that also feeds another suburb (`flag_shared_rent_area`, 28): 127 suburbs. |
+| Crime | Summed victimisations / summed residents; rated again in thirds across analysis-ready, non-hotspot suburbs (7 hotspots). |
+| Nearest place | Minimum distance over the parts, with that part's name. Distances run from SA2 points, so a suburb's nearest can lie inside a neighbour. |
+| Stops within 800 m | Population-weighted average of the SA2 parts (`pt_stops_800m_avg`). |
+| Area type | File 3 type covering most of the suburb's residents (`area_type_share_pct` gives the share). |
+| Screen (`suburb_screen.csv`) | File 4 method re-scored across suburbs: 200 in the universe, 180 ranked. New development = population more than doubled and a shared rent area. Percentiles are relative to suburbs, so ranks differ from SA2 ranks. |
+| Forecast (`suburb_rent_forecast.csv`) | File 8 Auckland-trend factors and bands applied to the suburb's rent now. Same caveats as File 8; never rank by forecast growth. |
+| Rent premium (`suburb_rent_premium.csv`) | File 6 gap against the approximate census median; only own-SA2 suburbs, no shared rent area, 30+ lodgements (138; median gap 12.2%). |
+| Known odd rows | Huntington Park has 6 residents (its SA2 went to East Tāmaki); Mangawhai shows Cape Rodney figures, though most of the town is in Northland. |
+
 ## Metrics
 
 ### Value and price

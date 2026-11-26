@@ -401,6 +401,34 @@ def premium(prof, rq, mem):
     return p.reset_index()
 
 
+def community(mem):
+    """File 7 shares per suburb: summed counts over summed denominators. A denominator is backed out of each SA2's count and
+    share (count / pct x 100; the largest in the group type, so a group with 0 people still gets one). Hub rule as File 7."""
+    c = pd.read_csv(CLEAN / "community_by_sa2.csv")
+    for y in (2013, 2018, 2023):
+        c[f"den_{y}"] = (c[f"count_{y}"] * 100 / c[f"pct_{y}"].where(c[f"pct_{y}"] > 0)).groupby(
+            [c.sa2_code, c.group_type]).transform("max")
+    s = mem.merge(c, on="sa2_code").groupby(["suburb_id", "group", "group_type"])[
+        [f"{k}_{y}" for k in ("count", "den") for y in (2013, 2018, 2023)]].sum(min_count=1).reset_index()
+    for y in (2013, 2018, 2023):
+        s[f"pct_{y}"] = 100 * s[f"count_{y}"] / s[f"den_{y}"]
+    akl = pd.read_csv(CLEAN / "community_summary.csv").set_index("group")["pct_2023"]
+    s["lq_2023"] = s.pct_2023 / s.group.map(akl)
+    s["is_hub"] = (s.lq_2023 >= 2) & (s.count_2023 >= 300)
+    s["share_change_pp_2013_2023"] = s.pct_2023 - s.pct_2013
+    assert s.pct_2023.dropna().between(0, 100).all()
+    return s.drop(columns=[f"den_{y}" for y in (2013, 2018, 2023)])
+
+
+def map_file(sub, subs):
+    """Suburb polygons for the dashboard map, simplified to ~25 m so the app stays light (the raw LINZ file is 27 MB)."""
+    m = sub[sub.suburb_id.isin(subs.suburb_id)][["suburb_id", "geometry"]].copy()
+    m["geometry"] = m.simplify(25, preserve_topology=True)
+    m["suburb_id"] = m.suburb_id.astype(int)
+    assert len(m) == len(subs), "every suburb row has a polygon"
+    m.to_crs(4326).to_file(DATA / "boundaries" / "auckland_suburbs_map.geojson", driver="GeoJSON", COORDINATE_PRECISION=5)
+
+
 if __name__ == "__main__":
     sa2, sub = load_layers()
     units = unit_pieces(sa2, sub)
@@ -454,6 +482,8 @@ if __name__ == "__main__":
     forecast(prof).round(1).to_csv(CLEAN / "suburb_rent_forecast.csv", index=False, encoding="utf-8")
     premium(prof, rq, mem).round(2).to_csv(CLEAN / "suburb_rent_premium.csv", index=False, encoding="utf-8")
     rq.to_csv(CLEAN / "suburb_rent_quarterly.csv", index=False, encoding="utf-8", date_format="%Y-%m-%d")
+    community(mem).round(2).to_csv(CLEAN / "suburb_community.csv", index=False, encoding="utf-8")
+    map_file(sub, subs)
     print("ok   suburb_profiles.csv", len(prof), "rows;", int(prof.median_rent_weekly.notna().sum()), "with rent;",
           int(prof.analysis_ready.fillna(False).sum()), "analysis-ready")
     print("ok   sa2_to_suburb.csv", len(lookup), "SA2s ->", lookup.suburb_id.nunique(), "suburbs;",
